@@ -1,0 +1,53 @@
+.sign-in {
+    background-color: rgb(253, 253, 253);
+    background: url('/public/img/bg-sign-in.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.form-signin {
+    float: left;
+    /*height: 420px;*/
+    /*height: 380px;    */
+    text-align: center;
+    width: 430px;
+    padding: 25px 60px 45px;
+    margin: 240px auto 0;
+    background-color: rgb(140, 145, 149);
+    color: white;
+    border-radius: 5px;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {margin-bottom: 12px;    border-radius: 7px;
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 18px;
+    font-size: 13px; height: 48px;
+}
+.form-signin .form-control:first-child {margin-top: 25px;}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {}
+.form-signin .btn-block {height: 47px;font-size: 13px;font-weight: bold;background: #2fc6f7;border: none;}
+.alert-info {margin-top: 240px; width: 250px; margin-left: 500px; height: 380px;}

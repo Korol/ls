@@ -1,0 +1,117 @@
+/* Для переноса в assol.css */
+
+#album-list {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#album-list>div  {
+    margin-bottom: 50px;
+}
+
+#album-list .thumbnail {
+    width: 138px;
+    height: 138px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+#album-list a.thumbnail {
+    background-color: #2fc6f7;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#album-list a.thumbnail:hover {
+    background-color: #4edbf7;
+}
+
+#album-list a.thumbnail:active {
+    background-color: #20d20a;
+}
+
+#album-list a.thumbnail img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#album-list .action-remove-album {
+    float: right;
+    text-decoration: underline;
+}
+
+#album-list .album-label {
+    font-weight: bold;
+}
+
+.album-image:hover .image-remove-btn {
+    display: block;
+}
+
+.image-remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    background-color: #959595;
+    display: none;
+    font-size: 19px;
+    cursor: pointer;
+    margin: 3px;
+    padding: 3px;
+}
+
+.album-image:hover .image-download-btn {
+    display: block;
+}
+
+.image-download-btn {
+    position: absolute;
+    top: 5px;
+    right: 35px;
+    color: white;
+    background-color: #959595;
+    display: none;
+    font-size: 19px;
+    cursor: pointer;
+    margin: 3px;
+    padding: 3px;
+}
+
+.video-site-header .col-md-3 {
+    height: 20px;
+}
+
+#videoSiteList .work-sites-block {
+    margin-bottom: 50px;
+}
+
+.navbar-default .btn-profile {
+    border: none;
+    background-color: #b9ec21;
+    border-radius: 20px;
+    height: 34px;
+    color: #535c69;
+    padding: 6px 20px;
+    /* line-height: 25px; */
+}
+.navbar-default .btn-profile:hover {
+    background-color: #85ec61;
+}
+
+.navbar-default .user-img-wrap {
+    width: 39px;
+    height: 39px;
+}
+
+.client-img img {
+    max-width: 100%;
+    width: initial;
+    height: initial;
+}

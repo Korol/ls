@@ -1,0 +1,38 @@
+.table-vcenter th {
+    vertical-align: top!important;
+}
+.table-vcenter td {
+    vertical-align: middle!important;
+}
+.table-action {
+    width: 50px;
+}
+.glyphicon {
+    top: 0;
+    vertical-align: middle!important;
+}
+.fixed-table-pagination {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.fixed-table-toolbar {
+    padding-right: 15px;
+}
+
+.site-table .fixed-table-container {
+    border: none;
+}
+
+.site-table .table {
+    border: none;
+}
+
+.site-table .fixed-table-container {
+    border: none;
+}
+
+.site-table .table>thead>tr>th, .table>tbody>tr>td {
+    font-weight: normal;
+    color: #5d5d5d;
+    border: none;
+}

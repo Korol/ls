@@ -1,0 +1,53 @@
+{
+  "name": "assol",
+  "version": "1.0.0",
+  "description": "assol crm",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aleksey Parkhomenko",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "gulp": "^3.9.1",
+    "gulp-compass": "^2.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^3.0.0",
+    "gulp-ftp": "^1.1.0",
+    "gulp-sftp": "^0.1.5",
+    "gulp-uglify": "^2.1.2",
+    "gulp-webpack": "^1.5.0",
+    "redux-devtools": "^3.3.1",
+    "remote-redux-devtools": "^0.5.7",
+    "vinyl-ftp": "^0.6.0",
+    "webpack": "^2.2.1",
+    "react-hot-loader": "^1.3.1",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "es6-shim": "^0.35.1",
+    "qs": "^6.2.1",
+    "react": "^15.3.2",
+    "react-bootstrap": "latest",
+    "react-bootstrap-modal": "^3.0.0",
+    "react-bootstrap-table": "^3.1.1",
+    "react-dom": "^15.3.2",
+    "react-redux": "^5.0.3",
+    "react-tinymce": "^0.5.1",
+    "redux": "^3.5.2",
+    "redux-promise-middleware": "^4.2.0",
+    "redux-thunk": "^2.1.0"
+  }
+}

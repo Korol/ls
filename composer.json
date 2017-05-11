@@ -1,0 +1,15 @@
+{
+    "name": "assol",
+    "description": "Assol",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Алексей Пархоменко",
+            "email": "it-webwork@mail.ru"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "4.8.10"
+    }
+}

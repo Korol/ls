@@ -1,0 +1,34 @@
+/* .navbar-default {
+    background-color: #8c9195;
+    color: #fff;
+    height: 90px;
+    padding: 5px 0 8px;
+}
+.navbar-default .navbar-nav>li>a {  float: left;padding: 0; color: #fff;}
+#navbar .navbar-left{margin: 22px 0px 0px 60px;}
+#navbar ul li a img{border-radius: 20px;}
+#navbar ul li.nick{font-weight: bold;    margin: 8px 0 0 20px;}
+#navbar ul li.nick a{margin-right: 5px;}
+#navbar ul li .type-user{font-size: 12px; color: #b6c3ca;}
+#navbar ul li .status{width: 8px;height: 8px;border-radius: 20px;    position: absolute;
+    right: 0;
+    top: 30px;}
+.online {background: #baed21;}
+.btn-logout {
+    border: none;
+    background-color: #404955;
+    border-radius: 20px;
+    height: 34px;
+}
+.glyphicon-log-out:before {
+    color: #7c8490;
+}
+.navbar-default .navbar-nav li a.btn-logout { margin-top: 20px;
+    color: #fafdfd;
+    padding: 6px 20px;
+    line-height: 25px;
+}
+
+.navbar-default .navbar-nav li a.btn-logout:hover {
+    background-color: #6d7785;
+} */

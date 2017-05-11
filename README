@@ -1,0 +1,45 @@
+1) В файле application\config\config.php необходимо настроить:
+    $config['base_url'] = 'http://example.com/' (Строка №20)
+    $config['cookie_domain'] = '.example.com' (Строка №385)
+
+
+2) В файле application\config\database.php необходимо настроить подключение к базе данных. Основные параметры:
+    'hostname' => '',
+	'username' => '',
+	'password' => '',
+	'database' => '',
+
+3) В файле thumb\phpThumb.config.php необходимо настроить подключение к базе. Основные параметры(строки 197-200):
+    $PHPTHUMB_CONFIG['mysql_hostname'] = '';
+    $PHPTHUMB_CONFIG['mysql_username'] = '';
+    $PHPTHUMB_CONFIG['mysql_password'] = '';
+    $PHPTHUMB_CONFIG['mysql_database'] = '';
+
+4) В файле application\config\constants.php необходимо указать сайт с помощью константы IS_LOVE_STORY. Например:
+    define('IS_LOVE_STORY', TRUE); // Сайт "Love story"
+    define('IS_LOVE_STORY', FALSE); // Сайт "Assol"
+
+5) В файле index.php константа ENVIRONMENT должна иметь значение 'production'. Например:
+     define('ENVIRONMENT', 'production');
+
+   При установки ENVIRONMENT = 'development' становится доступным страница http://<host>/utils с возможностью совершать
+   служебные операции с системой. Например:
+
+       1) Инициализация базы данных:
+            Операция: database-init
+            Секретный ключ: FC49C607-168B-4C0B-B683-91C61163BECC
+
+       2) Удаление всех системных таблиц из базы:
+            Операция: database-drop
+            Секретный ключ: 13E88CA1-55A3-4E11-B0D3-D821BE6F760D
+
+       3) Создание нового пользователя с ролью "Директор"
+            Операция: create-admin
+            Секретный ключ: 32EE697C-2076-4B54-BB50-1D83E4C8B577
+
+       4) Сброс пароля указанного пользователя. При сбросе для пользователя устанавливается роль "Директор":
+            Операция: reset-admin
+            Параметры: ID(логин) пользователя
+            Секретный ключ: BB43DA67-A481-42BD-83B6-892E41BCACCC
+
+    На новом хостинге обязательно нужно выполнить пункты 1 (инициализация базы) и 3 (создание первого пользователя)

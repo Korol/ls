@@ -1,0 +1,5551 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrblack/helveticaneuecyr-black.eot");
+  src: url("../fonts/helveticaneuecyrblack/helveticaneuecyr-black.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrblack/helveticaneuecyr-black.woff") format("woff"), url("../fonts/helveticaneuecyrblack/helveticaneuecyr-black.ttf") format("truetype"), url("../fonts/helveticaneuecyrblack/helveticaneuecyr-black.svg#helveticaneuecyrblack") format("svg");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrblack_italic/helveticaneuecyr-blackitalic.eot");
+  src: url("../fonts/helveticaneuecyrblack_italic/helveticaneuecyr-blackitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrblack_italic/helveticaneuecyr-blackitalic.woff") format("woff"), url("../fonts/helveticaneuecyrblack_italic/helveticaneuecyr-blackitalic.ttf") format("truetype"), url("../fonts/helveticaneuecyrblack_italic/helveticaneuecyr-blackitalic.svg#helveticaneuecyrblack_italic") format("svg");
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrbold/helveticaneuecyr-bold.eot");
+  src: url("../fonts/helveticaneuecyrbold/helveticaneuecyr-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrbold/helveticaneuecyr-bold.woff") format("woff"), url("../fonts/helveticaneuecyrbold/helveticaneuecyr-bold.ttf") format("truetype"), url("../fonts/helveticaneuecyrbold/helveticaneuecyr-bold.svg#helveticaneuecyrbold") format("svg");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrbold_italic/helveticaneuecyr-bolditalic.eot");
+  src: url("../fonts/helveticaneuecyrbold_italic/helveticaneuecyr-bolditalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrbold_italic/helveticaneuecyr-bolditalic.woff") format("woff"), url("../fonts/helveticaneuecyrbold_italic/helveticaneuecyr-bolditalic.ttf") format("truetype"), url("../fonts/helveticaneuecyrbold_italic/helveticaneuecyr-bolditalic.svg#helveticaneuecyrbold_italic") format("svg");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrheavy/helveticaneuecyr-heavy.eot");
+  src: url("../fonts/helveticaneuecyrheavy/helveticaneuecyr-heavy.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrheavy/helveticaneuecyr-heavy.woff") format("woff"), url("../fonts/helveticaneuecyrheavy/helveticaneuecyr-heavy.ttf") format("truetype"), url("../fonts/helveticaneuecyrheavy/helveticaneuecyr-heavy.svg#helveticaneuecyrheavy") format("svg");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrheavy_italic/helveticaneuecyr-heavyitalic.eot");
+  src: url("../fonts/helveticaneuecyrheavy_italic/helveticaneuecyr-heavyitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrheavy_italic/helveticaneuecyr-heavyitalic.woff") format("woff"), url("../fonts/helveticaneuecyrheavy_italic/helveticaneuecyr-heavyitalic.ttf") format("truetype"), url("../fonts/helveticaneuecyrheavy_italic/helveticaneuecyr-heavyitalic.svg#helveticaneuecyrheavy_italic") format("svg");
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyritalic/helveticaneuecyr-italic.eot");
+  src: url("../fonts/helveticaneuecyritalic/helveticaneuecyr-italic.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyritalic/helveticaneuecyr-italic.woff") format("woff"), url("../fonts/helveticaneuecyritalic/helveticaneuecyr-italic.ttf") format("truetype"), url("../fonts/helveticaneuecyritalic/helveticaneuecyr-italic.svg#helveticaneuecyritalic") format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrlight/helveticaneuecyr-light.eot");
+  src: url("../fonts/helveticaneuecyrlight/helveticaneuecyr-light.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrlight/helveticaneuecyr-light.woff") format("woff"), url("../fonts/helveticaneuecyrlight/helveticaneuecyr-light.ttf") format("truetype"), url("../fonts/helveticaneuecyrlight/helveticaneuecyr-light.svg#helveticaneuecyrlight") format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrlight_italic/helveticaneuecyr-lightitalic.eot");
+  src: url("../fonts/helveticaneuecyrlight_italic/helveticaneuecyr-lightitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrlight_italic/helveticaneuecyr-lightitalic.woff") format("woff"), url("../fonts/helveticaneuecyrlight_italic/helveticaneuecyr-lightitalic.ttf") format("truetype"), url("../fonts/helveticaneuecyrlight_italic/helveticaneuecyr-lightitalic.svg#helveticaneuecyrlight_italic") format("svg");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrmedium/helveticaneuecyr-medium.eot");
+  src: url("../fonts/helveticaneuecyrmedium/helveticaneuecyr-medium.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrmedium/helveticaneuecyr-medium.woff") format("woff"), url("../fonts/helveticaneuecyrmedium/helveticaneuecyr-medium.ttf") format("truetype"), url("../fonts/helveticaneuecyrmedium/helveticaneuecyr-medium.svg#helveticaneuecyrmedium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrmedium_italic/helveticaneuecyr-mediumitaicl.eot");
+  src: url("../fonts/helveticaneuecyrmedium_italic/helveticaneuecyr-mediumitaicl.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrmedium_italic/helveticaneuecyr-mediumitaicl.woff") format("woff"), url("../fonts/helveticaneuecyrmedium_italic/helveticaneuecyr-mediumitaicl.ttf") format("truetype"), url("../fonts/helveticaneuecyrmedium_italic/helveticaneuecyr-mediumitaicl.svg#helveticaneuecyrmedium_italic") format("svg");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'HelveticaNeueCyr';
+  src: url("../fonts/helveticaneuecyrroman/helveticaneuecyr-roman.eot");
+  src: url("../fonts/helveticaneuecyrroman/helveticaneuecyr-roman.eot?#iefix") format("embedded-opentype"), url("../fonts/helveticaneuecyrroman/helveticaneuecyr-roman.woff") format("woff"), url("../fonts/helveticaneuecyrroman/helveticaneuecyr-roman.ttf") format("truetype"), url("../fonts/helveticaneuecyrroman/helveticaneuecyr-roman.svg#helveticaneuecyrroman") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 5, ../../../scss/assol.scss */
+.navbar-fixed-top {
+  position: static;
+}
+
+/* line 10, ../../../scss/assol.scss */
+.lovestory .navbar-default {
+  height: 67px;
+}
+
+/* line 15, ../../../scss/assol.scss */
+.navbar-default {
+  background-color: #8c9195;
+  color: #fff;
+  height: 90px;
+  padding: 5px 0 8px;
+}
+/* line 21, ../../../scss/assol.scss */
+.navbar-default div {
+  height: 100%;
+}
+/* line 25, ../../../scss/assol.scss */
+.navbar-default .btn-logout {
+  border: none;
+  background-color: #404955;
+  border-radius: 20px;
+  height: 34px;
+  color: #fafdfd;
+  padding: 6px 20px;
+  line-height: 25px;
+}
+/* line 34, ../../../scss/assol.scss */
+.navbar-default .btn-logout:hover {
+  background-color: #6d7785;
+}
+/* line 39, ../../../scss/assol.scss */
+.navbar-default .glyphicon-log-out:before {
+  color: #7c8490;
+}
+/* line 43, ../../../scss/assol.scss */
+.navbar-default .user-block {
+  margin: 0;
+  padding: 0 0 0 5px;
+}
+/* line 47, ../../../scss/assol.scss */
+.navbar-default .user-block .user-img-wrap {
+  position: relative;
+}
+/* line 51, ../../../scss/assol.scss */
+.navbar-default .user-block .user-img {
+  border-radius: 20px;
+  overflow: hidden;
+}
+/* line 55, ../../../scss/assol.scss */
+.navbar-default .user-block .status {
+  width: 8px;
+  height: 8px;
+  border-radius: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+}
+/* line 63, ../../../scss/assol.scss */
+.navbar-default .user-block .online {
+  background: #baed21;
+}
+/* line 67, ../../../scss/assol.scss */
+.navbar-default .user-block .nick {
+  font-weight: bold;
+  margin: 0 0 0 10px;
+}
+/* line 71, ../../../scss/assol.scss */
+.navbar-default .user-block .type-user {
+  font-size: 12px;
+  color: #b6c3ca;
+}
+/* line 76, ../../../scss/assol.scss */
+.navbar-default .user-block li {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 84, ../../../scss/assol.scss */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* line 91, ../../../scss/assol.scss */
+body {
+  font: 13px 'HelveticaNeueCyr';
+  line-height: normal;
+}
+
+/* line 98, ../../../scss/assol.scss */
+.clear:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* line 105, ../../../scss/assol.scss */
+* {
+  outline: none !important;
+}
+
+/* line 110, ../../../scss/assol.scss */
+#passport li {
+  margin-bottom: 10px;
+}
+
+/* line 123, ../../../scss/assol.scss */
+.dropdown-menu li input[type="checkbox"]:checked ~ label {
+  background: none;
+  color: inherit;
+}
+/* line 127, ../../../scss/assol.scss */
+.dropdown-menu li input[type="checkbox"]:checked ~ label:hover {
+  background: #f5f5f5;
+  color: inherit;
+}
+/* line 132, ../../../scss/assol.scss */
+.dropdown-menu li input[type="checkbox"]:checked ~ label:before {
+  background-position: -2px -2px;
+}
+/* line 140, ../../../scss/assol.scss */
+.dropdown-menu li input[type="checkbox"] ~ label:before {
+  content: '';
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0 15px 0 0;
+  overflow: hidden;
+  display: inline-block;
+  background: url("../img/checkbox.png") no-repeat;
+  background-position: -23px -2px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Кнопки */
+/* line 160, ../../../scss/assol.scss */
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  outline: none;
+}
+/* line 168, ../../../scss/assol.scss */
+.btn .caret {
+        /* &:before {
+			border-left: 1px solid #e2e2e2;
+			content: "";
+			position: relative;
+			top: -13px;
+			left: -21px;
+		} */
+}
+
+/* line 179, ../../../scss/assol.scss */
+.assol-btn {
+  border-radius: 20px;
+  height: 34px;
+  line-height: normal;
+}
+/* line 184, ../../../scss/assol.scss */
+.assol-btn.right {
+  float: right;
+}
+/* line 187, ../../../scss/assol.scss */
+.assol-btn.save {
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #b8eb21;
+  color: #4e615f;
+  line-height: 1;
+}
+/* line 194, ../../../scss/assol.scss */
+.assol-btn.save:hover {
+  background-color: #bbee21;
+}
+/* line 198, ../../../scss/assol.scss */
+.assol-btn.add {
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #2fc4f5;
+  color: #f7fbfd;
+}
+/* line 206, ../../../scss/assol.scss */
+.assol-btn.add.site span {
+  padding-right: 25px;
+}
+/* line 210, ../../../scss/assol.scss */
+.assol-btn.add:hover {
+  color: #d4fddd;
+}
+/* line 214, ../../../scss/assol.scss */
+.assol-btn.remove {
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #b22323;
+  color: #fbf7ed;
+  line-height: 1;
+}
+/* line 221, ../../../scss/assol.scss */
+.assol-btn.remove:hover {
+  background-color: #ba2323;
+}
+/* line 225, ../../../scss/assol.scss */
+.assol-btn.doc {
+  background: #f8f8f8 linear-gradient(to bottom, #fdfdfd, #f5f5f5);
+  border: 1px solid #e2e2e2;
+  color: #4e615f;
+}
+/* line 230, ../../../scss/assol.scss */
+.assol-btn.doc a {
+  text-decoration: underline;
+  border-right: 1px solid #e2e2e2;
+  padding-right: 10px;
+  margin-right: 5px;
+}
+/* line 236, ../../../scss/assol.scss */
+.assol-btn.doc a > span {
+  margin-right: 5px;
+}
+/* line 241, ../../../scss/assol.scss */
+.assol-btn.file {
+  font-weight: normal;
+  display: inline-block;
+}
+/* line 246, ../../../scss/assol.scss */
+.assol-btn.upload, .assol-btn.expired, .assol-btn.download {
+  color: #535c69;
+  background-color: #e1e8ef;
+}
+/* line 252, ../../../scss/assol.scss */
+.active .assol-btn.upload, .assol-btn.upload.active, .active .assol-btn.expired, .assol-btn.expired.active, .active .assol-btn.download, .assol-btn.download.active {
+  background-color: #9eb1c4;
+  color: #ffffff;
+  box-shadow: none;
+}
+/* line 262, ../../../scss/assol.scss */
+.assol-btn.upload > span, .assol-btn.download > span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+  background: url("../img/download-upload-icons.png") no-repeat;
+  position: relative;
+  top: 2px;
+}
+/* line 274, ../../../scss/assol.scss */
+.assol-btn.download > span {
+  background-position: 0 100%;
+}
+/* line 279, ../../../scss/assol.scss */
+.active .assol-btn.download > span {
+  background-position: 0 0;
+}
+/* line 285, ../../../scss/assol.scss */
+.assol-btn.upload > span {
+  background-position: 100% 100%;
+}
+/* line 290, ../../../scss/assol.scss */
+.active .assol-btn.upload > span {
+  background-position: 100% 0;
+}
+/* line 295, ../../../scss/assol.scss */
+.assol-btn.archive {
+  color: #2067b0;
+  text-decoration: underline;
+  background: none;
+}
+/* line 300, ../../../scss/assol.scss */
+.assol-btn.archive:hover {
+  text-decoration: none;
+}
+/* line 304, ../../../scss/assol.scss */
+.active .assol-btn.archive {
+  color: #535c69;
+  border: 1px solid #abafb4;
+  text-decoration: none;
+}
+/* line 310, ../../../scss/assol.scss */
+.assol-btn.eye {
+  background: #b0bbca;
+  color: #3b607e;
+}
+
+/* line 316, ../../../scss/assol.scss */
+#addNewsText,
+#addNewsTitle {
+  background: linear-gradient(to bottom, #f5f5f5, #fdfdfd);
+  max-width: 100%;
+}
+
+/* line 324, ../../../scss/assol.scss */
+.list-group .list-group-item {
+  position: relative;
+}
+/* line 327, ../../../scss/assol.scss */
+.list-group .list-group-item .nums {
+  width: 24px;
+  height: 24px;
+  display: none;
+  position: relative;
+  top: -4px;
+  right: 0;
+  border-radius: 50%;
+  background: #2fc6f7;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.18);
+  text-align: center;
+  line-height: 24px;
+  padding: 0;
+  color: #fff;
+  float: right;
+}
+/* line 343, ../../../scss/assol.scss */
+.list-group .list-group-item .nums.task {
+  background: #f52faf;
+}
+/* line 347, ../../../scss/assol.scss */
+.list-group .list-group-item .nums.comment {
+  background: #fd0101;
+}
+/* line 351, ../../../scss/assol.scss */
+.list-group .list-group-item .nums.undone {
+  background: #a73bc1;
+}
+
+/* line 358, ../../../scss/assol.scss */
+.news-site-menu {
+  outline: none !important;
+  box-shadow: 0 1px 2px 0 rgba(72, 85, 96, 0.25);
+  border-radius: 3px;
+}
+/* line 363, ../../../scss/assol.scss */
+.news-site-menu * {
+  outline: none !important;
+}
+/* line 367, ../../../scss/assol.scss */
+.news-site-menu .assol-btn {
+  float: left;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* line 376, ../../../scss/assol.scss */
+.news-site-menu .assol-btn-ar {
+  background: #f8f8f8 linear-gradient(to bottom, #fdfdfd, #f5f5f5);
+  border: 1px solid #e2e2e2;
+  color: #4e615f;
+  height: 34px;
+}
+/* line 382, ../../../scss/assol.scss */
+.news-site-menu .assol-btn-ar:active, .news-site-menu .assol-btn-ar.active {
+  box-shadow: none;
+}
+/* line 388, ../../../scss/assol.scss */
+.news-site-menu .assol-btn-ar .caret:before {
+  display: none;
+}
+/* line 394, ../../../scss/assol.scss */
+.news-site-menu.open .assol-btn-ar {
+  background: #f8f8f8 linear-gradient(to bottom, #f5f5f5, #fdfdfd);
+}
+/* line 397, ../../../scss/assol.scss */
+.news-site-menu.open .caret {
+  transform: rotate(180deg);
+}
+/* line 399, ../../../scss/assol.scss */
+.news-site-menu.open .caret:before {
+  display: none;
+}
+
+/* line 406, ../../../scss/assol.scss */
+.square {
+  border-radius: 2px;
+  width: 160px;
+  text-align: left;
+}
+/* line 411, ../../../scss/assol.scss */
+.square.var-width {
+  width: auto;
+}
+/* line 414, ../../../scss/assol.scss */
+.square .caret {
+  margin-left: 50px;
+}
+
+/* line 420, ../../../scss/assol.scss */
+.addNews .sites {
+  width: 170px;
+  float: left;
+}
+/* line 424, ../../../scss/assol.scss */
+.addNews .nameNews {
+  width: 520px;
+  float: left;
+  margin-left: 5px;
+}
+
+/* line 431, ../../../scss/assol.scss */
+.panel {
+  margin-bottom: 10px;
+}
+
+/* line 435, ../../../scss/assol.scss */
+.collapseNews {
+  border: none;
+  background: inherit;
+  border-left: 1px solid #e2e2e2;
+  font-size: 0;
+  width: 120px;
+}
+/* line 442, ../../../scss/assol.scss */
+.collapseNews span {
+  font-size: 13px;
+}
+/* line 446, ../../../scss/assol.scss */
+.collapseNews:after {
+  margin-left: 5px;
+  content: ' Свернуть';
+  font-size: 13px;
+}
+/* line 453, ../../../scss/assol.scss */
+.collapseNews.collapsed .glyphicon {
+  transform: rotate(180deg);
+}
+/* line 456, ../../../scss/assol.scss */
+.collapseNews.collapsed:after {
+  content: ' Развернуть';
+}
+
+/* line 464, ../../../scss/assol.scss */
+.singleNews .bodyNews {
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  padding: 7px 15px;
+  margin: 5px 0;
+}
+/* line 473, ../../../scss/assol.scss */
+.singleNews .bodyNews .nav a:hover {
+  text-decoration: none;
+}
+/* line 479, ../../../scss/assol.scss */
+.singleNews .bodyNews h5 {
+  font-weight: bold;
+  color: #2067b0;
+  font-size: 15px;
+}
+/* line 488, ../../../scss/assol.scss */
+.singleNews .bodyNews .bodyNewsThumb img {
+  display: block;
+  float: left;
+  width: 215px;
+  margin: 0 20px 20px 0;
+  border: 5px solid #fff;
+  box-shadow: 0px 0px 20px #e2e2e2;
+}
+/* line 499, ../../../scss/assol.scss */
+.singleNews .bodyNewsContent {
+  font-size: 13px;
+  line-height: 1.7;
+  border-bottom: 1px solid #e2e2e2;
+}
+/* line 504, ../../../scss/assol.scss */
+.singleNews .bodyNewsContent .bodyNewsContent-in {
+  max-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+/* line 509, ../../../scss/assol.scss */
+.singleNews .bodyNewsContent .bodyNewsContent-in.show-full {
+  overflow: inherit;
+  max-height: 100%;
+}
+/* line 513, ../../../scss/assol.scss */
+.singleNews .bodyNewsContent .bodyNewsContent-in.show-full .show-full-news {
+  display: none;
+}
+/* line 518, ../../../scss/assol.scss */
+.singleNews .bodyNewsContent .bodyNewsContent-in .show-full-news {
+  position: absolute;
+  top: 355px;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  text-transform: lowercase;
+  padding: 10px;
+  font-size: 15px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0px 30px 20px #fff;
+  cursor: pointer;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.3s ease 0s;
+}
+/* line 533, ../../../scss/assol.scss */
+.singleNews .bodyNewsContent .bodyNewsContent-in .show-full-news:hover {
+  background: #ecf0f3;
+  box-shadow: 0 0px 30px 20px #ecf0f3;
+}
+/* line 540, ../../../scss/assol.scss */
+.singleNews .nav-wrap {
+  padding-top: 7px;
+  padding-right: 130px;
+}
+/* line 544, ../../../scss/assol.scss */
+.singleNews .btn-wrap {
+  height: 34px;
+  padding: 8px 0;
+  float: right;
+  margin: -34px 0 0 0;
+}
+/* line 550, ../../../scss/assol.scss */
+.singleNews .nav {
+  display: table;
+  width: 100%;
+  min-height: 34px;
+}
+/* line 555, ../../../scss/assol.scss */
+.singleNews .nav > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 560, ../../../scss/assol.scss */
+.singleNews .nav .btn {
+  background: #eef2f4;
+  border-radius: 22px;
+  color: #535c69;
+}
+/* line 565, ../../../scss/assol.scss */
+.singleNews .nav .btn:hover {
+  background: #2fc4f5;
+  color: #fff;
+}
+/* line 570, ../../../scss/assol.scss */
+.singleNews .nav .site {
+  color: #7b9f0e;
+  margin: 0 40px;
+}
+/* line 574, ../../../scss/assol.scss */
+.singleNews .nav .user {
+  font-weight: bold;
+  margin: 0 40px;
+}
+/* line 578, ../../../scss/assol.scss */
+.singleNews .nav .user a {
+  font-weight: normal;
+  color: #2fc6f7;
+  text-decoration: underline;
+}
+/* line 583, ../../../scss/assol.scss */
+.singleNews .nav .user a:hover {
+  text-decoration: none;
+}
+
+/* line 591, ../../../scss/assol.scss */
+.glyphicon-paperclip:before {
+  margin: 0 7px;
+}
+
+/* line 595, ../../../scss/assol.scss */
+.dropdown-menu {
+  margin: 0px;
+  min-width: 100%;
+  /*width: 170px; TODO: не влезают длинные домены*/
+}
+/* line 599, ../../../scss/assol.scss */
+.dropdown-menu.bootstrap-datetimepicker-widget {
+  min-width: auto;
+}
+
+/* line 605, ../../../scss/assol.scss */
+.dateNews {
+  height: 40px;
+  padding: 15px 20px;
+  line-height: 0.7;
+}
+
+/* line 611, ../../../scss/assol.scss */
+button.close {
+  border: 1px solid;
+  border-radius: 20px;
+  width: 23px;
+}
+
+/* line 617, ../../../scss/assol.scss */
+.btn-remove-site {
+  color: #ba2933;
+  border: none;
+  padding-left: 0;
+}
+
+/* line 623, ../../../scss/assol.scss */
+.assol-grey-panel, .reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user {
+  background-color: #ecf0f3;
+  border-radius: 6px;
+}
+
+/* line 628, ../../../scss/assol.scss */
+.assol-menu {
+  height: 100%;
+  position: relative;
+}
+/* line 633, ../../../scss/assol.scss */
+.assol-menu .panel-body {
+  padding-bottom: 50px;
+}
+/* line 636, ../../../scss/assol.scss */
+.assol-menu .panel-body a {
+  font-size: 14px;
+  background-color: #ecf0f3;
+  border: none;
+}
+/* line 641, ../../../scss/assol.scss */
+.lovestory .assol-menu .panel-body a {
+  font-size: 16px;
+}
+/* line 645, ../../../scss/assol.scss */
+.assol-menu .panel-body a:hover {
+  background-color: #dee3e6;
+  border-radius: 6px;
+}
+/* line 649, ../../../scss/assol.scss */
+.assol-menu .panel-body a.active {
+  font-weight: 700;
+  background-color: #b8eb21;
+  color: #495470;
+  border-radius: 6px;
+  box-shadow: inset 2px 3px 5px 1px #9ac41b;
+  font-weight: bold;
+}
+
+/* line 661, ../../../scss/assol.scss */
+a.list-group-item {
+  color: #535c69;
+}
+
+/* line 665, ../../../scss/assol.scss */
+.modal-header {
+  border-bottom: none;
+  padding: 20px;
+}
+
+/* line 670, ../../../scss/assol.scss */
+.modal-footer {
+  border-top: none;
+}
+
+/* line 674, ../../../scss/assol.scss */
+.modal-body {
+  position: relative;
+  padding: 20px;
+}
+
+/* line 679, ../../../scss/assol.scss */
+.modal-title {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  color: #535c69;
+}
+
+/* line 686, ../../../scss/assol.scss */
+.modal-dialog {
+  width: 740px;
+  margin: 60px auto;
+}
+
+/* line 691, ../../../scss/assol.scss */
+label {
+  color: #535c69;
+  font-weight: normal;
+}
+
+/* line 696, ../../../scss/assol.scss */
+.modal-content {
+  border-radius: 0px;
+}
+
+/* line 700, ../../../scss/assol.scss */
+.assol-tab {
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+/* line 709, ../../../scss/assol.scss */
+.assol-tab .nav > li > a {
+  background-color: #e8e8e8;
+  color: #696969;
+  font-weight: bold;
+  font-size: 12px;
+  height: 45px;
+  padding-left: 14px;
+  padding-right: 15px;
+  border-radius: 0;
+  margin-right: 0;
+  padding-top: 15px;
+  border-bottom: 1px solid #bebebe;
+  border-right: 1px solid #bebebe;
+}
+/* line 723, ../../../scss/assol.scss */
+.assol-tab .nav > li > a:hover {
+  background-color: #f0f0f0;
+}
+/* line 728, ../../../scss/assol.scss */
+.assol-tab .nav > li:last-child > a {
+  padding-left: 18px;
+  width: 98px;
+  border-right: none;
+}
+/* line 736, ../../../scss/assol.scss */
+.assol-tab .nav > li.active:last-child > a {
+  width: 97px;
+}
+/* line 740, ../../../scss/assol.scss */
+.assol-tab .nav > li.active > a {
+  background-color: #fdfdfd;
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+}
+/* line 749, ../../../scss/assol.scss */
+.assol-tab .tab-pane {
+  min-height: 200px;
+  padding: 25px 20px;
+}
+
+/* line 755, ../../../scss/assol.scss */
+.sub-row {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* line 760, ../../../scss/assol.scss */
+.sub-col {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* line 766, ../../../scss/assol.scss */
+.form-group label {
+  font-weight: bold;
+}
+
+/* line 772, ../../../scss/assol.scss */
+.list-agreement li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* line 778, ../../../scss/assol.scss */
+.customer-video {
+  border-left: 1px solid #e2e2e2;
+}
+/* line 781, ../../../scss/assol.scss */
+.customer-video .embed-responsive {
+  margin-bottom: 20px;
+}
+
+/* line 787, ../../../scss/assol.scss */
+.customer-children .form-group {
+  margin-bottom: 0;
+}
+
+/* Сотрудники */
+/* line 795, ../../../scss/assol.scss */
+.employee-profile-page .assol-btn-select {
+  height: 34px;
+}
+/* line 798, ../../../scss/assol.scss */
+.employee-profile-page .assol-btn-select .assol-btn-style {
+  line-height: 34px;
+}
+/* line 806, ../../../scss/assol.scss */
+.employee-profile-page .assol-btn-select .dropdown-menu li.selected a {
+  font-weight: 700;
+}
+/* line 813, ../../../scss/assol.scss */
+.employee-profile-page .assol-input-style {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+/* line 818, ../../../scss/assol.scss */
+.employee-profile-page .assol-input-style.vertical-center {
+  line-height: 34px;
+}
+/* line 825, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .photo-block {
+  text-align: center;
+  border-right: 1px solid #e1e1e1;
+}
+/* line 829, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block {
+  margin-left: -1px;
+  border-left: 1px solid #e1e1e1;
+  padding-left: 55px;
+}
+/* line 834, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .form-group {
+  clear: both;
+}
+/* line 838, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .youtube-video-code {
+  padding-right: 10%;
+}
+/* line 842, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .col {
+  float: left;
+}
+/* line 845, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .col:first-child {
+  width: 83%;
+}
+/* line 852, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .list-inline li {
+  min-width: 50%;
+  padding-right: 25px;
+  margin-bottom: 10px;
+}
+/* line 857, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .list-inline li > div {
+  width: 100%;
+  text-align: left;
+}
+/* line 861, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .list-inline li > div > a {
+  border: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+/* line 866, ../../../scss/assol.scss */
+.employee-profile-page #PhotoAndVideo .docs-video-block .list-inline li > div > span {
+  border-left: 1px solid #e2e2e2;
+  float: right;
+  padding-left: 10px;
+  margin-left: 5px;
+}
+
+/* line 879, ../../../scss/assol.scss */
+.assol-select-dropdown {
+  width: 100%;
+}
+/* line 882, ../../../scss/assol.scss */
+.assol-select-dropdown.defaultheight {
+  height: 36px;
+}
+/* line 886, ../../../scss/assol.scss */
+.assol-select-dropdown > div {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+/* line 892, ../../../scss/assol.scss */
+.assol-select-dropdown button {
+  height: 100%;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+}
+/* line 901, ../../../scss/assol.scss */
+.assol-select-dropdown .label-placement-wrap {
+  float: left;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 33px;
+  margin-right: -33px;
+}
+/* line 909, ../../../scss/assol.scss */
+.assol-select-dropdown .label-placement-wrap button {
+  width: 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-left: 11px;
+  text-align: left;
+}
+/* line 916, ../../../scss/assol.scss */
+.assol-select-dropdown .label-placement-wrap button:active {
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+}
+/* line 926, ../../../scss/assol.scss */
+.assol-select-dropdown.open .dropdown-toggle {
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEFEFF0', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmZWZmMCIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #efeff0), color-stop(60%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+}
+/* line 931, ../../../scss/assol.scss */
+.assol-select-dropdown.open .dropdown-toggle .caret {
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+/* line 937, ../../../scss/assol.scss */
+.assol-select-dropdown .dropdown-toggle {
+  width: 33px;
+  z-index: 2;
+}
+/* line 941, ../../../scss/assol.scss */
+.assol-select-dropdown .dropdown-toggle:active {
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEFEFF0', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmZWZmMCIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #efeff0), color-stop(60%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+}
+/* line 949, ../../../scss/assol.scss */
+.assol-select-dropdown .dropdown-toggle .caret:before {
+  display: none;
+}
+/* line 954, ../../../scss/assol.scss */
+.assol-select-dropdown .dropdown-menu {
+  min-width: 100%;
+}
+/* line 959, ../../../scss/assol.scss */
+.assol-select-dropdown .open .dropdown-toggle {
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEFEFF0', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmZWZmMCIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #efeff0), color-stop(60%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #efeff0 0%, #ffffff 60%, #ffffff 100%);
+}
+/* line 964, ../../../scss/assol.scss */
+.assol-select-dropdown .open .dropdown-toggle .caret {
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/* line 971, ../../../scss/assol.scss */
+.tabs-info-fields {
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+}
+/* line 975, ../../../scss/assol.scss */
+.tabs-info-fields .tab-content {
+  padding: 20px 25px;
+}
+/* line 978, ../../../scss/assol.scss */
+.tabs-info-fields .assol-select-dropdown {
+  height: 36px;
+}
+
+/* line 983, ../../../scss/assol.scss */
+.employees-wrap {
+  width: 100%;
+}
+
+/* line 987, ../../../scss/assol.scss */
+.employees {
+  display: block;
+  min-width: 100%;
+  margin: 0 -9px;
+}
+/* line 992, ../../../scss/assol.scss */
+.employees > div {
+  padding-left: 9px;
+  padding-right: 9px;
+  width: 25%;
+  float: left;
+}
+/* line 999, ../../../scss/assol.scss */
+.employees .load-inform {
+  padding: 0 9px;
+}
+
+/* line 1004, ../../../scss/assol.scss */
+.employee-wrap {
+  width: 100%;
+  position: relative;
+  margin-bottom: 17px;
+  height: 600px;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+/* line 1013, ../../../scss/assol.scss */
+.employee-wrap:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 11px;
+  background: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  bottom: -11px;
+  box-shadow: 0 0 30px 24px #ffffff;
+  border-radius: 6px;
+}
+/* line 1025, ../../../scss/assol.scss */
+.employee-wrap:hover {
+  overflow: visible;
+  border: none;
+  border-radius: 0;
+  z-index: 2;
+}
+/* line 1031, ../../../scss/assol.scss */
+.employee-wrap:hover:after {
+  display: none;
+}
+/* line 1035, ../../../scss/assol.scss */
+.employee-wrap:hover .employee {
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  min-height: 100%;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 1043, ../../../scss/assol.scss */
+.employee-wrap > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* line 1049, ../../../scss/assol.scss */
+.employee {
+  background: #fff;
+}
+/* line 1052, ../../../scss/assol.scss */
+.employee.thumbnail {
+  padding: 15px;
+}
+/* line 1055, ../../../scss/assol.scss */
+.employee.thumbnail .form-group {
+  margin-bottom: 0;
+}
+/* line 1060, ../../../scss/assol.scss */
+.employee .employee-img {
+  padding: 10px 30px 25px;
+}
+/* line 1063, ../../../scss/assol.scss */
+.employee .employee-img .employee-img-in {
+  width: 160px;
+  height: 160px;
+}
+/* line 1069, ../../../scss/assol.scss */
+.employee .employee-info {
+  padding: 0 17px;
+  line-height: 22px;
+  color: #535c69;
+        /* .employee-footnote {
+
+			textarea {
+				width: 100%;
+				height: 55px;
+				padding: 5px 7px 5px 5px;
+			}
+		} */
+}
+/* line 1074, ../../../scss/assol.scss */
+.employee .employee-info .employee-id {
+  color: #2067b0;
+}
+/* line 1091, ../../../scss/assol.scss */
+.employee .employee-info .employee-footnote .employee-footnote-block-wrap {
+  margin-top: 5px;
+  width: 100%;
+  height: 55px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+/* line 1099, ../../../scss/assol.scss */
+.employee .employee-info .employee-footnote .employee-footnote-block-wrap:hover {
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+/* line 1104, ../../../scss/assol.scss */
+.employee .employee-info .employee-footnote .employee-footnote-block-wrap:hover .employee-footnote-block {
+  background: #fff;
+  position: relative;
+  z-index: 5;
+  height: auto;
+  min-height: 100%;
+}
+/* line 1111, ../../../scss/assol.scss */
+.employee .employee-info .employee-footnote .employee-footnote-block-wrap:hover .employee-footnote-block-in {
+  height: auto;
+  min-height: 55px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.15) inset, 0 0 0 1px rgba(95, 103, 109, 0.2) inset;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF000000', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjA1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.05)), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+}
+/* line 1122, ../../../scss/assol.scss */
+.employee .employee-info .employee-footnote .employee-footnote-block-wrap .employee-footnote-block-in {
+  padding: 5px 7px 5px 5px;
+  min-height: 100%;
+  height: 100%;
+  background: none;
+  box-shadow: none;
+}
+
+/* line 1134, ../../../scss/assol.scss */
+.employee-on-off {
+  font-weight: 700;
+  color: #c5c5c5;
+  padding: 14px 0 0 17px;
+}
+/* line 1139, ../../../scss/assol.scss */
+.employee-on-off:before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #c5c5c5;
+  border-radius: 50%;
+}
+/* line 1148, ../../../scss/assol.scss */
+.employee-on-off.on {
+  color: #7ea40d;
+}
+/* line 1150, ../../../scss/assol.scss */
+.employee-on-off.on:before {
+  background: #baed21;
+}
+
+/* line 1160, ../../../scss/assol.scss */
+.employee-img .employee-img-wrap {
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #d6caca;
+}
+/* line 1167, ../../../scss/assol.scss */
+.employee-img a.employee-img-wrap {
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.3s ease 0s;
+}
+/* line 1170, ../../../scss/assol.scss */
+.employee-img a.employee-img-wrap:hover {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 1175, ../../../scss/assol.scss */
+.employee-img img {
+  max-width: 100%;
+}
+
+/* line 1180, ../../../scss/assol.scss */
+.employee-card {
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  margin: 15px 0 35px;
+}
+/* line 1185, ../../../scss/assol.scss */
+.employee-card .employee-img {
+  float: left;
+  padding: 20px 30px 20px 20px;
+}
+/* line 1189, ../../../scss/assol.scss */
+.employee-card .employee-img .employee-img-wrap {
+  width: 152px;
+  height: 152px;
+}
+/* line 1194, ../../../scss/assol.scss */
+.employee-card .employee-info {
+  color: #535c69;
+  padding-top: 60px;
+}
+/* line 1198, ../../../scss/assol.scss */
+.employee-card .employee-info div {
+  padding: 0 0 5px;
+}
+/* line 1202, ../../../scss/assol.scss */
+.employee-card .employee-info .blue-style {
+  color: #2067b0;
+}
+/* line 1208, ../../../scss/assol.scss */
+.employee-card .employee-info table td {
+  vertical-align: top;
+  padding: 0 35px 0 0;
+}
+
+/* line 1216, ../../../scss/assol.scss */
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:focus,
+.nav-tabs.nav-justified > .active > a:hover {
+  border: none;
+}
+
+/* line 1224, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-line {
+  overflow: hidden;
+  display: table;
+  width: 100%;
+  background-color: #f6f6f6;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFDBDBDB', endColorstr='#FFEDEDED');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RiZGJkYiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VkZWRlZCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dbdbdb), color-stop(100%, #ededed));
+  background-image: -moz-linear-gradient(top, #dbdbdb 0%, #ededed 100%);
+  background-image: -webkit-linear-gradient(top, #dbdbdb 0%, #ededed 100%);
+  background-image: linear-gradient(to bottom, #dbdbdb 0%, #ededed 100%);
+  box-shadow: 0 -3px 3px 0 rgba(0, 0, 0, 0.02) inset, 0 -1px 0 0 #bebebe inset;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+/* line 1235, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-line > div {
+  display: table-cell;
+}
+/* line 1242, ../../../scss/assol.scss */
+.assol-tabs .nav-justified.assol-tabs-btns > li > a {
+  padding: 0 5px;
+  width: 100%;
+  white-space: nowrap;
+}
+/* line 1249, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-btns {
+  border: 0;
+  font-weight: 700;
+  font-size: 12px;
+  color: #6a6969;
+}
+/* line 1255, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-btns > li {
+  margin: 0;
+  padding: 0 0 1px 0;
+}
+/* line 1259, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-btns > li.active > a, .assol-tabs .assol-tabs-btns > li.active > a:focus {
+  background: #fff;
+  border: none;
+  border-right: 1px solid #fff;
+  color: inherit;
+}
+/* line 1267, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-btns > li > a {
+  margin: 0;
+  padding: 0 35px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid #bebebe;
+  box-shadow: 1px 0 0 0 whitesmoke;
+  color: inherit;
+  -moz-transition: background-color 0.2s ease 0s;
+  -o-transition: background-color 0.2s ease 0s;
+  -webkit-transition: background-color 0.2s ease;
+  -webkit-transition-delay: 0s;
+  transition: background-color 0.2s ease 0s;
+}
+/* line 1279, ../../../scss/assol.scss */
+.assol-tabs .assol-tabs-btns > li > a:hover {
+  background-color: #f6f6f6;
+}
+
+/* line 1287, ../../../scss/assol.scss */
+.employee-avatar-wrap {
+  border-radius: 50%;
+  width: 221px;
+  height: 221px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+}
+
+/* line 1295, ../../../scss/assol.scss */
+.work-sites-block-wrap {
+  padding-bottom: 5px;
+}
+
+/* line 1301, ../../../scss/assol.scss */
+.work-sites-block textarea.note-site {
+  height: 75px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+/* line 1307, ../../../scss/assol.scss */
+.work-sites-block table {
+  width: 100%;
+}
+/* line 1310, ../../../scss/assol.scss */
+.work-sites-block table td {
+  vertical-align: top;
+}
+/* line 1313, ../../../scss/assol.scss */
+.work-sites-block table td:first-child {
+  width: 120px;
+}
+/* line 1321, ../../../scss/assol.scss */
+.work-sites-block .site-item {
+  background-color: #8de285;
+  height: 36px;
+  line-height: 36px;
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8DE285', endColorstr='#FF4DB247');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzhkZTI4NSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzRkYjI0NyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8de285), color-stop(100%, #4db247));
+  background-image: -moz-linear-gradient(top, #8de285 0%, #4db247 100%);
+  background-image: -webkit-linear-gradient(top, #8de285 0%, #4db247 100%);
+  background-image: linear-gradient(to bottom, #8de285 0%, #4db247 100%);
+  box-shadow: 0 0 0 1px rgba(15, 97, 11, 0.25) inset;
+  border-radius: 2px;
+  position: relative;
+}
+/* line 1334, ../../../scss/assol.scss */
+.work-sites-block .site-item .glyphicon {
+  font-size: 16px;
+  position: relative;
+  margin: 0 9px;
+  cursor: pointer;
+}
+/* line 1340, ../../../scss/assol.scss */
+.work-sites-block .site-item .arrow {
+  position: absolute;
+  right: -9px;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  overflow: hidden;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8DE285', endColorstr='#FF4DB247');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzhkZTI4NSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzRkYjI0NyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8de285), color-stop(100%, #4db247));
+  background-image: -moz-linear-gradient(top, #8de285 0%, #4db247 100%);
+  background-image: -webkit-linear-gradient(top, #8de285 0%, #4db247 100%);
+  background-image: linear-gradient(to bottom, #8de285 0%, #4db247 100%);
+}
+/* line 1350, ../../../scss/assol.scss */
+.work-sites-block .site-item .arrow .arrow-in {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: -15px;
+  margin: -10px 0 0 0;
+  box-shadow: 0 0 0 1px rgba(15, 97, 11, 0.25) inset, 0 0 0 100px #fff;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* line 1362, ../../../scss/assol.scss */
+.work-sites-block .site-item .arrow:before, .work-sites-block .site-item .arrow:after {
+  content: '';
+  display: block;
+}
+/* line 1374, ../../../scss/assol.scss */
+.work-sites-block .clients-list {
+  min-height: 34px;
+  padding: 7px 20px;
+  border-radius: 20px;
+}
+/* line 1379, ../../../scss/assol.scss */
+.work-sites-block .clients-list ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 1383, ../../../scss/assol.scss */
+.work-sites-block .clients-list li {
+  list-style: none;
+  margin: 0 6px 3px 0;
+  display: inline-block;
+}
+/* line 1391, ../../../scss/assol.scss */
+.work-sites-block .clients-list .clients-item span {
+  cursor: pointer;
+  font-size: 16px;
+  color: #b32323;
+  top: 4px;
+}
+/* line 1398, ../../../scss/assol.scss */
+.work-sites-block .clients-list .clients-item a {
+  margin-left: 4px;
+  font-size: 13px;
+  color: #1daddc;
+}
+
+/* line 1410, ../../../scss/assol.scss */
+.schedule-table-wrap .my-schedule {
+  color: #535c69;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* line 1420, ../../../scss/assol.scss */
+.schedule-table table {
+  border: 1px solid #d3d3d3;
+  width: 100%;
+}
+/* line 1425, ../../../scss/assol.scss */
+.schedule-table table tr td {
+  background: #fafafa;
+}
+/* line 1429, ../../../scss/assol.scss */
+.schedule-table table tr:nth-child(2n) td {
+  background: #f7f7f7;
+}
+/* line 1434, ../../../scss/assol.scss */
+.schedule-table table th {
+  background: #ebeced;
+}
+/* line 1437, ../../../scss/assol.scss */
+.schedule-table table td {
+  border-top: 1px solid #d5d5d5;
+  border-bottom: 1px solid #d5d5d5;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+/* line 1443, ../../../scss/assol.scss */
+.schedule-table table th,
+.schedule-table table td {
+  font-size: 12px;
+  color: #454545;
+  white-space: nowrap;
+}
+/* line 1449, ../../../scss/assol.scss */
+.schedule-table table th:first-child,
+.schedule-table table td:first-child {
+  width: 130px;
+}
+/* line 1452, ../../../scss/assol.scss */
+.schedule-table table th:nth-child(2),
+.schedule-table table td:nth-child(2) {
+  width: 140px;
+}
+/* line 1455, ../../../scss/assol.scss */
+.schedule-table table th:last-child,
+.schedule-table table td:last-child {
+  white-space: normal;
+}
+
+/* line 1464, ../../../scss/assol.scss */
+.remove-navs-wrap .pseudo-table-wrap {
+  margin-bottom: 10px;
+}
+
+/* line 1469, ../../../scss/assol.scss */
+.pseudo-table-wrap {
+  margin: 0 -7px;
+}
+
+/* line 1473, ../../../scss/assol.scss */
+.pseudo-table {
+  display: table;
+  width: 100%;
+}
+
+/* line 1478, ../../../scss/assol.scss */
+.pseudo-td {
+  display: table-cell;
+  vertical-align: middle;
+  width: auto;
+  padding: 0 7px;
+}
+/* line 1484, ../../../scss/assol.scss */
+.pseudo-td.width50 {
+  width: 50%;
+}
+/* line 1487, ../../../scss/assol.scss */
+.pseudo-td.width25 {
+  width: 25%;
+}
+/* line 1490, ../../../scss/assol.scss */
+.pseudo-td.width33 {
+  width: 33%;
+}
+/* line 1494, ../../../scss/assol.scss */
+.pseudo-td.content-width {
+  width: 1px;
+}
+
+/* line 1500, ../../../scss/assol.scss */
+#videoSiteList .pseudo-table-wrap {
+  margin: 0 -4px;
+}
+/* line 1503, ../../../scss/assol.scss */
+#videoSiteList .pseudo-td {
+  vertical-align: top;
+  padding: 0 4px;
+}
+/* line 1507, ../../../scss/assol.scss */
+#videoSiteList .site-item {
+  margin: 20px 5px 0 0;
+  width: 185px;
+}
+
+/* line 1513, ../../../scss/assol.scss */
+.remove-txt {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 0 10px 0 0;
+  text-align: right;
+}
+/* line 1519, ../../../scss/assol.scss */
+.remove-txt a {
+  font-weight: normal;
+}
+/* line 1522, ../../../scss/assol.scss */
+.remove-txt .date {
+  padding: 0 0 0 10px;
+}
+
+/* line 1529, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+  width: 80px;
+}
+/* line 1539, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field input:focus ~ .user-id-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+/* line 1546, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip {
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  left: -38px;
+  margin: 0 0 11px 0;
+  width: 158px;
+  text-align: center;
+  min-height: 36px;
+  padding-top: 11px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  visibility: hidden;
+  opacity: 0;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.3s ease 0s;
+}
+/* line 1566, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip:hover {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 1570, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip .tooltip-content {
+  white-space: nowrap;
+  color: #2fc4f5;
+}
+/* line 1574, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip .tooltip-content a {
+  color: #2fc4f5;
+  text-decoration: underline;
+}
+/* line 1578, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip .tooltip-content a:hover {
+  text-decoration: none;
+}
+/* line 1584, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip .arrow {
+  position: absolute;
+  top: 100%;
+  height: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+/* line 1591, ../../../scss/assol.scss */
+.user-id-field-wrap .user-id-field .user-id-tooltip .arrow:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  background: #efeff0;
+  -moz-transform: rotate(45deg) translate(0, 0);
+  -ms-transform: rotate(45deg) translate(0, 0);
+  -webkit-transform: rotate(45deg) translate(0, 0);
+  transform: rotate(45deg) translate(0, 0);
+  position: relative;
+  top: -15px;
+  left: -2px;
+}
+
+/* Сотрудники */
+/* line 1610, ../../../scss/assol.scss */
+.assol-input-style {
+  resize: none;
+  border: none;
+  line-height: normal;
+  border-radius: 3px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.15) inset, 0 0 0 1px rgba(95, 103, 109, 0.2) inset;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF000000', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjA1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.05)), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+}
+/* line 1627, ../../../scss/assol.scss */
+.assol-input-style.fullwidth {
+  width: 100%;
+}
+/* line 1631, ../../../scss/assol.scss */
+.assol-input-style.defaultheight {
+  height: 36px;
+}
+
+/* line 1636, ../../../scss/assol.scss */
+.assol-btn-style {
+  min-height: 100%;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+}
+
+/* line 1645, ../../../scss/assol.scss */
+.assol-btn-select-checked-wrap {
+  float: left;
+  height: 100%;
+  width: 100%;
+  padding-right: 33px;
+  margin-right: -33px;
+}
+/* line 1652, ../../../scss/assol.scss */
+.assol-btn-select-checked-wrap .assol-btn-select-checked {
+  width: 100%;
+  padding-left: 9px;
+}
+
+/* line 1658, ../../../scss/assol.scss */
+.assol-btn-select {
+  position: relative;
+}
+/* line 1661, ../../../scss/assol.scss */
+.assol-btn-select .assol-btn-style {
+  float: left;
+}
+
+/* line 1666, ../../../scss/assol.scss */
+.checkbox-line,
+.radio-line {
+  display: inline-block;
+}
+/* line 1670, ../../../scss/assol.scss */
+.checkbox-line label,
+.radio-line label {
+  margin: 0;
+}
+/* line 1673, ../../../scss/assol.scss */
+.checkbox-line input,
+.radio-line input {
+  display: none;
+}
+/* line 1678, ../../../scss/assol.scss */
+.checkbox-line input:checked ~ mark,
+.radio-line input:checked ~ mark {
+  background-position: -2px -2px;
+}
+/* line 1683, ../../../scss/assol.scss */
+.checkbox-line input[disabled] ~ mark,
+.radio-line input[disabled] ~ mark {
+  background-position: -23px -25px;
+}
+/* line 1687, ../../../scss/assol.scss */
+.checkbox-line input[disabled]:checked ~ mark,
+.radio-line input[disabled]:checked ~ mark {
+  background-position: -2px -25px;
+}
+/* line 1693, ../../../scss/assol.scss */
+.checkbox-line mark,
+.radio-line mark {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  display: inline-block;
+  background: url("../img/checkbox.png") no-repeat;
+  background-position: -23px -2px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* line 1709, ../../../scss/assol.scss */
+.radio-line mark {
+  background-image: url("../img/radio.png");
+}
+
+/* line 1714, ../../../scss/assol.scss */
+.assol-pagination {
+  padding: 14px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #575d62;
+}
+/* line 1722, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-left {
+  float: left;
+}
+/* line 1725, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-right {
+  float: left;
+}
+/* line 1729, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .now-page-input {
+  width: 33px;
+  height: 32px;
+  text-align: center;
+}
+/* line 1734, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-all {
+  padding-left: 12px;
+}
+/* line 1737, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-arrs {
+  float: left;
+  padding-left: 15px;
+}
+/* line 1741, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-arrs .prev,
+.assol-pagination .assol-pagination-in .assol-pagination-arrs .next {
+  width: 31px;
+  height: 30px;
+  float: left;
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  border: 0;
+  box-shadow: 0 1px 2px 0 rgba(72, 85, 96, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.25);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFEDEDEE');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMzElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSI3NyUiIHN0b3AtY29sb3I9IiNlZGVkZWUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZGVkZWQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(31%, #ffffff), color-stop(77%, #ededee), color-stop(100%, #ededed));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 31%, #ededee 77%, #ededed 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 31%, #ededee 77%, #ededed 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 31%, #ededee 77%, #ededed 100%);
+}
+/* line 1754, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-arrs .prev:active,
+.assol-pagination .assol-pagination-in .assol-pagination-arrs .next:active {
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEDEDED', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VkZWRlZCIvPjxzdG9wIG9mZnNldD0iMjMlIiBzdG9wLWNvbG9yPSIjZWRlZGVlIi8+PHN0b3Agb2Zmc2V0PSI2OSUiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ededed), color-stop(23%, #ededee), color-stop(69%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, #ededed 0%, #ededee 23%, #ffffff 69%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, #ededed 0%, #ededee 23%, #ffffff 69%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #ededed 0%, #ededee 23%, #ffffff 69%, #ffffff 100%);
+}
+/* line 1762, ../../../scss/assol.scss */
+.assol-pagination .assol-pagination-in .assol-pagination-arrs .next {
+  margin: 0 0 0 1px;
+}
+
+/* documents */
+/* line 1770, ../../../scss/assol.scss */
+.document {
+  border: none;
+  width: 185px;
+  height: 180px;
+  float: left;
+  text-align: center;
+  border: 1px solid transparent;
+}
+/* line 1778, ../../../scss/assol.scss */
+.document:hover {
+  border: 1px solid #e7e7e7;
+  box-shadow: 0 0 20px #e2e2e2;
+}
+/* line 1782, ../../../scss/assol.scss */
+.document:hover .document-menu-btn {
+  display: block;
+}
+
+/* line 1788, ../../../scss/assol.scss */
+.document-menu-btn {
+  display: none;
+  float: right;
+  font-size: 19px;
+  cursor: pointer;
+  margin: 3px;
+}
+/* line 1795, ../../../scss/assol.scss */
+.document-menu-btn.blue {
+  color: #35c4f7;
+}
+/* line 1798, ../../../scss/assol.scss */
+.document-menu-btn.blue:hover {
+  color: #6de5f7;
+}
+/* line 1802, ../../../scss/assol.scss */
+.document-menu-btn.remove {
+  color: #8e8f91;
+}
+/* line 1804, ../../../scss/assol.scss */
+.document-menu-btn.remove:hover {
+  color: #c2c3c5;
+}
+
+/* line 1810, ../../../scss/assol.scss */
+.document-menu {
+  height: 32px;
+  text-align: right;
+  padding: 5px;
+}
+
+/* line 1816, ../../../scss/assol.scss */
+.document-name {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* line 1822, ../../../scss/assol.scss */
+.panel-body.bread-crumbs {
+  padding-top: 5px;
+  padding-bottom: 3px;
+}
+
+/* line 1827, ../../../scss/assol.scss */
+.assol-dropdown {
+  background: #f8f8f8 linear-gradient(to bottom, #fdfdfd, #f5f5f5);
+  border: 1px solid #e2e2e2;
+  color: #4e615f;
+  border-radius: 2px;
+}
+/* line 1835, ../../../scss/assol.scss */
+.assol-dropdown .caret:before {
+  display: none;
+}
+
+/* line 1841, ../../../scss/assol.scss */
+.assol-main-content {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  height: 0%;
+  padding: 0 0 20px 0;
+}
+/* line 1848, ../../../scss/assol.scss */
+.assol-main-content > div {
+  display: table-cell;
+  float: none;
+  height: 100%;
+  vertical-align: top;
+}
+/* line 1854, ../../../scss/assol.scss */
+.assol-main-content > div:last-child {
+  padding-left: 20px;
+}
+
+/* line 1860, ../../../scss/assol.scss */
+.sidebar-search {
+  padding: 0 11px;
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}
+/* line 1866, ../../../scss/assol.scss */
+.sidebar-search .search-block {
+  background: #fff;
+  border-radius: 5px;
+  width: 100%;
+  height: 37px;
+  position: relative;
+}
+/* line 1873, ../../../scss/assol.scss */
+.sidebar-search .search-field {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: #575d62;
+  border-radius: 5px;
+  line-height: 1;
+  border: none;
+  padding: 0 40px 0 11px;
+}
+/* line 1883, ../../../scss/assol.scss */
+.sidebar-search .search-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #535c69;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  text-align: center;
+  line-height: 28px;
+  position: absolute;
+  right: 9px;
+  top: 4px;
+  -moz-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  -webkit-transition: all 0.2s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.2s ease 0s;
+}
+/* line 1899, ../../../scss/assol.scss */
+.sidebar-search .search-btn span {
+  -moz-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  -webkit-transition: all 0.2s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.2s ease 0s;
+  color: #535c69;
+}
+/* line 1904, ../../../scss/assol.scss */
+.sidebar-search .search-btn:hover {
+  background: #535c69;
+}
+/* line 1907, ../../../scss/assol.scss */
+.sidebar-search .search-btn:hover span {
+  color: #fff;
+}
+
+/* Календарь */
+/* line 1916, ../../../scss/assol.scss */
+.fc table {
+  border-collapse: separate;
+}
+
+/* line 1920, ../../../scss/assol.scss */
+.fc-unthemed th,
+.fc-unthemed td,
+.fc-unthemed thead,
+.fc-unthemed tbody,
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-row,
+.fc-unthemed .fc-popover {
+  border-color: #e8e8e8;
+}
+
+/* line 1932, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover {
+  margin-left: -9px;
+  width: 153px;
+}
+/* line 1936, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-header {
+  height: 26px;
+  line-height: 26px;
+  background: #fff;
+}
+/* line 1941, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-header .fc-close {
+  margin-top: 6px;
+}
+/* line 1948, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event {
+  padding: 0;
+  border: none;
+  background: none;
+  position: relative;
+  height: 17px;
+}
+/* line 1959, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event.fc-not-start .fc-title:before {
+  content: '← ';
+}
+/* line 1967, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event:hover .fc-content {
+  background: #2fc6f7;
+  border-color: #2fc6f7;
+  position: absolute;
+  width: auto;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+}
+/* line 1974, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event:hover .fc-content:after {
+  display: none;
+}
+/* line 1979, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event:hover .fc-title {
+  color: #fff;
+}
+/* line 1984, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event .fc-content {
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  padding-right: 5px;
+  height: 100%;
+  line-height: 17px;
+  min-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+/* line 1995, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event .fc-content:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  box-shadow: 0 0 10px 10px #e8e8e8;
+}
+/* line 2006, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event .fc-content .fc-time {
+  display: none;
+}
+/* line 2011, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event .fc-title {
+  color: #535c69;
+  padding-left: 7px;
+}
+/* line 2015, ../../../scss/assol.scss */
+.fc-unthemed .fc-popover .fc-event-container .fc-event .fc-title:before {
+  content: '• ';
+}
+
+/* line 2025, ../../../scss/assol.scss */
+.fc-agendaWeek-view .fc-event {
+  background: #e8e8e8;
+  border: 1px solid #dbdbdb;
+  color: #535c69;
+}
+/* line 2030, ../../../scss/assol.scss */
+.fc-agendaWeek-view .fc-event:hover {
+  background: #2fc6f7;
+  border-color: #2fc6f7;
+  color: #fff;
+}
+
+/* line 2048, ../../../scss/assol.scss */
+.fc-agendaDay-view .fc-event {
+  background: #e8e8e8;
+  border: 1px solid #dbdbdb;
+  color: #535c69;
+  min-height: 10px;
+}
+/* line 2054, ../../../scss/assol.scss */
+.fc-agendaDay-view .fc-event:hover {
+  background: #2fc6f7;
+  border-color: #2fc6f7;
+  color: #fff;
+}
+
+/* line 2073, ../../../scss/assol.scss */
+.fc-more-cell > div {
+  border-top: 1px solid #e8e8e8;
+  margin: 6px 0 0 0;
+  text-align: center;
+}
+/* line 2078, ../../../scss/assol.scss */
+.fc-more-cell > div a {
+  font-size: 11px;
+  color: #99a4b4;
+}
+/* line 2082, ../../../scss/assol.scss */
+.fc-more-cell > div a:after {
+  content: ' ▼';
+}
+/* line 2085, ../../../scss/assol.scss */
+.fc-more-cell > div a:hover {
+  color: #2fc6f7;
+  text-decoration: none;
+}
+
+/* line 2097, ../../../scss/assol.scss */
+.fc-unthemed .fc-widget-content .fc-today {
+  position: relative;
+  border: 1px solid #2fc6f7;
+  background: none;
+  position: relative;
+}
+/* line 2106, ../../../scss/assol.scss */
+.fc-unthemed .fc-agendaDay-view .fc-today {
+  border: 1px solid #e8e8e8;
+}
+
+/* line 2113, ../../../scss/assol.scss */
+.fc-head .fc-day-header {
+  background: #fafafa;
+  font-size: 12px;
+  color: #6a6969;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: none;
+  font-weight: normal;
+}
+
+/* line 2125, ../../../scss/assol.scss */
+.fc-head td {
+  border-bottom: 0;
+}
+
+/* line 2130, ../../../scss/assol.scss */
+.fc-row.fc-rigid:hover {
+  overflow: visible;
+}
+
+/* line 2154, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-day-number {
+  text-align: left;
+  height: 21px;
+  vertical-align: middle;
+  padding-left: 8px;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 14px;
+  font-weight: bold;
+  color: #404955;
+}
+/* line 2164, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-day-number.fc-other-month {
+  color: #cfcfcf;
+  font-weight: normal;
+}
+/* line 2170, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container {
+  padding-top: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+/* line 2175, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-day-grid-event {
+  margin: 0;
+}
+/* line 2178, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event {
+  padding: 0;
+  border: none;
+  background: none;
+  position: relative;
+  height: 17px;
+}
+/* line 2189, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event.fc-not-start .fc-title:before {
+  content: '← ';
+}
+/* line 2195, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event:hover {
+  z-index: 50;
+}
+/* line 2198, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event:hover .fc-content {
+  background: #2fc6f7;
+  border-color: #2fc6f7;
+  position: absolute;
+  width: auto;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+}
+/* line 2205, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event:hover .fc-content:after {
+  display: none;
+}
+/* line 2210, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event:hover .fc-title {
+  color: #fff;
+}
+/* line 2215, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event .fc-content {
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  padding-right: 5px;
+  height: 100%;
+  line-height: 17px;
+  min-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+/* line 2226, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event .fc-content:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  box-shadow: 0 0 10px 10px #e8e8e8;
+}
+/* line 2237, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event .fc-content .fc-time {
+  display: none;
+}
+/* line 2242, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event .fc-title {
+  color: #535c69;
+  padding-left: 7px;
+}
+/* line 2246, ../../../scss/assol.scss */
+.fc-basic-view .fc-content-skeleton .fc-event-container .fc-event .fc-title:before {
+  content: '• ';
+}
+
+/* line 2255, ../../../scss/assol.scss */
+.light-title {
+  font-weight: 300;
+}
+
+/* line 2262, ../../../scss/assol.scss */
+.day-report .day-report-in table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+/* line 2266, ../../../scss/assol.scss */
+.day-report .day-report-in table td {
+  padding: 7px;
+  border: 1px solid #e8e8e8;
+}
+/* line 2270, ../../../scss/assol.scss */
+.day-report .day-report-in table td:nth-child(1) {
+  text-align: center;
+  width: 7%;
+}
+/* line 2274, ../../../scss/assol.scss */
+.day-report .day-report-in table td:nth-child(2) {
+  width: 45%;
+}
+/* line 2282, ../../../scss/assol.scss */
+.day-report .day-report-in input {
+  height: 36px;
+  padding: 7px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* line 2291, ../../../scss/assol.scss */
+.calendar-day-events {
+  padding-bottom: 30px;
+}
+/* line 2294, ../../../scss/assol.scss */
+.calendar-day-events table {
+  width: 100%;
+}
+/* line 2297, ../../../scss/assol.scss */
+.calendar-day-events table td {
+  width: 50%;
+}
+/* line 2300, ../../../scss/assol.scss */
+.calendar-day-events table td:first-child {
+  padding: 0 10px 0 0;
+}
+/* line 2303, ../../../scss/assol.scss */
+.calendar-day-events table td:last-child {
+  padding: 0 0 0 10px;
+}
+/* line 2309, ../../../scss/assol.scss */
+.calendar-day-events .day-events,
+.calendar-day-events .day-tasks {
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 15px 15px 15px 15px;
+  height: 145px;
+}
+/* line 2317, ../../../scss/assol.scss */
+.calendar-day-events .cde-block-in {
+  height: 100%;
+  overflow: auto;
+}
+/* line 2321, ../../../scss/assol.scss */
+.calendar-day-events .cde-block-in ul {
+  padding: 0;
+  margin: 0;
+}
+/* line 2325, ../../../scss/assol.scss */
+.calendar-day-events .cde-block-in ul li {
+  margin-bottom: 10px;
+  list-style-position: inside;
+}
+/* line 2329, ../../../scss/assol.scss */
+.calendar-day-events .cde-block-in ul a {
+  color: #535c69;
+  font-size: 14px;
+}
+
+/* Календарь */
+/* Клиенты */
+/* line 2341, ../../../scss/assol.scss */
+.client-img {
+  width: 200px;
+  padding: 0 25px 0;
+  box-sizing: border-box;
+}
+/* line 2346, ../../../scss/assol.scss */
+.client-img .client-img-wrap {
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #d6caca;
+}
+/* line 2353, ../../../scss/assol.scss */
+.client-img a.client-img-wrap {
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.3s ease 0s;
+}
+/* line 2356, ../../../scss/assol.scss */
+.client-img a.client-img-wrap:hover {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 2361, ../../../scss/assol.scss */
+.client-img img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 2367, ../../../scss/assol.scss */
+.clients-wrap {
+  padding: 0 0 40px 0;
+}
+/* line 2370, ../../../scss/assol.scss */
+.clients-wrap .client-block {
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  width: 100%;
+  padding: 16px 0 24px;
+  margin: 0 0 10px;
+}
+/* line 2377, ../../../scss/assol.scss */
+.clients-wrap .client-block:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 2381, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-img {
+  float: left;
+  margin-right: -100%;
+  position: relative;
+}
+/* line 2386, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-img .client-img-in {
+  width: 150px;
+  height: 150px;
+}
+/* line 2391, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info-wrap {
+  width: 100%;
+  float: left;
+}
+/* line 2395, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info-wrap:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+/* line 2401, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info-wrap .client-info {
+  padding: 0 0 0 200px;
+}
+/* line 2406, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-id {
+  color: #2067b0;
+}
+/* line 2410, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-id a:hover {
+  color: #2067b0;
+}
+/* line 2415, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-btn {
+  height: 67px;
+  padding-top: 15px;
+  text-align: left;
+}
+/* line 2423, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info ul {
+  padding: 0;
+  margin: 0;
+}
+/* line 2428, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info li {
+  float: left;
+  width: 33.3333333%;
+  list-style: none;
+}
+/* line 2433, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info li > div {
+  margin: 0 0 5px 0;
+}
+/* line 2436, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-info li > div.email-block {
+  max-width: 600px;
+  padding-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* line 2453, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap {
+  margin-top: 5px;
+  height: 67px;
+  width: 175px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+/* line 2461, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap.full {
+  height: 135px;
+}
+/* line 2465, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap.min {
+  height: 25px;
+}
+/* line 2469, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap:hover {
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+/* line 2474, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap:hover .client-footnote-block {
+  background: #fff;
+  position: relative;
+  z-index: 5;
+  height: auto;
+  min-height: 100%;
+}
+/* line 2481, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap:hover .client-footnote-block-in {
+  height: auto;
+  min-height: 67px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.15) inset, 0 0 0 1px rgba(95, 103, 109, 0.2) inset;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF000000', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjA1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.05)), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+}
+/* line 2491, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap.full .client-footnote-block-in {
+  min-height: 135px;
+}
+/* line 2497, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap.min .client-footnote-block-in {
+  min-height: 25px;
+}
+/* line 2504, ../../../scss/assol.scss */
+.clients-wrap .client-block .client-footnote .client-footnote-block-wrap .client-footnote-block-in {
+  padding: 7px;
+  min-height: 100%;
+  height: 100%;
+  background: none;
+  box-shadow: none;
+}
+
+/* line 2518, ../../../scss/assol.scss */
+.client-profile-page textarea {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 13px;
+  line-height: 22px;
+}
+/* line 2527, ../../../scss/assol.scss */
+.client-profile-page .assol-input-style,
+.client-profile-page select.assol-btn-style {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+/* line 2534, ../../../scss/assol.scss */
+.client-profile-page form.avatar-file {
+  text-align: center;
+}
+/* line 2537, ../../../scss/assol.scss */
+.client-profile-page form.avatar-file label {
+  margin: 0 auto;
+}
+/* line 2543, ../../../scss/assol.scss */
+.client-profile-page #SelfDescription textarea {
+  height: 146px;
+  padding: 7px;
+}
+/* line 2550, ../../../scss/assol.scss */
+.client-profile-page #Questions textarea {
+  padding: 10px;
+  line-height: 22px;
+  font-size: 13px;
+}
+/* line 2556, ../../../scss/assol.scss */
+.client-profile-page #Questions textarea[id^="Question"] {
+  height: 89px;
+  resize: none;
+  border: none;
+  line-height: normal;
+  border-radius: 3px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.15) inset, 0 0 0 1px rgba(95, 103, 109, 0.2) inset;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF000000', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjA1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.05)), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+}
+/* line 2566, ../../../scss/assol.scss */
+.client-profile-page #Questions textarea[id^="Question"][readonly] {
+  background: none;
+  resize: none;
+  border: none;
+  line-height: normal;
+  border-radius: 3px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.15) inset, 0 0 0 1px rgba(95, 103, 109, 0.2) inset;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF000000', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjA1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.05)), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, #ffffff 100%);
+}
+/* line 2577, ../../../scss/assol.scss */
+.client-profile-page #Questions textarea[id^="Answer"] {
+  height: 146px;
+}
+/* line 2585, ../../../scss/assol.scss */
+.client-profile-page #PhotoAndVideo .last-photo-session .date-field {
+  width: 200px;
+}
+/* line 2596, ../../../scss/assol.scss */
+.client-profile-page #AdditionallyPane textarea,
+.client-profile-page #ReservationContactPane textarea {
+  height: 136px;
+  padding: 10px;
+}
+/* line 2604, ../../../scss/assol.scss */
+.client-profile-page #Remove textarea {
+  height: 36px;
+  line-height: 36px;
+}
+
+/* line 2614, ../../../scss/assol.scss */
+.calendar-event-page textarea {
+  height: 186px;
+  padding: 10px;
+  width: 100%;
+}
+/* line 2620, ../../../scss/assol.scss */
+.calendar-event-page input.assol-input-style,
+.calendar-event-page input.assol-btn-style {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+/* line 2626, ../../../scss/assol.scss */
+.calendar-event-page .change-task-info-table {
+  margin-top: 25px;
+}
+/* line 2629, ../../../scss/assol.scss */
+.calendar-event-page .change-task-info-table table {
+  width: auto;
+}
+/* line 2632, ../../../scss/assol.scss */
+.calendar-event-page .change-task-info-table table td,
+.calendar-event-page .change-task-info-table table th {
+  padding-right: 5px;
+  width: auto;
+}
+/* line 2638, ../../../scss/assol.scss */
+.calendar-event-page .change-task-info-table .task-date {
+  padding-right: 20px;
+}
+
+/* line 2647, ../../../scss/assol.scss */
+.save-edit-wrap .blue-square {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #2fc6f7;
+  line-height: normal;
+  vertical-align: top;
+}
+/* line 2656, ../../../scss/assol.scss */
+.save-edit-wrap .gray-square {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #eaeaea;
+  line-height: normal;
+  vertical-align: top;
+}
+/* line 2665, ../../../scss/assol.scss */
+.save-edit-wrap button {
+  width: 213px;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+}
+/* line 2670, ../../../scss/assol.scss */
+.save-edit-wrap button.disabled {
+  color: #d7d7d7;
+  background: #f7f7f7;
+}
+
+/* line 2677, ../../../scss/assol.scss */
+.new-event-settings {
+  padding: 20px 0 0;
+}
+/* line 2680, ../../../scss/assol.scss */
+.new-event-settings > table {
+  width: 100%;
+  margin: 0 -10px;
+}
+/* line 2684, ../../../scss/assol.scss */
+.new-event-settings td {
+  vertical-align: middle;
+  padding: 0 10px;
+}
+/* line 2688, ../../../scss/assol.scss */
+.new-event-settings td:nth-child(1) {
+  width: 45%;
+}
+/* line 2691, ../../../scss/assol.scss */
+.new-event-settings td:nth-child(2) {
+  width: 20%;
+}
+/* line 2694, ../../../scss/assol.scss */
+.new-event-settings td:nth-child(3) {
+  width: 20%;
+}
+/* line 2697, ../../../scss/assol.scss */
+.new-event-settings td:nth-child(4) {
+  width: 15%;
+}
+
+/* line 2703, ../../../scss/assol.scss */
+.new-event-description {
+  padding: 10px 0 0;
+}
+
+/* line 2708, ../../../scss/assol.scss */
+.calendar-block .input-group-addon {
+  height: 100%;
+  padding: 0;
+  width: 35px;
+  position: relative;
+  border-radius: 2px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+}
+
+/* line 2723, ../../../scss/assol.scss */
+.clients-view-table {
+  width: 100%;
+  padding: 0 10px;
+  margin: 10px 0 10px 0;
+}
+/* line 2730, ../../../scss/assol.scss */
+.clients-view-table.tasks-view-table td {
+  width: auto;
+}
+/* line 2735, ../../../scss/assol.scss */
+.clients-view-table td {
+  padding: 0 10px;
+  vertical-align: bottom;
+}
+/* line 2741, ../../../scss/assol.scss */
+.clients-view-table td input,
+.clients-view-table td select {
+  height: 34px;
+  width: 100%;
+}
+/* line 2747, ../../../scss/assol.scss */
+.clients-view-table td .select-block {
+  width: 50%;
+  float: left;
+}
+/* line 2751, ../../../scss/assol.scss */
+.clients-view-table td .select-block:first-child {
+  padding-right: 8px;
+}
+/* line 2754, ../../../scss/assol.scss */
+.clients-view-table td .select-block:last-child {
+  padding-right: 8px;
+}
+
+/* line 2761, ../../../scss/assol.scss */
+.rating-wrap {
+  border: 1px solid #d0d0d0;
+  width: 135px;
+  padding: 4px 0px 4px 5px;
+  border-radius: 3px;
+  position: relative;
+  float: left;
+  margin: 0 15px 0 0;
+}
+/* line 2770, ../../../scss/assol.scss */
+.rating-wrap .arrow {
+  width: 0px;
+  height: 0px;
+  border: 10px solid transparent;
+  border-top-color: #d0d0d0;
+  margin: 0;
+  padding: 0;
+  float: left;
+  position: absolute;
+  right: 100%;
+  top: 6px;
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+/* line 2783, ../../../scss/assol.scss */
+.rating-wrap .arrow:before {
+  content: '';
+  width: 0px;
+  height: 0px;
+  border: 9px solid transparent;
+  border-top-color: white;
+  display: inline-block;
+  -moz-transform: translate(-9px, -10px);
+  -ms-transform: translate(-9px, -10px);
+  -webkit-transform: translate(-9px, -10px);
+  transform: translate(-9px, -10px);
+}
+
+/* line 2795, ../../../scss/assol.scss */
+.stars {
+  background: url("../img/stars2.png") repeat-x 0 0;
+  width: 120px;
+}
+
+/* line 2800, ../../../scss/assol.scss */
+.stars input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  display: none;
+}
+
+/* line 2807, ../../../scss/assol.scss */
+.stars input[type="radio"]:checked ~ span {
+  background-position: 0 -23px;
+}
+
+/* line 2811, ../../../scss/assol.scss */
+.stars input[type="radio"].star-5:checked ~ span {
+  width: 100%;
+}
+
+/* line 2815, ../../../scss/assol.scss */
+.stars input[type="radio"].star-4:checked ~ span {
+  width: 80%;
+}
+
+/* line 2819, ../../../scss/assol.scss */
+.stars input[type="radio"].star-3:checked ~ span {
+  width: 60%;
+}
+
+/* line 2823, ../../../scss/assol.scss */
+.stars input[type="radio"].star-2:checked ~ span {
+  width: 40%;
+}
+
+/* line 2827, ../../../scss/assol.scss */
+.stars input[type="radio"].star-1:checked ~ span {
+  width: 20%;
+}
+
+/* line 2831, ../../../scss/assol.scss */
+.stars label {
+  display: block;
+  width: 24px;
+  height: 23px;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-indent: -999em;
+  float: left;
+  position: relative;
+  z-index: 10;
+  background: transparent !important;
+  cursor: pointer;
+}
+
+/* line 2845, ../../../scss/assol.scss */
+.stars label:hover ~ span {
+  background-position: 0 -23px;
+}
+
+/* line 2849, ../../../scss/assol.scss */
+.stars label.star-5:hover ~ span {
+  width: 100% !important;
+}
+
+/* line 2853, ../../../scss/assol.scss */
+.stars label.star-4:hover ~ span {
+  width: 80% !important;
+}
+
+/* line 2857, ../../../scss/assol.scss */
+.stars label.star-3:hover ~ span {
+  width: 60% !important;
+}
+
+/* line 2861, ../../../scss/assol.scss */
+.stars label.star-2:hover ~ span {
+  width: 40% !important;
+}
+
+/* line 2865, ../../../scss/assol.scss */
+.stars label.star-1:hover ~ span {
+  width: 20% !important;
+}
+
+/* line 2869, ../../../scss/assol.scss */
+.stars span {
+  display: block;
+  width: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 23px;
+  background: url("../img/stars2.png") repeat-x 0 -46px;
+}
+
+/* Клиенты end */
+/* line 2881, ../../../scss/assol.scss */
+.editor-block-wrap {
+  margin: 20px 0 10px;
+}
+
+/* Задачи */
+/* line 2889, ../../../scss/assol.scss */
+.add-task textarea {
+  height: 186px;
+  padding: 15px 15px 20px;
+  color: #535c69;
+  font-size: 13px;
+  line-height: 22px;
+  width: 100%;
+}
+/* line 2898, ../../../scss/assol.scss */
+.add-task input.assol-input-style {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+/* line 2903, ../../../scss/assol.scss */
+.add-task .add-task-setting {
+  margin: 0 -10px;
+}
+/* line 2906, ../../../scss/assol.scss */
+.add-task .add-task-setting table {
+  width: 100%;
+}
+/* line 2909, ../../../scss/assol.scss */
+.add-task .add-task-setting table td {
+  width: 33.3333333%;
+  padding: 0 10px;
+}
+
+/* line 2917, ../../../scss/assol.scss */
+.change-task-info-table {
+  background: #eef2f4;
+  padding: 20px 15px;
+  border-radius: 6px;
+}
+/* line 2922, ../../../scss/assol.scss */
+.change-task-info-table table {
+  width: 80%;
+}
+/* line 2925, ../../../scss/assol.scss */
+.change-task-info-table th {
+  color: #454545;
+}
+/* line 2928, ../../../scss/assol.scss */
+.change-task-info-table td {
+  color: #7f7f7f;
+}
+/* line 2932, ../../../scss/assol.scss */
+.change-task-info-table th,
+.change-task-info-table td {
+  vertical-align: middle;
+  height: 25px;
+  font-weight: 700;
+  font-size: 13px;
+}
+/* line 2940, ../../../scss/assol.scss */
+.change-task-info-table .task-date {
+  color: #7f7f7f;
+  background: url(../img/calendar-icon.png) 0 50% no-repeat;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 0 0 25px;
+}
+
+/* line 2952, ../../../scss/assol.scss */
+.change-task-description-wrap {
+  padding: 25px 0 20px;
+}
+/* line 2955, ../../../scss/assol.scss */
+.change-task-description-wrap .change-task-description {
+  color: #535c69;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+/* line 2966, ../../../scss/assol.scss */
+.tasks-tabs-content {
+  padding-top: 10px;
+}
+
+/* line 2970, ../../../scss/assol.scss */
+.tasks-view-table-btns {
+  white-space: nowrap;
+}
+/* line 2973, ../../../scss/assol.scss */
+.tasks-view-table-btns ul {
+  padding: 0;
+  margin: 0;
+}
+/* line 2977, ../../../scss/assol.scss */
+.tasks-view-table-btns ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 7px;
+}
+/* line 2983, ../../../scss/assol.scss */
+.tasks-view-table-btns a {
+  text-decoration: none;
+  color: #535c69;
+}
+
+/* line 2991, ../../../scss/assol.scss */
+.tasks-table-wrap table {
+  width: 100%;
+  font-size: 13px;
+}
+/* line 2995, ../../../scss/assol.scss */
+.tasks-table-wrap table th {
+  height: 47px;
+  vertical-align: middle;
+  background: #ebeced;
+  border-bottom: 1px solid #f2f3f4;
+  font-weight: 700;
+  padding: 0 0 0 20px;
+}
+/* line 3003, ../../../scss/assol.scss */
+.tasks-table-wrap table td {
+  height: 45px;
+  vertical-align: middle;
+  padding: 0 0 0 20px;
+  font-weight: 700;
+}
+/* line 3013, ../../../scss/assol.scss */
+.tasks-table-wrap table tr:nth-child(2n) td {
+  background: #fafafa;
+}
+/* line 3020, ../../../scss/assol.scss */
+.tasks-table-wrap .task-director {
+  color: #7f7f7f;
+}
+/* line 3023, ../../../scss/assol.scss */
+.tasks-table-wrap .task-name {
+  color: #2067b0;
+}
+/* line 3026, ../../../scss/assol.scss */
+.tasks-table-wrap .task-date {
+  color: #7f7f7f;
+  background: url(../img/calendar-icon.png) 0 50% no-repeat;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 0 0 25px;
+}
+/* line 3033, ../../../scss/assol.scss */
+.tasks-table-wrap .task-responsible {
+  color: #7f7f7f;
+}
+/* line 3036, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status {
+  font-size: 12px;
+}
+/* line 3039, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status .execute {
+  color: #2fc6f7;
+  text-decoration: underline;
+}
+/* line 3043, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status .execute:hover {
+  text-decoration: none;
+}
+/* line 3047, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status .confirm {
+  color: #b22323;
+  text-decoration: underline;
+}
+/* line 3051, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status .done {
+  color: #7b9f0e;
+}
+/* line 3054, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status .in-work {
+  color: #9eb1c4;
+}
+/* line 3057, ../../../scss/assol.scss */
+.tasks-table-wrap .task-status .overdue {
+  color: #b32323;
+}
+
+/* Задачи */
+/* Сообщение */
+/* line 3068, ../../../scss/assol.scss */
+#popup {
+  height: 100%;
+  overflow-y: scroll;
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* line 3080, ../../../scss/assol.scss */
+.popup-in {
+  background: none repeat scroll 0 0 #fff;
+  box-sizing: border-box;
+  margin: 30px auto;
+  padding: 20px;
+  height: 595px;
+  width: 860px;
+  box-sizing: border-box;
+  position: relative;
+}
+/* line 3090, ../../../scss/assol.scss */
+.popup-in .close {
+  position: absolute;
+  z-index: 2;
+  right: 7px;
+  top: 7px;
+}
+/* line 3096, ../../../scss/assol.scss */
+.popup-in .popup-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #535c69;
+}
+/* line 3101, ../../../scss/assol.scss */
+.popup-in .popup-header {
+  height: 36px;
+}
+
+/* line 3106, ../../../scss/assol.scss */
+.popup-show {
+  overflow: hidden !important;
+}
+
+/* line 3110, ../../../scss/assol.scss */
+.services-view-setting {
+  padding: 30px 25px;
+}
+/* line 3117, ../../../scss/assol.scss */
+.services-view-setting > div {
+  display: table;
+  width: 100%;
+}
+/* line 3121, ../../../scss/assol.scss */
+.services-view-setting > div > div {
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+  padding: 0 6px;
+}
+/* line 3130, ../../../scss/assol.scss */
+.services-view-setting > div > div:nth-child(2) {
+  width: 135px;
+}
+/* line 3136, ../../../scss/assol.scss */
+.services-view-setting > div > div:nth-child(4) {
+  width: 135px;
+}
+/* line 3139, ../../../scss/assol.scss */
+.services-view-setting > div > div:nth-child(5) {
+  width: 108px;
+}
+/* line 3142, ../../../scss/assol.scss */
+.services-view-setting > div > div:nth-child(6) {
+  min-width: 166px;
+}
+/* line 3145, ../../../scss/assol.scss */
+.services-view-setting > div > div:nth-child(7) {
+  padding-left: 40px;
+  width: 184px;
+}
+/* line 3152, ../../../scss/assol.scss */
+.services-view-setting input {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+
+/* line 3159, ../../../scss/assol.scss */
+.date-field {
+  position: relative;
+}
+/* line 3162, ../../../scss/assol.scss */
+.date-field:after {
+  content: '';
+  width: 20px;
+  height: 100%;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  background: url(../img/calendar-icon.png) 0 50% no-repeat;
+  display: inline-block;
+}
+/* line 3172, ../../../scss/assol.scss */
+.date-field input {
+  padding-right: 30px !important;
+}
+
+/* line 3177, ../../../scss/assol.scss */
+.nobr {
+  white-space: nowrap;
+}
+
+/* line 3181, ../../../scss/assol.scss */
+.service-block {
+  padding-top: 40px;
+}
+
+/* line 3185, ../../../scss/assol.scss */
+.service-block-title {
+  color: #575d62;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+/* line 3192, ../../../scss/assol.scss */
+.service-block-settings {
+  margin-top: 15px;
+  padding: 25px;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+}
+/* line 3198, ../../../scss/assol.scss */
+.service-block-settings .checkbox-line {
+  width: 100%;
+}
+/* line 3201, ../../../scss/assol.scss */
+.service-block-settings > div {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+/* line 3206, ../../../scss/assol.scss */
+.service-block-settings input {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+
+/* line 3213, ../../../scss/assol.scss */
+.service-block-settings-btns {
+  text-align: right;
+  padding-top: 20px;
+}
+/* line 3217, ../../../scss/assol.scss */
+.service-block-settings-btns button {
+  margin-left: 10px;
+}
+
+/* line 3222, ../../../scss/assol.scss */
+.service-block-info-table {
+  padding: 20px 0 0;
+}
+/* line 3225, ../../../scss/assol.scss */
+.service-block-info-table table {
+  width: 100%;
+}
+/* line 3228, ../../../scss/assol.scss */
+.service-block-info-table th,
+.service-block-info-table td {
+  font-size: 13px;
+  font-weight: 700;
+  height: 60px;
+  vertical-align: middle;
+  padding: 0 5px;
+}
+/* line 3236, ../../../scss/assol.scss */
+.service-block-info-table th:first-child,
+.service-block-info-table td:first-child {
+  padding: 0 0 0 13px;
+}
+/* line 3239, ../../../scss/assol.scss */
+.service-block-info-table th:last-child,
+.service-block-info-table td:last-child {
+  padding: 0 10px 0 0;
+}
+/* line 3243, ../../../scss/assol.scss */
+.service-block-info-table th.centertext,
+.service-block-info-table td.centertext {
+  text-align: center;
+}
+/* line 3247, ../../../scss/assol.scss */
+.service-block-info-table th {
+  background: #ebeced;
+  color: #454545;
+}
+/* line 3251, ../../../scss/assol.scss */
+.service-block-info-table td {
+  color: #7f7f7f;
+  border-bottom: 1px solid #f4fbfd;
+}
+/* line 3258, ../../../scss/assol.scss */
+.service-block-info-table tr:nth-child(2n) td {
+  background: #f4fbfd;
+}
+
+/* line 3265, ../../../scss/assol.scss */
+.round-check {
+  width: 14px;
+  height: 14px;
+  background: url(../img/round-check.png) no-repeat;
+  display: inline-block;
+}
+/* line 3271, ../../../scss/assol.scss */
+.round-check.on {
+  background-position: 0 0;
+}
+/* line 3274, ../../../scss/assol.scss */
+.round-check.off {
+  background-position: 0 100%;
+}
+
+/* Услуги */
+/* Отчеты */
+/* line 3285, ../../../scss/assol.scss */
+.reports-page .save-edit-wrap {
+  padding-top: 10px;
+}
+
+/* line 3290, ../../../scss/assol.scss */
+.reports-title {
+  font-size: 18px;
+  color: #575d62;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+/* line 3303, ../../../scss/assol.scss */
+.reports-folders-wrap .report-folder {
+  margin: 0 0 7px;
+  height: 91px;
+  padding: 0 0 0 20px;
+  line-height: 91px;
+}
+/* line 3309, ../../../scss/assol.scss */
+.reports-folders-wrap .report-folder a {
+  color: #535c69;
+  font-weight: 700;
+  font-size: 18px;
+}
+/* line 3314, ../../../scss/assol.scss */
+.reports-folders-wrap .report-folder a.folder-img {
+  margin: 0 25px 0 0;
+}
+
+/* line 3323, ../../../scss/assol.scss */
+.reports-files-wrap .report-file {
+  margin: 0 0 7px;
+  height: 91px;
+  padding: 0 0 0 20px;
+  line-height: 91px;
+}
+/* line 3329, ../../../scss/assol.scss */
+.reports-files-wrap .report-file a {
+  color: #535c69;
+  font-weight: 700;
+  font-size: 18px;
+}
+/* line 3334, ../../../scss/assol.scss */
+.reports-files-wrap .report-file a.file-img {
+  margin: 0 25px 0 0;
+}
+
+/* line 3341, ../../../scss/assol.scss */
+.report-filter-wrap {
+  padding: 15px 15px;
+}
+/* line 3344, ../../../scss/assol.scss */
+.report-filter-wrap input,
+.report-filter-wrap select {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+}
+/* line 3351, ../../../scss/assol.scss */
+.report-filter-wrap > div {
+  float: left;
+  margin-right: 20px;
+}
+/* line 3356, ../../../scss/assol.scss */
+.report-filter-wrap .form-group {
+  margin: 0;
+}
+/* line 3360, ../../../scss/assol.scss */
+.report-filter-wrap .date-filter-block {
+  width: 180px;
+}
+
+/* line 3368, ../../../scss/assol.scss */
+.reports-table-wrap table thead {
+  background: #ebeced;
+}
+/* line 3371, ../../../scss/assol.scss */
+.reports-table-wrap table thead th {
+  background: #ebeced;
+}
+/* line 3375, ../../../scss/assol.scss */
+.reports-table-wrap table th,
+.reports-table-wrap table td {
+  border: 1px solid #d5d5d5;
+  height: 28px;
+  padding: 4px 0;
+  font-size: 12px;
+  vertical-align: middle;
+  color: #454545;
+}
+/* line 3386, ../../../scss/assol.scss */
+.reports-table-wrap table tbody tr:nth-child(2n) {
+  background: #f7f7f7;
+}
+
+/* line 3396, ../../../scss/assol.scss */
+.day-reports .day-main-fixed-wrap {
+  width: 100%;
+  position: relative;
+  max-width: 935px;
+}
+/* line 3403, ../../../scss/assol.scss */
+.day-reports .day-main-fixed-table {
+  position: absolute;
+  top: 0;
+  right: -1px;
+  font-size: 12px;
+  width: 140px;
+  z-index: 5;
+}
+/* line 3412, ../../../scss/assol.scss */
+.day-reports .day-main-fixed-table table {
+  width: 100%;
+}
+/* line 3417, ../../../scss/assol.scss */
+.day-reports .day-main-fixed-table thead th,
+.day-reports .day-main-fixed-table thead td {
+  background: #ebeced;
+}
+/* line 3423, ../../../scss/assol.scss */
+.day-reports .day-main-fixed-table th,
+.day-reports .day-main-fixed-table td {
+  width: 100%;
+  text-align: center;
+  border: 1px solid #bababa;
+  background: #d7d7d7;
+}
+/* line 3432, ../../../scss/assol.scss */
+.day-reports .day-reports-tables {
+  overflow: auto;
+  padding: 0 0 10px 0;
+  position: relative;
+  width: 100%;
+  max-width: 935px;
+}
+/* line 3439, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-reports-tables-in {
+  white-space: nowrap;
+  font-size: 0;
+}
+/* line 3443, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-reports-tables-in > div {
+  display: inline-block;
+}
+/* line 3465, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table thead th {
+  border-top: 1px solid #d3d3d3;
+}
+/* line 3468, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table thead th .site-name {
+  color: #2067b0;
+  font-weight: 700;
+}
+/* line 3475, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table thead tr:first-child th {
+  padding-left: 6px;
+  border-right: 1px solid #bababa;
+  border-left: 1px solid #d3d3d3;
+}
+/* line 3480, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table thead tr:first-child th:first-child {
+  font-weight: 700;
+  color: #454545;
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3489, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table thead tr:last-child th:nth-child(2n+1) {
+  padding-left: 6px;
+  border-right: 1px solid #d3d3d3;
+}
+/* line 3493, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table thead tr:last-child th:nth-child(2n) {
+  padding-left: 11px;
+  border-right: 1px solid #bababa;
+}
+/* line 3504, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table tbody th div,
+.day-reports .day-reports-tables .day-main-table table tbody td div {
+  width: 52px;
+}
+/* line 3508, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table tbody th:first-child,
+.day-reports .day-reports-tables .day-main-table table tbody td:first-child {
+  text-align: left;
+}
+/* line 3511, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table tbody th:first-child div,
+.day-reports .day-reports-tables .day-main-table table tbody td:first-child div {
+  width: 163px;
+  padding-left: 10px;
+}
+/* line 3516, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table tbody th:nth-child(2n+1),
+.day-reports .day-reports-tables .day-main-table table tbody td:nth-child(2n+1) {
+  border-right: 1px solid #bababa;
+}
+/* line 3518, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table tbody th:nth-child(2n+1) div,
+.day-reports .day-reports-tables .day-main-table table tbody td:nth-child(2n+1) div {
+  padding-left: 11px;
+}
+/* line 3523, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table tbody th:nth-child(2n) div,
+.day-reports .day-reports-tables .day-main-table table tbody td:nth-child(2n) div {
+  padding-left: 6px;
+}
+/* line 3532, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table .day-main-table-footer td {
+  background: #d7d7d7;
+  border-color: #e0e0e0;
+}
+/* line 3533, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table .day-main-table-footer td div {
+  padding-left: 6px;
+}
+/* line 3539, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table .day-main-table-footer td:nth-child(2n+1) {
+  border-right: 1px solid #bababa;
+}
+/* line 3541, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-main-table table .day-main-table-footer td:nth-child(2n+1) div {
+  padding-left: 11px;
+}
+/* line 3550, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table {
+  padding: 0 0 0 20px;
+}
+/* line 3557, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table thead tr:first-child th {
+  background: #fff;
+  border: none;
+}
+/* line 3564, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table thead th {
+  padding-left: 6px;
+}
+/* line 3570, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table tbody th,
+.day-reports .day-reports-tables .day-total-table tbody td {
+  width: 54px;
+  padding-left: 6px;
+}
+/* line 3575, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table tbody th:last-child,
+.day-reports .day-reports-tables .day-total-table tbody td:last-child {
+  background: #d7d7d7;
+}
+/* line 3580, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table tbody tr:nth-child(2n) {
+  background: #f7f7f7;
+}
+/* line 3589, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table .day-main-table-footer td {
+  padding-left: 6px;
+  background: #d7d7d7;
+  border-color: #e0e0e0;
+}
+/* line 3597, ../../../scss/assol.scss */
+.day-reports .day-reports-tables .day-total-table .day-main-table-footer tr:last-child td:last-child {
+  background: #aaaaaa;
+}
+
+/* line 3614, ../../../scss/assol.scss */
+.newsletter-report .newsletter-report-table table,
+.newsletter-report .correspondence-report-table table,
+.correspondence-report .newsletter-report-table table,
+.correspondence-report .correspondence-report-table table {
+  width: 100%;
+}
+/* line 3619, ../../../scss/assol.scss */
+.newsletter-report .newsletter-report-table table thead th,
+.newsletter-report .correspondence-report-table table thead th,
+.correspondence-report .newsletter-report-table table thead th,
+.correspondence-report .correspondence-report-table table thead th {
+  vertical-align: middle;
+  height: 46px;
+}
+/* line 3624, ../../../scss/assol.scss */
+.newsletter-report .newsletter-report-table table th,
+.newsletter-report .newsletter-report-table table td,
+.newsletter-report .correspondence-report-table table th,
+.newsletter-report .correspondence-report-table table td,
+.correspondence-report .newsletter-report-table table th,
+.correspondence-report .newsletter-report-table table td,
+.correspondence-report .correspondence-report-table table th,
+.correspondence-report .correspondence-report-table table td {
+  text-align: center;
+  width: 1%;
+}
+/* line 3629, ../../../scss/assol.scss */
+.newsletter-report .newsletter-report-table table th:nth-child(1), .newsletter-report .newsletter-report-table table th:nth-child(2), .newsletter-report .newsletter-report-table table th:nth-child(3),
+.newsletter-report .newsletter-report-table table td:nth-child(1),
+.newsletter-report .newsletter-report-table table td:nth-child(2),
+.newsletter-report .newsletter-report-table table td:nth-child(3),
+.newsletter-report .correspondence-report-table table th:nth-child(1),
+.newsletter-report .correspondence-report-table table th:nth-child(2),
+.newsletter-report .correspondence-report-table table th:nth-child(3),
+.newsletter-report .correspondence-report-table table td:nth-child(1),
+.newsletter-report .correspondence-report-table table td:nth-child(2),
+.newsletter-report .correspondence-report-table table td:nth-child(3),
+.correspondence-report .newsletter-report-table table th:nth-child(1),
+.correspondence-report .newsletter-report-table table th:nth-child(2),
+.correspondence-report .newsletter-report-table table th:nth-child(3),
+.correspondence-report .newsletter-report-table table td:nth-child(1),
+.correspondence-report .newsletter-report-table table td:nth-child(2),
+.correspondence-report .newsletter-report-table table td:nth-child(3),
+.correspondence-report .correspondence-report-table table th:nth-child(1),
+.correspondence-report .correspondence-report-table table th:nth-child(2),
+.correspondence-report .correspondence-report-table table th:nth-child(3),
+.correspondence-report .correspondence-report-table table td:nth-child(1),
+.correspondence-report .correspondence-report-table table td:nth-child(2),
+.correspondence-report .correspondence-report-table table td:nth-child(3) {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3637, ../../../scss/assol.scss */
+.newsletter-report .newsletter-report-table table tr:nth-child(2n),
+.newsletter-report .correspondence-report-table table tr:nth-child(2n),
+.correspondence-report .newsletter-report-table table tr:nth-child(2n),
+.correspondence-report .correspondence-report-table table tr:nth-child(2n) {
+  background: #f7f7f7;
+}
+/* line 3649, ../../../scss/assol.scss */
+.newsletter-report .correspondence-report-table table th:nth-child(4),
+.newsletter-report .correspondence-report-table table td:nth-child(4),
+.correspondence-report .correspondence-report-table table th:nth-child(4),
+.correspondence-report .correspondence-report-table table td:nth-child(4) {
+  padding-left: 10px;
+  text-align: left;
+}
+
+/* line 3662, ../../../scss/assol.scss */
+.salary-report .salary-report-table table {
+  width: 100%;
+}
+/* line 3672, ../../../scss/assol.scss */
+.salary-report .salary-report-table table thead tr:first-child th:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3679, ../../../scss/assol.scss */
+.salary-report .salary-report-table table thead th {
+  text-align: center;
+}
+/* line 3685, ../../../scss/assol.scss */
+.salary-report .salary-report-table table tbody td {
+  text-align: center;
+}
+/* line 3688, ../../../scss/assol.scss */
+.salary-report .salary-report-table table tbody td:first-child {
+  width: 227px;
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3695, ../../../scss/assol.scss */
+.salary-report .salary-report-table table tbody a {
+  font-weight: 700;
+  color: #2067b0;
+}
+/* line 3705, ../../../scss/assol.scss */
+.salary-report .salary-report-table table .salary-report-sum {
+  background: #ffffff;
+}
+/* line 3708, ../../../scss/assol.scss */
+.salary-report .salary-report-table table .salary-report-sum td {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+/* line 3712, ../../../scss/assol.scss */
+.salary-report .salary-report-table table .salary-report-sum td.in-total {
+  text-align: left;
+  padding-left: 10px;
+  background: #d7d7d7;
+  border-color: #d7d7d7;
+}
+
+/* line 3729, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table {
+  width: 100%;
+}
+/* line 3739, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table thead tr:first-child th:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3746, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table thead th {
+  text-align: center;
+}
+/* line 3752, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table tbody td {
+  text-align: center;
+}
+/* line 3755, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table tbody td:first-child {
+  width: 227px;
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3762, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table tbody a {
+  font-weight: 700;
+  color: #2067b0;
+}
+/* line 3766, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table tbody a.confirm {
+  color: #2fc6f7;
+  text-decoration: underline;
+}
+/* line 3770, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table tbody a.confirm:hover {
+  text-decoration: none;
+}
+/* line 3779, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table td.editable-cell {
+  background: #eaeaea;
+}
+/* line 3784, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table .overlay-salary-report-sum {
+  background: #ffffff;
+}
+/* line 3787, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table .overlay-salary-report-sum td {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+/* line 3791, ../../../scss/assol.scss */
+.overlay-salary-report .overlay-salary-report-table table .overlay-salary-report-sum td.in-total {
+  text-align: left;
+  padding-left: 10px;
+  background: #d7d7d7;
+  border-color: #d7d7d7;
+}
+
+/* line 3806, ../../../scss/assol.scss */
+.total-salary-report .sum-num-wrap {
+  position: relative;
+}
+/* line 3809, ../../../scss/assol.scss */
+.total-salary-report .sum-num-wrap > a {
+  color: #454545;
+  font-weight: normal;
+}
+/* line 3816, ../../../scss/assol.scss */
+.total-salary-report .sum-num-wrap > a:focus ~ .is-repay-tooltip, .total-salary-report .sum-num-wrap > a:active ~ .is-repay-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 3824, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip {
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  right: 50%;
+  margin: 0 -79px 10px 0;
+  width: 158px;
+  text-align: center;
+  min-height: 36px;
+  padding-top: 11px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  visibility: hidden;
+  opacity: 0;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.3s ease 0s;
+}
+/* line 3844, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip:hover {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 3849, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip .tooltip-content {
+  white-space: nowrap;
+  color: #454545;
+  font-size: 13px;
+  padding: 0 5px 10px;
+}
+/* line 3855, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip .tooltip-content a {
+  color: #1daddc;
+  text-decoration: underline;
+}
+/* line 3859, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip .tooltip-content a:hover {
+  text-decoration: none;
+}
+/* line 3865, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip .arrow {
+  position: absolute;
+  top: 100%;
+  height: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+/* line 3872, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip .arrow:empty {
+  height: 10px;
+}
+/* line 3876, ../../../scss/assol.scss */
+.total-salary-report .is-repay-tooltip .arrow:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  background: #efeff0;
+  -moz-transform: rotate(45deg) translate(0, 0);
+  -ms-transform: rotate(45deg) translate(0, 0);
+  -webkit-transform: rotate(45deg) translate(0, 0);
+  transform: rotate(45deg) translate(0, 0);
+  position: relative;
+  top: -15px;
+  left: -2px;
+}
+/* line 3891, ../../../scss/assol.scss */
+.total-salary-report .blue-square {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #2fc6f7;
+  line-height: normal;
+  vertical-align: top;
+}
+/* line 3900, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table {
+  max-width: 935px;
+  width: 100%;
+  overflow: auto;
+  padding-left: 170px;
+}
+/* line 3906, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table .total-salary-report-table-in {
+  white-space: nowrap;
+  font-size: 0;
+}
+/* line 3911, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table {
+  width: 100%;
+}
+/* line 3916, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table thead .fixed {
+  line-height: 2;
+  height: 50px;
+}
+/* line 3921, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table thead .fixed-nxt {
+  line-height: 2;
+  height: 50px;
+}
+/* line 3931, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table thead tr:first-child th:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3938, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table thead th {
+  text-align: center;
+  padding: 0 4px;
+}
+/* line 3945, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table tbody .fixed {
+  background: #dddddd !important;
+  height: 50px;
+}
+/* line 3952, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table tbody .fixed-nxt {
+  background: #dddddd !important;
+  height: 50px;
+}
+/* line 3957, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table tbody td {
+  text-align: center;
+}
+/* line 3960, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table tbody td:first-child {
+  width: 227px;
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 3970, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table td.repay {
+  background: #2fc6f7;
+  color: #ffffff;
+}
+/* line 3974, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table td.repay .sum-num-wrap {
+  position: relative;
+}
+/* line 3977, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table td.repay .sum-num-wrap > a {
+  color: #ffffff;
+  font-weight: normal;
+}
+/* line 3985, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table .fixed {
+  position: absolute;
+  margin-left: -170px;
+  width: 115px !important;
+  background: #d5d5d5 !important;
+  border-color: #e0e0e0;
+  z-index: 1000;
+  line-height: 1.5;
+  overflow: hidden;
+}
+/* line 3996, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table .fixed-nxt {
+  position: absolute;
+  margin-left: -56px;
+  width: 55px !important;
+  background: #d5d5d5 !important;
+  border-color: #e0e0e0;
+  z-index: 1000;
+  line-height: 1.5;
+  overflow: hidden;
+}
+/* line 4007, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table .total-salary-report-sum {
+  background: #ffffff;
+}
+/* line 4012, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table .total-salary-report-sum tr:first-child td {
+  background: #ffffff;
+  border-color: #e0e0e0;
+}
+/* line 4018, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table .total-salary-report-sum td {
+  background: #d7d7d7;
+  text-align: center;
+  border-color: #e0e0e0;
+}
+/* line 4023, ../../../scss/assol.scss */
+.total-salary-report .total-salary-report-table table .total-salary-report-sum td:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+
+/* line 4036, ../../../scss/assol.scss */
+.approved-salary-report .gray-square {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #eaeaea;
+  line-height: normal;
+  vertical-align: top;
+}
+/* line 4047, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table {
+  width: 100%;
+}
+/* line 4057, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table thead tr:first-child th:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 4064, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table thead th {
+  text-align: center;
+}
+/* line 4070, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table tbody td {
+  text-align: center;
+}
+/* line 4073, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table tbody td:first-child {
+  width: 227px;
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 4080, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table tbody a {
+  font-weight: 700;
+  color: #2067b0;
+}
+/* line 4084, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table tbody a.confirm {
+  color: #2fc6f7;
+  text-decoration: underline;
+}
+/* line 4088, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table tbody a.confirm:hover {
+  text-decoration: none;
+}
+/* line 4097, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table td.editable-cell {
+  background: #eaeaea;
+}
+/* line 4102, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-status {
+  font-size: 12px;
+  font-weight: 700;
+}
+/* line 4106, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-status .round-check {
+  margin: 0 0 -4px 0;
+}
+/* line 4110, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-status.on {
+  color: #7b9f0e;
+}
+/* line 4113, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-status.off {
+  color: #c1c1c1;
+}
+/* line 4118, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum {
+  background: #ffffff;
+}
+/* line 4121, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum .approved-salary-conclusion {
+  width: 100%;
+  padding-top: 10px;
+}
+/* line 4125, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum .approved-salary-conclusion > div {
+  float: left;
+  width: 33.3333333%;
+  background: #d7d7d7;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 6px 0 6px 16px;
+  border: 2px solid #ffffff;
+}
+/* line 4134, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum .approved-salary-conclusion > div:first-child {
+  border-left: 0;
+}
+/* line 4137, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum .approved-salary-conclusion > div:last-child {
+  border-right: 0;
+}
+/* line 4143, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum td {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+/* line 4147, ../../../scss/assol.scss */
+.approved-salary-report .approved-salary-report-table table .approved-salary-report-sum td.in-total {
+  text-align: left;
+  padding-left: 10px;
+  background: #d7d7d7;
+  border-color: #d7d7d7;
+}
+
+/* line 4164, ../../../scss/assol.scss */
+.overall-allocation-report .overall-allocation-report-table table {
+  width: 100%;
+}
+/* line 4169, ../../../scss/assol.scss */
+.overall-allocation-report .overall-allocation-report-table table thead th {
+  vertical-align: middle;
+  height: 46px;
+}
+/* line 4180, ../../../scss/assol.scss */
+.overall-allocation-report .overall-allocation-report-table table tbody tr:first-child td:last-child {
+  vertical-align: top;
+}
+/* line 4187, ../../../scss/assol.scss */
+.overall-allocation-report .overall-allocation-report-table table th,
+.overall-allocation-report .overall-allocation-report-table table td {
+  text-align: center;
+  width: 1%;
+}
+/* line 4192, ../../../scss/assol.scss */
+.overall-allocation-report .overall-allocation-report-table table th:nth-child(1), .overall-allocation-report .overall-allocation-report-table table th:nth-child(2), .overall-allocation-report .overall-allocation-report-table table th:nth-child(3),
+.overall-allocation-report .overall-allocation-report-table table td:nth-child(1),
+.overall-allocation-report .overall-allocation-report-table table td:nth-child(2),
+.overall-allocation-report .overall-allocation-report-table table td:nth-child(3) {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 4200, ../../../scss/assol.scss */
+.overall-allocation-report .overall-allocation-report-table table tr:nth-child(2n) {
+  background: #f7f7f7;
+}
+
+/* Отчеты */
+/* line 4212, ../../../scss/assol.scss */
+textarea.assol-input-style {
+  padding: 10px;
+}
+
+/* Обучение */
+/* Обучение */
+/* Сайты */
+/* line 4227, ../../../scss/assol.scss */
+.sites-page .btn-remove-site {
+  font-size: 19px;
+  padding: 0;
+}
+
+/* Сайты */
+/* Документы */
+/* line 4236, ../../../scss/assol.scss */
+.document-top-btns {
+  text-align: right;
+}
+/* line 4239, ../../../scss/assol.scss */
+.document-top-btns > div {
+  display: inline-block;
+}
+/* line 4242, ../../../scss/assol.scss */
+.document-top-btns > div:first-child {
+  margin: 0 10px 0 0;
+}
+
+/* Документы */
+/* line 4250, ../../../scss/assol.scss */
+.love-report-scroll-block-wrap {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+/* line 4256, ../../../scss/assol.scss */
+.love-report-scroll-block {
+  display: table;
+  min-width: 100%;
+}
+/* line 4260, ../../../scss/assol.scss */
+.love-report-scroll-block > div {
+  display: table-cell;
+  vertical-align: top;
+}
+/* line 4265, ../../../scss/assol.scss */
+.love-report-scroll-block .love-report-table {
+  min-width: 100%;
+}
+/* line 4269, ../../../scss/assol.scss */
+.love-report-scroll-block .love-report-table-wrap {
+  overflow: visible;
+}
+
+/* line 4281, ../../../scss/assol.scss */
+.love-report-table-wrap {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+/* line 4287, ../../../scss/assol.scss */
+.love-report-table {
+  font-size: 12px;
+  border: 1px solid #d3d3d3;
+}
+/* line 4293, ../../../scss/assol.scss */
+.love-report-table thead tr {
+  background: #ebeced;
+}
+/* line 4296, ../../../scss/assol.scss */
+.love-report-table thead tr:first-child {
+  border-top: none;
+}
+/* line 4304, ../../../scss/assol.scss */
+.love-report-table tbody tr:nth-child(2n) {
+  background: #fafafa;
+}
+/* line 4307, ../../../scss/assol.scss */
+.love-report-table tbody tr:nth-child(2n+1) {
+  background: #f7f7f7;
+}
+/* line 4315, ../../../scss/assol.scss */
+.love-report-table tr {
+  border-top: 1px solid #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
+}
+/* line 4320, ../../../scss/assol.scss */
+.love-report-table th,
+.love-report-table td {
+  white-space: nowrap;
+  vertical-align: middle;
+  height: 28px;
+  border-left: 1px solid #e0e0e0;
+}
+/* line 4327, ../../../scss/assol.scss */
+.love-report-table th.content-width,
+.love-report-table td.content-width {
+  width: 1px;
+}
+/* line 4331, ../../../scss/assol.scss */
+.love-report-table th:first-child,
+.love-report-table td:first-child {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* line 4344, ../../../scss/assol.scss */
+.love-report-day-table th,
+.love-report-day-table td {
+  min-width: 55px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 4350, ../../../scss/assol.scss */
+.love-report-day-table th:nth-child(2n+1),
+.love-report-day-table td:nth-child(2n+1) {
+  border-left: 1px solid #e0e0e0;
+}
+/* line 4353, ../../../scss/assol.scss */
+.love-report-day-table th:nth-child(2n+1)[colspan="2"],
+.love-report-day-table td:nth-child(2n+1)[colspan="2"] {
+  border-left: 1px solid #bababa;
+}
+/* line 4356, ../../../scss/assol.scss */
+.love-report-day-table th:nth-child(2n+1)[colspan="2"]:last-child,
+.love-report-day-table td:nth-child(2n+1)[colspan="2"]:last-child {
+  border-left: none;
+}
+/* line 4361, ../../../scss/assol.scss */
+.love-report-day-table th:nth-child(2n),
+.love-report-day-table td:nth-child(2n) {
+  border-left: 1px solid #bababa;
+}
+/* line 4364, ../../../scss/assol.scss */
+.love-report-day-table th:first-child,
+.love-report-day-table td:first-child {
+  border-left: none;
+}
+/* line 4370, ../../../scss/assol.scss */
+.love-report-day-table tfoot tr {
+  background: #d7d7d7;
+}
+/* line 4373, ../../../scss/assol.scss */
+.love-report-day-table tfoot tr:last-child {
+  border-bottom: none;
+}
+/* line 4378, ../../../scss/assol.scss */
+.love-report-day-table .site-name {
+  color: #2067b0;
+  text-decoration: none;
+}
+/* line 4382, ../../../scss/assol.scss */
+.love-report-day-table .site-name a {
+  color: #2067b0;
+  text-decoration: none;
+}
+
+/* line 4389, ../../../scss/assol.scss */
+.love-report-day-total-table {
+  border-left: none;
+}
+/* line 4392, ../../../scss/assol.scss */
+.love-report-day-total-table th,
+.love-report-day-total-table td {
+  min-width: 55px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 4407, ../../../scss/assol.scss */
+.love-report-day-total-table thead tr:nth-child(3) th:last-child {
+  border: 1px solid #bababa;
+  background: #d7d7d7;
+}
+/* line 4417, ../../../scss/assol.scss */
+.love-report-day-total-table thead tr:nth-child(4) th:last-child {
+  border: 1px solid #bababa;
+  background: #d7d7d7;
+}
+/* line 4428, ../../../scss/assol.scss */
+.love-report-day-total-table td:last-child {
+  border: 1px solid #bababa;
+  background: #d7d7d7;
+}
+/* line 4435, ../../../scss/assol.scss */
+.love-report-day-total-table tfoot tr {
+  background: #d7d7d7;
+}
+/* line 4442, ../../../scss/assol.scss */
+.love-report-day-total-table tfoot tr:last-child td:last-child {
+  background: #aaaaaa;
+}
+
+/* line 4451, ../../../scss/assol.scss */
+.love-report-newsletter-table {
+  width: 100%;
+}
+/* line 4454, ../../../scss/assol.scss */
+.love-report-newsletter-table th,
+.love-report-newsletter-table td {
+  text-align: center;
+  width: 25px;
+}
+/* line 4459, ../../../scss/assol.scss */
+.love-report-newsletter-table th.girl-name,
+.love-report-newsletter-table td.girl-name {
+  width: 1px;
+  padding: 0 10px;
+}
+/* line 4463, ../../../scss/assol.scss */
+.love-report-newsletter-table th.girl-id,
+.love-report-newsletter-table td.girl-id {
+  width: 1px;
+  padding: 0 10px;
+}
+/* line 4467, ../../../scss/assol.scss */
+.love-report-newsletter-table th.girl-age,
+.love-report-newsletter-table td.girl-age {
+  width: 1px;
+  padding: 0 10px;
+}
+/* line 4472, ../../../scss/assol.scss */
+.love-report-newsletter-table th:first-child,
+.love-report-newsletter-table td:first-child {
+  text-align: left;
+}
+
+/* line 4478, ../../../scss/assol.scss */
+.love-report-salary-table {
+  width: 100%;
+  border-bottom: none;
+}
+/* line 4482, ../../../scss/assol.scss */
+.love-report-salary-table th,
+.love-report-salary-table td {
+  text-align: center;
+}
+/* line 4490, ../../../scss/assol.scss */
+.love-report-salary-table tbody td:first-child {
+  text-align: left;
+}
+/* line 4496, ../../../scss/assol.scss */
+.love-report-salary-table .site-name {
+  color: #2067b0;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* line 4501, ../../../scss/assol.scss */
+.love-report-salary-table .site-name a {
+  color: #2067b0;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* line 4508, ../../../scss/assol.scss */
+.love-report-salary-table tfoot tr {
+  border-bottom: none;
+}
+/* line 4512, ../../../scss/assol.scss */
+.love-report-salary-table tfoot td {
+  border-left-color: #fff;
+}
+/* line 4515, ../../../scss/assol.scss */
+.love-report-salary-table tfoot td.total-cell {
+  font-weight: bold;
+  background: #d7d7d7;
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* line 4525, ../../../scss/assol.scss */
+.love-report-total-salary-table {
+  width: 100%;
+  border-bottom: none;
+}
+/* line 4529, ../../../scss/assol.scss */
+.love-report-total-salary-table th,
+.love-report-total-salary-table td {
+  text-align: center;
+}
+/* line 4533, ../../../scss/assol.scss */
+.love-report-total-salary-table th.edited,
+.love-report-total-salary-table td.edited {
+  background: #eaeaea;
+}
+/* line 4540, ../../../scss/assol.scss */
+.love-report-total-salary-table tbody td:first-child {
+  text-align: left;
+}
+/* line 4546, ../../../scss/assol.scss */
+.love-report-total-salary-table tfoot tr {
+  border-bottom: none;
+}
+/* line 4550, ../../../scss/assol.scss */
+.love-report-total-salary-table tfoot td {
+  border-left-color: #fff;
+  border-right: 1px solid #fff;
+}
+/* line 4554, ../../../scss/assol.scss */
+.love-report-total-salary-table tfoot td.total-cell {
+  font-weight: bold;
+  background: #d7d7d7;
+  text-align: left;
+  padding-left: 10px;
+}
+/* line 4562, ../../../scss/assol.scss */
+.love-report-total-salary-table .confirm {
+  color: #777777;
+  font-weight: bold;
+}
+/* line 4566, ../../../scss/assol.scss */
+.love-report-total-salary-table .confirm a {
+  color: #2fc6f7;
+  text-decoration: underline;
+}
+/* line 4570, ../../../scss/assol.scss */
+.love-report-total-salary-table .confirm a:hover {
+  text-decoration: none;
+}
+
+/* line 4577, ../../../scss/assol.scss */
+.love-report-general-salary-table {
+  width: 100%;
+}
+/* line 4580, ../../../scss/assol.scss */
+.love-report-general-salary-table th,
+.love-report-general-salary-table td {
+  text-align: center;
+}
+/* line 4584, ../../../scss/assol.scss */
+.love-report-general-salary-table th.repay,
+.love-report-general-salary-table td.repay {
+  background: #2fc6f7;
+  color: #ffffff;
+}
+/* line 4588, ../../../scss/assol.scss */
+.love-report-general-salary-table th.repay .sum-num-wrap,
+.love-report-general-salary-table td.repay .sum-num-wrap {
+  position: relative;
+}
+/* line 4591, ../../../scss/assol.scss */
+.love-report-general-salary-table th.repay .sum-num-wrap > a,
+.love-report-general-salary-table td.repay .sum-num-wrap > a {
+  color: #ffffff;
+  font-weight: normal;
+}
+/* line 4601, ../../../scss/assol.scss */
+.love-report-general-salary-table tbody td:first-child {
+  text-align: left;
+}
+/* line 4606, ../../../scss/assol.scss */
+.love-report-general-salary-table tfoot {
+  background: #d7d7d7;
+}
+/* line 4610, ../../../scss/assol.scss */
+.love-report-general-salary-table tfoot td:first-child {
+  text-align: left;
+}
+/* line 4617, ../../../scss/assol.scss */
+.love-report-general-salary-table .sum-num-wrap {
+  position: relative;
+}
+/* line 4620, ../../../scss/assol.scss */
+.love-report-general-salary-table .sum-num-wrap > a {
+  color: #454545;
+  font-weight: normal;
+}
+/* line 4627, ../../../scss/assol.scss */
+.love-report-general-salary-table .sum-num-wrap > a:focus ~ .is-repay-tooltip, .love-report-general-salary-table .sum-num-wrap > a:active ~ .is-repay-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 4635, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip {
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  right: 50%;
+  margin: 0 -79px 10px 0;
+  width: 158px;
+  text-align: center;
+  min-height: 36px;
+  padding-top: 11px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  visibility: hidden;
+  opacity: 0;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFFFFFF', endColorstr='#FFFFFFFF');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWZlZmYwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(40%, #ffffff), color-stop(100%, #efeff0));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 40%, #efeff0 100%);
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease;
+  -webkit-transition-delay: 0s;
+  transition: all 0.3s ease 0s;
+}
+/* line 4655, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip:hover {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 4660, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip .tooltip-content {
+  white-space: nowrap;
+  color: #454545;
+  font-size: 13px;
+  padding: 0 5px 10px;
+}
+/* line 4666, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip .tooltip-content a {
+  color: #1daddc;
+  text-decoration: underline;
+}
+/* line 4670, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip .tooltip-content a:hover {
+  text-decoration: none;
+}
+/* line 4676, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip .arrow {
+  position: absolute;
+  top: 100%;
+  height: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+/* line 4683, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip .arrow:empty {
+  height: 10px;
+}
+/* line 4687, ../../../scss/assol.scss */
+.love-report-general-salary-table .is-repay-tooltip .arrow:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 1px 3px 0 rgba(72, 85, 96, 0.25), 0 0 1px 0 rgba(0, 0, 0, 0.26);
+  background: #efeff0;
+  -moz-transform: rotate(45deg) translate(0, 0);
+  -ms-transform: rotate(45deg) translate(0, 0);
+  -webkit-transform: rotate(45deg) translate(0, 0);
+  transform: rotate(45deg) translate(0, 0);
+  position: relative;
+  top: -15px;
+  left: -2px;
+}
+
+/* line 4703, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table {
+  width: 100%;
+}
+/* line 4706, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table th,
+.love-report-confirmed-salary-table td {
+  text-align: center;
+}
+/* line 4710, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table th:first-child,
+.love-report-confirmed-salary-table td:first-child {
+  text-align: left;
+}
+/* line 4720, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table .site-name {
+  color: #2067b0;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* line 4725, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table .site-name a {
+  color: #2067b0;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* line 4732, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table .approved-salary-status {
+  font-size: 12px;
+  font-weight: 700;
+}
+/* line 4736, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table .approved-salary-status .round-check {
+  margin: 0 0 -4px 0;
+}
+/* line 4740, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table .approved-salary-status.on {
+  color: #7b9f0e;
+}
+/* line 4743, ../../../scss/assol.scss */
+.love-report-confirmed-salary-table .approved-salary-status.off {
+  color: #c1c1c1;
+}
+
+/* line 4751, ../../../scss/assol.scss */
+.love-report-general-staff-table th,
+.love-report-general-staff-table td {
+  min-width: 55px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 4757, ../../../scss/assol.scss */
+.love-report-general-staff-table th:nth-child(2),
+.love-report-general-staff-table td:nth-child(2) {
+  text-align: center;
+}
+/* line 4761, ../../../scss/assol.scss */
+.love-report-general-staff-table tfoot {
+  background: #d7d7d7;
+}
+/* line 4765, ../../../scss/assol.scss */
+.love-report-general-staff-table tfoot td:first-child {
+  text-align: left;
+}
+/* line 4771, ../../../scss/assol.scss */
+.love-report-general-staff-table .site-name {
+  color: #2067b0;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* line 4776, ../../../scss/assol.scss */
+.love-report-general-staff-table .site-name a {
+  color: #2067b0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* line 4785, ../../../scss/assol.scss */
+.love-report-general-staff-total-table {
+  border-left: 0;
+}
+/* line 4788, ../../../scss/assol.scss */
+.love-report-general-staff-total-table th,
+.love-report-general-staff-total-table td {
+  min-width: 55px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  width: 50%;
+}
+/* line 4796, ../../../scss/assol.scss */
+.love-report-general-staff-total-table th:first-child,
+.love-report-general-staff-total-table td:first-child {
+  border-left: 0;
+}
+/* line 4801, ../../../scss/assol.scss */
+.love-report-general-staff-total-table tfoot {
+  background: #d7d7d7;
+}
+
+/* line 4810, ../../../scss/assol.scss */
+.love-report-summary-distribution-table {
+  width: 100%;
+}
+/* line 4813, ../../../scss/assol.scss */
+.love-report-summary-distribution-table th,
+.love-report-summary-distribution-table td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 4818, ../../../scss/assol.scss */
+.love-report-summary-distribution-table th.empty-staff,
+.love-report-summary-distribution-table td.empty-staff {
+  padding-top: 5px;
+  background: #fff;
+  vertical-align: top;
+}
+
+/* line 4826, ../../../scss/assol.scss */
+.loadingPanel {
+  text-align: center;
+  height: 100%;
+}
+/* line 4830, ../../../scss/assol.scss */
+.loadingPanel img {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  top: 40%;
+}
+
+/* line 4838, ../../../scss/assol.scss */
+.user-avatar-wrap {
+  position: relative;
+  float: left;
+  margin-right: 15px;
+}
+/* line 4843, ../../../scss/assol.scss */
+.user-avatar-wrap .user-avatar-img {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  border: 1px solid #d6caca;
+  overflow: hidden;
+}
+/* line 4850, ../../../scss/assol.scss */
+.user-avatar-wrap .user-avatar-img img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+/* line 4857, ../../../scss/assol.scss */
+.user-avatar-wrap .user-avatar-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #d6caca;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+/* line 4866, ../../../scss/assol.scss */
+.user-avatar-wrap .user-avatar-status.online {
+  background: #baed21;
+}
+/* line 4869, ../../../scss/assol.scss */
+.user-avatar-wrap .user-avatar-status.offline {
+  background: #e8e8e8;
+}
+
+/* line 4876, ../../../scss/assol.scss */
+.modal[role="document"] {
+  display: block;
+}
+
+/* line 4882, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog {
+  width: 90%;
+  height: 90%;
+  margin: 30px auto 10px;
+  min-width: 1062px;
+  min-height: 450px;
+}
+/* line 4889, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content {
+  height: 100%;
+  position: relative;
+}
+/* line 4893, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 65px;
+}
+/* line 4901, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel {
+  height: 100%;
+}
+/* line 4904, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock {
+  position: relative;
+  float: left;
+  width: 220px;
+  margin: 0 20px 0 0;
+  height: 100%;
+  padding: 72px 0 15px;
+  box-sizing: border-box;
+  z-index: 4;
+}
+/* line 4914, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .sidebar-search {
+  bottom: auto;
+  top: 14px;
+}
+/* line 4919, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .control-panel {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: -10px;
+  margin-bottom: 25px;
+}
+/* line 4926, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .control-panel button {
+  width: 100%;
+}
+/* line 4931, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap {
+  height: 100%;
+  padding: 0 11px 0 0;
+}
+/* line 4935, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList {
+  overflow: auto;
+  height: 100%;
+  padding-left: 0;
+}
+/* line 4940, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem {
+  width: 100%;
+  padding: 0 0 0 11px;
+  box-sizing: border-box;
+}
+/* line 4945, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-in {
+  display: block;
+  padding: 6px 0 6px 5px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+/* line 4952, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-in > div {
+  position: relative;
+}
+/* line 4956, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-in:hover {
+  background: #dde8ed;
+  text-decoration: none;
+}
+/* line 4961, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-in:active {
+  text-decoration: none;
+}
+/* line 4965, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-name {
+  color: #535c69;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 3px 0 0 0;
+}
+/* line 4971, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-name a {
+  color: #535c69;
+  font-size: 12px;
+  line-height: 18px;
+}
+/* line 4977, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-name a:hover {
+  text-decoration: none;
+}
+/* line 4981, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-name.current {
+  color: #2067b0;
+  font-weight: 700;
+}
+/* line 4986, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-user-name.current a {
+  color: #2067b0;
+}
+/* line 4992, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-nums {
+  background: #FCFD07;
+  color: #77563D;
+  padding: 2px 5px;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 20%;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  font-weight: bold;
+  border: 1px solid #D5D61B;
+}
+/* line 5006, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .userListBlock .userListWrap .userList .userItem .chat-nums.hide {
+  display: none;
+}
+/* line 5020, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock {
+  padding-left: 240px;
+  position: relative;
+  height: 100%;
+}
+/* line 5025, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select {
+  width: 200px;
+  padding-left: 10px;
+}
+/* line 5030, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user {
+  min-height: 49px;
+  margin-bottom: 10px;
+  padding: 5px;
+  position: relative;
+  z-index: 3;
+}
+/* line 5039, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user table {
+  width: 100%;
+}
+/* line 5042, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user table td:nth-child(1) {
+  width: 45px;
+}
+/* line 5046, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user table td:nth-child(2) {
+  text-align: left;
+}
+/* line 5050, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user table td:last-child {
+  padding-right: 20px;
+  text-align: right;
+  text-decoration: underline;
+  height: 39px;
+}
+/* line 5058, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user .glyphicon-sort {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  color: #b0bbca;
+  font-weight: bold;
+  font-size: 25px;
+  padding: 0 10px;
+  position: relative;
+}
+/* line 5067, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .chat-select-user .chat-user-name {
+  font-size: 12px;
+  padding-left: 10px;
+}
+/* line 5073, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 55px 0 100px 240px;
+}
+/* line 5082, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block {
+  height: 100%;
+  overflow: auto;
+  padding-right: 20px;
+}
+/* line 5087, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date {
+  color: #6b89a1;
+  font-size: 12px;
+  line-height: 22px;
+  border-bottom: 1px solid #b0bdce;
+}
+/* line 5094, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .read-info {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #898989;
+}
+/* line 5100, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line {
+  margin-top: 7px;
+  display: table;
+  width: 100%;
+}
+/* line 5105, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line:first-child {
+  margin-top: 0;
+}
+/* line 5109, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line.new {
+  background: #fbfbbe;
+}
+/* line 5115, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line.my-message .chat-date-message-text-wrap .chat-date-message-text {
+  background: #dde8ed;
+}
+/* line 5118, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line.my-message .chat-date-message-text-wrap .chat-date-message-text:before {
+  border-right-color: #dde8ed;
+}
+/* line 5125, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line > div {
+  display: table-cell;
+  vertical-align: top;
+}
+/* line 5130, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line .chat-date-message-user {
+  width: 55px;
+}
+/* line 5133, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line .chat-date-message-text-wrap {
+  vertical-align: middle;
+}
+/* line 5136, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line .chat-date-message-text-wrap .chat-date-message-text {
+  font-size: 13px;
+  line-height: 22px;
+  color: #535c69;
+  padding: 7px 12px 5px 12px;
+  border-radius: 2px;
+  display: block;
+  min-height: 100%;
+  width: 100%;
+  background: #eef2f4;
+  position: relative;
+}
+/* line 5148, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-block .chat-date-message-line .chat-date-message-text-wrap .chat-date-message-text:before {
+  display: block;
+  position: absolute;
+  right: 100%;
+  top: 9px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-right: 7px solid #eef2f4;
+  border-bottom: 7px solid transparent;
+}
+/* line 5165, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  padding-left: 240px;
+}
+/* line 5173, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings {
+  height: 90px;
+  display: table;
+  width: 100%;
+}
+/* line 5178, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 20px 0 30px;
+  width: 100%;
+  height: 100%;
+}
+/* line 5185, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .main-chat-user-settings {
+  display: table;
+  width: 100%;
+}
+/* line 5189, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .main-chat-user-settings > div {
+  display: table-cell;
+  padding-left: 8px;
+}
+/* line 5193, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .main-chat-user-settings > div:first-child {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 6px;
+}
+/* line 5199, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .main-chat-user-settings > div:last-child {
+  text-align: right;
+}
+/* line 5204, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .main-chat-user-settings .assol-input-style {
+  height: 36px;
+  width: 100%;
+}
+/* line 5208, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .main-chat-user-settings .assol-input-style#TextSendMessage {
+  padding-right: 40px;
+}
+/* line 5214, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block {
+  display: table;
+  width: 100%;
+}
+/* line 5218, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block > div {
+  display: table-cell;
+}
+/* line 5221, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block > div:last-child {
+  text-align: right;
+  width: 200px;
+}
+/* line 5227, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block > .sort {
+  min-width: 60px;
+}
+/* line 5231, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block .assol-btn.remove {
+  background: #b0bbca;
+  color: #ffffff;
+}
+/* line 5235, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block .assol-btn.remove:hover {
+  background: #b0bbca;
+  color: #ffffff;
+}
+/* line 5241, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block .glyphicon-sort {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  color: #b0bbca;
+  font-weight: bold;
+  font-size: 25px;
+  padding: 0 10px;
+  position: relative;
+}
+/* line 5250, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block select {
+  min-width: 220px;
+}
+/* line 5254, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-body .chatPanel .messageBlock .main-chat-settings-wrap .main-chat-settings .main-chat-settings-in .director-show-block .assol-select-dropdown {
+  min-width: 200px;
+}
+/* line 5267, ../../../scss/assol.scss */
+.reactMessageDialog .modal-dialog .modal-content .modal-header {
+  position: relative;
+  z-index: 3;
+}
+
+/* line 5278, ../../../scss/assol.scss */
+#album-list {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* line 5283, ../../../scss/assol.scss */
+#album-list > div {
+  margin-bottom: 50px;
+}
+
+/* line 5287, ../../../scss/assol.scss */
+#album-list .thumbnail {
+  width: 138px;
+  height: 138px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* line 5294, ../../../scss/assol.scss */
+#album-list a.thumbnail {
+  background-color: #2fc6f7;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* line 5306, ../../../scss/assol.scss */
+#album-list a.thumbnail:hover {
+  background-color: #4edbf7;
+}
+
+/* line 5310, ../../../scss/assol.scss */
+#album-list a.thumbnail:active {
+  background-color: #20d20a;
+}
+
+/* line 5314, ../../../scss/assol.scss */
+#album-list a.thumbnail img {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* line 5319, ../../../scss/assol.scss */
+#album-list .action-remove-album {
+  float: right;
+  text-decoration: underline;
+}
+
+/* line 5324, ../../../scss/assol.scss */
+#album-list .album-label {
+  font-weight: bold;
+}
+
+/* line 5328, ../../../scss/assol.scss */
+.album-image:hover .image-remove-btn {
+  display: block;
+}
+
+/* line 5332, ../../../scss/assol.scss */
+.image-remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: white;
+  background-color: #959595;
+  display: none;
+  font-size: 19px;
+  cursor: pointer;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 5345, ../../../scss/assol.scss */
+.album-image:hover .image-download-btn {
+  display: block;
+}
+
+/* line 5349, ../../../scss/assol.scss */
+.image-download-btn {
+  position: absolute;
+  top: 5px;
+  right: 35px;
+  color: white;
+  background-color: #959595;
+  display: none;
+  font-size: 19px;
+  cursor: pointer;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 5362, ../../../scss/assol.scss */
+.video-site-header .col-md-3 {
+  height: 20px;
+}
+
+/* line 5366, ../../../scss/assol.scss */
+#videoSiteList .work-sites-block {
+  margin-bottom: 50px;
+}
+
+/* line 5370, ../../../scss/assol.scss */
+.navbar-default .btn-profile {
+  border: none;
+  background-color: #b9ec21;
+  border-radius: 20px;
+  height: 34px;
+  color: #535c69;
+  padding: 6px 20px;
+  /* line-height: 25px; */
+}
+
+/* line 5379, ../../../scss/assol.scss */
+.navbar-default .btn-profile:hover {
+  background-color: #85ec61;
+}
+
+/* line 5383, ../../../scss/assol.scss */
+.navbar-default .user-img-wrap {
+  width: 39px;
+  height: 39px;
+}
+
+/* line 5388, ../../../scss/assol.scss */
+.client-img img {
+  max-width: 100%;
+  width: initial;
+  height: initial;
+}
+
+/* line 5395, ../../../scss/assol.scss */
+.reactTableBody td {
+  white-space: normal !important;
+  border: 1px solid #ddd !important;
+}
+
+/* line 5401, ../../../scss/assol.scss */
+.assol-select-dropdown .label-placement-wrap > button {
+  overflow: hidden;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/* line 5408, ../../../scss/assol.scss */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/* line 5413, ../../../scss/assol.scss */
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+/* line 5418, ../../../scss/assol.scss */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #535d69;
+  color: #c3cbcd;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+/* line 5432, ../../../scss/assol.scss */
+body > .container {
+  /*margin-top: 115px;*/
+  padding: 0 10px 0;
+  width: 1200px;
+}
+
+/* line 5437, ../../../scss/assol.scss */
+.navbar-default .container {
+  /*margin-top: 115px;*/
+  padding: 0 10px 0;
+  width: 1200px;
+}
+
+/* line 5443, ../../../scss/assol.scss */
+.container .text-muted {
+  margin: 20px 0;
+  color: #c3cbcd;
+}
+
+/* line 5448, ../../../scss/assol.scss */
+.footer .container .text-muted {
+  margin-right: 5px;
+}
+
+/* line 5452, ../../../scss/assol.scss */
+.font-size-12 {
+  padding-top: 1px;
+  font-size: 12px;
+}
+
+/* line 5457, ../../../scss/assol.scss */
+.container .text-muted .docs {
+  padding-left: 30px;
+}
+
+/* line 5461, ../../../scss/assol.scss */
+.container .text-muted a.footer-link {
+  color: #c3cbcd;
+  text-decoration: underline;
+}
+
+/* line 5466, ../../../scss/assol.scss */
+.container .text-muted a.footer-link:hover {
+  color: #a2aaac;
+  text-decoration: underline;
+}
+
+/* line 5471, ../../../scss/assol.scss */
+.footer > .container {
+  width: 1180px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* line 5477, ../../../scss/assol.scss */
+.container .a-webcase {
+  color: #3dbef7;
+}
+
+/* line 5481, ../../../scss/assol.scss */
+.container a.a-webcase:hover {
+  color: #81d4f7;
+}
+
+/* line 5484, ../../../scss/assol.scss */
+.panel-body {
+  padding: 12px 11px;
+}
+
+/* line 5485, ../../../scss/assol.scss */
+.assol-col-1 {
+  width: 220px;
+  float: left;
+}
+
+/* line 5490, ../../../scss/assol.scss */
+.assol-col-2 {
+  width: 680px;
+  float: left;
+  margin-left: 20px;
+}
+
+/* line 5496, ../../../scss/assol.scss */
+.assol-col-3 {
+  width: 260px;
+  float: left;
+}
+
+/* line 5501, ../../../scss/assol.scss */
+.assol-col-content {
+  width: 940px;
+  float: left;
+  margin-left: 20px;
+}
+
+/* line 5507, ../../../scss/assol.scss */
+code {
+  font-size: 80%;
+}
+
+/* line 5518, ../../../scss/assol.scss */
+.table-vcenter th {
+  vertical-align: top !important;
+}
+
+/* line 5521, ../../../scss/assol.scss */
+.table-vcenter td {
+  vertical-align: middle !important;
+}
+
+/* line 5524, ../../../scss/assol.scss */
+.table-action {
+  width: 50px;
+}
+
+/* line 5527, ../../../scss/assol.scss */
+.glyphicon {
+  top: 0;
+  vertical-align: middle !important;
+}
+
+/* line 5531, ../../../scss/assol.scss */
+.fixed-table-pagination {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* line 5535, ../../../scss/assol.scss */
+.fixed-table-toolbar {
+  padding-right: 15px;
+}
+
+/* line 5539, ../../../scss/assol.scss */
+.site-table .fixed-table-container {
+  border: none;
+}
+
+/* line 5543, ../../../scss/assol.scss */
+.site-table .table {
+  border: none;
+}
+
+/* line 5547, ../../../scss/assol.scss */
+.site-table .fixed-table-container {
+  border: none;
+}
+
+/* line 5551, ../../../scss/assol.scss */
+.site-table .table > thead > tr > th, .table > tbody > tr > td {
+  font-weight: normal;
+  color: #5d5d5d;
+  border: none;
+}
+
+/* line 5557, ../../../scss/assol.scss */
+.colBtn {
+  width: 50px;
+}
+
+/* line 5562, ../../../scss/assol.scss */
+#setting-category .tab-content {
+  padding: 20px 25px;
+}
+
+/* line 5568, ../../../scss/assol.scss */
+.page-schedules thead {
+  background-color: #eaebed;
+}
+/* line 5572, ../../../scss/assol.scss */
+.page-schedules .my-schedule {
+  margin-top: 60px;
+  margin-bottom: 25px;
+  font-size: 18px;
+  font-weight: bold;
+}

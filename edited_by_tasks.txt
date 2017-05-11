@@ -1,0 +1,57 @@
+Stage 3:
+
+Task 6 (Сотрудникам добавить вкладка Комментарии):
+SQL:
+//CREATE TABLE `assol_employees_comments_access` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `EmployeeID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `EmployeeID` (`EmployeeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+//ALTER TABLE `assol_employee` ADD `Comment` TEXT  NULL  AFTER `sms`;
+
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.employee.card.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.employee.card.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.customer.card.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.customer.card.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.employee.list.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.employee.list.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.report.director.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.report.director.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.report.list.director.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.report.list.director.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.report.list.secretary.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.report.list.secretary.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/report.list.secretary.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/report.list.secretary.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.report.translate.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.report.translate.js
+java -jar /Users/korol/Sites/asl2.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/asl2.loc/src/public/js/src/assol.calendar.js          --js_output_file /Users/korol/Sites/asl2.loc/src/public/js/assol.calendar.js
+
+
+ReloadReportGeneralOfCustomers
+ReloadGeneralOfCustomersMeta
+ReloadReportGeneralOfCustomersData
+RefreshReportGeneralOfCustomersDataSummary
+
+//INSERT INTO `assol_references` (`ID`, `ReferenceKey`, `ReferenceValue`) VALUES (NULL, 'FORMING', 'Среднее техническое');
+
+//ALTER TABLE `assol_customer` ADD `FootSize` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `WhoUpdate`;
+//ALTER TABLE `assol_customer` ADD `FingerSize` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT NULL  AFTER `FootSize`;
+//ALTER TABLE `assol_customer` ADD `ClothingSize` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT NULL  AFTER `FingerSize`;
+================
+
+2017-04-21:
+//ALTER TABLE `assol_customer_site` ADD `Comment` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `IsDeleted`;
+
+//(`Comment` varchar(255) DEFAULT NULL COMMENT 'Комментарий к сайту клиента',)
+================
+
+2017-04-25:
+//ALTER TABLE `assol_customer` ADD `ssdCharacter` TEXT  NULL  AFTER `ClothingSize`;
+//ALTER TABLE `assol_customer` ADD `ssdHobbies` TEXT  NULL  AFTER `ssdCharacter`;
+//ALTER TABLE `assol_customer` ADD `ssdWishingForPartner` TEXT  NULL  AFTER `ssdHobbies`;
+//ALTER TABLE `assol_customer` ADD `ssdPresentationLetter` TEXT  NULL  AFTER `ssdWishingForPartner`;
+//ALTER TABLE `assol_customer` ADD `ssdMailingList1` TEXT  NULL  AFTER `ssdPresentationLetter`;
+//ALTER TABLE `assol_customer` ADD `ssdMailingList2` TEXT  NULL  AFTER `ssdMailingList1`;
+//ALTER TABLE `assol_customer` ADD `ssdMailingList3` TEXT  NULL  AFTER `ssdMailingList2`;
+//ALTER TABLE `assol_customer` ADD `ssdResponsibleStaff` INT(11)  NULL  DEFAULT NULL  AFTER `ssdMailingList3`;
+//ALTER TABLE `assol_customer` ADD `ssdPending` TINYINT(1)  NOT NULL  DEFAULT '0'  AFTER `ssdResponsibleStaff`;
+================
+
+2017-04-26:
+//ALTER TABLE `assol_customer` CHANGE `ssdPending` `ssdStatus` TINYINT(1)  NOT NULL  DEFAULT '0';
+//ALTER TABLE `assol_customer` ADD `ssdRSComment` TEXT  NULL  AFTER `ssdStatus`;
+

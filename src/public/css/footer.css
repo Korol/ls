@@ -1,0 +1,104 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #535d69;
+    color: #c3cbcd;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    /*margin-top: 115px;*/
+    padding: 0 10px 0;
+    width: 1200px;
+}
+.navbar-default .container {
+    /*margin-top: 115px;*/
+    padding: 0 10px 0;
+    width: 1200px;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+    color: #c3cbcd;
+}
+
+.footer .container .text-muted {
+    margin-right: 5px;
+}
+
+.font-size-12 {
+    padding-top: 1px;
+    font-size: 12px;
+}
+
+.container .text-muted .docs {
+    padding-left: 30px;
+}
+
+.container .text-muted a.footer-link {
+    color: #c3cbcd;
+    text-decoration: underline;
+}
+
+.container .text-muted a.footer-link:hover {
+    color: #a2aaac;
+    text-decoration: underline;
+}
+
+.footer > .container {
+    width: 1180px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.container .a-webcase {
+    color: #3dbef7;
+}
+
+.container a.a-webcase:hover {
+    color: #81d4f7;
+}
+.panel-body {padding: 12px 11px;}
+.assol-col-1 {
+    width: 220px;
+    float: left;
+}
+
+.assol-col-2 {
+    width: 680px;
+    float: left;
+    margin-left: 20px;
+}
+
+.assol-col-3 {
+    width: 260px;
+    float: left;
+}
+
+.assol-col-content {
+    width: 940px;
+    float: left;
+    margin-left: 20px;
+}
+
+code {
+    font-size: 80%;
+}
