@@ -54,6 +54,9 @@ class Tasks extends MY_Controller {
                     $records = $this->getTaskModel()->taskOutGetList($this->getUserID(), $data);
                     break;
                 case 2;
+                    // удаляем задачи, которые выполнены более 1 недели назад
+                    $this->getTaskModel()->cleanArchive();
+                    // получаем оставшиеся записи
                     $records = $this->getTaskModel()->taskArchiveGetList($this->getUserID(), $data);
                     break;
                 case 3;

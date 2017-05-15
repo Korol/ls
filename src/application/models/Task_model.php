@@ -433,4 +433,12 @@ class Task_model extends MY_Model {
             $this->db()->insert(self::TABLE_TASK_COMMENT_READ, ['EmployeeID' => $employee, 'CommentID' => $comment['ID']]);
     }
 
+    public function cleanArchive()
+    {
+        $this->db()->where("DateClose < DATE_ADD(NOW(), INTERVAL -1 WEEK)", null, false);
+        $this->db()->where("State", 2);
+        $this->db()->delete(self::TABLE_TASK_NAME);
+        return true;
+    }
+
 }

@@ -5,7 +5,7 @@ import TinyMCE from 'react-tinymce'
 import { Button, Modal, Alert, Glyphicon } from 'react-bootstrap'
 
 import {
-    hideTask, changeTaskCardMode, changeEditText, appendComment, readComments, updateTask, readTask, removeTask, changeConfirmation
+    hideTask, changeTaskCardMode, changeEditText, appendComment, readComments, updateTask, readTask, removeTask, changeConfirmation, doneTask
 } from '../../actions/task-actions'
 
 import LoadingPanel from '../LoadingPanel'
@@ -198,6 +198,24 @@ export default class TasksBlock_FormTask extends React.Component {
                         >УДАЛИТЬ</button>
                     );
                 }
+                if(task.State == 0){
+                    buttons.push(
+                        <button
+                        key="confirm"
+                        className="btn assol-btn save"
+                        onClick={this.confirm}
+                        >ВЫПОЛНИТЬ</button>
+                    );
+                }
+                if(task.State == 1){
+                    buttons.push(
+                        <button
+                        key="execute"
+                        className="btn assol-btn save"
+                        onClick={this.execute}
+                        >ПОДТВЕРДИТЬ</button>
+                    );
+                }
                 break;
             case TASK_CARD_MODE_EDIT:
                 buttons.push(
@@ -293,6 +311,30 @@ export default class TasksBlock_FormTask extends React.Component {
         const { dispatch, task, editText } = this.props;
         
         dispatch(appendComment(task.ID, editText));
+    };
+
+    /** Подтвердить выполнение задачи */
+    confirm = () => {
+        this.props.dispatch(hideTask());
+        const { dispatch, refresh, task } = this.props;
+
+        bootbox.confirm(`Подтвердить выполнение задачи <strong> ${task.Title} </strong>?`, function(result) {
+            if (result) {
+                dispatch(doneTask(task.ID, refresh, (error) => alert(error)));
+            }
+        });
+    };
+
+    /** Поставить метку выполнения для задачи */
+    execute = () => {
+        this.props.dispatch(hideTask());
+        const { dispatch, refresh, task } = this.props;
+
+        bootbox.confirm(`Поставить метку выполнения для задачи <strong> ${task.Title} </strong>?`, function(result) {
+            if (result) {
+                dispatch(doneTask(task.ID, refresh, (error) => alert(error)));
+            }
+        });
     };
 
 }
