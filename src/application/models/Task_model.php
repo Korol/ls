@@ -433,6 +433,11 @@ class Task_model extends MY_Model {
             $this->db()->insert(self::TABLE_TASK_COMMENT_READ, ['EmployeeID' => $employee, 'CommentID' => $comment['ID']]);
     }
 
+    /**
+     * Удаляем задачи, выполненные более 1 недели назад
+     *
+     * @return bool
+     */
     public function cleanArchive()
     {
         $this->db()->where("DateClose < DATE_ADD(NOW(), INTERVAL -1 WEEK)", null, false);
