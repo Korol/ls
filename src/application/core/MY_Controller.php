@@ -51,6 +51,7 @@ class MY_Controller extends CI_Controller {
             redirect(base_url('login'), 'refresh');
         } else {
             $this->user = $this->session->userdata('user');
+            $this->checkBlackList();
             $this->user['role_description'] = array(
                 "10001" => "Директор",
                 "10002" => "Секретарь",
@@ -415,6 +416,14 @@ class MY_Controller extends CI_Controller {
             $menu[] = ['controller'=>'setting', 'description'=>'Настройки'];
 
         return $menu;
+    }
+
+    public function checkBlackList()
+    {
+        $blackList = $this->getEmployeeModel()->getBlackList();
+        if(!empty($blackList) && in_array($this->user['ID'], $blackList)){
+            redirect(base_url('logout'));
+        }
     }
 
 }

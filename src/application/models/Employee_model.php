@@ -1408,4 +1408,26 @@ class Employee_model extends MY_Model {
         $this->session->set_userdata(['UpdateEmployeeFields' => $updateFields]);
     }
 
+    /**
+     * Черный список сотрудников – ID заблокированных и удалённых
+     * @return array
+     */
+    public function getBlackList()
+    {
+        $return = array();
+        $res = $this->db()
+            ->distinct()
+            ->select('ID')
+            ->from(self::TABLE_EMPLOYEE_NAME)
+            ->where('IsBlocked', 1)
+            ->or_where('IsDeleted', 1)
+            ->get()->result_array();
+        if(!empty($res)){
+            foreach ($res as $row) {
+                $return[] = $row['ID'];
+            }
+        }
+        return $return;
+    }
+
 }
