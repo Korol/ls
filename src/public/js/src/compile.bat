@@ -1,0 +1,24 @@
+java -jar compiler.jar --js assol.calendar.js               --js_output_file ../assol.calendar.js
+java -jar compiler.jar --js assol.customer.card.js          --js_output_file ../assol.customer.card.js
+java -jar compiler.jar --js assol.customer.list.js          --js_output_file ../assol.customer.list.js
+java -jar compiler.jar --js assol.document.js               --js_output_file ../assol.document.js
+java -jar compiler.jar --js assol.employee.card.js          --js_output_file ../assol.employee.card.js
+java -jar compiler.jar --js assol.employee.list.js          --js_output_file ../assol.employee.list.js
+java -jar compiler.jar --js assol.news.js                   --js_output_file ../assol.news.js
+java -jar compiler.jar --js assol.report.director.js        --js_output_file ../assol.report.director.js
+java -jar compiler.jar --js assol.report.list.director.js   --js_output_file ../assol.report.list.director.js
+java -jar compiler.jar --js assol.report.list.translate.js  --js_output_file ../assol.report.list.translate.js
+java -jar compiler.jar --js assol.report.translate.js       --js_output_file ../assol.report.translate.js
+java -jar compiler.jar --js assol.services.js               --js_output_file ../assol.services.js
+java -jar compiler.jar --js assol.system.events.js          --js_output_file ../assol.system.events.js
+java -jar compiler.jar --js assol.task.js                   --js_output_file ../assol.task.js
+java -jar compiler.jar --js assol.training.article.js       --js_output_file ../assol.training.article.js
+java -jar compiler.jar --js assol.training.js               --js_output_file ../assol.training.js
+java -jar compiler.jar --js style-scripts.js                --js_output_file ../style-scripts.js
+java -jar compiler.jar --js utils.js                        --js_output_file ../utils.js
+
+java -jar compiler.jar --js lovestory.task.js                   --js_output_file ../lovestory.task.js
+java -jar compiler.jar --js lovestory.report.director.js        --js_output_file ../lovestory.report.director.js
+java -jar compiler.jar --js lovestory.report.list.director.js   --js_output_file ../lovestory.report.list.director.js
+java -jar compiler.jar --js lovestory.report.list.translate.js  --js_output_file ../lovestory.report.list.translate.js
+java -jar compiler.jar --js lovestory.report.translate.js       --js_output_file ../lovestory.report.translate.js

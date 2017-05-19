@@ -24,6 +24,11 @@ class Customer_model extends MY_Model {
             `Phone_1` VARCHAR(32) COMMENT 'Телефон 1',
             `Phone_2` VARCHAR(32) COMMENT 'Телефон 2',
             `Email` VARCHAR(320) COMMENT 'E-Mail',
+            `Email_site` VARCHAR(320) COMMENT 'E-Mail',
+            `Email_private` VARCHAR(320) COMMENT 'E-Mail',
+            `VK` VARCHAR(256) COMMENT 'URL страницы Вконтакте',
+            `Instagram` VARCHAR(256) COMMENT 'URL страницы в Instagram',
+            `Facebook` VARCHAR(256) COMMENT 'URL страницы в Facebook',
             `ProfessionOfDiploma` VARCHAR(256) COMMENT 'Профессия (по диплому)',
             `CurrentWork` VARCHAR(256) COMMENT 'Работа на данный момент',
             `Worship` VARCHAR(128) COMMENT 'Вероисповедание',
@@ -1543,7 +1548,12 @@ class Customer_model extends MY_Model {
         'Story' => 'История',
         'Album' => 'Фотоальбом',
         'Video' => 'Видео',
-        'QuestionPhoto' => 'Вопросы'
+        'QuestionPhoto' => 'Вопросы',
+        'Email_site' => 'E-Mail для сайта',
+        'Email_private' => 'E-Mail клиентки',
+        'VK' => 'URL Вконтакте',
+        'Instagram' => 'URL Instagram',
+        'Facebook' => 'URL Facebook',
     ];
 
     public function passportList($limit, $offset) {

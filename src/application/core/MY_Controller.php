@@ -418,6 +418,12 @@ class MY_Controller extends CI_Controller {
         return $menu;
     }
 
+    /**
+     * Проверка сотрудника по черному списку (заблокированные и удалённые)
+     * если в списке – разлогиниваем
+     *
+     * @return mixed
+     */
     public function checkBlackList()
     {
         $blackList = $this->getEmployeeModel()->getBlackList();

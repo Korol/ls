@@ -275,15 +275,68 @@
                         </div>
                     </div>
                 </div>
+                <? if (IS_LOVE_STORY): ?>
+<!--                    Emails -->
                 <div class="row">
-                    <? if (IS_LOVE_STORY): ?>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="Email">E-Mail</label>
-                                <input type="text" class="assol-input-style" id="Email" placeholder="E-Mail" value="<?=$customer['Email']?>">
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Email">E-Mail для мужчин</label>
+                            <input type="text" class="assol-input-style" id="Email" placeholder="E-Mail для мужчин" value="<?=$customer['Email']?>">
                         </div>
-                    <? endif ?>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Email_site">E-Mail для сайта</label>
+                            <input type="text" class="assol-input-style" id="Email_site" placeholder="E-Mail для сайта" value="<?=$customer['Email_site']?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Email_private">E-Mail клиентки</label>
+                            <input type="text" class="assol-input-style" id="Email_private" placeholder="E-Mail клиентки" value="<?=$customer['Email_private']?>">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+<!--                    Соцсети -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <style>
+                    .my-fa {
+                        font-size: 22px;
+                        padding-right: 5px;
+                    }
+                    .fa-vk {
+                        color: #007bb5;
+                    }
+                    .fa-instagram {
+                        color: #125688;
+                    }
+                    .fa-facebook {
+                        color: #3B5998;
+                    }
+                </style>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="VK"><span class="my-fa fa fa-vk"></span>Вконтакте</label>
+                            <input type="text" class="assol-input-style" id="VK" placeholder="URL страницы Вконтакте" value="<?=$customer['VK']?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Instagram"><span class="my-fa fa fa-instagram"></span>Instagram</label>
+                            <input type="text" class="assol-input-style" id="Instagram" placeholder="URL страницы в Instagram" value="<?=$customer['Instagram']?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Facebook"><span class="my-fa fa fa-facebook"></span>Facebook</label>
+                            <input type="text" class="assol-input-style" id="Facebook" placeholder="URL страницы в Facebook" value="<?=$customer['Facebook']?>">
+                        </div>
+                    </div>
+                </div>
+                <? endif ?>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="Forming">Образование</label>
@@ -320,7 +373,8 @@
                             <input type="text" class="assol-input-style" id="ProfessionOfDiploma" placeholder="Профессия (по диплому)" value="<?=$customer['ProfessionOfDiploma']?>">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <?php $CurrentWorkBlock = (IS_LOVE_STORY) ? 6 : 3; ?>
+                    <div class="col-md-<?= $CurrentWorkBlock; ?>">
                         <div class="form-group">
                             <label for="CurrentWork">Работа на данный момент</label>
                             <input type="text" class="assol-input-style" id="CurrentWork" placeholder="Работа на данный момент" value="<?=$customer['CurrentWork']?>">
