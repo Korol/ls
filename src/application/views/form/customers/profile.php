@@ -305,8 +305,8 @@
                         font-size: 22px;
                         padding-right: 5px;
                     }
-                    .fa-vk {
-                        color: #007bb5;
+                    .fa-skype {
+                        color: #00aff0;
                     }
                     .fa-instagram {
                         color: #125688;
@@ -318,8 +318,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="VK"><span class="my-fa fa fa-vk"></span>Вконтакте</label>
-                            <input type="text" class="assol-input-style" id="VK" placeholder="URL страницы Вконтакте" value="<?=$customer['VK']?>">
+                            <label for="Skype"><span class="my-fa fa fa-skype"></span>Skype</label>
+                            <input type="text" class="assol-input-style" id="Skype" placeholder="Skype" value="<?=$customer['Skype']?>">
                         </div>
                     </div>
                     <div class="col-md-4">

@@ -1551,7 +1551,7 @@ class Customer_model extends MY_Model {
         'QuestionPhoto' => 'Вопросы',
         'Email_site' => 'E-Mail для сайта',
         'Email_private' => 'E-Mail клиентки',
-        'VK' => 'URL Вконтакте',
+        'Skype' => 'Skype',
         'Instagram' => 'URL Instagram',
         'Facebook' => 'URL Facebook',
     ];

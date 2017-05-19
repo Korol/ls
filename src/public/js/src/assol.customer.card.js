@@ -732,7 +732,7 @@ $(document).ready(function(){
             var data = getChangeData(['SName', 'FName', 'MName', 'DOB', 'DateRegister', 'City', 'Postcode','Country', 'Address', 'Phone_1',
                 'Phone_2', 'Email', 'Forming', 'ProfessionOfDiploma', 'CurrentWork', 'Worship', 'MaritalStatus',
                 'PassportSeries', 'PassportNumber', 'Height', 'Weight', 'HairColor', 'EyeColor', 'BodyBuild', 'BodyBuildID',
-                'SizeFoot', 'Smoking', 'Alcohol', 'Email_site', 'Email_private', 'VK', 'Instagram', 'Facebook']);
+                'SizeFoot', 'Smoking', 'Alcohol', 'Email_site', 'Email_private', 'Skype', 'Instagram', 'Facebook']);
 
             if (!$.isBlank(data))
                 $.post($.CustomerCard.GetCustomerUpdateUrl(), {data: data}, callback, 'json');
