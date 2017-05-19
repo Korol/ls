@@ -1506,7 +1506,7 @@ class Customer_model extends MY_Model {
         'Address' => 'Адрес проживания',
         'Phone_1' => 'Телефон 1',
         'Phone_2' => 'Телефон 2',
-        'Email' => 'E-Mail',
+        'Email' => 'E-Mail для мужчин',
         'ProfessionOfDiploma' => 'Профессия (по диплому)',
         'CurrentWork' => 'Работа на данный момент',
         'Worship' => 'Вероисповедание',
