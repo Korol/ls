@@ -275,7 +275,13 @@
                         </div>
                     </div>
                 </div>
+                    <?php $CurrentWorkBlock = 3; ?>
                 <? if (IS_LOVE_STORY): ?>
+                    <?php if($isDirector || $isSecretary): ?>
+                        <?php
+                        $emailIsDisplayed = true;
+                        $CurrentWorkBlock = 6;
+                        ?>
 <!--                    Emails -->
                 <div class="row">
                     <div class="col-md-4">
@@ -335,8 +341,17 @@
                         </div>
                     </div>
                 </div>
-                <? endif ?>
+                    <?php endif; // isDirector || isSecretary ?>
+                <? endif; // IS_LOVE_STORY ?>
                 <div class="row">
+                    <?php if(empty($emailIsDisplayed)): ?>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Email">E-Mail для мужчин</label>
+                            <input type="text" class="assol-input-style" id="Email" placeholder="E-Mail для мужчин" value="<?=$customer['Email']?>">
+                        </div>
+                    </div>
+                    <?php endif; // emailIsDisplayed ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="Forming">Образование</label>
@@ -373,7 +388,6 @@
                             <input type="text" class="assol-input-style" id="ProfessionOfDiploma" placeholder="Профессия (по диплому)" value="<?=$customer['ProfessionOfDiploma']?>">
                         </div>
                     </div>
-                    <?php $CurrentWorkBlock = (IS_LOVE_STORY) ? 6 : 3; ?>
                     <div class="col-md-<?= $CurrentWorkBlock; ?>">
                         <div class="form-group">
                             <label for="CurrentWork">Работа на данный момент</label>
