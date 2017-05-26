@@ -23,6 +23,8 @@ $(document).ready(function(){
     const REPORT_GENERAL_OF_EMPLOYEES = {Level: 33, Name: 'Общая таблица по сотрудникам'};
     /** Общие отчеты -> Сводная таблица распределения */
     const REPORT_OVERALL_ALLOCATION = {Level: 34, Name: 'Сводная таблица распределения'};
+    /** Общие отчеты -> Статистика по клиенткам */
+    const REPORT_GENERAL_CUSTOMERS_STATS = {Level: 35, Name: 'Статистика по клиенткам'};
 
     var pathLevel = REPORT_TYPE_LIST.Level;
     var selectEmployeeName = '';
@@ -70,6 +72,9 @@ $(document).ready(function(){
             case REPORT_GENERAL_SALARY.Level:
                 bread.push({Name: REPORT_GENERAL_SALARY.Name, IsLast: true});
                 break;
+            case REPORT_GENERAL_CUSTOMERS_STATS.Level:
+                bread.push({Name: REPORT_GENERAL_CUSTOMERS_STATS.Name, IsLast: true});
+                break;
         }
 
         return bread;
@@ -88,7 +93,8 @@ $(document).ready(function(){
                 {Level: REPORT_GENERAL_OF_EMPLOYEES.Level, Name: REPORT_GENERAL_OF_EMPLOYEES.Name,IsDoc: true},
                 {Level: REPORT_OVERALL_SALARY.Level, Name: REPORT_OVERALL_SALARY.Name, IsDoc: true},
                 {Level: REPORT_GENERAL_SALARY.Level, Name: REPORT_GENERAL_SALARY.Name, IsDoc: true},
-                {Level: REPORT_OVERALL_ALLOCATION.Level, Name: REPORT_OVERALL_ALLOCATION.Name, IsDoc: true}
+                {Level: REPORT_OVERALL_ALLOCATION.Level, Name: REPORT_OVERALL_ALLOCATION.Name, IsDoc: true},
+                {Level: REPORT_GENERAL_CUSTOMERS_STATS.Level, Name: REPORT_GENERAL_CUSTOMERS_STATS.Name, IsDoc: true}
             ]
         },
         individual: {
@@ -180,6 +186,7 @@ $(document).ready(function(){
                 case REPORT_OVERALL_ALLOCATION.Level:
                 case REPORT_GENERAL_OF_EMPLOYEES.Level:
                 case REPORT_GENERAL_SALARY.Level:
+                case REPORT_GENERAL_CUSTOMERS_STATS.Level:
                     render({bread: getGeneralBread()});
                     break;
                 default:
@@ -195,6 +202,7 @@ $(document).ready(function(){
             $('#ReportOverallAllocation').toggle(level == REPORT_OVERALL_ALLOCATION.Level);
             $('#ReportGeneralOfCustomers').toggle(level == REPORT_GENERAL_OF_EMPLOYEES.Level);
             $('#ReportGeneralSalary').toggle(level == REPORT_GENERAL_SALARY.Level);
+            $('#ReportGeneralCustomersStats').toggle(level == REPORT_GENERAL_CUSTOMERS_STATS.Level);
 
             switch (level) {
                 case REPORT_INDIVIDUAL_DAILY.Level:

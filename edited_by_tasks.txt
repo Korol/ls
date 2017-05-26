@@ -14,7 +14,7 @@ java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /
 java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/assol.customer.card.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/assol.customer.card.js
 java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/assol.employee.list.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/assol.employee.list.js
 java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/assol.report.director.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/assol.report.director.js
-java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/assol.report.list.director.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/assol.report.list.director.js
+java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/lovestory.report.list.director.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/lovestory.report.list.director.js
 java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/assol.report.list.secretary.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/assol.report.list.secretary.js
 java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/report.list.secretary.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/report.list.secretary.js
 java -jar /Users/korol/Sites/lovestory.loc/src/public/js/src/compiler.jar --js /Users/korol/Sites/lovestory.loc/src/public/js/src/assol.report.translate.js          --js_output_file /Users/korol/Sites/lovestory.loc/src/public/js/assol.report.translate.js
@@ -57,10 +57,12 @@ RefreshReportGeneralOfCustomersDataSummary
 ================
 
 2017-05-19:
-ALTER TABLE `assol_customer` ADD `Email_site` VARCHAR(320)  NULL  DEFAULT NULL  AFTER `Email`;
-ALTER TABLE `assol_customer` ADD `Email_private` VARCHAR(320)  NULL  DEFAULT NULL  AFTER `Email_site`;
-ALTER TABLE `assol_customer` ADD `VK` VARCHAR(256)  NULL  DEFAULT NULL  AFTER `Email_private`;
-ALTER TABLE `assol_customer` ADD `Instagram` VARCHAR(256)  NULL  DEFAULT NULL  AFTER `VK`;
-ALTER TABLE `assol_customer` ADD `Facebook` VARCHAR(256)  NULL  DEFAULT NULL  AFTER `Instagram`;
+//ALTER TABLE `assol_customer` ADD `Email_site` VARCHAR(320)  NULL  DEFAULT NULL  AFTER `Email`;
+//ALTER TABLE `assol_customer` ADD `Email_private` VARCHAR(320)  NULL  DEFAULT NULL  AFTER `Email_site`;
+//ALTER TABLE `assol_customer` ADD `VK` VARCHAR(256)  NULL  DEFAULT NULL  AFTER `Email_private`;
+//ALTER TABLE `assol_customer` ADD `Instagram` VARCHAR(256)  NULL  DEFAULT NULL  AFTER `VK`;
+//ALTER TABLE `assol_customer` ADD `Facebook` VARCHAR(256)  NULL  DEFAULT NULL  AFTER `Instagram`;
+//ALTER TABLE `assol_customer` CHANGE `VK` `Skype` VARCHAR(256)  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT NULL;
+===============
 
-ALTER TABLE `assol_customer` CHANGE `VK` `Skype` VARCHAR(256)  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT NULL;
+2017-05-25:

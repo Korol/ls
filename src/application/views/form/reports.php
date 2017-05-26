@@ -2316,3 +2316,12 @@
 </div>
 
 <? endif ?>
+
+<?php
+// Статистика по клиенткам
+$this->load->view('form/report_customers_stats',
+    array(
+        'role' => $role,
+    )
+);
+?>
