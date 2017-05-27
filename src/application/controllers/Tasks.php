@@ -103,8 +103,25 @@ class Tasks extends MY_Controller {
                     throw new Exception('К указанным сайтам нет прикрепленных сотрудников');
             }
 
+            // визуализируем список сайтов в тексте задачи
+            $sitesList = array();
+            if(!empty($sites)){
+                $sitesAdd = array();
+                $sitesAll = $this->getSiteModel()->getRecords(); // список сайтов
+                if(!empty($sitesAll)){
+                    foreach($sitesAll as $site){
+                        if(in_array($site['ID'], $sites)){
+                            $sitesAdd[] = $site['Name'];
+                        }
+                    }
+                }
+                if(!empty($sitesAdd)){
+                    $sitesList = implode(', ', $sitesAdd);
+                }
+            }
+
             foreach($employees as $idEmployee)
-                $this->getTaskModel()->insertTask($this->getUserID(), $idEmployee, $title, $deadline, $description, $confirmation);
+                $this->getTaskModel()->insertTask($this->getUserID(), $idEmployee, $title, $deadline, $description, $confirmation, $sitesList);
 
             $this->json_response(array('status' => 1));
         } catch (Exception $e) {

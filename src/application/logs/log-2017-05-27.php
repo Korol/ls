@@ -145,3 +145,22 @@ ERROR - 2017-05-27 10:56:03 --> Severity: Parsing Error --> syntax error, unexpe
 ERROR - 2017-05-27 10:56:06 --> Severity: Parsing Error --> syntax error, unexpected '}' /Users/korol/Sites/lovestory.loc/src/application/models/Customer_model.php 1712
 ERROR - 2017-05-27 10:56:08 --> Severity: Parsing Error --> syntax error, unexpected '}' /Users/korol/Sites/lovestory.loc/src/application/models/Customer_model.php 1712
 ERROR - 2017-05-27 10:59:44 --> 404 Page Not Found: Customers/savestat
+ERROR - 2017-05-27 12:25:11 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.Title, 0 as 'TypeTasks', (COUNT(c.ID) - COUNT(cr.ID)) AS 'CountNewComment', aut' at line 1 - Invalid query: SELECT task.*, CONCAT(task.Title, ' ', task.SitesList) AS task.Title, 0 as 'TypeTasks', (COUNT(c.ID) - COUNT(cr.ID)) AS 'CountNewComment', aut.FName as 'Author_FName', aut.SName as 'Author_SName', emp.FName as 'Employee_FName', emp.SName as 'Employee_SName'
+FROM `assol_tasks` AS `task`
+LEFT JOIN `assol_employee` as `aut` ON `aut`.`ID` = `task`.`AuthorID`
+LEFT JOIN `assol_employee` as `emp` ON `emp`.`ID` = `task`.`EmployeeID`
+LEFT JOIN `assol_task_comment` AS `c` ON `c`.`TaskID` = `task`.`ID`
+LEFT JOIN `assol_task_comment_read` AS `cr` ON `cr`.`EmployeeID` = 13 AND `c`.`ID` = `cr`.`CommentID`
+WHERE   (
+   (
+`task`.`EmployeeID` = '13'
+AND `task`.`State` =0
+  )
+OR    (
+`task`.`AuthorID` = '13'
+AND `task`.`State` = 1
+  )
+ )
+GROUP BY `task`.`ID`
+ORDER BY `task`.`Deadline` ASC, `task`.`ID` DESC
+ERROR - 2017-05-27 12:25:11 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/Task_model.php 201

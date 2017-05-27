@@ -3022,7 +3022,7 @@ label {
 }
 /* line 2922, ../../../scss/assol.scss */
 .change-task-info-table table {
-  width: 80%;
+  width: auto;
 }
 /* line 2925, ../../../scss/assol.scss */
 .change-task-info-table th {
@@ -5548,4 +5548,14 @@ code {
   margin-bottom: 25px;
   font-size: 18px;
   font-weight: bold;
+}
+
+.green {
+    color: #008000;
+}
+.width25 {
+    width: 25%;
+}
+.width100 {
+    width: 100% !important;
 }

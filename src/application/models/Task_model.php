@@ -20,6 +20,7 @@ class Task_model extends MY_Model {
             `DateClose` TIMESTAMP NULL DEFAULT NULL COMMENT 'Дата и время закрытия задачи',
             `IsRead` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'Флаг прочтения задачи исполнителем',
             `State` INT(11) NOT NULL DEFAULT '0' COMMENT 'Состояние задачи (0 - активна, 1 - на подтверждение, 2 - закрыта)',
+            `SitesList` TEXT,
             PRIMARY KEY (`ID`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 COMMENT='Задачи';";
 
@@ -73,15 +74,17 @@ class Task_model extends MY_Model {
      * @param string $deadline      Крайний срок
      * @param string $description   Описание задачи
      * @param int    $confirmation  Требует подтверждение
+     * @param string $sitesList     Список сайтов
      */
-    public function insertTask($authorID, $idEmployee, $title, $deadline, $description, $confirmation) {
+    public function insertTask($authorID, $idEmployee, $title, $deadline, $description, $confirmation, $sitesList = '') {
         $data = array(
             'AuthorID' => $authorID,
             'EmployeeID' => $idEmployee,
             'Title' => $title,
             'Deadline' => $deadline,
             'Description' => $description,
-            'Confirmation' => $confirmation
+            'Confirmation' => $confirmation,
+            'SitesList' => $sitesList,
         );
         $this->db()->set('DateCreate', 'NOW()', FALSE);
         $this->db()->insert(self::TABLE_TASK_NAME, $data);

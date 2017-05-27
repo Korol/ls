@@ -64,29 +64,35 @@ export default class TasksBlock_FormTask extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="change-task-info-table">
-                        <table>
+                        <table className="width100">
                             <thead>
                             <tr>
                                 <th>Постановщик</th>
                                 <th>Крайний срок</th>
                                 <th>Ответственный</th>
+                                <th>Сайты</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>
+                                <td className="width25">
                                     <div className="task-director">
                                         {`${task.Author_SName} ${task.Author_FName}`}
                                     </div>
                                 </td>
-                                <td>
+                                <td className="width25">
                                     <div className="task-date">
                                         {toClientDate(task.Deadline)}
                                     </div>
                                 </td>
-                                <td>
+                                <td className="width25">
                                     <div className="task-responsible">
                                         {`${task.Employee_SName} ${task.Employee_FName}`}
+                                    </div>
+                                </td>
+                                <td className="width25">
+                                    <div className="green">
+                                        {task.SitesList ? `${task.SitesList}` : ``}
                                     </div>
                                 </td>
                             </tr>
