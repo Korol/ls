@@ -1,4 +1,5 @@
 <div id="ReportGeneralCustomersStats" class="report-table">
+    <div class="reports-title">Статистика по клиенткам</div>
 <?php if(!empty($sites) && !empty($cs_customers)): ?>
 <link rel="stylesheet" href="/public/stickytable/jquery.stickytable.min.css">
 <script src="/public/stickytable/jquery.stickytable.min.js"></script>
