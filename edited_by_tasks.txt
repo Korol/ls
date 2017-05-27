@@ -65,4 +65,5 @@ RefreshReportGeneralOfCustomersDataSummary
 //ALTER TABLE `assol_customer` CHANGE `VK` `Skype` VARCHAR(256)  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT NULL;
 ===============
 
-2017-05-25:
+2017-05-27:
+//ALTER TABLE `assol_customer_site` ADD `Comment` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `IsDeleted`;

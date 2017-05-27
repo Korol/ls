@@ -1661,4 +1661,53 @@ class Customer_model extends MY_Model {
         ]);
     }
 
+    /**
+     * Получаем список клиентов для таблицы Клиенты <–> Сайты
+     */
+    public function getListCustomersSites()
+    {
+        // клиенты
+        $customers = $this->db()
+            ->select('ID, SName, FName, MName')
+            ->from(self::TABLE_CUSTOMER_NAME)
+            ->where(array(
+                'IsDeleted' => 0,
+            ))
+            ->order_by('SName ASC, FName ASC')
+            ->get()->result_array();
+        if(!empty($customers)){
+            // привязка клиентов к сайтам
+            $customers_sites = $this->db()
+                ->select('CustomerID, SiteID, Comment')
+                ->from(self::TABLE_CUSTOMER_SITE_NAME)
+                ->where('IsDeleted', 0)
+                ->get()->result_array();
+            if(!empty($customers_sites)){
+                // группируем привязку сайтов по клиентам
+                $groupped_cs = array();
+                foreach ($customers_sites as $cs) {
+                    $groupped_cs[$cs['CustomerID']][$cs['SiteID']] = $cs['Comment'];
+                }
+
+                // добавляем привязку в массив клиентов
+                foreach ($customers as $c_key => $customer) {
+                    $customers[$c_key]['CS'] = (!empty($groupped_cs[$customer['ID']]))
+                        ? $groupped_cs[$customer['ID']]
+                        : array();
+                }
+            }
+        }
+        return (!empty($customers)) ? $customers : array();
+    }
+
+    public function updateCustomerSiteComment($customerID, $siteID, $text)
+    {
+        $update = array('Comment' => $text);
+        $where = array(
+            'CustomerID' => $customerID,
+            'SiteID' => $siteID,
+        );
+        $this->db()->update(self::TABLE_CUSTOMER_SITE_NAME, $update, $where);
+        return $this->db()->affected_rows();
+    }
 }

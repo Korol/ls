@@ -17,6 +17,9 @@ class Reports extends MY_Controller {
         );
 
         if ($this->isDirector() || $this->isSecretary()) {
+            // данные для таблицы Клиенты <–> Сайты
+            $data['cs_customers'] = $this->getCustomerModel()->getListCustomersSites();//var_dump($data['cs_customers']);
+
             $js[] = "public/js/$script_prefix.report.director.js";
             $js[] = $this->isDirector()
                 ? "public/js/$script_prefix.report.list.director.js"
@@ -56,5 +59,22 @@ class Reports extends MY_Controller {
         } catch (Exception $e) {
             $this->json_response(['status' => 0, 'message' => $e->getMessage()]);
         }
+    }
+
+    public function savestat()
+    {
+        $res = 0;
+        $cell = $this->input->post('cell', true); // ячейка (cell_12_34)
+        $text = $this->input->post('text', true); // текст в ячейке
+        if(!empty($cell)){
+            $text = (!empty($text)) ? strip_tags($text) : '';
+            $cell_info = explode('_', $cell);
+            $customerID = (!empty($cell_info[1])) ? (int)$cell_info[1] : 0; // клиент
+            $siteID = (!empty($cell_info[2])) ? (int)$cell_info[2] : 0; // сайт
+            $res = $this->getCustomerModel()->updateCustomerSiteComment($customerID, $siteID, $text);
+        }
+
+        echo $res;
+        return;
     }
 }

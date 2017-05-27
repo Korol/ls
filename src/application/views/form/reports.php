@@ -2318,10 +2318,13 @@
 <? endif ?>
 
 <?php
-// Статистика по клиенткам
-$this->load->view('form/report_customers_stats',
-    array(
-        'role' => $role,
-    )
-);
+if($role['isDirector'] || $role['isSecretary']){
+    // Статистика по клиенткам
+    $this->load->view('form/report_customers_stats',
+        array(
+            'sites' => $sites,
+            'cs_customers' => $cs_customers,
+        )
+    );
+}
 ?>

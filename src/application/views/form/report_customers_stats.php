@@ -1,7 +1,5 @@
-<?php
-// TODO: получение данных из БД, и заполнение таблицы реальными значениями
-?>
 <div id="ReportGeneralCustomersStats" class="report-table">
+<?php if(!empty($sites) && !empty($cs_customers)): ?>
 <link rel="stylesheet" href="/public/stickytable/jquery.stickytable.min.css">
 <script src="/public/stickytable/jquery.stickytable.min.js"></script>
     <style>
@@ -29,23 +27,39 @@
                 <table class="table table-bordered table-striped editable-table">
                     <thead>
                         <tr class="sticky-row">
-                            <?php
-                            for($i = 1; $i <= 30; $i++){
-                                $thClass = ($i == 1) ? ' class="sticky-cell"' : '';
-                                echo '<th' . $thClass . ' nowrap="nowrap"> Header ' . $i . '</th>';
-                            }
-                            ?>
+                            <th class="sticky-cell" nowrap="nowrap">ФИО</th>
+                            <?php foreach($sites as $th_site): ?>
+                                <th nowrap="nowrap"><?= $th_site['Name']; ?></th>
+                            <?php endforeach; ?>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php for($i = 1; $i <= 100; $i++): ?>
+                    <?php foreach($cs_customers as $cs_item): ?>
+                        <?php
+                        $sname_ex = explode(' ', trim($cs_item['SName']));
+                        $sname = $sname_ex[0];
+                        $fname = mb_substr($cs_item['FName'], 0, 1, 'UTF-8');
+                        $mname = mb_substr($cs_item['MName'], 0, 1, 'UTF-8');
+                        ?>
                         <tr>
-                            <?php for($k = 1; $k <= 30; $k++): ?>
-                                <?php $tdClass = ($k == 1) ? 'sticky-cell' : 'editable-cell'; ?>
-                                <td class="<?=$tdClass; ?>" nowrap="nowrap" id="cll_<?=$i;?>_<?=$k;?>">Value <?= $i . ' - ' . $k; ?></td>
-                            <?php endfor; ?>
+                            <td class="sticky-cell" nowrap="nowrap">
+                                <a href="/customer/<?=$cs_item['ID']; ?>/profile" target="_blank">
+                                    <?= $sname . ' ' . $fname . '.' . $mname . '.'; ?>
+                                </a>
+                            </td>
+                            <?php foreach($sites as $tb_site): ?>
+                                <?php
+                                $tb_text = '&dash;';
+                                if(in_array($tb_site['ID'], array_keys($cs_item['CS']))){
+                                    $tb_text = (!empty($cs_item['CS'][$tb_site['ID']])) ? $cs_item['CS'][$tb_site['ID']] : '';
+                                }
+                                $tdClass = ($tb_text !== '&dash;') ? 'editable-cell' : '';
+                                $tdId = ($tb_text !== '&dash;') ? 'id="cell_' . $cs_item['ID'] . '_' . $tb_site['ID'] . '"' : '';
+                                ?>
+                                <td class="<?= $tdClass; ?>" <?= $tdId; ?> nowrap="nowrap"><?= $tb_text; ?></td>
+                            <?php endforeach; // ($sites as $td_site) ?>
                         </tr>
-                    <?php endfor; ?>
+                    <?php endforeach; // ($cs_customers as $cs_item) ?>
                     </tbody>
                 </table>
             </div>
@@ -54,7 +68,6 @@
     <script>
         $(document).ready(function(){
             $('.editable-cell').click(function(e){
-                var i=0;
                 var id=$(this).attr('id');
                 e.stopPropagation();      //<-------stop the bubbling of the event here
                 var checkInput = $('#'+id).find('input.thVal').length;
@@ -69,52 +82,40 @@
 
             });
             // update cell value
-            function updateVal(currentEle, value) {
-                $('#'+currentEle).html('<input class="thVal" onfocus="this.select()" type="text" width="2" value="'+value+'" />').select();
+            function updateVal(currentId, value) {
+                $('#'+currentId).html('<input class="thVal" onfocus="this.select()" type="text" value="'+value+'" />').select();
                 $(".thVal").focus();
                 $(".thVal").keyup(function (event) {
                     if (event.keyCode == 13) {
                         var newValue = $(".thVal").val().trim();
-                        $('#'+currentEle).html(newValue);
-                        saveVal(currentEle, newValue);
+                        $('#'+currentId).html(newValue);
+                        if(newValue !== value){
+                            saveVal(currentId, newValue);
+                        }
                     }
                 });
 
                 $(".thVal").focusout(function () { // you can use $('html')
                     var nnewVal = $(".thVal").val().trim();
-                    $('#'+currentEle).html(nnewVal);
-                    saveVal(currentEle, nnewVal);
+                    $('#'+currentId).html(nnewVal);
+                    if(nnewVal !== value){
+                        saveVal(currentId, nnewVal);
+                    }
                 });
             }
             // save new cell value
             function saveVal(cellId, cellVal){
-                console.log(cellId, cellVal);
-                // TODO: сохранение изменений в БД
+//                console.log(cellId, cellVal);
+                $.post(
+                    '/reports/savestat',
+                    { cell: cellId, text: cellVal},
+                    function(data){
+//                        console.log(data);
+                    },
+                    'text'
+                );
             }
-
         });
-//        $(function(){
-//            $('td.editable-cell').click(function(){
-//                var currentVal = $(this).html();
-//                var currentId = $(this).attr('id');
-//                console.log(currentId, currentVal);
-//                $(this).html('<input type="text" id="tf'+currentId+'" value="'+currentVal+'"/>');
-//            });
-//        });
-//        $(function () {
-//            $("td").dblclick(function () {
-//                var OriginalContent = $(this).text();
-//
-//
-//                var inputNewText = prompt("Enter new content for:", OriginalContent);
-//
-//                if (inputNewText!=null)
-//                {
-//                    $(this).text(inputNewText)
-//                }
-//
-//
-//            });
-//        }); // end function
     </script>
+<?php endif; // (!empty($sites) && !empty($cs_customers)) ?>
 </div>
