@@ -195,6 +195,10 @@ $route['customer/(:num)/video_1/data']              = 'Customer_Video/data/$1/1'
 $route['customer/(:num)/video/add']                 = 'Customer_Video/add/$1';
 $route['customer/(:num)/video/(:num)/remove']       = 'Customer_Video/remove/$1/$2';
 
+// Мужчины
+$route['customer/mens/save'] = 'Customer_Mens/save';
+$route['customer/mens/remove'] = 'Customer_Mens/remove';
+
 // Маршрутизация для раздела "Отчеты"
 $route['reports/daily/(:any)']              = 'Reports_Daily/$1';
 $route['reports/mailing/(:any)']            = 'Reports_Mailing/$1';

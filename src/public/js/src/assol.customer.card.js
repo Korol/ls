@@ -1089,4 +1089,9 @@ $(document).ready(function(){
         $('#alertError').hide();
         $('#alertSuccess').hide();
     }
+
+    if(window.location.hash) {
+        var mhash = window.location.hash;
+        $('a[href="'+mhash+'"]').tab('show');
+    }
 });

@@ -23,6 +23,7 @@ class MY_Model extends CI_Model {
     const TABLE_CUSTOMER_VIDEO_SITE_LINK_NAME = 'assol_customer_video_site_link';
     const TABLE_CUSTOMER_STORY_NAME = 'assol_customer_story';
     const TABLE_CUSTOMER_DOCS_RIGHTS_NAME = 'assol_customer_docs_rights';
+    const TABLE_CUSTOMER_MENS_NAME = 'assol_customer_mens';
 
     const TABLE_EMPLOYEE_NAME = 'assol_employee';
     const TABLE_EMPLOYEE_HISTORY_NAME = 'assol_employee_history';

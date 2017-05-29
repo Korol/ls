@@ -67,3 +67,15 @@ RefreshReportGeneralOfCustomersDataSummary
 
 2017-05-27:
 //ALTER TABLE `assol_customer_site` ADD `Comment` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `IsDeleted`;
+===============
+
+2017-05-29:
+CREATE TABLE `assol_customer_mens` (
+  `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `CustomerID` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Photo` varchar(255) DEFAULT NULL,
+  `Comment` text,
+  PRIMARY KEY (`ID`),
+  KEY `CustomerID` (`CustomerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -23,6 +23,7 @@
         $isEditPhoto                    = ($isDirector || $isSecretary);
         $isEditSitesDescription         = ($isDirector || $isSecretary);
         $isEditQuestionPhoto            = false;
+        $isEditMens                     = ($isDirector || $isSecretary);
 
         $isShowPassportSection = ($isDirector || $isSecretary);
     } else { /* На сайте Assol переводчик может редактировать вкладки: дополнительно, история, заказ контактов, вопросы */
@@ -137,6 +138,11 @@
                     <li role="presentation" class="active">
                         <a href="#PersonalData" aria-controls="PersonalData" role="tab" data-toggle="tab">
                             Личные данные
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#Mens" aria-controls="Mens" role="tab" data-toggle="tab">
+                            Мужчины
                         </a>
                     </li>
                     <li role="presentation">
@@ -1216,6 +1222,17 @@
                         Сохранить
                     </button>
                 <? endif ?>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Mens">
+                <?php
+                $this->load->view('form/customers/profile_mens',
+                    array(
+                        'customerID' => $customer['ID'],
+                        'isEditMens' => $isEditMens,
+                        'mensList' => (!empty($mensList)) ? $mensList : array(),
+                    )
+                );
+                ?>
             </div>
             <div role="tabpanel" class="tab-pane" id="SelfDescription">
                 <div class="row">

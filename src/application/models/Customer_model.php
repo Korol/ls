@@ -260,7 +260,16 @@ class Customer_model extends MY_Model {
             PRIMARY KEY (`ID`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 COMMENT='Изображения вопросов клиента';";
 
-
+    private $table_customer_mens =
+        "CREATE TABLE `assol_customer_mens` (
+            `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+            `CustomerID` int(11) DEFAULT NULL,
+            `Name` varchar(255) DEFAULT NULL,
+            `Photo` varchar(255) DEFAULT NULL,
+            `Comment` text,
+            PRIMARY KEY (`id`),
+            KEY `CustomerID` (`CustomerID`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
     /**
      * Инициализация таблиц
@@ -285,6 +294,7 @@ class Customer_model extends MY_Model {
         $this->db()->query($this->table_customer_question_template);
         $this->db()->query($this->table_customer_question_answer);
         $this->db()->query($this->table_customer_question_photo);
+        $this->db()->query($this->table_customer_mens);
     }
 
     /** Удаление таблиц */
@@ -1554,6 +1564,9 @@ class Customer_model extends MY_Model {
         'Skype' => 'Skype',
         'Instagram' => 'URL Instagram',
         'Facebook' => 'URL Facebook',
+        'AddMen' => 'Добавлен мужчина',
+        'EditMen' => 'Обновлён мужчина',
+        'RemoveMen' => 'Удалён мужчина',
     ];
 
     public function passportList($limit, $offset) {
@@ -1708,6 +1721,64 @@ class Customer_model extends MY_Model {
             'SiteID' => $siteID,
         );
         $this->db()->update(self::TABLE_CUSTOMER_SITE_NAME, $update, $where);
+        return $this->db()->affected_rows();
+    }
+
+    /**
+     * Список мужчин клиентки
+     * @param int $CustomerID
+     * @param string $order_by
+     * @return mixed
+     */
+    public function getCustomerMens($CustomerID, $order_by = 'ID DESC')
+    {
+        return $this->db()
+            ->where(array('CustomerID' => $CustomerID))
+            ->order_by($order_by)
+            ->get(self::TABLE_CUSTOMER_MENS_NAME)->result_array();
+    }
+
+    /**
+     * Информация о мужчине по ID
+     * @param int $id
+     * @return mixed
+     */
+    public function getCustomerMen($id)
+    {
+        return $this->db()->get_where(self::TABLE_CUSTOMER_MENS_NAME, array('ID' => $id))->row_array();
+    }
+
+    /**
+     * Добавляем нового мужчину
+     * @param array $data
+     * @return mixed
+     */
+    public function saveCustomerMen($data)
+    {
+        $this->db()->insert(self::TABLE_CUSTOMER_MENS_NAME, $data);
+        return $this->db()->affected_rows();
+    }
+
+    /**
+     * Обновляем существующего мужчину
+     * @param int $id
+     * @param array $data
+     * @return mixed
+     */
+    public function updateCustomerMen($id, $data)
+    {
+        $this->db()->update(self::TABLE_CUSTOMER_MENS_NAME, $data, array('ID' => $id));
+        return $this->db()->affected_rows();
+    }
+
+    /**
+     * Удаляем мужчину
+     * @param int $id
+     * @return mixed
+     */
+    public function removeCustomerMen($id)
+    {
+        $this->db()->delete(self::TABLE_CUSTOMER_MENS_NAME, array('ID' => $id));
         return $this->db()->affected_rows();
     }
 }

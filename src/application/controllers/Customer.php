@@ -143,7 +143,8 @@ class Customer extends MY_Controller {
             'child_sex' => $this->getReferencesModel()->getReference(REFERENCE_CHILD_SEX),
             'marital' => $this->getReferencesModel()->getReference(REFERENCE_MARITAL),
             'body_build' => $this->getReferencesModel()->getReference(REFERENCE_BODY_BUILD),
-            'sites' => $this->getSiteModel()->getRecords()
+            'sites' => $this->getSiteModel()->getRecords(),
+            'mensList' => $this->getCustomerModel()->getCustomerMens($id),
         );
 
         // Установка прав доступа к договорам и паспорту только для assol
