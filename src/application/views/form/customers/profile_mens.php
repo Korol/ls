@@ -30,6 +30,13 @@
 <div class="row" style="margin-top: 20px; margin-bottom: 30px;">
     <div class="col-md-12">
     <?php if(!empty($mensList)): ?>
+        <style>
+            .mens-men-photo img {
+                border-radius: 25px;
+                width: 50px;
+                height: 50px;
+            }
+        </style>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -46,7 +53,7 @@
                 <!-- Men Info -->
                 <td><?= $men['ID']; ?></td>
                 <td><?= $men['Name']; ?></td>
-                <td>
+                <td class="mens-men-photo">
                 <?php if(!empty($men['Photo'])): ?>
                     <a href="<?= base_url("thumb") ?>/?src=/files/images/<?=$men['Photo'];?>" data-lightbox="Men_Image_View_Modal_<?=$men['ID'];?>">
                         <img src="<?= base_url("thumb") ?>/?src=/files/images/<?=$men['Photo'];?>&w=100" alt="avatar">
