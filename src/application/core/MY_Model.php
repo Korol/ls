@@ -44,6 +44,8 @@ class MY_Model extends CI_Model {
     const TABLE_DOCUMENT_RIGHTS_NAME = 'assol_document_rights';
 
     const TABLE_IMAGE_NAME = 'assol_images';
+    const TABLE_IMAGE_MEN_NAME = 'assol_image_men';
+    const TABLE_IMAGE_SITE_NAME = 'assol_image_site';
 
     const TABLE_CHAT_NAME = 'assol_chat';
     const TABLE_CHAT_USER_NAME = 'assol_chat_user';

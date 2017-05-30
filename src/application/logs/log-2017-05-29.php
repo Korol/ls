@@ -86,3 +86,150 @@ WHERE `CustomerID` = '92'
 ORDER BY `ID` DESC
 ERROR - 2017-05-29 13:58:45 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/Customer_model.php 1735
 ERROR - 2017-05-29 14:00:51 --> Severity: error --> Exception: Неверный формат: image/png. Для загрузки доступны следующие форматы: | hqx | cpt | csv | bin | dms | lha | lzh | exe | class | psd | so | sea | dll | oda | pdf | ai | eps | ps | smi | smil | mif | xls | ppt | pptx | wbxml | wmlc | dcr | dir | dxr | dvi | gtar | gz | gzip | php | php4 | php3 | phtml | phps | js | swf | sit | tar | tgz | z | xhtml | xht | zip | rar | mid | midi | mpga | mp2 | mp3 | aif | aiff | aifc | ram | rm | rpm | ra | rv | wav | bmp | gif | jpeg | jpg | jpe | png | tiff | tif | css | html | htm | shtml | txt | text | log | rtx | rtf | xml | xsl | mpeg | mpg | mpe | qt | mov | avi | movie | doc | docx | dot | dotx | xlsx | word | xl | eml | json | pem | p10 | p12 | p7a | p7c | p7m | p7r | p7s | crt | crl | der | kdb | pgp | gpg | sst | csr | rsa | cer | 3g2 | 3gp | mp4 | m4a | f4v | webm | aac | m4u | m3u | xspf | vlc | wmv | au | ac3 | flac | ogg | kmz | kml | ics | ical | zsh | 7zip | cdr | wma | jar | svg | vcf | srt | vtt | ico |  /Users/korol/Sites/lovestory.loc/src/application/core/MY_Controller.php 191
+ERROR - 2017-05-29 16:43:56 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10, 10' at line 13 - Invalid query: SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT -10, 10
+ERROR - 2017-05-29 16:43:56 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 16:44:12 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10, 10' at line 13 - Invalid query: SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT -10, 10
+ERROR - 2017-05-29 16:44:12 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 16:45:16 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10, 10' at line 13 - Invalid query: SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT -10, 10
+ERROR - 2017-05-29 16:45:16 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 16:45:49 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10, 10' at line 13 - Invalid query: SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT -10, 10
+ERROR - 2017-05-29 16:45:49 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 16:48:17 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10, 10' at line 13 - Invalid query: SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT -10, 10
+ERROR - 2017-05-29 16:48:17 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 16:58:32 --> SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ERROR - 2017-05-29 16:58:32 --> Query error: No tables used - Invalid query: SELECT *
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT 10
+ERROR - 2017-05-29 16:58:32 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 17:01:31 --> SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ERROR - 2017-05-29 17:01:31 --> Query error: No tables used - Invalid query: SELECT *
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT 10
+ERROR - 2017-05-29 17:01:31 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 17:01:45 --> SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+AND `news`.`SiteID` = '39'
+GROUP BY `news`.`ID`
+ERROR - 2017-05-29 17:01:45 --> Query error: No tables used - Invalid query: SELECT *
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT 10
+ERROR - 2017-05-29 17:01:45 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 17:08:56 --> SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+GROUP BY `news`.`ID`
+ERROR - 2017-05-29 17:08:56 --> Query error: No tables used - Invalid query: SELECT *
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT 10
+ERROR - 2017-05-29 17:08:56 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96
+ERROR - 2017-05-29 17:09:55 --> SELECT `news`.*, `e`.`FName`, `e`.`SName`, CONCAT(img.ID, '.', img.ext) as 'FileName'
+FROM `assol_news` AS `news`
+LEFT JOIN `assol_images` AS `img` ON `news`.`ImageID` = `img`.`ID`
+LEFT JOIN `assol_employee` AS `e` ON `e`.`ID` = `news`.`Who`
+INNER JOIN `assol_employee` AS `user` ON `user`.`ID` = 7
+LEFT JOIN assol_employee_site AS es ON (user.ID = es.EmployeeID AND es.IsDeleted = 0 AND news.SiteID = es.SiteID)
+LEFT JOIN assol_employee_site AS esT ON (user.ID = esT.EmployeeID AND esT.IsDeleted = 0)
+LEFT JOIN assol_employee_site_customer AS es2c ON (es2c.IsDeleted = 0 AND es2c.EmployeeSiteID=esT.ID AND es2c.CustomerID=news.CustomerID)
+WHERE (news.SiteID=0 OR es.ID IS NOT NULL)
+AND (news.CustomerID=0 OR es2c.ID IS NOT NULL)
+OR `news`.`SiteID` = '39'
+GROUP BY `news`.`ID`
+ERROR - 2017-05-29 17:09:55 --> Query error: No tables used - Invalid query: SELECT *
+ORDER BY `news`.`DateCreate` DESC
+ LIMIT 10
+ERROR - 2017-05-29 17:09:55 --> Severity: Error --> Call to a member function result_array() on a non-object /Users/korol/Sites/lovestory.loc/src/application/models/News_model.php 96

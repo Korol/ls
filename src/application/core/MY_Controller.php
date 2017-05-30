@@ -25,7 +25,7 @@ class MY_Controller extends CI_Controller {
 
         if (!$isInit) return;
 
-        $this->load->helper('url');
+        $this->load->helper(array('url', 'functions'));
         $this->load->library('session');
 
         // Авторизация для тестов

@@ -12,18 +12,42 @@ class Image_model extends MY_Model {
                           PRIMARY KEY (`ID`)
                       ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 COMMENT='Изображения';";
 
+    private $table_image_men =
+        "CREATE TABLE `assol_image_men` (
+          `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+          `ImageID` int(11) DEFAULT NULL,
+          `MenID` int(11) DEFAULT NULL,
+          `Comment` varchar(255) DEFAULT NULL,
+          PRIMARY KEY (`ID`),
+          KEY `ImageID` (`ImageID`),
+          KEY `MenID` (`MenID`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+    private $table_image_site =
+        "CREATE TABLE `assol_image_site` (
+          `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+          `ImageID` int(11) DEFAULT NULL,
+          `SiteID` int(11) DEFAULT NULL,
+          PRIMARY KEY (`ID`),
+          KEY `ImageID` (`ImageID`),
+          KEY `SiteID` (`SiteID`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
     /**
      * Инициализация таблицы
      */
     public function initDataBase() {
         $this->db()->query($this->table);
+        $this->db()->query($this->table_image_men);
+        $this->db()->query($this->table_image_site);
     }
 
     public function dropTables() {
         $this->load->dbforge();
 
         $this->dbforge->drop_table(self::TABLE_IMAGE_NAME, TRUE);
+        $this->dbforge->drop_table(self::TABLE_IMAGE_MEN_NAME, TRUE);
+        $this->dbforge->drop_table(self::TABLE_IMAGE_SITE_NAME, TRUE);
     }
 
 
@@ -76,4 +100,41 @@ class Image_model extends MY_Model {
             ->get()->result_array();
     }
 
+    /**
+     * Получаем связи указанных изображений с сайтами
+     * @param array $ids
+     * @return array
+     */
+    public function getImagesToSites($ids)
+    {
+        $return = array();
+        $res = $this->db()
+            ->where_in('ImageID', $ids)
+            ->get(self::TABLE_IMAGE_SITE_NAME)->result_array();
+        if(!empty($res)){
+            foreach($res as $row){
+                $return[$row['SiteID']][] = $row['ImageID'];
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * Получаем связи указанных изображений с мужчинами
+     * @param array $ids
+     * @return array
+     */
+    public function getImagesToMens($ids)
+    {
+        $return = array();
+        $res = $this->db()
+            ->where_in('ImageID', $ids)
+            ->get(self::TABLE_IMAGE_MEN_NAME)->result_array();
+        if(!empty($res)){
+            foreach($res as $row){
+                $return[$row['MenID']][$row['ImageID']] = $row['Comment'];
+            }
+        }
+        return $return;
+    }
 }

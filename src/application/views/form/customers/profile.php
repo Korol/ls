@@ -1496,7 +1496,7 @@
                             </a>
                         <? endif ?>
                     </div>
-
+                    <?php $showNewModal = true; ?>
                     <script id="albumTemplate" type="text/x-jquery-tmpl">
 
                         <div class="album-item-wrap">
@@ -1535,9 +1535,13 @@
                                                 <a href="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}&sia=${ImageID}.${ext}" target="_blank" download>
                                                     <span class="glyphicon glyphicon-download image-download-btn" aria-hidden="true" title="Скачать"></span>
                                                 </a>
+                                                <?php if(empty($showNewModal)): ?>
                                                 <a href="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}" data-lightbox="Album_${AlbumID}">
                                                     <img src="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}&w=138" class="thumbnail">
                                                 </a>
+                                                <?php else: ?>
+                                                <img src="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}&w=138" class="thumbnail launch-album-modal" id="img_${AlbumID}_${ImageID}">
+                                                <?php endif; ?>
                                             </div>
                                         {{/each}}
 
@@ -1548,7 +1552,7 @@
                                                     ДОБАВИТЬ<br>ФОТО
                                                 </a>
 
-                                                <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="albumUpload_${ID}">
+                                                <div class="modal fade upload-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="albumUpload_${ID}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -1566,6 +1570,94 @@
                                                 </div>
                                             </div>
                                         <? endif ?>
+                                        <?php if(!empty($showNewModal)): ?>
+<!-- Modal with carousel -->
+<div class="modal fade" id="myModalAlbum_${ID}" tabindex="-1" role="dialog" aria-labelledby="myModalAlbum_${ID}Label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="carousel-example-generic-album_${ID}" class="carousel slide" data-ride="carousel" data-interval="false">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            {{each images}}
+                <div class="img-item item" id="mc_item_${ImageID}">
+                  <img src="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}" class="img-responsive mac-image">
+                  <form name="macForm_${ImageID}" action="" method="post">
+                  {{if ToSites.length > 0}}
+                    {{each ToSites}}
+                    <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group work-sites-block">
+                          <div class="site-item">
+                            <span style="padding-left: 10px;">${SiteName}</span>
+                            <div class="arrow">
+                              <div class="arrow-in"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+
+                    </div>
+                    </div>
+                    {{/each}}
+                  {{/if}}
+
+                  {{if ToMens.length > 0}}
+                  <table class="table table-striped table-bordered" style="margin: 20px auto;">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Имя мужчины</th>
+                        <th>Фото</th>
+                        <th>Отправлено</th>
+                        <th>Комментарий</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{each ToMens}}
+                      <tr>
+                        <td>${MenID}</td>
+                        <td>${MenName}</td>
+                        <td>
+                          <a href="<?= base_url("thumb") ?>/?src=/files/images/${MenPhoto}" data-lightbox="Men_Image_Photo_${ImageID}_Modal_${MenID}">
+                            <img src="<?= base_url("thumb") ?>/?src=/files/images/${MenPhoto}&w=100" alt="avatar" class="mn-avatar">
+                          </a>
+                        </td>
+                        <td>
+                          <input type="checkbox" name="sended[${MenID}]" value="1" id="sended_${MenID}" />
+                        </td>
+                        <td>
+                          <textarea name="comment[${ID}]" id="comment_${MenID}" class="form-control" rows="2">${MenComment}</textarea>
+                        </td>
+                      </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                  {{/if}}
+                  <button class="btn btn-success send-mac-form" id="send_${ImageID}">Сохранить</button>
+                  </form>
+                </div>
+            {{/each}}
+            <!-- Controls -->
+              <a class="left carousel-control album-carousel" href="#carousel-example-generic-album_${ID}" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control album-carousel" href="#carousel-example-generic-album_${ID}" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            <!-- /Controls -->
+          </div>
+          <!-- /Wrapper for slides -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal with carousel -->
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -1573,6 +1665,37 @@
                     </script>
 
                     <style>
+                        .mac-image {
+                            max-width: 100%;
+                            max-height: 700px;
+                            margin: 0 auto 10px;
+                        }
+                        .album-carousel {
+                            width: 100px;
+                            height: 100px;
+                            top: 180px;
+                            border: 1px solid #ddd;
+                            border-radius: 50px;
+                        }
+                        .album-carousel .glyphicon-chevron-right{
+                            margin-right: -15px;
+                            margin-top: -15px;
+                        }
+                        .album-carousel .glyphicon-chevron-left{
+                            margin-left: -15px;
+                            margin-top: -15px;
+                        }
+                        .launch-album-modal{
+                            cursor: pointer;
+                        }
+                        .mn-avatar {
+                            border-radius: 25px;
+                            width: 50px;
+                            height: 50px;
+                        }
+
+
+
                         .album-item-wrap {
 
                         }
@@ -1645,7 +1768,7 @@
                         });
 
                         $(document).on('click', '.open-album a[data-url]', function () {
-                            var modal = $(this).parent().find('.modal');
+                            var modal = $(this).parent().find('.upload-modal');
                             var frame = $(this).parent().find('iframe');
                             var frameSrc = $(this).attr('data-url');
 
@@ -1656,6 +1779,15 @@
                                 $.CustomerCard.ReloadAlbumList();
                             });
                             modal.modal({show:true});
+                        });
+
+                        $(document).on('click', '.launch-album-modal', function () {
+                            var thisId = this.id.split('_');
+                            // удаляем старые активные элементы карусели
+                            $('#myModalAlbum_'+thisId[1]).find('.active').removeClass('active');
+                            // новая карусель
+                            $('#mc_item_'+thisId[2]).addClass('active');
+                            $('#myModalAlbum_'+thisId[1]).modal();
                         });
                     </script>
 

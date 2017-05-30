@@ -172,6 +172,7 @@ class News extends MY_Controller {
     public function data() {
         try {
             $data = $this->input->post('data');
+            if($data['Offset'] < 0) $data['Offset'] = 0;
 
             // Определяем необходимость фильтрации по сайтам
             $employee = ($this->isTranslate() || $this->isEmployee()) ? $this->getUserID() : false;
