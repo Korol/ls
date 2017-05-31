@@ -96,11 +96,11 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 {unread(task)}
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>
@@ -176,11 +176,11 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 {unread(task)}
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>
@@ -264,11 +264,11 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 {unread(task)}
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>
@@ -335,11 +335,11 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 {unreadComment(task)}
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>
@@ -398,11 +398,11 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 {unreadComment(task)}
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>
@@ -452,10 +452,10 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>
@@ -514,10 +514,10 @@ export default class TasksBlock_List extends React.Component {
                     </td>
                     <td>
                         <div className="task-name">
+                            <span className="green">{task.SitesList} </span><br />
                             <a href="#" onClick={() => dispatch(showTask(task))}>
                                 <span className="title">{task.Title}</span>
                             </a>
-                            <span className="green"> {task.SitesList}</span>
                         </div>
                     </td>
                     <td>

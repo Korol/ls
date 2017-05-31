@@ -21,6 +21,9 @@
         .thVal{
             max-width: 100%;
         }
+        .editable-table>thead>tr>th{
+            border-bottom-width: 1px !important;
+        }
     </style>
     <div class="row" style="margin-bottom: 50px;">
         <div class="col-md-12">

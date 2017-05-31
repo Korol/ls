@@ -8340,3 +8340,6 @@ ERROR - 2017-05-31 17:33:55 --> Severity: Warning --> in_array() expects paramet
 ERROR - 2017-05-31 17:33:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given /Users/korol/Sites/lovestory.loc/src/application/controllers/Customer_Album.php 69
 ERROR - 2017-05-31 17:33:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given /Users/korol/Sites/lovestory.loc/src/application/controllers/Customer_Album.php 69
 ERROR - 2017-05-31 17:33:55 --> Severity: Warning --> in_array() expects parameter 2 to be array, null given /Users/korol/Sites/lovestory.loc/src/application/controllers/Customer_Album.php 69
+ERROR - 2017-05-31 18:07:14 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-05-31 18:45:23 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-05-31 18:45:23 --> 404 Page Not Found: Faviconico/index
