@@ -2,7 +2,7 @@
     <div class="reports-title">Статистика по клиенткам</div>
 <?php if(!empty($sites) && !empty($cs_customers)): ?>
 <link rel="stylesheet" href="/public/stickytable/jquery.stickytable.min.css">
-<script src="/public/stickytable/jquery.stickytable.min.js"></script>
+<script src="/public/stickytable/jquery.stickytable.min.js?v=1"></script>
     <style>
         .sticky-table table td.sticky-cell, .sticky-table table th.sticky-cell,
         .sticky-table table tr.sticky-row td, .sticky-table table tr.sticky-row th {
