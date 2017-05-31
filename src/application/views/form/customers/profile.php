@@ -1582,12 +1582,11 @@
             {{each images}}
                 <div class="img-item item" id="mc_item_${ImageID}">
                   <img src="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}" class="img-responsive mac-image">
-                  <form name="macForm_${ImageID}" action="" method="post">
                   {{if ToSites.length > 0}}
                     {{each ToSites}}
-                    <div class="row">
+                    <div class="row mac-site-row">
                     <div class="col-md-3">
-                        <div class="form-group work-sites-block">
+                        <div class="form-group work-sites-block mac-wsb">
                           <div class="site-item">
                             <span style="padding-left: 10px;">${SiteName}</span>
                             <div class="arrow">
@@ -1596,8 +1595,35 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
-
+                    <div class="col-md-1 col-md-offset-5 clearfix">
+                      <span class="glyphicon glyphicon-ok mac-ok hidden pull-right" id="oksite_${SiteID}_${ImageID}" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="Connect_${SiteID}_${ImageID}">В профайле</label>
+                            <div class="btn-group assol-select-dropdown mac-asd" id="Connect_${SiteID}_${ImageID}">
+                                <div class="label-placement-wrap">
+                                    <button class="btn" data-label-placement>Выбрать</button>
+                                </div>
+                                <button data-toggle="dropdown" class="btn dropdown-toggle">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <input type="radio" class="mac-radio" id="Connect_${SiteID}_${ImageID}_0" name="Connect[${SiteID}][${ImageID}]" ${SiteConnect == 0 ? 'checked=checked' : ''} value="0">
+                                        <label for="Connect_${SiteID}_${ImageID}_0">
+                                            <span class="data-label">Нет</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" class="mac-radio" id="Connect_${SiteID}_${ImageID}_1" name="Connect[${SiteID}][${ImageID}]" ${SiteConnect == 1 ? 'checked=checked' : ''} value="1">
+                                        <label for="Connect_${SiteID}_${ImageID}_1">
+                                            <span class="data-label">Есть</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     </div>
                     {{/each}}
@@ -1612,6 +1638,7 @@
                         <th>Фото</th>
                         <th>Отправлено</th>
                         <th>Комментарий</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1625,18 +1652,22 @@
                           </a>
                         </td>
                         <td>
-                          <input type="checkbox" name="sended[${MenID}]" value="1" id="sended_${MenID}" />
+                          <input type="checkbox" value="1" id="sended_${MenID}_${ImageID}" ${MenConnect > 0 ? 'checked=checked disabled=disabled' : ''} />
                         </td>
                         <td>
-                          <textarea name="comment[${ID}]" id="comment_${MenID}" class="form-control" rows="2">${MenComment}</textarea>
+                          <textarea id="comment_${MenID}_${ImageID}" class="form-control" rows="2">${MenComment}</textarea>
+                        </td>
+                        <td class="clearfix" style="width: 100px;">
+                          <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="ok_${MenID}_${ImageID}" aria-hidden="true"></span>
+                          <button class="btn btn-success save-men-info pull-right" id="savemeninfo_${MenID}_${ImageID}" title="Сохранить изменения">
+                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                          </button>
                         </td>
                       </tr>
                       {{/each}}
                     </tbody>
                   </table>
                   {{/if}}
-                  <button class="btn btn-success send-mac-form" id="send_${ImageID}">Сохранить</button>
-                  </form>
                 </div>
             {{/each}}
             <!-- Controls -->
@@ -1692,6 +1723,21 @@
                             border-radius: 25px;
                             width: 50px;
                             height: 50px;
+                        }
+                        .mac-wsb {
+                            margin-top: 10px;
+                        }
+                        .mac-site-row {
+                            margin-bottom: 15px;
+                            margin-top: 15px;
+                            border-bottom: 1px solid #ddd;
+                        }
+                        .mac-asd {
+                            width: 98%;
+                        }
+                        .mac-ok {
+                            color: green;
+                            font-size: 30px;
                         }
 
 
@@ -1788,6 +1834,60 @@
                             // новая карусель
                             $('#mc_item_'+thisId[2]).addClass('active');
                             $('#myModalAlbum_'+thisId[1]).modal();
+                        });
+
+                        // обработка селектов связи фото<->сайт
+                        $(document).on('click', '.mac-radio', function () {
+                            var macRadioId = this.id.split('_');
+                            $.post(
+                                '/customer/album/connect',
+                                {
+                                    SiteID: macRadioId[1],
+                                    ImageID: macRadioId[2],
+                                    Value: macRadioId[3],
+                                    Type: 'site'
+                                },
+                                function(data){
+                                    if(data*1 === 1){
+                                        // показываем ОК
+                                        $('#oksite_'+macRadioId[1]+'_'+macRadioId[2]).removeClass('hidden').addClass('show');
+                                        setTimeout(function() { $('#oksite_'+macRadioId[1]+'_'+macRadioId[2]).removeClass('show').addClass('hidden'); }, 2000);
+                                    }
+                                },
+                                'text'
+                            );
+                        });
+
+                        // обработка строки из таблицы связи фото<->мужчина
+                        $(document).on('click', '.save-men-info', function () {
+                            var macMenBtn = this.id.split('_');
+                            var macMenSend = ($('#sended_'+macMenBtn[1]+'_'+macMenBtn[2]).is(':checked')) ? 1 : 0;
+                            var macMenComment = $('#comment_'+macMenBtn[1]+'_'+macMenBtn[2]).val();
+                            if(macMenSend === 1) {
+                                $.post(
+                                    '/customer/album/connect',
+                                    {
+                                        MenID: macMenBtn[1],
+                                        ImageID: macMenBtn[2],
+                                        Value: macMenSend,
+                                        Comment: macMenComment,
+                                        Type: 'men'
+                                    },
+                                    function(data){
+                                        if(data*1 === 1){
+                                            // закрываем чекбокс от редактирования
+                                            $('#sended_'+macMenBtn[1]+'_'+macMenBtn[2]).prop('disabled', 'disabled');
+                                            // показываем ОК
+                                            $('#ok_'+macMenBtn[1]+'_'+macMenBtn[2]).removeClass('hidden').addClass('show');
+                                            setTimeout(function() { $('#ok_'+macMenBtn[1]+'_'+macMenBtn[2]).removeClass('show').addClass('hidden'); }, 2000);
+                                        }
+                                    },
+                                    'text'
+                                );
+                            }
+                            else{
+                                alert('Для сохранения изменений обязательно должен быть отмечен чекбокс «Отправлено»!');
+                            }
                         });
                     </script>
 

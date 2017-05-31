@@ -20,6 +20,7 @@
 //    ),
 //);
 ?>
+<?php if($isEditMens): ?>
 <div class="row">
     <div class="col-md-12">
         <button class="btn btn-success" data-toggle="modal" data-target="#myModalMenAdd">
@@ -27,6 +28,7 @@
         </button>
     </div>
 </div>
+<?php endif; // ($isEditMens) ?>
 <div class="row" style="margin-top: 20px; margin-bottom: 30px;">
     <div class="col-md-12">
     <?php if(!empty($mensList)): ?>

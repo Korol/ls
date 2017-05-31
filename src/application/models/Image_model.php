@@ -137,4 +137,57 @@ class Image_model extends MY_Model {
         }
         return $return;
     }
+
+    /**
+     * Добавляем связь картинки с сайтом или мужчиной
+     * @param array $data
+     * @param string $type
+     */
+    public function addConnect($data, $type)
+    {
+        $types = array(
+            'site' => array(
+                'table' => self::TABLE_IMAGE_SITE_NAME,
+                'entity' => 'SiteID',
+            ),
+            'men' => array(
+                'table' => self::TABLE_IMAGE_MEN_NAME,
+                'entity' => 'MenID',
+            )
+        );
+        if(in_array($type, array_keys($types))){
+            // сначала удаляем связь – на всякий случай
+            $this->removeConnect($data[$types[$type]['entity']], $data['ImageID'], $type);
+            // затем добавляем
+            $this->db()->insert($types[$type]['table'], $data);
+        }
+        return $this->db()->affected_rows();
+    }
+
+    /**
+     * Удаляем связь картинки с сайтом или мужчиной
+     * @param int $entityID
+     * @param int $imageID
+     * @param string $type
+     */
+    public function removeConnect($entityID, $imageID, $type)
+    {
+        $types = array(
+            'site' => array(
+                'table' => self::TABLE_IMAGE_SITE_NAME,
+                'entity' => 'SiteID',
+            ),
+            'men' => array(
+                'table' => self::TABLE_IMAGE_MEN_NAME,
+                'entity' => 'MenID',
+            )
+        );
+        if(in_array($type, array_keys($types))){
+            $this->db()->delete($types[$type]['table'], array(
+                $types[$type]['entity'] => $entityID,
+                'ImageID' => $imageID,
+            ));
+        }
+        return $this->db()->affected_rows();
+    }
 }

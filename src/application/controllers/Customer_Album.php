@@ -49,7 +49,7 @@ class Customer_Album extends MY_Controller {
             foreach ($records as $key => $record) {
 //                $records[$key]['images'] = $this->getCustomerModel()->albumImageGetList($record['ID']);
                 $images = $this->getCustomerModel()->albumImageGetList($record['ID']);
-                $img_ids = get_keys_array($images, 'ID'); // собираем ID картинок
+                $img_ids = get_keys_array($images, 'ImageID'); // собираем ID картинок
                 // получаем по этим ID связи с сайтами и мужчинами
                 if(!empty($img_ids)){
                     // с сайтами
@@ -60,7 +60,7 @@ class Customer_Album extends MY_Controller {
                             // проходим по сайтам
                             foreach($sites as $sid => $sitem){
                                 // если в массиве $images_sites для этого сайта есть связь с этой картинкой – Connect = 1
-                                if(!empty($images_sites) && in_array($iv['ID'], $images_sites[$sid])){
+                                if(!empty($images_sites) && in_array($iv['ImageID'], $images_sites[$sid])){
                                     $images[$ik]['ToSites'][] = array(
                                         'SiteID' => $sid,
                                         'SiteName' => $sitem['Name'],
@@ -86,12 +86,12 @@ class Customer_Album extends MY_Controller {
                             // проходим по мужчинам
                             foreach($mens as $mid => $mitem){
                                 // если в массиве $images_mens для этого мужчины есть связь с этой картинкой – Connect = 1
-                                if(!empty($images_mens) && in_array($iiv['ID'], array_keys($images_mens[$mid]))){
+                                if(!empty($images_mens) && in_array($iiv['ImageID'], array_keys($images_mens[$mid]))){
                                     $images[$iik]['ToMens'][] = array(
                                         'MenID' => $mid,
                                         'MenName' => $mitem['Name'],
                                         'MenPhoto' => $mitem['Photo'],
-                                        'MenComment' => $images_mens[$mid][$iiv['ID']],
+                                        'MenComment' => $images_mens[$mid][$iiv['ImageID']],
                                         'MenConnect' => 1,
                                     );
                                 }
@@ -282,6 +282,51 @@ class Customer_Album extends MY_Controller {
             'png' => 'image/png',
             'gif' => 'image/gif'
         );
+    }
+
+    /**
+     * Добавляем/удаляем связь картинки с сайтом или мужчиной
+     */
+    public function connect()
+    {
+        $post = $this->input->post(null, true);
+        $types = array('site', 'men');
+        $res = 0;
+        if(in_array($post['Type'], $types)){
+            if($post['Type'] == 'site'){
+                // связь картинки с сайтом
+                if($post['Value'] == 0){
+                    // удаляем связь
+                    $res = $this->getImageModel()->removeConnect($post['SiteID'], $post['ImageID'], 'site');
+                }
+                else{
+                    // добавляем связь
+                    if(!empty($post['SiteID']) && !empty($post['ImageID'])){
+                        $add =  array(
+                            'SiteID' => $post['SiteID'],
+                            'ImageID' => $post['ImageID'],
+                        );
+                        $res = $this->getImageModel()->addConnect($add, 'site');
+                    }
+                }
+            }
+            elseif($post['Type'] == 'men'){
+                // связь картинки с мужчиной – связь можно только добавить, удалить нельзя (по ТЗ)
+                if($post['Value'] == 1){
+                    // добавляем связь
+                    if(!empty($post['MenID']) && !empty($post['ImageID'])){
+                        $add =  array(
+                            'MenID' => $post['MenID'],
+                            'ImageID' => $post['ImageID'],
+                            'Comment' => (!empty($post['Comment'])) ? $post['Comment'] : '',
+                        );
+                        $res = $this->getImageModel()->addConnect($add, 'men');
+                    }
+                }
+            }
+        }
+        echo $res;
+        return;
     }
 
 }
