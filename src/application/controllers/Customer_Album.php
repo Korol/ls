@@ -78,6 +78,12 @@ class Customer_Album extends MY_Controller {
                             }
                         }
                     }
+                    else{
+                        // проходим по картинкам
+                        foreach($images as $ik => $iv){
+                            $images[$ik]['ToSites'] = array(); // пустой массив
+                        }
+                    }
                     // с мужчинами
                     $images_mens = $this->getImageModel()->getImagesToMens($img_ids);
                     if(!empty($mens)){
@@ -106,6 +112,12 @@ class Customer_Album extends MY_Controller {
                                     );
                                 }
                             }
+                        }
+                    }
+                    else{
+                        // проходим по картинкам
+                        foreach($images as $ik => $iv){
+                            $images[$ik]['ToMens'] = array(); // пустой массив
                         }
                     }
                 }

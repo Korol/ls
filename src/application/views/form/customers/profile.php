@@ -1658,7 +1658,7 @@
                           <textarea id="comment_${MenID}_${ImageID}" class="form-control" rows="2">${MenComment}</textarea>
                         </td>
                         <td class="clearfix" style="width: 100px;">
-                          <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="ok_${MenID}_${ImageID}" aria-hidden="true"></span>
+                          <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="okmen_${MenID}_${ImageID}" aria-hidden="true"></span>
                           <button class="btn btn-success save-men-info pull-right" id="savemeninfo_${MenID}_${ImageID}" title="Сохранить изменения">
                             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                           </button>
@@ -1878,8 +1878,8 @@
                                             // закрываем чекбокс от редактирования
                                             $('#sended_'+macMenBtn[1]+'_'+macMenBtn[2]).prop('disabled', 'disabled');
                                             // показываем ОК
-                                            $('#ok_'+macMenBtn[1]+'_'+macMenBtn[2]).removeClass('hidden').addClass('show');
-                                            setTimeout(function() { $('#ok_'+macMenBtn[1]+'_'+macMenBtn[2]).removeClass('show').addClass('hidden'); }, 2000);
+                                            $('#okmen_'+macMenBtn[1]+'_'+macMenBtn[2]).removeClass('hidden').addClass('show');
+                                            setTimeout(function() { $('#okmen_'+macMenBtn[1]+'_'+macMenBtn[2]).removeClass('show').addClass('hidden'); }, 2000);
                                         }
                                     },
                                     'text'
