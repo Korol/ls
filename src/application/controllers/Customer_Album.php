@@ -11,119 +11,132 @@ class Customer_Album extends MY_Controller {
             show_error('Данный раздел доступен только для ролей "Директор" и "Секретарь"', 403, 'Доступ запрещен');
     }
 
+    /**
+     * данные для модального окна
+     */
+    public function datamodal()
+    {
+        $AlbumID = $this->input->post('AlbumID', true);
+        $ImageID = $this->input->post('ImageID', true);
+        $CustomerID = $this->input->post('CustomerID', true);
+        if(empty($AlbumID) || empty($ImageID) || empty($CustomerID)){
+            echo '';
+            return;
+        }
+
+        // Получаем Сайты и Мужчин, с которыми связана Клиентка
+        // mens
+        $mens = $this->getCustomerModel()->getCustomerMens($CustomerID); // мужчины, с которыми связан Клиентка
+        $mens = toolIndexArrayBy($mens, 'ID'); // вынесли ID в ключи массива
+        // sites
+        $all_sites = $this->getSiteModel()->getRecords(); // все сайты проекта
+        $customer_sites = $this->getCustomerModel()->siteGetList($CustomerID); // сайты, с которыми связан Клиентка
+        $sites = array();
+        if(!empty($all_sites) && !empty($customer_sites)){
+            $sites_all = toolIndexArrayBy($all_sites, 'ID'); // индексируем по ID
+            foreach ($customer_sites as $c_site) {
+                if(!empty($sites_all[$c_site['SiteID']])){
+                    $sites[$c_site['SiteID']] = array('ID' => $c_site['SiteID'], 'Name' => $sites_all[$c_site['SiteID']]['Name']);
+                }
+            }
+        }
+        // для Переводчиков
+        if($this->role['isTranslate']){
+            // фильтруем сайты Клиентки, оставляя только те, с которыми связан и Переводчик, и Клиентка
+            $cs_ids = get_keys_array($customer_sites, 'SiteID'); // ID сайтов Клиентки
+            $us_ids = get_keys_array($this->getEmployeeModel()->siteGetList($this->getUserID()), 'SiteID'); // ID сайтов Переводчика
+            $intersect_ids = array_intersect($cs_ids, $us_ids);
+            foreach($sites as $i_key => $i_site){
+                if(!in_array($i_key, $intersect_ids)){
+                    unset($sites[$i_key]); // удаляем сайт, не связанный с Переводчиком
+                }
+            }
+        }
+
+        // получаем картинки из альбома, получаем связи
+        $images = $this->getCustomerModel()->albumImageGetList($AlbumID);
+        $img_ids = get_keys_array($images, 'ImageID'); // собираем ID картинок
+        // получаем по этим ID связи с сайтами и мужчинами
+        if(!empty($img_ids)){
+            // с сайтами
+            $images_sites = $this->getImageModel()->getImagesToSites($img_ids);
+            if(!empty($sites)){
+                // проходим по картинкам
+                foreach($images as $ik => $iv){
+                    // проходим по сайтам
+                    foreach($sites as $sid => $sitem){
+                        // если в массиве $images_sites для этого сайта есть связь с этой картинкой – Connect = 1
+                        if(!empty($images_sites) && in_array($iv['ImageID'], $images_sites[$sid])){
+                            $images[$ik]['ToSites'][] = array(
+                                'SiteID' => $sid,
+                                'SiteName' => $sitem['Name'],
+                                'SiteConnect' => 1,
+                            );
+                        }
+                        else {
+                            // если в массиве $images_sites для этого сайта нет связи с этой картинкой – Connect = 0
+                            $images[$ik]['ToSites'][] = array(
+                                'SiteID' => $sid,
+                                'SiteName' => $sitem['Name'],
+                                'SiteConnect' => 0,
+                            );
+                        }
+                    }
+                }
+            }
+            // с мужчинами
+            $images_mens = $this->getImageModel()->getImagesToMens($img_ids);
+            if(!empty($mens)){
+                // проходим по картинкам
+                foreach($images as $iik => $iiv){
+                    // проходим по мужчинам
+                    foreach($mens as $mid => $mitem){
+                        // если в массиве $images_mens для этого мужчины есть связь с этой картинкой – Connect = 1
+                        if(!empty($images_mens) && in_array($iiv['ImageID'], array_keys($images_mens[$mid]))){
+                            $images[$iik]['ToMens'][] = array(
+                                'MenID' => $mid,
+                                'MenName' => $mitem['Name'],
+                                'MenPhoto' => $mitem['Photo'],
+                                'MenComment' => $images_mens[$mid][$iiv['ImageID']],
+                                'MenConnect' => 1,
+                            );
+                        }
+                        else {
+                            // если в массиве $images_mens для этого мужчины нет связи с этой картинкой – Connect = 0
+                            $images[$iik]['ToMens'][] = array(
+                                'MenID' => $mid,
+                                'MenName' => $mitem['Name'],
+                                'MenPhoto' => $mitem['Photo'],
+                                'MenComment' => '',
+                                'MenConnect' => 0,
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        $modal = $this->load->view(
+            'form/customers/album/album_modal',
+            array(
+                'AlbumID' => $AlbumID,
+                'ImageID' => $ImageID,
+                'images' => $images,
+            ),
+            true
+        );
+        echo $modal;
+    }
+
     public function data($CustomerID) {
         try {
             if (!isset($CustomerID))
                 throw new RuntimeException("Не указан обязательный параметр");
 
             $records = $this->getCustomerModel()->albumGetList($CustomerID); // альбомы Клиентки
-            // mens
-            $mens = $this->getCustomerModel()->getCustomerMens($CustomerID); // мужчины, с которыми связан Клиентка
-            $mens = toolIndexArrayBy($mens, 'ID'); // вынесли ID в ключи массива
-            // sites
-            $all_sites = $this->getSiteModel()->getRecords(); // все сайты проекта
-            $customer_sites = $this->getCustomerModel()->siteGetList($CustomerID); // сайты, с которыми связан Клиентка
-            $sites = array();
-            if(!empty($all_sites) && !empty($customer_sites)){
-                $sites_all = toolIndexArrayBy($all_sites, 'ID'); // индексируем по ID
-                foreach ($customer_sites as $c_site) {
-                    if(!empty($sites_all[$c_site['SiteID']])){
-                        $sites[$c_site['SiteID']] = array('ID' => $c_site['SiteID'], 'Name' => $sites_all[$c_site['SiteID']]['Name']);
-                    }
-                }
-            }
-            // для Переводчиков
-            if($this->role['isTranslate']){
-                // фильтруем сайты Клиентки, оставляя только те, с которыми связан и Переводчик, и Клиентка
-                $cs_ids = get_keys_array($customer_sites, 'SiteID'); // ID сайтов Клиентки
-                $us_ids = get_keys_array($this->getEmployeeModel()->siteGetList($this->getUserID()), 'SiteID'); // ID сайтов Переводчика
-                $intersect_ids = array_intersect($cs_ids, $us_ids);
-                foreach($sites as $i_key => $i_site){
-                    if(!in_array($i_key, $intersect_ids)){
-                        unset($sites[$i_key]); // удаляем сайт, не связанный с Переводчиком
-                    }
-                }
-            }
 
-            // получаем картинки, получаем связи
+            // получаем картинки
             foreach ($records as $key => $record) {
-//                $records[$key]['images'] = $this->getCustomerModel()->albumImageGetList($record['ID']);
-                $images = $this->getCustomerModel()->albumImageGetList($record['ID']);
-                $img_ids = get_keys_array($images, 'ImageID'); // собираем ID картинок
-                // получаем по этим ID связи с сайтами и мужчинами
-                if(!empty($img_ids)){
-                    // с сайтами
-                    $images_sites = $this->getImageModel()->getImagesToSites($img_ids);
-                    if(!empty($sites)){
-                        // проходим по картинкам
-                        foreach($images as $ik => $iv){
-                            // проходим по сайтам
-                            foreach($sites as $sid => $sitem){
-                                // если в массиве $images_sites для этого сайта есть связь с этой картинкой – Connect = 1
-                                if(!empty($images_sites) && in_array($iv['ImageID'], $images_sites[$sid])){
-                                    $images[$ik]['ToSites'][] = array(
-                                        'SiteID' => $sid,
-                                        'SiteName' => $sitem['Name'],
-                                        'SiteConnect' => 1,
-                                    );
-                                }
-                                else {
-                                    // если в массиве $images_sites для этого сайта нет связи с этой картинкой – Connect = 0
-                                    $images[$ik]['ToSites'][] = array(
-                                        'SiteID' => $sid,
-                                        'SiteName' => $sitem['Name'],
-                                        'SiteConnect' => 0,
-                                    );
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        // проходим по картинкам
-                        foreach($images as $ik => $iv){
-                            $images[$ik]['ToSites'] = array(); // пустой массив
-                        }
-                    }
-                    // с мужчинами
-                    $images_mens = $this->getImageModel()->getImagesToMens($img_ids);
-                    if(!empty($mens)){
-                        // проходим по картинкам
-                        foreach($images as $iik => $iiv){
-                            // проходим по мужчинам
-                            foreach($mens as $mid => $mitem){
-                                // если в массиве $images_mens для этого мужчины есть связь с этой картинкой – Connect = 1
-                                if(!empty($images_mens) && in_array($iiv['ImageID'], array_keys($images_mens[$mid]))){
-                                    $images[$iik]['ToMens'][] = array(
-                                        'MenID' => $mid,
-                                        'MenName' => $mitem['Name'],
-                                        'MenPhoto' => $mitem['Photo'],
-                                        'MenComment' => $images_mens[$mid][$iiv['ImageID']],
-                                        'MenConnect' => 1,
-                                    );
-                                }
-                                else {
-                                    // если в массиве $images_mens для этого мужчины нет связи с этой картинкой – Connect = 0
-                                    $images[$iik]['ToMens'][] = array(
-                                        'MenID' => $mid,
-                                        'MenName' => $mitem['Name'],
-                                        'MenPhoto' => $mitem['Photo'],
-                                        'MenComment' => '',
-                                        'MenConnect' => 0,
-                                    );
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        // проходим по картинкам
-                        foreach($images as $ik => $iv){
-                            $images[$ik]['ToMens'] = array(); // пустой массив
-                        }
-                    }
-                }
-                $records[$key]['images'] = $images;
-                $records[$key]['Mens'] = (!empty($mens)) ? $mens : array();
-                $records[$key]['Sites'] = $sites;
+                $records[$key]['images'] = $this->getCustomerModel()->albumImageGetList($record['ID']);
             }
 
             $this->json_response(array("status" => 1, 'records' => $records));

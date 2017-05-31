@@ -143,6 +143,7 @@ $route['customer/(:num)/album/cross/(:num)/remove'] = 'Customer_Album/remove_cro
 $route['customer/(:num)/album/(:num)/upload']       = 'Customer_Album/upload/$1/$2';
 $route['customer/(:num)/album/(:num)/server']       = 'Customer_Album/server/$1/$2';
 $route['customer/album/connect']                    = 'Customer_Album/connect';
+$route['customer/album/datamodal']                  = 'Customer_Album/datamodal';
 
 $route['customer/(:num)/agreement/data']            = 'Customer_Agreement/data/$1';
 $route['customer/(:num)/agreement/upload']          = 'Customer_Agreement/upload/$1';

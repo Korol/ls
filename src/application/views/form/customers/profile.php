@@ -1570,125 +1570,7 @@
                                                 </div>
                                             </div>
                                         <? endif ?>
-                                        <?php if(!empty($showNewModal)): ?>
-<!-- Modal with carousel -->
-<div class="modal fade" id="myModalAlbum_${ID}" tabindex="-1" role="dialog" aria-labelledby="myModalAlbum_${ID}Label">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div id="carousel-example-generic-album_${ID}" class="carousel slide" data-ride="carousel" data-interval="false">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-            {{each images}}
-                <div class="img-item item" id="mc_item_${ImageID}">
-                  <img src="<?= base_url("thumb") ?>?src=/files/images/${ImageID}.${ext}" class="img-responsive mac-image">
-                  {{if ToSites.length > 0}}
-                    {{each ToSites}}
-                    <div class="row mac-site-row">
-                    <div class="col-md-3">
-                        <div class="form-group work-sites-block mac-wsb">
-                          <div class="site-item">
-                            <span style="padding-left: 10px;">${SiteName}</span>
-                            <div class="arrow">
-                              <div class="arrow-in"></div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-md-offset-5 clearfix">
-                      <span class="glyphicon glyphicon-ok mac-ok hidden pull-right" id="oksite_${SiteID}_${ImageID}" aria-hidden="true"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                          <label for="Connect_${SiteID}_${ImageID}">В профайле</label>
-                            <div class="btn-group assol-select-dropdown mac-asd" id="Connect_${SiteID}_${ImageID}">
-                                <div class="label-placement-wrap">
-                                    <button class="btn" data-label-placement>Выбрать</button>
-                                </div>
-                                <button data-toggle="dropdown" class="btn dropdown-toggle">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <input type="radio" class="mac-radio" id="Connect_${SiteID}_${ImageID}_0" name="Connect[${SiteID}][${ImageID}]" ${SiteConnect == 0 ? 'checked=checked' : ''} value="0">
-                                        <label for="Connect_${SiteID}_${ImageID}_0">
-                                            <span class="data-label">Нет</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" class="mac-radio" id="Connect_${SiteID}_${ImageID}_1" name="Connect[${SiteID}][${ImageID}]" ${SiteConnect == 1 ? 'checked=checked' : ''} value="1">
-                                        <label for="Connect_${SiteID}_${ImageID}_1">
-                                            <span class="data-label">Есть</span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    {{/each}}
-                  {{/if}}
 
-                  {{if ToMens.length > 0}}
-                  <table class="table table-striped table-bordered" style="margin: 20px auto;">
-                    <thead>
-                      <tr>
-                        <th>Id</th>
-                        <th>Имя мужчины</th>
-                        <th>Фото</th>
-                        <th>Отправлено</th>
-                        <th>Комментарий</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {{each ToMens}}
-                      <tr>
-                        <td>${MenID}</td>
-                        <td>${MenName}</td>
-                        <td>
-                          <a href="<?= base_url("thumb") ?>/?src=/files/images/${MenPhoto}" data-lightbox="Men_Image_Photo_${ImageID}_Modal_${MenID}">
-                            <img src="<?= base_url("thumb") ?>/?src=/files/images/${MenPhoto}&w=100" alt="avatar" class="mn-avatar">
-                          </a>
-                        </td>
-                        <td>
-                          <input type="checkbox" value="1" id="sended_${MenID}_${ImageID}" ${MenConnect > 0 ? 'checked=checked disabled=disabled' : ''} />
-                        </td>
-                        <td>
-                          <textarea id="comment_${MenID}_${ImageID}" class="form-control" rows="2">${MenComment}</textarea>
-                        </td>
-                        <td class="clearfix" style="width: 100px;">
-                          <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="okmen_${MenID}_${ImageID}" aria-hidden="true"></span>
-                          <button class="btn btn-success save-men-info pull-right" id="savemeninfo_${MenID}_${ImageID}" title="Сохранить изменения">
-                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                          </button>
-                        </td>
-                      </tr>
-                      {{/each}}
-                    </tbody>
-                  </table>
-                  {{/if}}
-                </div>
-            {{/each}}
-            <!-- Controls -->
-              <a class="left carousel-control album-carousel" href="#carousel-example-generic-album_${ID}" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control album-carousel" href="#carousel-example-generic-album_${ID}" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            <!-- /Controls -->
-          </div>
-          <!-- /Wrapper for slides -->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /Modal with carousel -->
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -1804,6 +1686,18 @@
 
                     <div id="album-list"></div>
 
+<!--New modal with carousel-->
+<div class="modal fade" id="myModalAlbum" tabindex="-1" role="dialog" aria-labelledby="myModalAlbumLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" id="myModalAlbumBody">
+                Loading...
+            </div>
+        </div>
+    </div>
+</div>
+<!--New modal with carousel-->
+
                     <script>
                         $(function () {
                             lightbox.option({
@@ -1829,11 +1723,43 @@
 
                         $(document).on('click', '.launch-album-modal', function () {
                             var thisId = this.id.split('_');
-                            // удаляем старые активные элементы карусели
-                            $('#myModalAlbum_'+thisId[1]).find('.active').removeClass('active');
-                            // новая карусель
-                            $('#mc_item_'+thisId[2]).addClass('active');
-                            $('#myModalAlbum_'+thisId[1]).modal();
+                            $.post(
+                                '/customer/album/datamodal',
+                                {
+                                    AlbumID: thisId[1],
+                                    ImageID: thisId[2],
+                                    CustomerID: CustomerID
+                                },
+                                function(data){
+                                    $('#myModalAlbumBody').html('Loading...'); // очистили модальное окно
+                                    $('#myModalAlbum').modal(); // вызвали модальное окно
+                                    $('#myModalAlbumBody').html(data); // поместили контент в модальное окно
+                                },
+                                'html'
+                            );
+                        });
+
+                        // новая обработка селектов связи фото<->сайт
+                        $(document).on('change', '.mac-site-connect', function () {
+                            var macSelectId = this.id.split('_');
+                            var macSelectValue = $('#'+this.id).val();
+                            $.post(
+                                '/customer/album/connect',
+                                {
+                                    SiteID: macSelectId[1],
+                                    ImageID: macSelectId[2],
+                                    Value: macSelectValue,
+                                    Type: 'site'
+                                },
+                                function(data){
+                                    if(data*1 === 1){
+                                        // показываем ОК
+                                        $('#oksite_'+macSelectId[1]+'_'+macSelectId[2]).removeClass('hidden').addClass('show');
+                                        setTimeout(function() { $('#oksite_'+macSelectId[1]+'_'+macSelectId[2]).removeClass('show').addClass('hidden'); }, 2000);
+                                    }
+                                },
+                                'text'
+                            );
                         });
 
                         // обработка селектов связи фото<->сайт
