@@ -1617,10 +1617,6 @@
                         .mac-asd {
                             width: 98%;
                         }
-                        .mac-ok {
-                            color: green;
-                            font-size: 30px;
-                        }
 
 
 

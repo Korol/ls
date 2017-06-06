@@ -10,6 +10,19 @@
     .mac-opt{
         padding: 7px 15px;
     }
+    .mac-checkbox{
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+    .mac-ok {
+        color: green;
+        font-size: 30px;
+    }
+    .mac-textarea{
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
 </style>
 <div id="carousel-example-generic-album_<?=$AlbumID;?>" class="carousel slide" data-ride="carousel" data-interval="false">
     <!-- Wrapper for slides -->
@@ -65,18 +78,19 @@
                     <td><?= $tm['MenName']; ?></td>
                     <td>
                         <a href="<?= base_url("thumb") ?>/?src=/files/images/<?= $tm['MenPhoto']; ?>" data-lightbox="Men_Image_Photo_<?=$image['ImageID'];?>_Modal_<?= $tm['MenID']; ?>">
-                            <img src="<?= base_url("thumb") ?>/?src=/files/images/<?= $tm['MenPhoto']; ?>&w=100" alt="avatar" class="mn-avatar">
+                            Фото
+<!--                            <img src="--><?//= base_url("thumb") ?><!--/?src=/files/images/--><?//= $tm['MenPhoto']; ?><!--&w=100" alt="avatar" class="mn-avatar">-->
                         </a>
                     </td>
-                    <td>
-                        <input type="checkbox" value="1" id="sended_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" <?= ($tm['MenConnect'] > 0) ? 'checked="checked" disabled="disabled"' : ''; ?> />
+                    <td class="text-center">
+                        <input class="mac-checkbox" type="checkbox" value="1" id="sended_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" <?= ($tm['MenConnect'] > 0) ? 'checked="checked" disabled="disabled"' : ''; ?> />
                     </td>
                     <td>
-                        <textarea id="comment_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" class="form-control" rows="2"><?= $tm['MenComment']; ?></textarea>
+                        <textarea id="comment_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" class="form-control mac-textarea" rows="1"><?= $tm['MenComment']; ?></textarea>
                     </td>
-                    <td class="clearfix" style="width: 100px;">
+                    <td class="clearfix text-center" style="width: 100px;">
                         <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="okmen_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" aria-hidden="true"></span>
-                        <button class="btn btn-success save-men-info pull-right" id="savemeninfo_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" title="Сохранить изменения">
+                        <button class="btn btn-success save-men-info" id="savemeninfo_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" title="Сохранить изменения">
                             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                         </button>
                     </td>
@@ -100,6 +114,10 @@
     </div>
     <!-- /Wrapper for slides -->
 </div>
+    <script type="text/javascript" src="<?= base_url('public/autosize/autosize.min.js'); ?>"></script>
+    <script>
+        autosize($('.mac-textarea'));
+    </script>
 <?php else: ?>
     <h4>Нет данных(</h4>
 <?php endif; // (!empty($AlbumID) && !empty($ImageID) && !empty($images)) ?>
