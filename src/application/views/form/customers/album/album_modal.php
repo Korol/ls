@@ -55,50 +55,51 @@
                         </select>
                     </div>
                 </div>
+                <?php if(!empty($image['ToMens'][$ts['SiteID']])): ?>
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered" style="margin: 0px auto 20px;">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Имя мужчины</th>
+                            <th>Фото</th>
+                            <th>Отправлено</th>
+                            <th>Комментарий</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                    <?php foreach($image['ToMens'][$ts['SiteID']] as $itmsi): ?>
+                        <tr>
+                            <td><?= $itmsi['MenID']; ?></td>
+                            <td><?= $itmsi['MenName']; ?></td>
+                            <td>
+                                <a href="<?= base_url("thumb") ?>/?src=/files/images/<?= $itmsi['MenPhoto']; ?>" data-lightbox="Men_Image_Photo_<?=$image['ImageID'];?>_Modal_<?= $itmsi['MenID']; ?>">
+                                    Фото
+    <!--                            <img src="--><?//= base_url("thumb") ?><!--/?src=/files/images/--><?//= $itmsi['MenPhoto']; ?><!--&w=100" alt="avatar" class="mn-avatar">-->
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <input class="mac-checkbox" type="checkbox" value="1" id="sended_<?= $itmsi['MenID']; ?>_<?=$image['ImageID'];?>" <?= ($itmsi['MenConnect'] > 0) ? 'checked="checked" disabled="disabled"' : ''; ?> />
+                            </td>
+                            <td>
+                                <textarea id="comment_<?= $itmsi['MenID']; ?>_<?=$image['ImageID'];?>" class="form-control mac-textarea" rows="1"><?= $itmsi['MenComment']; ?></textarea>
+                            </td>
+                            <td class="clearfix text-center" style="width: 100px;">
+                                <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="okmen_<?= $itmsi['MenID']; ?>_<?=$image['ImageID'];?>" aria-hidden="true"></span>
+                                <button class="btn btn-success save-men-info" id="savemeninfo_<?= $itmsi['MenID']; ?>_<?=$image['ImageID'];?>" title="Сохранить изменения">
+                                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; // foreach($image['ToMens'][$ts['SiteID']] as $itmsi) ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php endif; // (!empty($image['ToMens'][$ts['SiteID']])) ?>
             </div>
             <?php endforeach; // foreach($image['ToSites'] as $ts) ?>
             <?php endif; // (!empty($image['ToSites'])) ?>
-
-            <?php if(!empty($image['ToMens'])): ?>
-            <table class="table table-striped table-bordered" style="margin: 20px auto;">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Имя мужчины</th>
-                    <th>Фото</th>
-                    <th>Отправлено</th>
-                    <th>Комментарий</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach($image['ToMens'] as $tm): ?>
-                <tr>
-                    <td><?= $tm['MenID']; ?></td>
-                    <td><?= $tm['MenName']; ?></td>
-                    <td>
-                        <a href="<?= base_url("thumb") ?>/?src=/files/images/<?= $tm['MenPhoto']; ?>" data-lightbox="Men_Image_Photo_<?=$image['ImageID'];?>_Modal_<?= $tm['MenID']; ?>">
-                            Фото
-<!--                            <img src="--><?//= base_url("thumb") ?><!--/?src=/files/images/--><?//= $tm['MenPhoto']; ?><!--&w=100" alt="avatar" class="mn-avatar">-->
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        <input class="mac-checkbox" type="checkbox" value="1" id="sended_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" <?= ($tm['MenConnect'] > 0) ? 'checked="checked" disabled="disabled"' : ''; ?> />
-                    </td>
-                    <td>
-                        <textarea id="comment_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" class="form-control mac-textarea" rows="1"><?= $tm['MenComment']; ?></textarea>
-                    </td>
-                    <td class="clearfix text-center" style="width: 100px;">
-                        <span class="glyphicon glyphicon-ok mac-ok pull-left hidden" id="okmen_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" aria-hidden="true"></span>
-                        <button class="btn btn-success save-men-info" id="savemeninfo_<?= $tm['MenID']; ?>_<?=$image['ImageID'];?>" title="Сохранить изменения">
-                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                        </button>
-                    </td>
-                </tr>
-                <?php endforeach; // ($image['ToMens'] as $tm) ?>
-                </tbody>
-            </table>
-            <?php endif; // (!empty($image['ToMens'])) ?>
         </div>
         <?php endforeach; // ($images as $image) ?>
         <!-- Controls -->

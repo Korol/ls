@@ -93,7 +93,7 @@ class Customer_Album extends MY_Controller {
                     foreach($mens as $mid => $mitem){
                         // если в массиве $images_mens для этого мужчины есть связь с этой картинкой – Connect = 1
                         if(!empty($images_mens) && in_array($iiv['ImageID'], array_keys($images_mens[$mid]))){
-                            $images[$iik]['ToMens'][] = array(
+                            $images[$iik]['ToMens'][$mitem['SiteID']][] = array(
                                 'MenID' => $mid,
                                 'MenName' => $mitem['Name'],
                                 'MenPhoto' => $mitem['Photo'],
@@ -103,7 +103,7 @@ class Customer_Album extends MY_Controller {
                         }
                         else {
                             // если в массиве $images_mens для этого мужчины нет связи с этой картинкой – Connect = 0
-                            $images[$iik]['ToMens'][] = array(
+                            $images[$iik]['ToMens'][$mitem['SiteID']][] = array(
                                 'MenID' => $mid,
                                 'MenName' => $mitem['Name'],
                                 'MenPhoto' => $mitem['Photo'],
