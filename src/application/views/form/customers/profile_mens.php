@@ -1,26 +1,13 @@
 <?php
-//$mensList = array(
-//    array(
-//        'ID' => 1,
-//        'Name' => 'Men 1',
-//        'Photo' => '',
-//        'Comment' => 'Some comment about Men 1',
-//    ),
-//    array(
-//        'ID' => 2,
-//        'Name' => 'Men 2',
-//        'Photo' => '',
-//        'Comment' => 'Some comment about Men 2',
-//    ),
-//    array(
-//        'ID' => 3,
-//        'Name' => 'Men 3',
-//        'Photo' => '',
-//        'Comment' => 'Some comment about Men 3',
-//    ),
-//);
+$sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
 ?>
-<?php if($isEditMens): ?>
+<style>
+    .pm-site-select > option {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+</style>
+<?php //if($isEditMens): ?>
 <div class="row">
     <div class="col-md-12">
         <button class="btn btn-success" data-toggle="modal" data-target="#myModalMenAdd">
@@ -28,7 +15,7 @@
         </button>
     </div>
 </div>
-<?php endif; // ($isEditMens) ?>
+<?php //endif; // ($isEditMens) ?>
 <div class="row" style="margin-top: 20px; margin-bottom: 30px;">
     <div class="col-md-12">
     <?php if(!empty($mensList)): ?>
@@ -44,6 +31,7 @@
             <tr>
                 <th>ID</th>
                 <th>Имя</th>
+                <th>Сайт</th>
                 <th>Фото</th>
                 <th>Комментарий</th>
                 <th>Действия</th>
@@ -55,6 +43,7 @@
                 <!-- Men Info -->
                 <td><?= $men['ID']; ?></td>
                 <td><?= $men['Name']; ?></td>
+                <td><?= (!empty($sites[$men['SiteID']]['Name'])) ? $sites[$men['SiteID']]['Name'] : '&dash;'; ?></td>
                 <td class="mens-men-photo">
                 <?php if(!empty($men['Photo'])): ?>
                     <a href="<?= base_url("thumb") ?>/?src=/files/images/<?=$men['Photo'];?>" data-lightbox="Men_Image_View_Modal_<?=$men['ID'];?>">
@@ -105,6 +94,21 @@
                                             <div class="form-group">
                                                 <label for="Name">Имя мужчины:</label>
                                                 <input type="text" name="Name" class="form-control" value="<?=$men['Name']; ?>" placeholder="Укажите имя"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="SiteID">Сайт:</label>
+                                                <select name="SiteID" class="form-control pm-site-select">
+                                                    <?php
+                                                    foreach($mensSitesList as $msl){
+                                                        $selected = ($msl['ID'] == $men['SiteID']) ? 'selected="selected"' : '';
+                                                        echo '<option value="' . $msl['ID'] . '" ' . $selected . '>' . $msl['Name'] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -174,6 +178,20 @@
                             <div class="form-group">
                                 <label for="Name">Имя мужчины:</label>
                                 <input type="text" name="Name" class="form-control" placeholder="Укажите имя"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="SiteID">Сайт:</label>
+                                <select name="SiteID" class="form-control pm-site-select">
+                                <?php
+                                foreach($mensSitesList as $msla){
+                                    echo '<option value="' . $msla['ID'] . '">' . $msla['Name'] . '</option>';
+                                }
+                                ?>
+                                </select>
                             </div>
                         </div>
                     </div>

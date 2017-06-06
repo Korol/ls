@@ -1230,6 +1230,8 @@
                         'customerID' => $customer['ID'],
                         'isEditMens' => $isEditMens,
                         'mensList' => (!empty($mensList)) ? $mensList : array(),
+                        'mensSitesList' => (!empty($mensSitesList)) ? $mensSitesList : array(),
+                        'sites' => $sites,
                     )
                 );
                 ?>

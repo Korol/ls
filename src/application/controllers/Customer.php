@@ -145,6 +145,7 @@ class Customer extends MY_Controller {
             'body_build' => $this->getReferencesModel()->getReference(REFERENCE_BODY_BUILD),
             'sites' => $this->getSiteModel()->getRecords(),
             'mensList' => $this->getCustomerModel()->getCustomerMens($id),
+            'mensSitesList' => $this->getSitesForMens($id),
         );
 
         // Установка прав доступа к договорам и паспорту только для assol
@@ -286,5 +287,34 @@ class Customer extends MY_Controller {
             'png' => 'image/png',
             'gif' => 'image/gif'
         );
+    }
+
+    public function getSitesForMens($CustomerID)
+    {
+        // sites
+        $all_sites = $this->getSiteModel()->getRecords(); // все сайты проекта
+        $customer_sites = $this->getCustomerModel()->siteGetList($CustomerID); // сайты, с которыми связана Клиентка
+        $sites = array();
+        if(!empty($all_sites) && !empty($customer_sites)){
+            $sites_all = toolIndexArrayBy($all_sites, 'ID'); // индексируем по ID
+            foreach ($customer_sites as $c_site) {
+                if(!empty($sites_all[$c_site['SiteID']])){
+                    $sites[$c_site['SiteID']] = array('ID' => $c_site['SiteID'], 'Name' => $sites_all[$c_site['SiteID']]['Name']);
+                }
+            }
+        }
+        // для Переводчиков
+        if($this->role['isTranslate']){
+            // фильтруем сайты Клиентки, оставляя только те, с которыми связан и Переводчик, и Клиентка
+            $cs_ids = get_keys_array($customer_sites, 'SiteID'); // ID сайтов Клиентки
+            $us_ids = get_keys_array($this->getEmployeeModel()->siteGetList($this->getUserID()), 'SiteID'); // ID сайтов Переводчика
+            $intersect_ids = array_intersect($cs_ids, $us_ids);
+            foreach($sites as $i_key => $i_site){
+                if(!in_array($i_key, $intersect_ids)){
+                    unset($sites[$i_key]); // удаляем сайт, не связанный с Переводчиком
+                }
+            }
+        }
+        return $sites;
     }
 }

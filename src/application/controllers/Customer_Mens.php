@@ -21,6 +21,7 @@ class Customer_Mens extends MY_Controller {
                 if($post['type'] == 'add'){
                     $add = array(
                         'CustomerID' => $post['CustomerID'],
+                        'SiteID' => (!empty($post['SiteID'])) ? $post['SiteID'] : 0,
                         'Name' => (!empty($post['Name'])) ? $post['Name'] : 'New man',
                         'Photo' => (!empty($photo)) ? $photo : '',
                         'Comment' => (!empty($post['Comment'])) ? $post['Comment'] : '',
@@ -37,6 +38,7 @@ class Customer_Mens extends MY_Controller {
                             $this->getImageModel()->remove($men['Photo']);
                         }
                         $update = array(
+                            'SiteID' => (!empty($post['SiteID'])) ? $post['SiteID'] : 0,
                             'Name' => (!empty($post['Name'])) ? $post['Name'] : $men['Name'],
                             'Photo' => (!empty($photo)) ? $photo : $men['Photo'],
                             'Comment' => (!empty($post['Comment'])) ? $post['Comment'] : $men['Comment'],
