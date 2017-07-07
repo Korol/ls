@@ -271,6 +271,20 @@ class Customer_model extends MY_Model {
             KEY `CustomerID` (`CustomerID`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+    /** Таблица для отчета «Статистика по клиенткам» */
+    private $table_customer_site_stats =
+        "CREATE TABLE `assol_customer_site_stats` (
+            `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+            `CustomerID` int(11) DEFAULT NULL,
+            `SiteID` int(11) DEFAULT NULL,
+            `Value` double(10,2) DEFAULT NULL,
+            `Date` date DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            KEY `CustomerID` (`CustomerID`),
+            KEY `SiteID` (`SiteID`),
+            KEY `Date` (`Date`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
     /**
      * Инициализация таблиц
      */
@@ -295,6 +309,7 @@ class Customer_model extends MY_Model {
         $this->db()->query($this->table_customer_question_answer);
         $this->db()->query($this->table_customer_question_photo);
         $this->db()->query($this->table_customer_mens);
+        $this->db()->query($this->table_customer_site_stats);
     }
 
     /** Удаление таблиц */
@@ -1779,6 +1794,88 @@ class Customer_model extends MY_Model {
     public function removeCustomerMen($id)
     {
         $this->db()->delete(self::TABLE_CUSTOMER_MENS_NAME, array('ID' => $id));
+        return $this->db()->affected_rows();
+    }
+
+    /**
+     * Получаем список клиентов для таблицы Клиенты <–> Сайты
+     */
+    public function getListCustomersSitesNew($month, $year)
+    {
+        // клиенты
+        $customers = $this->db()
+            ->select('ID, SName, FName, MName')
+            ->from(self::TABLE_CUSTOMER_NAME)
+            ->where(array(
+                'IsDeleted' => 0,
+            ))
+            ->order_by('SName ASC, FName ASC')
+            ->get()->result_array();
+        if(!empty($customers)){
+            // привязка клиентов к сайтам
+            $customers_sites = $this->db()
+                ->select('cs.CustomerID, cs.SiteID, css.Value')
+                ->from(self::TABLE_CUSTOMER_SITE_NAME . ' AS cs')
+                ->join(self::TABLE_CUSTOMER_SITE_STATS_NAME . ' AS css', "(css.CustomerID = cs.CustomerID AND css.SiteID = cs.SiteID) AND DATE_FORMAT(css.Date, '%Y-%m') = '" . $year . "-" . $month . "'", 'left', false)
+                ->where('cs.IsDeleted', 0)
+                ->get()->result_array();
+            if(!empty($customers_sites)){
+                // группируем привязку сайтов по клиентам
+                $groupped_cs = array();
+                foreach ($customers_sites as $cs) {
+                    $groupped_cs[$cs['CustomerID']][$cs['SiteID']] = $cs['Value'];
+                }
+
+                // добавляем привязку в массив клиентов
+                foreach ($customers as $c_key => $customer) {
+                    $customers[$c_key]['CS'] = (!empty($groupped_cs[$customer['ID']]))
+                        ? $groupped_cs[$customer['ID']]
+                        : array();
+                }
+            }
+        }
+        return (!empty($customers)) ? $customers : array();
+    }
+
+    public function updateCustomerSiteValue($CustomerID, $SiteID, $Value, $month, $year)
+    {
+        // проверка, есть ли уже запись для связки клиент-сайт за этот месяц
+        $check = $this->db()
+            ->select('ID')
+            ->from(self::TABLE_CUSTOMER_SITE_STATS_NAME)
+            ->where(
+                array(
+                    'CustomerID' => $CustomerID,
+                    'SiteID' => $SiteID,
+                )
+            )
+            ->where("DATE_FORMAT(`Date`, '%Y-%m') = '" . $year . "-" . $month . "'", null, false)
+            ->count_all_results();
+        // если есть – обновляем Value
+        if($check > 0){
+            $update = array(
+                'Value' => $Value,
+            );
+            $this->db()
+                ->where(
+                    array(
+                        'CustomerID' => $CustomerID,
+                        'SiteID' => $SiteID,
+                    )
+                )
+                ->where("DATE_FORMAT(`Date`, '%Y-%m') = '" . $year . "-" . $month . "'", null, false)
+                ->update(self::TABLE_CUSTOMER_SITE_STATS_NAME, $update);
+        }
+        else{
+            // если нет – добавляем информацию в таблицу
+            $insert = array(
+                'CustomerID' => $CustomerID,
+                'SiteID' => $SiteID,
+                'Value' => $Value,
+                'Date' => $year . '-' . $month . '-' . date('d'),
+            );
+            $this->db()->insert(self::TABLE_CUSTOMER_SITE_STATS_NAME, $insert);
+        }
         return $this->db()->affected_rows();
     }
 }

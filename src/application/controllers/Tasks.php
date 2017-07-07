@@ -119,6 +119,7 @@ class Tasks extends MY_Controller {
                     $sitesList = implode(', ', $sitesAdd);
                 }
             }
+            $sitesList = (!empty($sitesList)) ? $sitesList : ''; // если список сайто не заполнен
 
             foreach($employees as $idEmployee)
                 $this->getTaskModel()->insertTask($this->getUserID(), $idEmployee, $title, $deadline, $description, $confirmation, $sitesList);

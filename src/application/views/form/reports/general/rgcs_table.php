@@ -1,8 +1,6 @@
-<div id="ReportGeneralCustomersStats" class="report-table">
-    <div class="reports-title">Статистика по клиенткам</div>
 <?php if(!empty($sites) && !empty($cs_customers)): ?>
-<link rel="stylesheet" href="/public/stickytable/jquery.stickytable.min.css">
-<script src="/public/stickytable/jquery.stickytable.min.js?v=1"></script>
+    <link rel="stylesheet" href="/public/stickytable/jquery.stickytable.min.css">
+    <script src="/public/stickytable/jquery.stickytable.min.js?v=1"></script>
     <style>
         .sticky-table table td.sticky-cell, .sticky-table table th.sticky-cell,
         .sticky-table table tr.sticky-row td, .sticky-table table tr.sticky-row th {
@@ -24,18 +22,26 @@
         .editable-table>thead>tr>th{
             border-bottom-width: 1px !important;
         }
+        .summary-col{
+            background-color: #ecf0f3 !important;
+            font-weight: bold;
+        }
+        .rgcs-row-data{
+            text-align: center !important;
+        }
     </style>
     <div class="row" style="margin-bottom: 50px;">
         <div class="col-md-12">
             <div class="sticky-table sticky-headers sticky-ltr-cells">
-                <table class="table table-bordered table-striped editable-table">
+                <table id="rgcs_table" class="table table-bordered table-striped editable-table">
                     <thead>
-                        <tr class="sticky-row">
-                            <th class="sticky-cell" nowrap="nowrap">ФИО</th>
-                            <?php foreach($sites as $th_site): ?>
-                                <th nowrap="nowrap"><?= $th_site['Name']; ?></th>
-                            <?php endforeach; ?>
-                        </tr>
+                    <tr class="sticky-row">
+                        <th class="sticky-cell" nowrap="nowrap">ФИО</th>
+                        <th class="sticky-cell" nowrap="nowrap">Итого</th>
+                        <?php foreach($sites as $th_site): ?>
+                            <th nowrap="nowrap"><?= $th_site['Name']; ?></th>
+                        <?php endforeach; ?>
+                    </tr>
                     </thead>
                     <tbody>
                     <?php foreach($cs_customers as $cs_item): ?>
@@ -51,20 +57,32 @@
                                     <?= $sname . ' ' . $fname . '.' . $mname . '.'; ?>
                                 </a>
                             </td>
+                            <td class="sticky-cell rgcs-row-total" nowrap="nowrap">
+                                0.00
+                            </td>
                             <?php foreach($sites as $tb_site): ?>
                                 <?php
                                 $tb_text = '&dash;';
                                 if(in_array($tb_site['ID'], array_keys($cs_item['CS']))){
-                                    $tb_text = (!empty($cs_item['CS'][$tb_site['ID']])) ? $cs_item['CS'][$tb_site['ID']] : '';
+                                    $tb_text = (!empty($cs_item['CS'][$tb_site['ID']])) ? $cs_item['CS'][$tb_site['ID']] : '0';
                                 }
                                 $tdClass = ($tb_text !== '&dash;') ? 'editable-cell' : '';
                                 $tdId = ($tb_text !== '&dash;') ? 'id="cell_' . $cs_item['ID'] . '_' . $tb_site['ID'] . '"' : '';
                                 ?>
-                                <td class="<?= $tdClass; ?>" <?= $tdId; ?> nowrap="nowrap"><?= $tb_text; ?></td>
+                                <td class="<?= $tdClass; ?> rgcs-row-data site-col-<?= $tb_site['ID']; ?>" <?= $tdId; ?> nowrap="nowrap"><?= $tb_text; ?></td>
                             <?php endforeach; // ($sites as $td_site) ?>
                         </tr>
                     <?php endforeach; // ($cs_customers as $cs_item) ?>
                     </tbody>
+                    <tfoot>
+                        <tr id="rgcs_summary">
+                            <td class="sticky-cell" nowrap="nowrap">ИТОГО</td>
+                            <td class="sticky-cell" id="rgcs_total" nowrap="nowrap">0.00</td>
+                            <?php foreach($sites as $tf_site): ?>
+                                <td class="summary-col" id="col-<?= $tf_site['ID']; ?>" nowrap="nowrap">0.00</td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -109,17 +127,55 @@
             }
             // save new cell value
             function saveVal(cellId, cellVal){
-//                console.log(cellId, cellVal);
+                var m = $('#rgcs-month').val();
+                var y = $('#rgcs-year-input').val();
                 $.post(
-                    '/reports/savestat',
-                    { cell: cellId, text: cellVal},
+                    '/reports/savestat2',
+                    {
+                        cell: cellId,
+                        text: cellVal,
+                        month: m,
+                        year: y
+                    },
                     function(data){
-//                        console.log(data);
+                        if(data*1 > 0){
+                            var newVal = parseFloat($('#'+cellId).html()) || 0.00;
+                            $('#'+cellId).html(newVal.toFixed(2));
+                            countRowsTotals();
+                        }
                     },
                     'text'
                 );
             }
         });
+
+        function countRowsTotals() {
+            // считаем суммы по строкам таблицы
+            $('#rgcs_table tbody tr').each(function () {
+                var rowSum = 0;
+                $(this).find('td.rgcs-row-data').each(function () {
+                    rowSum += parseFloat($(this).html()) || 0.00;
+                });
+                $(this).find('td.rgcs-row-total').html(rowSum.toFixed(2));
+            });
+            // считаем суммы по столбцам таблицы
+            $('#rgcs_summary td.summary-col').each(function () {
+                var tID = this.id;
+                var colSum = 0;
+                $('#rgcs_table tbody td.site-'+tID).each(function () {
+                    colSum += parseFloat($(this).html()) || 0.00;
+                });
+                $(this).html(colSum.toFixed(2));
+            });
+            // считаем общую сумму по таблице
+            var total = 0;
+            $('#rgcs_summary td.summary-col').each(function () {
+                total += parseFloat($(this).html()) || 0.00;
+            });
+            $('#rgcs_total').html(total.toFixed(2));
+        }
+        countRowsTotals();
     </script>
+<?php else: ?>
+    <h3 class="text-center">Нет данных для отображения</h3>
 <?php endif; // (!empty($sites) && !empty($cs_customers)) ?>
-</div>

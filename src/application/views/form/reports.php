@@ -2320,7 +2320,7 @@
 <?php
 if($role['isDirector'] || $role['isSecretary']){
     // Статистика по клиенткам
-    $this->load->view('form/report_customers_stats',
+    $this->load->view('form/reports/general/report_customers_stats',
         array(
             'sites' => $sites,
             'cs_customers' => $cs_customers,

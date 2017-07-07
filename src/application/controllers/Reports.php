@@ -18,7 +18,8 @@ class Reports extends MY_Controller {
 
         if ($this->isDirector() || $this->isSecretary()) {
             // данные для таблицы Клиенты <–> Сайты
-            $data['cs_customers'] = $this->getCustomerModel()->getListCustomersSites();//var_dump($data['cs_customers']);
+//            $data['cs_customers'] = $this->getCustomerModel()->getListCustomersSites();
+            $data['cs_customers'] = $this->getCustomerModel()->getListCustomersSitesNew(date('m'), date('Y'));
 
             $js[] = "public/js/$script_prefix.report.director.js";
             $js[] = $this->isDirector()
@@ -72,6 +73,50 @@ class Reports extends MY_Controller {
             $customerID = (!empty($cell_info[1])) ? (int)$cell_info[1] : 0; // клиент
             $siteID = (!empty($cell_info[2])) ? (int)$cell_info[2] : 0; // сайт
             $res = $this->getCustomerModel()->updateCustomerSiteComment($customerID, $siteID, $text);
+        }
+
+        echo $res;
+        return;
+    }
+
+    public function reload()
+    {
+        $html = '';
+        if($this->isDirector() || $this->isSecretary()){
+            $month = $this->input->post('month', true) + 1;
+            $year = $this->input->post('year', true);
+            $data = array(
+                'sites' => $this->getSiteModel()->getRecords(),
+                'cs_customers' => $this->getCustomerModel()->getListCustomersSitesNew($this->normalizeDate($month), $year),
+            );
+            $html = $this->load->view('form/reports/general/rgcs_table', $data, true);
+        }
+        echo $html;
+        return;
+    }
+
+    private function normalizeDate($item) {
+        if (strlen($item) === 1) {
+            $item = '0'.$item;
+        }
+
+        return $item;
+    }
+
+    public function savestat2()
+    {
+        $res = 0;
+        $cell = $this->input->post('cell', true); // ячейка (cell_12_34)
+        $text = $this->input->post('text', true); // текст в ячейке
+        $month = $this->input->post('month', true) + 1; // месяц
+        $year = $this->input->post('year', true); // год
+        if(!empty($cell)){
+            $text = str_replace(',', '.', $text);
+            $text = (!empty($text) && is_numeric($text)) ? number_format((float)$text, 2) : '0.00';
+            $cell_info = explode('_', $cell);
+            $customerID = (!empty($cell_info[1])) ? (int)$cell_info[1] : 0; // клиент
+            $siteID = (!empty($cell_info[2])) ? (int)$cell_info[2] : 0; // сайт
+            $res = $this->getCustomerModel()->updateCustomerSiteValue($customerID, $siteID, $text, $this->normalizeDate($month), $year);
         }
 
         echo $res;
