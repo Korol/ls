@@ -67,7 +67,7 @@
                         '/reports/reload',
                         { month: m, year: y},
                         function(data){
-                            $('#rgcs_table').html(data);
+                            $('#rgcs_table_block').html(data);
                         },
                         'html'
                     );
@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <div id="rgcs_table">
+    <div id="rgcs_table_block">
         <?php
         $this->load->view('form/reports/general/rgcs_table',
             array(

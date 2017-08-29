@@ -1,6 +1,8 @@
 <?php if(!empty($sites) && !empty($cs_customers)): ?>
     <link rel="stylesheet" href="/public/stickytable/jquery.stickytable.min.css">
     <script src="/public/stickytable/jquery.stickytable.min.js?v=1"></script>
+    <script src="/public/tablesorter/jquery.tablesorter.min.js"></script>
+    <link rel="stylesheet" href="/public/tablesorter/blue/style.css">
     <style>
         .sticky-table table td.sticky-cell, .sticky-table table th.sticky-cell,
         .sticky-table table tr.sticky-row td, .sticky-table table tr.sticky-row th {
@@ -33,11 +35,11 @@
     <div class="row" style="margin-bottom: 50px;">
         <div class="col-md-12">
             <div class="sticky-table sticky-headers sticky-ltr-cells">
-                <table id="rgcs_table" class="table table-bordered table-striped editable-table">
+                <table id="rgcs_table" class="table table-bordered table-striped editable-table tablesorter">
                     <thead>
                     <tr class="sticky-row">
-                        <th class="sticky-cell" nowrap="nowrap">ФИО</th>
-                        <th class="sticky-cell" nowrap="nowrap">Итого</th>
+                        <th class="sticky-cell sortable" nowrap="nowrap">ФИО</th>
+                        <th class="sticky-cell sortable" nowrap="nowrap" style="min-width: 70px;">Итого</th>
                         <?php foreach($sites as $th_site): ?>
                             <th nowrap="nowrap"><?= $th_site['Name']; ?></th>
                         <?php endforeach; ?>
@@ -173,6 +175,10 @@
                 total += parseFloat($(this).html()) || 0.00;
             });
             $('#rgcs_total').html(total.toFixed(2));
+            // sortable
+            $("#rgcs_table").tablesorter({
+                selectorHeaders: 'thead th.sortable'
+            });
         }
         countRowsTotals();
     </script>
