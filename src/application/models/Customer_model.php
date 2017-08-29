@@ -996,6 +996,20 @@ class Customer_model extends MY_Model {
     }
 
     /**
+     * Получить список сайтов клиента - включая те, с которых она удалена
+     * @param int $idCustomer ID клиента
+     */
+    public function siteGetListAll($idCustomer) {
+        return $this->db()
+            ->from(self::TABLE_CUSTOMER_SITE_NAME . ' AS cs')
+            ->select('cs.*')
+            ->join(self::TABLE_SITE_NAME . ' AS s', 's.id = cs.SiteID', 'inner')
+            ->where('cs.CustomerID', $idCustomer)
+            ->order_by('s.Name', 'ASC')
+            ->get()->result_array();
+    }
+
+    /**
      * Добавление сайтов клиента
      *
      * @param int $idCustomer ID клиента
@@ -1359,6 +1373,7 @@ class Customer_model extends MY_Model {
             ->from(self::TABLE_CUSTOMER_NAME.' AS c')
             ->join(self::TABLE_CUSTOMER_SITE_NAME.' AS cs',
                 'c.ID = cs.CustomerID AND cs.IsDeleted=0 AND cs.SiteID = '.$siteID, 'inner')
+            ->where('c.IsDeleted', 0)
             ->order_by('c.SName, c.FName', 'ASC')
             ->get()->result_array();
 
@@ -1413,7 +1428,7 @@ class Customer_model extends MY_Model {
         $customers = $this->db()
             ->select('c.ID, c.FName, c.SName')
             ->from(self::TABLE_CUSTOMER_NAME.' AS c')
-            ->where('IsDeleted', 0)
+            ->where('c.IsDeleted', 0)
             ->order_by('c.SName, c.FName', 'ASC')
             ->get()->result_array();
 

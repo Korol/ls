@@ -216,10 +216,26 @@ class Customer extends MY_Controller {
                     'DateRemove' => date('Y-m-d'), 'IsDeleted' => 1, 'WhoDeleted' => $this->getUserID()));
                 $this->getCustomerModel()->customerUpdateNote($CustomerID, $this->getUserID(), ['IsDeleted']);
             }
+            // удаляем клиентку со всех её сайтов
+            $this->removeFromSites($CustomerID);
 
             $this->json_response(array("status" => 1));
         } catch (Exception $e) {
             $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
+        }
+    }
+
+    /**
+     * удаление клиентки со всех её сайтов
+     * @param $CustomerID
+     */
+    public function removeFromSites($CustomerID)
+    {
+        $sites = $this->getCustomerModel()->siteGetList($CustomerID); // список её сайтов
+        if(!empty($sites)){
+            foreach ($sites as $site) {
+                $this->getCustomerModel()->siteDelete($site['ID']); // ставим флаг удаления связи клиентки с сайтом
+            }
         }
     }
 
@@ -244,9 +260,26 @@ class Customer extends MY_Controller {
                 'ReasonForDeleted' => null, 'DateRemove' => null, 'IsDeleted' => 0, 'WhoDeleted' =>  null));
             $this->getCustomerModel()->customerUpdateNote($id, $this->getUserID(), ['IsDeleted']);
 
+            // восстанавливаем связи с сайтами
+            $this->restoreToSites($id);
+
             $this->json_response(array("status" => 1));
         } catch (Exception $e) {
             $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
+        }
+    }
+
+    /**
+     * восстанавливаем связи клиентки с её сайтами
+     * @param $CustomerID
+     */
+    public function restoreToSites($CustomerID)
+    {
+        $sites = $this->getCustomerModel()->siteGetListAll($CustomerID); // список сайтов, с которыми связана клиентка
+        if(!empty($sites)){
+            foreach ($sites as $site) {
+                $this->getCustomerModel()->siteUpdate($site['ID'], array('IsDeleted' => 0)); // снимаем флаг удаления связи клиентки с сайтом
+            }
         }
     }
 
