@@ -987,7 +987,7 @@ class Customer_model extends MY_Model {
     public function siteGetList($idCustomer) {
         return $this->db()
             ->from(self::TABLE_CUSTOMER_SITE_NAME . ' AS cs')
-            ->select('cs.*')
+            ->select('cs.*, s.Name')
             ->join(self::TABLE_SITE_NAME . ' AS s', 's.id = cs.SiteID', 'inner')
             ->where('cs.CustomerID', $idCustomer)
             ->where('cs.IsDeleted', 0)
@@ -1892,5 +1892,27 @@ class Customer_model extends MY_Model {
             $this->db()->insert(self::TABLE_CUSTOMER_SITE_STATS_NAME, $insert);
         }
         return $this->db()->affected_rows();
+    }
+
+    /**
+     * Получить переводчика, за которым клиентка закреплена на сайте
+     * @param int $siteID сайт
+     * @param int $CustomerID клиентка
+     * @return
+     */
+    public function findTranslatorBySiteCustomer($siteID, $CustomerID) {
+        return $this->db()
+            ->select('e.*')
+            ->from(self::TABLE_EMPLOYEE_NAME . ' AS e')
+            ->join(self::TABLE_EMPLOYEE_SITE_NAME . ' AS es',
+                'e.ID = es.EmployeeID AND es.IsDeleted = 0 AND es.SiteID = ' . $siteID, 'inner')
+            ->join(self::TABLE_EMPLOYEE_SITE_CUSTOMER_NAME . ' AS esc',
+                'es.ID = esc.EmployeeSiteID AND esc.IsDeleted = 0 AND esc.CustomerID = ' . $CustomerID, 'inner')
+            ->where('e.UserRole', USER_ROLE_TRANSLATE)
+            ->where('e.IsDeleted', 0)
+            ->order_by('e.SName, e.FName', 'ASC')
+//            ->limit(1)
+//            ->get()->row_array(); // выьираем одного
+            ->get()->result_array(); // выбираем всех
     }
 }

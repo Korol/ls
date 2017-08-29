@@ -2163,14 +2163,22 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <textarea class="assol-input-style note-site" record="${ID}" <? if (!$isEditSitesDescription): ?> disabled="disabled" <? endif ?>>${Note}</textarea>
+                                    <textarea class="assol-input-style note-site1" record="${ID}" <? if (!$isEditSitesDescription): ?> disabled="disabled" <? endif ?>>${Note}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </script>
 
-                <div id="siteList" class="work-sites-block-wrap"></div>
+                <?php
+                // новый вариант таблицы с сайтами клиентки
+                $this->load->view('form/customers/sites', array(
+                        'isEditSites' => $isEditSites,
+                        'CustomerID' => $customer['ID'],
+                ));
+                ?>
+
+                <div id="siteList" class="work-sites-block-wrap" style="display: none;"></div>
 
                 <? if ($isEditSitesDescription): ?>
                 <button id="SaveSites" class="btn assol-btn save" title="Сохранить изменения">
