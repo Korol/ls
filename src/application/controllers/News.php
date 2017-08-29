@@ -13,7 +13,8 @@ class News extends MY_Controller {
 
     public function index() {
         $data = array(
-            'sites' => $this->getSitesFilter()
+            'sites' => $this->getSitesFilter(),
+            'customers' => $this->getCustomersFilter(),
         );
 
         $this->viewHeader($data);
@@ -235,5 +236,85 @@ class News extends MY_Controller {
             'png' => 'image/png',
             'gif' => 'image/gif'
         );
+    }
+
+    /**
+     * список клиенток для пользователя (без выбора сайта)
+     * @return array
+     */
+    private function getCustomersFilter() {
+        if($this->isTranslate() || $this->isEmployee()){
+            // для Переводчика или Сотрудника – только его клиентки
+            $customers = $this->getEmployeeModel()->employeeCustomerGetList($this->getUserID());
+        }
+        else{
+            // для Директора и Секретаря – все клиентки
+            $customers = $customers = $this->getEmployeeModel()->allEmployeeCustomerGetList();
+        }
+
+        if(!empty($customers)){
+            $customers_list = array();
+            foreach ($customers as $customer) {
+                $customers_list[$customer['CustomerID']] = array(
+                    'ID' => $customer['CustomerID'],
+                    'CustomerID' => $customer['CustomerID'],
+                    'Name' => $customer['SName'] . ' ' . $customer['FName'],
+                );
+            }
+            $return = array_merge(
+                array(
+                    array(
+                        'ID' => 0,
+                        'CustomerID' => 0,
+                        'Name' => 'Все клиентки',
+                    )
+                ),
+                $customers_list
+            );
+        }
+        else{
+            $return = array(
+                array(
+                    'ID' => 0,
+                    'CustomerID' => 0,
+                    'Name' => 'Все клиентки',
+                )
+            );
+        }
+
+        return $return;
+    }
+
+    public function customerlist()
+    {
+        $return = '<li><input type="radio" id="NewsCustomer_0" name="NewsCustomer" value="0"><label for="NewsCustomer_0">Все клиентки</label></li>';
+        $siteID = $this->input->post('siteID', true);
+        if(!empty($siteID)){
+            if($this->isTranslate() || $this->isEmployee()){
+                // для Переводчика или Сотрудника – только его клиентки на выбранном сайте
+                $customers = $this->getEmployeeModel()->findEmployeeSiteCustomerBySiteID($this->getUserID(), $siteID);
+            }
+            else{
+                // для Директора и Секретаря – все клиентки на выбранном сайте
+                $customers = $this->getCustomerModel()->findCustomerBySiteID($siteID);
+            }
+        }
+        else{
+            $customers = $this->getCustomersFilter();
+            array_shift($customers); // удаляем первый элемент «Все клиентки» – он у нас уже есть в $return
+        }
+
+        if(!empty($customers)){
+            // формируем элементы списка клиенток
+            foreach ($customers as $customer) {
+                $name = (!empty($customer['Name'])) ? $customer['Name'] : $customer['SName'] . ' ' . $customer['FName'];
+                $return .= '<li>';
+                $return .= '<input type="radio" id="NewsCustomer_' . $customer['CustomerID'] . '" name="NewsCustomer" value="' . $customer['CustomerID'] . '"/>';
+                $return .= '<label for="NewsCustomer_' . $customer['CustomerID'] . '">' . $name . '</label>';
+                $return .= '</li>';
+            }
+        }
+
+        echo $return;
     }
 }

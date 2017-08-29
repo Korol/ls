@@ -57,6 +57,7 @@ class News_model extends MY_Model {
     public function newsGetList($employee, $data) {
         // ID сайта для фильтрации или 0 для всех сайтов
         $SiteID = $data['category'];
+        $CustomerID = (!empty($data['customer'])) ? (int)$data['customer'] : 0;
 
         $this->db()
             ->select("news.*, e.FName, e.SName, CONCAT(img.ID, '.', img.ext) as 'FileName'")
@@ -83,6 +84,11 @@ class News_model extends MY_Model {
         // Фильтр по сайту
         if (!empty($SiteID))
             $this->db()->where('news.SiteID', $SiteID);
+
+        // Фильтр по клиентке
+        if(!empty($CustomerID)){
+            $this->db()->where('news.CustomerID', $CustomerID);
+        }
 
 
         // Групировка по сайту

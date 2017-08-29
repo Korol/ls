@@ -21,7 +21,14 @@ $(document).ready(function(){
                 $.News.RemoveNewsRecord($(e.target).closest('button').attr('record'));
             });
             $(document).on("click", "#newsCategory input:radio", function (e) {
-                $.News.ReloadNewsList($(e.target).val());
+                var nCustomer = $('#newsCustomer input:radio:checked').val();
+                $.News.ReloadNewsList($(e.target).val(), nCustomer);
+                // во второй список фильтра выбираем только тех клиенток, которые связаны с выбранным сайтом
+                $.News.ReloadCustomerList($(e.target).val());
+            });
+            $(document).on("click", "#newsCustomer input:radio", function (e) {
+                var nCategory = $('#newsCategory input:radio:checked').val();
+                $.News.ReloadNewsList(nCategory, $(e.target).val());
             });
 
             $('.assol-pagination-arrs .next').click(function () {
@@ -49,9 +56,26 @@ $(document).ready(function(){
             $("#newsTemplate").template('newsTemplate');
         },
         /** Загрузка списка новостей */
-        ReloadNewsList: function (category) {
+        ReloadNewsList: function (category, customer) {
             category = category || $('#newsCategory input:radio:checked').val();
-            this.ReloadData('#news', 'newsTemplate', category)
+            customer = customer || $('#newsCustomer input:radio:checked').val(); // input[name=NewsCustomer]:checked
+            this.ReloadData('#news', 'newsTemplate', category, customer);
+        },
+        /** формируем список клиенток для данного сайта */
+        ReloadCustomerList: function (category) {
+            category = category || $('#newsCategory input:radio:checked').val();
+            $.post(
+                BaseUrl + 'news/customerlist',
+                {
+                    siteID: (category || 0)
+                },
+                function(data){
+                    if(data !== ''){
+                        $('#newsCustomer > ul.dropdown-menu').html('').append(data);
+                    }
+                },
+                'html'
+            );
         },
         /**
          * Загрузка и рендер данных
@@ -59,8 +83,9 @@ $(document).ready(function(){
          * @param TargetSelector селектор контейнера для загрузки данных
          * @param TemplateName имя шаблона для рендера
          * @param category
+         * @param customer
          */
-        ReloadData: function(TargetSelector, TemplateName, category){
+        ReloadData: function(TargetSelector, TemplateName, category, customer){
             $(TargetSelector).html('Загрузка данных...');
 
             function callback(data) {
@@ -91,6 +116,7 @@ $(document).ready(function(){
 
             var data = {
                 category: (category || 0),
+                customer: (customer || 0),
                 Limit: pageRecordLimit,
                 Offset: (($('#CurrentPage').val() || 1) - 1) * pageRecordLimit
             };

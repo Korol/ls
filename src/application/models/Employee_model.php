@@ -969,7 +969,7 @@ class Employee_model extends MY_Model {
      */
     public function findEmployeeSiteCustomerBySiteID($employee, $SiteID) {
         return $this->db()
-            ->select('es2c.ID, c.FName, c.SName')
+            ->select("es2c.ID, c.FName, c.SName, c.ID AS 'CustomerID'")
             ->from(self::TABLE_CUSTOMER_NAME.' AS c')
             ->join(self::TABLE_EMPLOYEE_SITE_CUSTOMER_NAME.' AS es2c',
                 'es2c.CustomerID = c.ID AND es2c.IsDeleted=0', 'inner')

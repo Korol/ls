@@ -5,6 +5,16 @@
     <?php endforeach ?>
 </script>
 
+<style>
+    #newsCustomer {
+        margin-left: 20px;
+    }
+    #newsCustomer > ul.dropdown-menu {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+
 <div class="panel assol-grey-panel">
     <div class="panel-body">
         <div class="btn-group assol-select-dropdown" id="newsCategory" style="width: 200px">
@@ -19,6 +29,23 @@
                     <li>
                         <input type="radio" id="NewsCategory_<?=$item['ID']?>" name="NewsCategory" value="<?=$item['ID']?>">
                         <label for="NewsCategory_<?=$item['ID']?>"><?= empty($item['Name']) ? $item['Domen'] : $item['Name'] ?></label>
+                    </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+
+        <div class="btn-group assol-select-dropdown" id="newsCustomer" style="width: 250px">
+            <div class="label-placement-wrap">
+                <button class="btn" data-label-placement>Все клиентки</button>
+            </div>
+            <button data-toggle="dropdown" class="btn dropdown-toggle">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <?php foreach($customers as $customer): ?>
+                    <li>
+                        <input type="radio" id="NewsCustomer_<?=$customer['ID']?>" name="NewsCustomer" value="<?=$customer['ID']?>">
+                        <label for="NewsCustomer_<?=$customer['ID']?>"><?= $customer['Name'] ?></label>
                     </li>
                 <?php endforeach ?>
             </ul>

@@ -1406,7 +1406,7 @@ class Customer_model extends MY_Model {
     public function findCustomerBySiteID($siteID) {
         // Поиск всех клиентов привязанных к сайту
         $customers = $this->db()
-            ->select('c.ID, c.FName, c.SName')
+            ->select("c.ID, c.FName, c.SName, c.ID AS 'CustomerID'")
             ->from(self::TABLE_CUSTOMER_NAME.' AS c')
             ->join(self::TABLE_CUSTOMER_SITE_NAME.' AS cs',
                 'c.ID = cs.CustomerID AND cs.IsDeleted=0 AND cs.SiteID = '.$siteID, 'inner')
