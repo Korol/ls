@@ -113,7 +113,7 @@ class Customer_Site extends MY_Controller {
                     $return .= '</td>';
                     $return .= '<td align="center">';
                     if(!empty($isEditSites)) {
-                        $return .= '<button class="btn btn-danger btn-sm" onclick="if(confirm(\'Вы уверены, что хотите удалить связь клиентки с этим сайтом?\')){removeSiteConnection(' . $site['ID'] . '); recheckSite(' . $site['SiteID'] . ');}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+                        $return .= '<button class="btn btn-default btn-sm" onclick="if(confirm(\'Вы уверены, что хотите удалить связь клиентки с этим сайтом?\')){removeSiteConnection(' . $site['ID'] . '); recheckSite(' . $site['SiteID'] . ');}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
                     }
                     $return .= '</td>';
                     $return .= '</tr>';
