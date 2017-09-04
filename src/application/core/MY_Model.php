@@ -75,6 +75,7 @@ class MY_Model extends CI_Model {
     const TABLE_SERVICE_WESTERN_NAME = 'assol_service_western';
     const TABLE_SERVICE_MEETING_NAME = 'assol_service_meeting';
     const TABLE_SERVICE_DELIVERY_NAME = 'assol_service_delivery';
+    const TABLE_SERVICE_DELIVERY_2_IMAGE_NAME = 'assol_service_delivery2image';
 
     const TABLE_SITE_NAME = 'assol_sites';
 

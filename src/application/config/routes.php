@@ -236,6 +236,9 @@ $route['services/meeting/(:any)']        = 'Services_Meeting/$1';
 $route['services/meeting/(:num)/edit']   = 'Services_Meeting/edit/$1';
 $route['services/delivery/(:any)']       = 'Services_Delivery/$1';
 $route['services/delivery/(:num)/edit']  = 'Services_Delivery/edit/$1';
+$route['services/delivery/(:num)/photos']  = 'Services_Delivery/photos/$1';
+$route['services/delivery/(:num)/server']  = 'Services_Delivery/server/$1';
+$route['services/delivery/cross/(:num)/remove'] = 'Services_Delivery/remove_cross/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

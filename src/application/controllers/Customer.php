@@ -350,4 +350,55 @@ class Customer extends MY_Controller {
         }
         return $sites;
     }
+
+    /**
+     * аоиск доставок по фамилии клиентки
+     */
+    public function getdelivery()
+    {
+        $return = '';
+        $CustomerID = $this->input->post('CustomerID', true);
+        $SiteID = (int)$this->input->post('SiteID', true);
+//        $CustomerID = 92;$SiteID = 0; // test
+
+        if(!empty($CustomerID)){
+            $customer = $this->getCustomerModel()->customerGet($CustomerID);
+            if(!empty($customer)){
+                $customerSNameEx = explode(' ', trim($customer['SName'])); // фамилия может быть из 2-х слов: Бабич Babich
+                $customerSNameEx[1] = (!empty($customerSNameEx[1])) ? $customerSNameEx[1] : '';
+                // ищем по всем частям фамилии + ID сайта
+                $records = $this->getServiceModel()->findDeliveryBySName($customerSNameEx[0], $customerSNameEx[1], $SiteID);
+                if(!empty($records)){
+                    foreach ($records as $record) {
+                        $countImages = $this->getServiceModel()->deliveryImageGetCount($record['ID']);
+                        $modalUrl = base_url('services/delivery') . '/' . $record['ID'] . '/photos';
+                        $return .= '<tr>';
+                        $return .= '<td>' . trim($record['ESName']) . ' ' . mb_substr(trim($record['EFName']), 0, 1) . '. ' . mb_substr(trim($record['EFName']), 0, 1) . '.</td>';
+                        $return .= '<td>' . date('d.m.Y', strtotime($record['Date'])) . '</td>';
+                        $return .= '<td><span class="site-name">' . $record['SiteName'] . '</span></td>';
+                        $return .= '<td>' . trim($record['E2SName']) . ' ' . mb_substr(trim($record['E2FName']), 0, 1) . '. ' . mb_substr(trim($record['E2FName']), 0, 1) . '.</td>';
+                        $return .= '<td>' . $record['Men'] . '</td>';
+                        $return .= '<td>' . $record['Girl'] . '</td>';
+                        $return .= '<td>' . $record['Delivery'] . '</td>';
+                        $return .= '<td style="padding-bottom: 10px;">' . $record['Gratitude'] . '</td>';
+                        $return .= '<td><div class="open-delivery-modal"><a class="btn btn-default delivery-photo-modal" data-delid="' . $record['ID'] . '" data-url="' . $modalUrl . '">
+                                        <span class="glyphicon glyphicon-' . (($countImages > 0) ? 'folder-open' : 'plus') . '" id="gl_icon_' . $record['ID'] . '" aria-hidden="true"></span>
+                                    </a></div></td>';
+                        $return .= '</tr>';
+                    }
+                }
+            }
+        }
+        echo $return;
+    }
+
+    public function cntimages()
+    {
+        $DeliveryID = (int)$this->input->post('DeliveryID', true);
+        $return = array('delivery' => $DeliveryID);
+        if(!empty($DeliveryID)){
+            $return['cnt'] = $this->getServiceModel()->deliveryImageGetCount($DeliveryID);
+        }
+        echo json_encode($return);
+    }
 }

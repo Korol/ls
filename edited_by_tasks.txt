@@ -79,3 +79,11 @@ RefreshReportGeneralOfCustomersDataSummary
 //  PRIMARY KEY (`ID`),
 //  KEY `CustomerID` (`CustomerID`)
 //) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-----
+2017-09-04 (Услуги - Доставка: добавление фото):
+1. Создать директорию /files/delivery (777).
+2. /application/controllers/Jfu.php (контроллер загрузки файлов)
+3. /application/libraries/UploadHandler.php (обработчик загрузки файлов - берём из jQuery-File-Upload/server/php/)
+4.

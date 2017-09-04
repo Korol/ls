@@ -523,4 +523,106 @@ class Service_model extends MY_Model {
         $this->db()->update(self::TABLE_SERVICE_DELIVERY_NAME, array('IsDone' => 1));
     }
 
+    /**
+     * Получить список фото доставки
+     *
+     * @param int $DeliveryID ID доставки
+     */
+    public function deliveryImageGetList($DeliveryID) {
+        return $this->db()
+            ->from(self::TABLE_SERVICE_DELIVERY_2_IMAGE_NAME . ' AS a2i')
+            ->select('a2i.*, i.ext')
+            ->join(self::TABLE_IMAGE_NAME . ' AS i', 'i.ID = a2i.ImageID', 'inner')
+            ->where('a2i.DeliveryID', $DeliveryID)
+            ->order_by("a2i.DateCreate", "DESC")
+            ->get()
+            ->result_array();
+    }
+
+    /**
+     * Добавление фото в доставку
+     *
+     * @param int $DeliveryID ID доставки
+     * @param int $idImage ID фото
+     *
+     * @return int ID
+     */
+    public function deliveryImageInsert($DeliveryID, $idImage) {
+        $this->db()->set('DateCreate', 'NOW()', FALSE);
+        $this->db()->insert(self::TABLE_SERVICE_DELIVERY_2_IMAGE_NAME, ['DeliveryID' => $DeliveryID, 'ImageID' => $idImage]);
+
+        return $this->db()->insert_id();
+    }
+
+    /**
+     * Удалить фото из доставки
+     *
+     * @param int $id ID записи в базе
+     */
+    public function deliveryImageDelete($id) {
+        // 1. Поиск и удаление фото
+        $cross = $this->db()->get_where(self::TABLE_SERVICE_DELIVERY_2_IMAGE_NAME, array('ID' => $id))->row_array();
+
+        $image = $this->db()->get_where(self::TABLE_IMAGE_NAME, ['ID' => $cross['ImageID']])->row_array();
+
+        if ($image) {
+            $file = './files/images/'.$image['ID'].'.'.$image['ext'];
+            if (file_exists($file)) unlink($file); // Удаление файла
+
+            $this->db()->delete(self::TABLE_IMAGE_NAME, ['ID' => $cross['ImageID']]); // Удаление записи из таблицы
+        }
+
+        // 2. Удаление связки фото с доставкой
+        $this->db()->delete(self::TABLE_SERVICE_DELIVERY_2_IMAGE_NAME, ['ID' => $id]);
+    }
+
+    /**
+     * Получить количество фото доставки
+     *
+     * @param int $DeliveryID ID доставки
+     * @return integer
+     */
+    public function deliveryImageGetCount($DeliveryID) {
+        return $this->db()
+            ->from(self::TABLE_SERVICE_DELIVERY_2_IMAGE_NAME . ' AS a2i')
+            ->select('a2i.*, i.ext')
+            ->join(self::TABLE_IMAGE_NAME . ' AS i', 'i.ID = a2i.ImageID', 'inner')
+            ->where('a2i.DeliveryID', $DeliveryID)
+            ->order_by("a2i.DateCreate", "DESC")
+            ->count_all_results();
+    }
+
+    /**
+     * поиск доставок по фамилии (может состоять из 2-х частей: Бабич Babich) клиентки + ID сайта
+     * @param $SName
+     * @param $SName2
+     * @param $SiteID
+     */
+    public function findDeliveryBySName($SName, $SName2, $SiteID)
+    {
+        $where = array(
+            'sd.IsDone' => 1
+        );
+        if($SiteID > 0){
+            $where['sd.SiteID'] = $SiteID;
+        }
+        $this->db()->select("sd.*, e.SName AS 'ESName', e.FName AS 'EFName', e.MName AS 'EMName', 
+        e2.SName AS 'E2SName', e2.FName AS 'E2FName', e2.MName AS 'E2MName', s.Name AS 'SiteName'")
+            ->from(self::TABLE_SERVICE_DELIVERY_NAME . ' AS sd')
+            ->join(self::TABLE_EMPLOYEE_NAME . ' AS e', 'e.ID = sd.EmployeeID')
+            ->join(self::TABLE_EMPLOYEE_NAME . ' AS e2', 'e2.ID = sd.UserTranslateID')
+            ->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = sd.SiteID');
+        $this->db()->group_start()
+            ->like('sd.Girl', $SName);
+        if(!empty($SName2)){
+            $this->db()->or_like('sd.Girl', $SName2);
+        }
+        $this->db()->group_end();
+        $res = $this->db()->where($where)
+            ->order_by('sd.Date', 'desc')
+            ->get()
+            ->result_array(); // log_message('error', $this->db()->last_query());
+        return $res;
+    }
+
 }

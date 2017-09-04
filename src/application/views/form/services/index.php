@@ -307,6 +307,19 @@
             <td>{{html Girl.trim().replace(" ","<br>")}}</td>
             <td>${Delivery}</td>
             <td>${Gratitude}</td>
+            <td>
+                <div class="open-delivery-modal">
+                {{if CountImg > 0}}
+                    <a class="btn btn-default delivery-photo-modal" data-delid="${ID}" data-url="<?= base_url('services/delivery') ?>/${ID}/photos">
+                        <span class="glyphicon glyphicon-folder-open" id="gl_icon_${ID}" aria-hidden="true"></span>
+                    </a>
+                {{else}}
+                    <a class="btn btn-default delivery-photo-modal" data-delid="${ID}" data-url="<?= base_url('services/delivery') ?>/${ID}/photos">
+                        <span class="glyphicon glyphicon-plus" id="gl_icon_${ID}" aria-hidden="true"></span>
+                    </a>
+                {{/if}}
+                </div>
+            </td>
             <td class="centertext done" id-delivery="${ID}">
                 <div class="round-check {{if IsDone > 0}}on{{else}}off <?= $isAdmin ? "action-delivery-done":"" ?>{{/if}}"></div>
             </td>
@@ -335,6 +348,7 @@
                         <th>Девушка</th>
                         <th>Доставка</th>
                         <th>Благодарность</th>
+                        <th>Фото</th>
                         <th class="centertext">Вып.</th>
                         <? if ($isEditDelivery): ?>
                             <th></th>
@@ -359,8 +373,74 @@
 
 </div>
 
+<style>
+    .dph-modal .modal-dialog {
+        width: 90%;
+        background: white;
+        max-width: 1180px;
+    }
+
+    .dph-modal iframe {
+        width: 100%;
+        height: 600px;
+    }
+</style>
+<div class="modal fade dph-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Фото доставки</h4>
+            </div>
+            <div class="modal-body">
+                <iframe src="" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $('body').on('hidden.bs.modal', '.remoteModal', function () {
         $(this).removeData('bs.modal');
     });
+
+    // модальное окно с фото Доставки
+    $(document).on('click', '.open-delivery-modal a[data-url]', function () {
+        var modal = $('.dph-modal');
+        var frame = modal.find('iframe');
+        var frameSrc = $(this).attr('data-url');
+        var delId = $(this).attr('data-delid');
+
+        modal.on('show.bs.modal', function () {
+            frame.attr("src", frameSrc);
+        });
+        modal.on('hidden.bs.modal', function () {
+            reloadBtnIcon(delId);
+            frame.html('');
+        });
+        modal.modal({show:true});
+    });
+    // обновить иконку на кнопке вызова модального окна с фото
+    function reloadBtnIcon(id){
+        $.post(
+            '/customer/cntimages',
+            {
+                DeliveryID: id
+            },
+            function(data){
+                if(data.cnt*1 > 0){
+                    $('#gl_icon_'+data.delivery).removeClass('glyphicon-plus');
+                    $('#gl_icon_'+data.delivery).addClass('glyphicon-folder-open');
+                }
+                else{
+                    $('#gl_icon_'+data.delivery).removeClass('glyphicon-folder-open');
+                    $('#gl_icon_'+data.delivery).addClass('glyphicon-plus');
+                }
+            },
+            'json'
+        );
+    }
 </script>

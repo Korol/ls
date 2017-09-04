@@ -193,6 +193,13 @@
                             <?= IS_LOVE_STORY ? 'Встречи' : 'История' ?>
                         </a>
                     </li>
+                    <?php if(IS_LOVE_STORY): ?>
+                    <li role="presentation">
+                        <a href="#Delivery" aria-controls="Delivery" role="tab" data-toggle="tab">
+                            Доставки
+                        </a>
+                    </li>
+                    <?php endif; ?>
                     <?php if($isShowRemove): ?>
                         <li role="presentation">
                             <a href="#Remove" aria-controls="Remove" role="tab" data-toggle="tab">
@@ -2352,6 +2359,166 @@
                     });
                 </script>
             </div>
+
+            <div role="tabpanel" class="tab-pane" id="Delivery">
+
+                <style>
+                    .dph-modal .modal-dialog {
+                        width: 90%;
+                        background: white;
+                        max-width: 1180px;
+                    }
+
+                    .dph-modal iframe {
+                        width: 100%;
+                        height: 600px;
+                    }
+                    .site-name {
+                        color: #2067b0;
+                        font-weight: 700;
+                    }
+                </style>
+
+                <div class="row assol-grey-panel" style="padding-top: 10px;">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="DeliverySite">Сайт</label>
+                            <div class="btn-group assol-select-dropdown" id="DeliverySite">
+                                <div class="label-placement-wrap">
+                                    <button class="btn" data-label-placement=""><span class="data-label">Все</span></button>
+                                </div>
+                                <button data-toggle="dropdown" class="btn dropdown-toggle">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <input type="radio" id="DeliverySite_0" name="DeliverySite" value="0">
+                                        <label for="DeliverySite_0">Все</label>
+                                    </li>
+                                    <? foreach($sites as $item): ?>
+                                        <li>
+                                            <input type="radio" id="DeliverySite_<?=$item['ID']?>" name="DeliverySite" value="<?=$item['ID']?>">
+                                            <label for="DeliverySite_<?=$item['ID']?>"><?= empty($item['Name']) ? $item['Domen'] : $item['Name'] ?></label>
+                                        </li>
+                                    <? endforeach ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5 style="text-transform: uppercase; margin-bottom: 0px; margin-top: 25px;">Выполненные доставки</h5>
+                </div>
+                <div class="row">
+                    <div class="service-block-info-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Сотрудник</th>
+                                <th>Дата</th>
+                                <th>Сайт</th>
+                                <th>Переводчик</th>
+                                <th>Мужчина</th>
+                                <th>Девушка</th>
+                                <th>Доставка</th>
+                                <th>Благодарность</th>
+                                <th>Фото</th>
+                            </tr>
+                            </thead>
+                            <tbody id="DeliveryTableContent"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal fade dph-modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Фото доставки</h4>
+                            </div>
+                            <div class="modal-body">
+                                <iframe src="" frameborder="0"></iframe>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    // клик по табу Доставки
+                    $(document).on('click', 'a[aria-controls=Delivery]', function(){
+                        loadDeliveryData();
+                    });
+                    // выбор сайта
+                    $(document).on('click', 'input[name=DeliverySite]', function(){
+                        // загружаем данные
+                        loadDeliveryData();
+                    });
+                    // загрузка данных
+                    function loadDeliveryData(){
+                        var dSite = $('input[name=DeliverySite]:checked').val();
+                        $.post(
+                            '/customer/getdelivery',
+                            {
+                                CustomerID: <?= $customer['ID']; ?>,
+                                SiteID: (dSite || 0)
+                            },
+                            function(data){
+                                if(data !== ''){
+                                    $('#DeliveryTableContent').html('');
+                                    $('#DeliveryTableContent').html(data);
+                                }
+                                else{
+                                    $('#DeliveryTableContent').html('');
+                                    $('#DeliveryTableContent').html('<tr><td colspan="9"><p class="text-center">Нет данных для отображения</p></td></tr>');
+                                }
+                            },
+                            'html'
+                        );
+                    }
+                    // модальное окно с фото Доставки
+                    $(document).on('click', '.open-delivery-modal a[data-url]', function () {
+                        var modal = $('.dph-modal');
+                        var frame = modal.find('iframe');
+                        var frameSrc = $(this).attr('data-url');
+                        var delId = $(this).attr('data-delid');
+
+                        modal.on('show.bs.modal', function () {
+                            frame.attr("src", frameSrc);
+                        });
+                        modal.on('hidden.bs.modal', function () {
+                            reloadBtnIcon(delId);
+                            frame.html('');
+                        });
+                        modal.modal({show:true});
+                    });
+                    // обновить иконку на кнопке вызова модального окна с фото
+                    function reloadBtnIcon(id){
+                        $.post(
+                            '/customer/cntimages',
+                            {
+                                DeliveryID: id
+                            },
+                            function(data){
+                                if(data.cnt*1 > 0){
+                                    $('#gl_icon_'+data.delivery).removeClass('glyphicon-plus');
+                                    $('#gl_icon_'+data.delivery).addClass('glyphicon-folder-open');
+                                }
+                                else{
+                                    $('#gl_icon_'+data.delivery).removeClass('glyphicon-folder-open');
+                                    $('#gl_icon_'+data.delivery).addClass('glyphicon-plus');
+                                }
+                            },
+                            'json'
+                        );
+                    }
+                </script>
+
+            </div>
+
             <? if($isShowRemove): ?>
                 <div role="tabpanel" class="tab-pane" id="Remove">
                     <div class="row">
