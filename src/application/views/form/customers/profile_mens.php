@@ -19,6 +19,8 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
 <div class="row" style="margin-top: 20px; margin-bottom: 30px;">
     <div class="col-md-12">
     <?php if(!empty($mensList)): ?>
+        <script src="/public/tablesorter/jquery.tablesorter.min.js"></script>
+        <link rel="stylesheet" href="/public/tablesorter/blue/style.css">
         <style>
             .mens-men-photo img {
                 border-radius: 25px;
@@ -26,11 +28,11 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                 height: 50px;
             }
         </style>
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped tablesorter" id="tableMens">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Имя</th>
+                <th class="sortable">Имя</th>
                 <th>Сайт</th>
                 <th>Фото</th>
                 <th>Комментарий</th>
@@ -242,4 +244,11 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
             'json'
         );
     }
+
+    jQuery(document).ready(function ($) {
+        $("#tableMens").tablesorter({
+            selectorHeaders: 'thead th.sortable' // <-- здесь указываем класс, который определяет те столбцы, по которым будет работать сортировка
+        });
+    });
+
 </script>
