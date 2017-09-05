@@ -614,10 +614,46 @@ class Service_model extends MY_Model {
             ->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = sd.SiteID');
         $this->db()->group_start()
             ->like('sd.Girl', $SName);
+        // вторая часть фамилии: Бабич Babich <- вот эта
         if(!empty($SName2)){
             $this->db()->or_like('sd.Girl', $SName2);
         }
         $this->db()->group_end();
+        $res = $this->db()->where($where)
+            ->order_by('sd.Date', 'desc')
+            ->get()
+            ->result_array(); // log_message('error', $this->db()->last_query());
+        return $res;
+    }
+
+    /**
+     * поиск доставок по фамилии (может состоять из 2-х частей: Бабич Babich) клиентки + ID сайтов
+     * @param $SName
+     * @param $SName2
+     * @param $SiteIDs
+     */
+    public function findDeliveryBySNameAndSites($SName, $SName2, $SiteIDs)
+    {
+        $where = array(
+            'sd.IsDone' => 1
+        );
+        $this->db()->select("sd.*, e.SName AS 'ESName', e.FName AS 'EFName', e.MName AS 'EMName', 
+        e2.SName AS 'E2SName', e2.FName AS 'E2FName', e2.MName AS 'E2MName', s.Name AS 'SiteName'")
+            ->from(self::TABLE_SERVICE_DELIVERY_NAME . ' AS sd')
+            ->join(self::TABLE_EMPLOYEE_NAME . ' AS e', 'e.ID = sd.EmployeeID')
+            ->join(self::TABLE_EMPLOYEE_NAME . ' AS e2', 'e2.ID = sd.UserTranslateID')
+            ->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = sd.SiteID');
+        $this->db()->group_start()
+            ->like('sd.Girl', $SName);
+        // вторая часть фамилии: Бабич Babich <- вот эта
+        if(!empty($SName2)){
+            $this->db()->or_like('sd.Girl', $SName2);
+        }
+        $this->db()->group_end();
+        // фильтр по сайтам
+        if(!empty($SiteIDs)){
+            $this->db()->where_in('sd.SiteID', $SiteIDs);
+        }
         $res = $this->db()->where($where)
             ->order_by('sd.Date', 'desc')
             ->get()

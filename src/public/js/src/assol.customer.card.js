@@ -469,7 +469,19 @@ $(document).ready(function(){
 
             var urlData = BaseUrl + 'customer/'+CustomerID+'/'+TargetSegment+'/data';
 
-            $.post(urlData, {}, callback, 'json');
+            if(TargetSelector === '#storyList'){
+                // учитываем фильтр по сайтам
+                var storyListInputs = $('#StorySitesList').find('input[type=checkbox]:checked'); // отмеченные чекбоксы
+                var storyListIds = []; // массив для ID выбранных сайтов
+                $.each(storyListInputs, function(key, item){
+                    storyListIds[key] = $(item).val(); // собираем ID выбранных сайтов
+                });
+
+                $.post(urlData, { SiteIDs: ((storyListIds.length > 0) ? storyListIds.join() : '')}, callback, 'json');
+            }
+            else{
+                $.post(urlData, {}, callback, 'json');
+            }
         },
         /** Удаление договора по ID */
         RemoveAgreementRecord: function(AgreementID) {

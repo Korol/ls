@@ -8,7 +8,33 @@ class Customer_Story extends MY_Controller {
             if (!isset($CustomerID))
                 throw new RuntimeException("Не указан обязательный параметр");
 
-            $records = $this->getCustomerModel()->storyGetList($CustomerID);
+            $SiteIDs = $this->input->post('SiteIDs', true); // like: 1,2,3,4,5
+            
+            // для первичного вывода и неактивного фильтра по сайтам
+            // выводим для всех, кроме Директора и Секретаря, только по тем сайтам, с которыми они связаны
+            if(empty($SiteIDs) && empty(($this->isDirector() || $this->isSecretary()))){
+                $employee_sites = $this->getEmployeeModel()->siteGetList($this->getUserID()); // сайты, с которыми связан сотрудник
+                if(!empty($employee_sites)){
+                    $st = array();
+                    foreach ($employee_sites as $employee_site) {
+                        $st[] = $employee_site['SiteID'];
+                    }
+                    $SiteIDs = implode(',', $st); // строка с ID сайтов, с которыми связан сотрудник, like: 1,2,3,4,5
+                }
+                else{
+                    $SiteIDs = '654321'; // рыба, чтоб не срабатывала empty()
+                }
+            }
+
+            if(!empty($SiteIDs)){
+                // учитываем фильтрацию по сайтам
+                $sites = explode(',', $SiteIDs);
+                $records = $this->getCustomerModel()->storyGetListBySites($CustomerID, $sites);
+            }
+            else{
+                // получаем все записи
+                $records = $this->getCustomerModel()->storyGetList($CustomerID);
+            }
 
             $this->json_response(array("status" => 1, 'records' => $records));
         } catch (Exception $e) {

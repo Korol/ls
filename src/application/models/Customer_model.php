@@ -1068,6 +1068,22 @@ class Customer_model extends MY_Model {
     }
 
     /**
+     * Получить список встреч клиента с учетом фильтра по сайтам
+     *
+     * @param int $idCustomer ID клиента
+     * @param int $SiteIDs ID сайтов из фильтра
+     */
+    public function storyGetListBySites($idCustomer, $SiteIDs) {
+        return $this->db()
+            ->select("cs.*, CONCAT(img.ID, '.', img.ext) as 'FileName'")
+            ->from(self::TABLE_CUSTOMER_STORY_NAME . ' AS cs')
+            ->join(self::TABLE_IMAGE_NAME . ' AS img', 'cs.Avatar = img.ID', 'left')
+            ->where('cs.CustomerID', $idCustomer)
+            ->where_in('cs.SiteID', $SiteIDs)
+            ->get()->result_array();
+    }
+
+    /**
      * Добавление историю встречи клиенту
      *
      * @param int $idCustomer ID клиента
@@ -1766,6 +1782,24 @@ class Customer_model extends MY_Model {
             ->where(array('CustomerID' => $CustomerID))
             ->order_by($order_by)
             ->get(self::TABLE_CUSTOMER_MENS_NAME)->result_array();
+    }
+
+    /**
+     * Список мужчин клиентки + фильтр по сайтам
+     * @param int $CustomerID
+     * @param int $SiteIDs
+     * @param string $order_by
+     * @return mixed
+     */
+    public function getCustomerMensBySites($CustomerID, $SiteIDs, $order_by = 'ID DESC')
+    {
+        if(!empty($SiteIDs)){
+            $this->db()->where_in('SiteID', $SiteIDs);
+        }
+        $this->db()
+            ->where(array('CustomerID' => $CustomerID))
+            ->order_by($order_by);
+        return $this->db()->get(self::TABLE_CUSTOMER_MENS_NAME)->result_array();
     }
 
     /**

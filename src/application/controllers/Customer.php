@@ -144,8 +144,9 @@ class Customer extends MY_Controller {
             'marital' => $this->getReferencesModel()->getReference(REFERENCE_MARITAL),
             'body_build' => $this->getReferencesModel()->getReference(REFERENCE_BODY_BUILD),
             'sites' => $this->getSiteModel()->getRecords(),
-            'mensList' => $this->getCustomerModel()->getCustomerMens($id),
-            'mensSitesList' => $this->getSitesForMens($id),
+//            'mensList' => $this->getCustomerModel()->getCustomerMens($id),
+//            'mensSitesList' => $this->getSitesForMens($id),
+            'employee_sites' => $this->getEmployeeSites(),
         );
 
         // Установка прав доступа к договорам и паспорту только для assol
@@ -358,8 +359,26 @@ class Customer extends MY_Controller {
     {
         $return = '';
         $CustomerID = $this->input->post('CustomerID', true);
-        $SiteID = (int)$this->input->post('SiteID', true);
+//        $SiteID = (int)$this->input->post('SiteID', true);
+        $SiteIDs = $this->input->post('SiteIDs', true); // фильтр по нескольким сайтам
 //        $CustomerID = 92;$SiteID = 0; // test
+//        $CustomerID = 3;$SiteIDs = ''; // test
+
+        // для первичного вывода и неактивного фильтра по сайтам
+        // выводим для всех, кроме Директора и Секретаря, только по тем сайтам, с которыми они связаны
+        if(empty($SiteIDs) && empty(($this->isDirector() || $this->isSecretary()))){
+            $employee_sites = $this->getEmployeeModel()->siteGetList($this->getUserID()); // сайты, с которыми связан сотрудник
+            if(!empty($employee_sites)){
+                $st = array();
+                foreach ($employee_sites as $employee_site) {
+                    $st[] = $employee_site['SiteID'];
+                }
+                $SiteIDs = implode(',', $st); // строка с ID сайтов, с которыми связан сотрудник, like: 1,2,3,4,5
+            }
+            else{
+                $SiteIDs = '654321'; // рыба, чтоб не срабатывала empty()
+            }
+        }
 
         if(!empty($CustomerID)){
             $customer = $this->getCustomerModel()->customerGet($CustomerID);
@@ -367,7 +386,10 @@ class Customer extends MY_Controller {
                 $customerSNameEx = explode(' ', trim($customer['SName'])); // фамилия может быть из 2-х слов: Бабич Babich
                 $customerSNameEx[1] = (!empty($customerSNameEx[1])) ? $customerSNameEx[1] : '';
                 // ищем по всем частям фамилии + ID сайта
-                $records = $this->getServiceModel()->findDeliveryBySName($customerSNameEx[0], $customerSNameEx[1], $SiteID);
+//                $records = $this->getServiceModel()->findDeliveryBySName($customerSNameEx[0], $customerSNameEx[1], $SiteID);
+                // учитываем фильтрацию по сайтам
+                $sites = (!empty($SiteIDs)) ? explode(',', $SiteIDs) : '';
+                $records = $this->getServiceModel()->findDeliveryBySNameAndSites($customerSNameEx[0], $customerSNameEx[1], $sites);
                 if(!empty($records)){
                     foreach ($records as $record) {
                         $countImages = $this->getServiceModel()->deliveryImageGetCount($record['ID']);
@@ -400,5 +422,23 @@ class Customer extends MY_Controller {
             $return['cnt'] = $this->getServiceModel()->deliveryImageGetCount($DeliveryID);
         }
         echo json_encode($return);
+    }
+
+    /**
+     * список сайтов, доступных для сотрудника (используется в фильтрах)
+     * Директор и Секретарь видят все сайты
+     * остальные – видят только связанные с ними сайты
+     */
+    public function getEmployeeSites()
+    {
+        if($this->isDirector() || $this->isSecretary()){
+            // все сайты
+            $sites = $this->getSiteModel()->getRecords();
+        }
+        else{
+            // только связанные сайты
+            $sites = $this->getEmployeeModel()->siteGetListWithInfo($this->getUserID());
+        }
+        return $sites;
     }
 }

@@ -23,7 +23,8 @@
         $isEditPhoto                    = ($isDirector || $isSecretary);
         $isEditSitesDescription         = ($isDirector || $isSecretary);
         $isEditQuestionPhoto            = false;
-        $isEditMens                     = ($isDirector || $isSecretary);
+        $isEditMens                     = ($isDirector || $isSecretary || $isTranslate);
+        $isDeleteMens                   = ($isDirector || $isSecretary);
 
         $isShowPassportSection = ($isDirector || $isSecretary);
     } else { /* На сайте Assol переводчик может редактировать вкладки: дополнительно, история, заказ контактов, вопросы */
@@ -39,6 +40,7 @@
         $isShowPassportSection = true;
     }
 
+    $employee_sites = (!empty($employee_sites)) ? $employee_sites : array();
 ?>
 
 <div class="client-profile-page">
@@ -137,12 +139,12 @@
                 <ul class="assol-tabs-btns nav nav-tabs nav-justified clear" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#PersonalData" aria-controls="PersonalData" role="tab" data-toggle="tab">
-                            Личные данные
+                            Анкета
                         </a>
                     </li>
                     <li role="presentation">
-                        <a href="#Mens" aria-controls="Mens" role="tab" data-toggle="tab">
-                            Мужчины
+                        <a href="#Questions" aria-controls="Questions" role="tab" data-toggle="tab">
+                            Вопросы
                         </a>
                     </li>
                     <li role="presentation">
@@ -151,8 +153,13 @@
                         </a>
                     </li>
                     <li role="presentation">
-                        <a href="#Questions" aria-controls="Questions" role="tab" data-toggle="tab">
-                            <?= IS_LOVE_STORY ? 'Анкета' : 'Вопросы' ?>
+                        <a href="#Sites" aria-controls="Sites" role="tab" data-toggle="tab">
+                            Сайты
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#Mens" aria-controls="Mens" role="tab" data-toggle="tab">
+                            Мужчины
                         </a>
                     </li>
                     <? if (IS_LOVE_STORY): ?>
@@ -174,18 +181,8 @@
                         </li>
                     <? endif ?>
                     <li role="presentation">
-                        <a href="#Sites" aria-controls="Sites" role="tab" data-toggle="tab">
-                            Сайты
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#AdditionallyPane" aria-controls="AdditionallyPane" role="tab" data-toggle="tab">
-                            <?= IS_LOVE_STORY ? 'Изменения' : 'Дополнительно' ?>
-                        </a>
-                    </li>
-                    <li role="presentation">
                         <a href="#ReservationContactPane" aria-controls="ReservationContactPane" role="tab" data-toggle="tab">
-                            Заказ контактов
+                            Контакты
                         </a>
                     </li>
                     <li role="presentation">
@@ -194,12 +191,17 @@
                         </a>
                     </li>
                     <?php if(IS_LOVE_STORY): ?>
+                        <li role="presentation">
+                            <a href="#Delivery" aria-controls="Delivery" role="tab" data-toggle="tab">
+                                Доставки
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li role="presentation">
-                        <a href="#Delivery" aria-controls="Delivery" role="tab" data-toggle="tab">
-                            Доставки
+                        <a href="#AdditionallyPane" aria-controls="AdditionallyPane" role="tab" data-toggle="tab">
+                            <?= IS_LOVE_STORY ? 'Изменения' : 'Дополнительно' ?>
                         </a>
                     </li>
-                    <?php endif; ?>
                     <?php if($isShowRemove): ?>
                         <li role="presentation">
                             <a href="#Remove" aria-controls="Remove" role="tab" data-toggle="tab">
@@ -1231,17 +1233,92 @@
                 <? endif ?>
             </div>
             <div role="tabpanel" class="tab-pane" id="Mens">
-                <?php
-                $this->load->view('form/customers/profile_mens',
-                    array(
-                        'customerID' => $customer['ID'],
-                        'isEditMens' => $isEditMens,
-                        'mensList' => (!empty($mensList)) ? $mensList : array(),
-                        'mensSitesList' => (!empty($mensSitesList)) ? $mensSitesList : array(),
-                        'sites' => $sites,
-                    )
-                );
-                ?>
+                <div class="row assol-grey-panel" style="padding-top: 10px; margin-bottom: 15px;">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="MensSite">Сайт</label>
+                            <div class="btn-group assol-select-dropdown" id="MensSite">
+                                <div class="label-placement-wrap">
+                                    <button class="btn" data-label-placement>Выбрать</button>
+                                </div>
+                                <button data-toggle="dropdown" class="btn dropdown-toggle">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" id="MensSitesList">
+                                    <?php foreach($employee_sites as $item): ?>
+                                        <li>
+                                            <input type="checkbox" id="MensSite_<?= $item['ID'] ?>" value="<?= $item['ID'] ?>">
+                                            <label for="MensSite_<?= $item['ID'] ?>"><?= empty($item['Name']) ? $item['Domen'] : $item['Name'] ?></label>
+                                        </li>
+                                    <?php endforeach ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" id="MensSearchBtn" style="margin-top: 18px; padding: 9px 12px 8px;">
+                            <span class="glyphicon glyphicon-search"></span> Поиск
+                        </button>
+                    </div>
+                </div>
+
+                <div id="MensTabContent">
+                    <?php /*
+                    $this->load->view('form/customers/profile_mens',
+                        array(
+                            'customerID' => $customer['ID'],
+                            'isEditMens' => $isEditMens,
+                            'isDeleteMens' => $isDeleteMens,
+                            'mensList' => (!empty($mensList)) ? $mensList : array(),
+                            'mensSitesList' => (!empty($mensSitesList)) ? $mensSitesList : array(),
+                            'sites' => $employee_sites,
+                        )
+                    );*/
+                    ?>
+                </div>
+
+                <script type="text/javascript">
+                    // клик по табу Мужчины
+                    $(document).on('click', 'a[aria-controls=Mens]', function(){
+                        fillMensContent();
+                    });
+                    // поиск по сайтам
+                    $(document).on('click', '#MensSearchBtn', function(){
+                        fillMensContent();
+                    });
+                    // загрузка контента после добавления нового Мужчины (или после редактирования)
+                    if(window.location.hash == '#Mens') {
+                        fillMensContent();
+                    }
+                    // загрузка данных
+                    function fillMensContent(){
+                        // учитываем фильтр по сайтам
+                        var mensListInputs = $('#MensSitesList').find('input[type=checkbox]:checked'); // отмеченные чекбоксы
+                        var mensListIds = []; // массив для ID выбранных сайтов
+                        $.each(mensListInputs, function(key, item){
+                            mensListIds[key] = $(item).val(); // собираем ID выбранных сайтов
+                        });
+
+                        $.post(
+                            '/Customer_Mens/filter',
+                            {
+                                CustomerID: <?= $customer['ID']; ?>,
+                                SiteIDs: ((mensListIds.length > 0) ? mensListIds.join() : '')
+                            },
+                            function(data){
+                                if(data !== ''){
+                                    $('#MensTabContent').html('');
+                                    $('#MensTabContent').html(data);
+                                }
+                                else{
+                                    $('#MensTabContent').html('');
+                                    $('#MensTabContent').html('<h4 class="text-center">Нет данных для отображения</h4>');
+                                }
+                            },
+                            'html'
+                        );
+                    }
+                </script>
             </div>
             <div role="tabpanel" class="tab-pane" id="SelfDescription">
                 <div class="row">
@@ -2259,6 +2336,42 @@
                     }
                 </style>
 
+                <div class="row assol-grey-panel" style="padding-top: 10px; margin-bottom: 15px;">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="StorySite">Сайт</label>
+                            <div class="btn-group assol-select-dropdown" id="StorySite">
+                                <div class="label-placement-wrap">
+                                    <button class="btn" data-label-placement>Выбрать</button>
+                                </div>
+                                <button data-toggle="dropdown" class="btn dropdown-toggle">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" id="StorySitesList">
+                                    <?php foreach($employee_sites as $item): ?>
+                                        <li>
+                                            <input type="checkbox" id="StorySite_<?= $item['ID'] ?>" value="<?= $item['ID'] ?>">
+                                            <label for="StorySite_<?= $item['ID'] ?>"><?= empty($item['Name']) ? $item['Domen'] : $item['Name'] ?></label>
+                                        </li>
+                                    <?php endforeach ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" id="StorySearchBtn" style="margin-top: 18px; padding: 9px 12px 8px;">
+                            <span class="glyphicon glyphicon-search"></span> Поиск
+                        </button>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    // поиск по сайтам
+                    $(document).on('click', '#StorySearchBtn', function(){
+                        $.CustomerCard.ReloadStoryList();
+                    });
+                </script>
+
                 <script id="storyTemplate" type="text/x-jquery-tmpl">
                 <form role="form" action="<?= base_url('customer/'.$customer['ID'].'/story/save') ?>" enctype="multipart/form-data" method="post">
                     <input type="hidden" name="RecordID" value="${ID}">
@@ -2380,30 +2493,31 @@
                 </style>
 
                 <div class="row assol-grey-panel" style="padding-top: 10px;">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="DeliverySite">Сайт</label>
                             <div class="btn-group assol-select-dropdown" id="DeliverySite">
                                 <div class="label-placement-wrap">
-                                    <button class="btn" data-label-placement=""><span class="data-label">Все</span></button>
+                                    <button class="btn" data-label-placement>Выбрать</button>
                                 </div>
                                 <button data-toggle="dropdown" class="btn dropdown-toggle">
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <input type="radio" id="DeliverySite_0" name="DeliverySite" value="0">
-                                        <label for="DeliverySite_0">Все</label>
-                                    </li>
-                                    <? foreach($sites as $item): ?>
+                                <ul class="dropdown-menu" id="DeliverySitesList">
+                                    <?php foreach($employee_sites as $item): ?>
                                         <li>
-                                            <input type="radio" id="DeliverySite_<?=$item['ID']?>" name="DeliverySite" value="<?=$item['ID']?>">
-                                            <label for="DeliverySite_<?=$item['ID']?>"><?= empty($item['Name']) ? $item['Domen'] : $item['Name'] ?></label>
+                                            <input type="checkbox" id="DeliverySite_<?= $item['ID'] ?>" value="<?= $item['ID'] ?>">
+                                            <label for="DeliverySite_<?= $item['ID'] ?>"><?= empty($item['Name']) ? $item['Domen'] : $item['Name'] ?></label>
                                         </li>
-                                    <? endforeach ?>
+                                    <?php endforeach ?>
                                 </ul>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" id="DeliverySearchBtn" style="margin-top: 18px; padding: 9px 12px 8px;">
+                            <span class="glyphicon glyphicon-search"></span> Поиск
+                        </button>
                     </div>
                 </div>
                 <div class="row">
@@ -2452,19 +2566,24 @@
                     $(document).on('click', 'a[aria-controls=Delivery]', function(){
                         loadDeliveryData();
                     });
-                    // выбор сайта
-                    $(document).on('click', 'input[name=DeliverySite]', function(){
-                        // загружаем данные
+                    // поиск по сайтам
+                    $(document).on('click', '#DeliverySearchBtn', function(){
                         loadDeliveryData();
                     });
                     // загрузка данных
                     function loadDeliveryData(){
-                        var dSite = $('input[name=DeliverySite]:checked').val();
+                        // учитываем фильтр по сайтам
+                        var deliveryListInputs = $('#DeliverySitesList').find('input[type=checkbox]:checked'); // отмеченные чекбоксы
+                        var deliveryListIds = []; // массив для ID выбранных сайтов
+                        $.each(deliveryListInputs, function(key, item){
+                            deliveryListIds[key] = $(item).val(); // собираем ID выбранных сайтов
+                        });
+
                         $.post(
                             '/customer/getdelivery',
                             {
                                 CustomerID: <?= $customer['ID']; ?>,
-                                SiteID: (dSite || 0)
+                                SiteIDs: ((deliveryListIds.length > 0) ? deliveryListIds.join() : '')
                             },
                             function(data){
                                 if(data !== ''){
