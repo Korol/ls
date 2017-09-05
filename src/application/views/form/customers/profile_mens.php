@@ -34,7 +34,7 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                 <th>Сайт</th>
                 <th>Фото</th>
                 <th>Комментарий</th>
-                <th>Действия</th>
+                <th style="min-width: 105px;">Действия</th>
             </tr>
             </thead>
             <tbody>
