@@ -144,12 +144,12 @@
                     </li>
                     <li role="presentation">
                         <a href="#Questions" aria-controls="Questions" role="tab" data-toggle="tab">
-                            Вопросы
+                            Интервью
                         </a>
                     </li>
                     <li role="presentation">
                         <a href="#SelfDescription" aria-controls="SelfDescription" role="tab" data-toggle="tab">
-                            Самоописание
+                            О себе и избраннике
                         </a>
                     </li>
                     <li role="presentation">
