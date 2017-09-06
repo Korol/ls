@@ -25,6 +25,14 @@ class Customer_Mens extends MY_Controller {
                         'Name' => (!empty($post['Name'])) ? $post['Name'] : 'New man',
                         'Photo' => (!empty($photo)) ? $photo : '',
                         'Comment' => (!empty($post['Comment'])) ? $post['Comment'] : '',
+                        'Age' => (!empty($post['Age'])) ? $post['Age'] : '',
+                        'Nickname' => (!empty($post['Nickname'])) ? $post['Nickname'] : '',
+                        'FromWhere' => (!empty($post['FromWhere'])) ? $post['FromWhere'] : '',
+                        'IDonSite' => (!empty($post['IDonSite'])) ? $post['IDonSite'] : '',
+                        'Added' => date('Y-m-d H:i:s'),
+                        'EmployeeID' => $this->getUserID(),
+                        'EmployeeName' => $this->getEmployeeName($this->getUserID()),
+                        'Blacklist' => 0,
                     );
                     // добавляем
                     $this->getCustomerModel()->saveCustomerMen($add);
@@ -42,6 +50,13 @@ class Customer_Mens extends MY_Controller {
                             'Name' => (!empty($post['Name'])) ? $post['Name'] : $men['Name'],
                             'Photo' => (!empty($photo)) ? $photo : $men['Photo'],
                             'Comment' => (!empty($post['Comment'])) ? $post['Comment'] : $men['Comment'],
+                            'Blacklist' => (!empty($post['Blacklist'])) ? 1 : 0,
+                            'Age' => (!empty($post['Age'])) ? $post['Age'] : '',
+                            'Nickname' => (!empty($post['Nickname'])) ? $post['Nickname'] : '',
+                            'FromWhere' => (!empty($post['FromWhere'])) ? $post['FromWhere'] : '',
+                            'IDonSite' => (!empty($post['IDonSite'])) ? $post['IDonSite'] : '',
+                            'EmployeeID' => (!empty($men['EmployeeID'])) ? $men['EmployeeID'] : $this->getUserID(),
+                            'EmployeeName' => (!empty($men['EmployeeID'])) ? $this->getEmployeeName($men['EmployeeID']) : $this->getEmployeeName($this->getUserID()),
                         );
                         // обновляем
                         $this->getCustomerModel()->updateCustomerMen($post['ID'], $update);
@@ -142,6 +157,7 @@ class Customer_Mens extends MY_Controller {
                     'mensList' => $this->getCustomerModel()->getCustomerMensBySites($CustomerID, $sites),
                     'mensSitesList' => $this->getSitesForMens($CustomerID),
                     'sites' => $this->getSiteModel()->getRecords(),
+                    'translators' => $this->getCMTranslators($CustomerID),
                 ),
                 true
             );
@@ -184,6 +200,9 @@ class Customer_Mens extends MY_Controller {
         return $sites;
     }
 
+    /**
+     * получаем мужчину для редактирования в модальном окне
+     */
     public function getman()
     {
         $ManID = $this->input->post('ManID', true);
@@ -194,6 +213,48 @@ class Customer_Mens extends MY_Controller {
         else{
             $this->json_response(array("status" => 0, 'error' => 'No Man ID!'));
         }
+    }
+
+    /**
+     * получаем имя сотрудника
+     * @param $EmployeeID
+     * @return string
+     */
+    public function getEmployeeName($EmployeeID)
+    {
+        $name = '';
+        $employee = $this->getEmployeeModel()->employeeGet($EmployeeID);
+        if(!empty($employee)){
+            $name .= $employee['SName'] . ' '
+                . mb_substr($employee['FName'], 0, 1) . '. '
+                . mb_substr($employee['MName'], 0, 1) . '.';
+        }
+        return $name;
+    }
+
+    /**
+     * обновляем информацию о черном списке мужфин
+     */
+    public function blacklist()
+    {
+        $return = array('status' => 0);
+        $MenID = $this->input->post('MenID', true);
+        $Blacklist = (int)$this->input->post('Blacklist', true);
+        if(!empty($MenID)){
+            // обновляем
+            $this->getCustomerModel()->updateCustomerMen($MenID, array('Blacklist' => $Blacklist));
+            $return = array('status' => 1, 'id' => $MenID);
+        }
+        $this->json_response($return);
+    }
+
+    /**
+     * получаем список переводчиков, для Директора и Секретаря, чтоб могли указать, кто добавил мужчину
+     * @param $CustomerID
+     */
+    public function getCMTranslators($CustomerID)
+    {
+        // TODO: пока не делаю – если не потребуют
     }
 
 }
