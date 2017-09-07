@@ -25,6 +25,7 @@ class MY_Model extends CI_Model {
     const TABLE_CUSTOMER_DOCS_RIGHTS_NAME = 'assol_customer_docs_rights';
     const TABLE_CUSTOMER_MENS_NAME = 'assol_customer_mens';
     const TABLE_CUSTOMER_SITE_STATS_NAME = 'assol_customer_site_stats';
+    const TABLE_CUSTOMER_CONTACTS_NAME = 'assol_customer_contacts';
 
     const TABLE_EMPLOYEE_NAME = 'assol_employee';
     const TABLE_EMPLOYEE_HISTORY_NAME = 'assol_employee_history';

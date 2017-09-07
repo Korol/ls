@@ -1503,20 +1503,6 @@
                     </div>
                 <? endif; ?>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <textarea data-autoresize class="assol-input-style" id="Question" rows="24" placeholder="Вопросы"><?=$customer['Question']?></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <? if ($isEditQuestions): ?>
-                    <button id="QuestionDescription" class="btn assol-btn save" title="Сохранить изменения">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                        Сохранить
-                    </button>
-                <? endif ?>
             </div>
             <? if (IS_LOVE_STORY): ?>
                 <div role="tabpanel" class="tab-pane" id="Photo">
@@ -2295,6 +2281,18 @@
                 <? endif ?>
             </div>
             <div role="tabpanel" class="tab-pane" id="ReservationContactPane">
+
+                <?php
+                // новая таблица Заказа контактов
+                $this->load->view('form/customers/contacts',
+                        array(
+                            'isEdit' => $isEditReservationContactPane,
+                            'CustomerID' => $customer['ID'],
+                            'employee_sites' => $employee_sites,
+                        )
+                );
+                ?>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">

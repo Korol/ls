@@ -1949,4 +1949,68 @@ class Customer_model extends MY_Model {
 //            ->get()->row_array(); // выьираем одного
             ->get()->result_array(); // выбираем всех
     }
+
+    /**
+     * добавление запроса контактов
+     * @param $data
+     * @return mixed
+     */
+    public function addCustomerContact($data)
+    {
+        $this->db()->insert(self::TABLE_CUSTOMER_CONTACTS_NAME, $data);
+        return $this->db()->affected_rows();
+    }
+
+    /**
+     * список запросов контактов клиентки + фильтр по сайтам
+     * @param $CustomerID
+     * @param $SiteIDs
+     */
+    public function getCustomerContactsList($CustomerID, $SiteIDs)
+    {
+        $this->db()
+            ->select("cc.*, s.Name AS 'SiteName', DATE_FORMAT(cc.Date, '%d.%m.%Y') AS Date")
+            ->from(self::TABLE_CUSTOMER_CONTACTS_NAME . ' AS cc')
+            ->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = cc.SiteID')
+            ->where('CustomerID', $CustomerID);
+        if(!empty($SiteIDs)){
+            $this->db()->where_in('SiteID', $SiteIDs);
+        }
+        return $this->db()
+            ->order_by('ID', 'DESC')
+            ->get()->result_array();
+    }
+
+    /**
+     * удалить запрос контактов
+     * @param $ContactID
+     * @return mixed
+     */
+    public function removeContact($ContactID)
+    {
+        return $this->db()->delete(self::TABLE_CUSTOMER_CONTACTS_NAME, array('ID' => $ContactID));
+    }
+
+    /**
+     * получаем запрос контактов по ID
+     * @param $ContactID
+     * @return mixed
+     */
+    public function getCustomerContact($ContactID)
+    {
+        return $this->db()
+            ->get_where(self::TABLE_CUSTOMER_CONTACTS_NAME, array('ID' => $ContactID))
+            ->row_array();
+    }
+
+    /**
+     * обновляем запрос контактов
+     * @param $ContactID
+     * @param $data
+     */
+    public function updateCustomerContact($ContactID, $data)
+    {
+        $this->db()->update(self::TABLE_CUSTOMER_CONTACTS_NAME, $data, array('ID' => $ContactID));
+        return $this->db()->affected_rows();
+    }
 }

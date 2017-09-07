@@ -81,18 +81,18 @@ class MY_Controller extends CI_Controller {
     }
 
     public function view($view, $data = array()) {
-        if (IS_LOVE_STORY && $this->isBlocked()) {
-            switch ($view) {
-                case 'form/documents/index':    // Документация
-                case 'form/reports':            // Отчеты
-                    $this->load->view($view, $data);
-                    break;
-                default:
-                    $this->load->view('form/blocked');
-            }
-        } else {
+//        if (IS_LOVE_STORY && $this->isBlocked()) {
+//            switch ($view) {
+//                case 'form/documents/index':    // Документация
+//                case 'form/reports':            // Отчеты
+//                    $this->load->view($view, $data);
+//                    break;
+//                default:
+//                    $this->load->view('form/blocked');
+//            }
+//        } else {
             $this->load->view($view, $data);
-        }
+//        }
     }
 
     public function viewFooter($data = array()) {
