@@ -121,6 +121,8 @@ class Customer_Album extends MY_Controller {
                 'AlbumID' => $AlbumID,
                 'ImageID' => $ImageID,
                 'images' => $images,
+                'sites' => $sites,
+                'CustomerID' => $CustomerID,
             ),
             true
         );
@@ -352,6 +354,131 @@ class Customer_Album extends MY_Controller {
         }
         echo $res;
         return;
+    }
+
+    /**
+     * получаем информацию о связях картинки с сайтами и мужчинами на этих сайтах
+     */
+    public function getimageinfo()
+    {
+        $return = '';
+        $ImageID = $this->input->post('ImageID', true);
+        $SiteIDs = $this->input->post('SiteIDs', true); // выбор минимум одного сайта – обязателен!
+        $CustomerID = $this->input->post('CustomerID', true);
+
+        // test
+//        $ImageID = 22996;
+//        $SiteIDs = '25';
+//        $CustomerID = 92;
+
+        // если все нужные данные присутствуют – получаем и структурируем информацию
+        if(!empty($ImageID) && !empty($CustomerID) && !empty($SiteIDs)){
+            // разбиваем ID сайтов из фильтра в массив
+            $filterSitesEx = (strpos($SiteIDs, ',') !== false)
+                ? explode(',', $SiteIDs) // несколько сайтов в фильтре
+                : array((int)$SiteIDs); // один сайт в фильтре
+
+            // Получаем Сайты и Мужчин, с которыми связана Клиентка
+            // mens
+            $mens = $this->getCustomerModel()->getCustomerMens($CustomerID); // мужчины, с которыми связан Клиентка
+            $mens = toolIndexArrayBy($mens, 'ID'); // вынесли ID в ключи массива
+            // sites
+            $all_sites = $this->getSiteModel()->getRecords(); // все сайты проекта
+            $customer_sites = array(); // массив сайтов из фильтра
+            foreach ($filterSitesEx as $f_site) {
+                $customer_sites[] = array('SiteID' => $f_site); // сайт из фильтра
+            }
+            $sites = array();
+            if(!empty($all_sites) && !empty($customer_sites)){
+                $sites_all = toolIndexArrayBy($all_sites, 'ID'); // индексируем по ID
+                foreach ($customer_sites as $c_site) {
+                    if(!empty($sites_all[$c_site['SiteID']])){
+                        $sites[$c_site['SiteID']] = array('ID' => $c_site['SiteID'], 'Name' => $sites_all[$c_site['SiteID']]['Name']);
+                    }
+                }
+            }
+            // для Переводчиков
+            if($this->role['isTranslate']){
+                // фильтруем сайты Клиентки, оставляя только те, с которыми связан и Переводчик, и Клиентка
+                $cs_ids = get_keys_array($customer_sites, 'SiteID'); // ID сайтов Клиентки
+                $us_ids = get_keys_array($this->getEmployeeModel()->siteGetList($this->getUserID()), 'SiteID'); // ID сайтов Переводчика
+                $intersect_ids = array_intersect($cs_ids, $us_ids);
+                foreach($sites as $i_key => $i_site){
+                    if(!in_array($i_key, $intersect_ids)){
+                        unset($sites[$i_key]); // удаляем сайт, не связанный с Переводчиком
+                    }
+                }
+            }
+
+            // получаем связи картинки
+            $image = array(
+                'ImageID' => $ImageID,
+                'ToSites' => array(),
+                'ToMens' => array(),
+            );
+            $img_ids = array($ImageID);
+            // с сайтами
+            $images_sites = $this->getImageModel()->getImagesToSites($img_ids);
+            if(!empty($sites)){
+                // проходим по сайтам
+                foreach($sites as $sid => $sitem){
+                    // если в массиве $images_sites для этого сайта есть связь с этой картинкой – Connect = 1
+                    if(!empty($images_sites) && in_array($ImageID, $images_sites[$sid])){
+                        $image['ToSites'][] = array(
+                            'SiteID' => $sid,
+                            'SiteName' => $sitem['Name'],
+                            'SiteConnect' => 1,
+                        );
+                    }
+                    else {
+                        // если в массиве $images_sites для этого сайта нет связи с этой картинкой – Connect = 0
+                        $image['ToSites'][] = array(
+                            'SiteID' => $sid,
+                            'SiteName' => $sitem['Name'],
+                            'SiteConnect' => 0,
+                        );
+                    }
+                }
+            }
+            // с мужчинами
+            $images_mens = $this->getImageModel()->getImagesToMens($img_ids);
+            if(!empty($mens)){
+                // проходим по мужчинам
+                foreach($mens as $mid => $mitem){
+                    // если в массиве $images_mens для этого мужчины есть связь с этой картинкой – Connect = 1
+                    if(!empty($images_mens) && in_array($ImageID, array_keys($images_mens[$mid]))){
+                        $image['ToMens'][$mitem['SiteID']][] = array(
+                            'MenID' => $mid,
+                            'MenName' => $mitem['Name'],
+                            'MenPhoto' => $mitem['Photo'],
+                            'MenComment' => $images_mens[$mid][$ImageID],
+                            'MenConnect' => 1,
+                        );
+                    }
+                    else {
+                        // если в массиве $images_mens для этого мужчины нет связи с этой картинкой – Connect = 0
+                        $image['ToMens'][$mitem['SiteID']][] = array(
+                            'MenID' => $mid,
+                            'MenName' => $mitem['Name'],
+                            'MenPhoto' => $mitem['Photo'],
+                            'MenComment' => '',
+                            'MenConnect' => 0,
+                        );
+                    }
+                }
+            }
+            $return = $this->getImageFilterModalHtml($image); // получаем HTML список сайтов и мужчин для картинки
+        }
+
+        echo $return;
+    }
+
+    /**
+     * строим список сайтов и мужчин для картинки
+     */
+    public function getImageFilterModalHtml($image)
+    {
+        return $this->load->view('form/customers/album/image_filter_info', array('image' => $image), true);
     }
 
 }

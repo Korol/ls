@@ -3,9 +3,11 @@
  * @var $AlbumID
  * @var $ImageID
  * @var $images
+ * @var $sites
+ * @var $CustomerID
  */
 ?>
-<?php if(!empty($AlbumID) && !empty($ImageID) && !empty($images)): ?>
+<?php if(!empty($AlbumID) && !empty($ImageID) && !empty($images) && !empty($CustomerID)): ?>
 <style>
     .mac-opt{
         padding: 7px 15px;
@@ -23,6 +25,12 @@
         padding-top: 5px !important;
         padding-bottom: 5px !important;
     }
+    .mac-filter-dropdown{
+        /*position: relative;*/
+        z-index: 5000;
+        max-height: 300px;
+        overflow-y: scroll;
+    }
 </style>
 <div id="carousel-example-generic-album_<?=$AlbumID;?>" class="carousel slide" data-ride="carousel" data-interval="false">
     <!-- Wrapper for slides -->
@@ -30,7 +38,53 @@
         <?php foreach($images as $image): ?>
         <div class="img-item item <?= ($image['ImageID'] == $ImageID) ? 'active' : ''; ?>" id="mc_item_<?=$image['ImageID'];?>">
             <img src="<?= base_url("thumb") ?>?src=/files/images/<?=$image['ImageID'];?>.<?=$image['ext'];?>" class="img-responsive mac-image">
-            <?php if(!empty($image['ToSites'])): ?>
+
+            <?php /* фильтр по сайтам */ ?>
+            <?php if(!empty($sites)): ?>
+                <div class="row assol-grey-panel" style="padding-top: 10px; margin: 15px 0;">
+                    <div class="col-md-6 col-md-offset-2">
+                        <div class="form-group">
+                            <label for="AlbumModalSite_<?=$image['ImageID'];?>">Сайт</label>
+                            <div class="btn-group assol-select-dropdown" id="AlbumModalSite_<?=$image['ImageID'];?>">
+                                <div class="label-placement-wrap">
+                                    <button class="btn" data-label-placement>Выбрать</button>
+                                </div>
+                                <button data-toggle="dropdown" class="btn dropdown-toggle mac-dd-toggle" id="macddtoggle_<?=$image['ImageID'];?>">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu mac-filter-dropdown" id="AlbumModalSitesList_<?=$image['ImageID'];?>">
+                                    <?php foreach($sites as $site_item): ?>
+                                        <li>
+                                            <input type="checkbox" id="AlbumModalSite_<?=$image['ImageID'];?>_<?= $site_item['ID']; ?>" value="<?= $site_item['ID']; ?>">
+                                            <label for="AlbumModalSite_<?=$image['ImageID'];?>_<?= $site_item['ID']; ?>"><?= $site_item['Name']; ?></label>
+                                        </li>
+                                    <?php endforeach ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" id="AlbumModalSearchBtn_<?=$image['ImageID'];?>" style="margin-top: 18px; padding: 9px 12px 8px;">
+                            <span class="glyphicon glyphicon-search"></span> Поиск
+                        </button>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    // поиск по сайтам
+                    $(document).on('click', '#AlbumModalSearchBtn_<?=$image['ImageID'];?>', function(){
+                        var amsb_ex = this.id.split('_'); // получаем ID картинки (amsb_ex[1])
+                        loadAlbumImageData(amsb_ex[1]); // загружаем данные по выбранным сайтам
+                    });
+                </script>
+            <?php endif; // sites ?>
+            <?php /* /фильтр по сайтам */ ?>
+
+            <?php /* результат работы фильтра – список сайтов + мужчины на сайтах */ ?>
+            <div class="row" id="AlbumImageSitesMens_<?=$image['ImageID'];?>" style="margin: 15px 0;"></div>
+            <?php /* /результат работы фильтра – список сайтов + мужчины на сайтах */ ?>
+
+            <?php /*if(!empty($image['ToSites'])): ?>
             <?php foreach($image['ToSites'] as $ts): ?>
             <div class="row mac-site-row">
                 <div class="col-md-3">
@@ -99,7 +153,7 @@
                 <?php endif; // (!empty($image['ToMens'][$ts['SiteID']])) ?>
             </div>
             <?php endforeach; // foreach($image['ToSites'] as $ts) ?>
-            <?php endif; // (!empty($image['ToSites'])) ?>
+            <?php endif; // (!empty($image['ToSites'])) */?>
         </div>
         <?php endforeach; // ($images as $image) ?>
         <!-- Controls -->
@@ -118,7 +172,50 @@
     <script type="text/javascript" src="<?= base_url('public/autosize/autosize.min.js'); ?>"></script>
     <script>
         autosize($('.mac-textarea'));
+
+        // загрузка данных по фильтру сайтов
+        function loadAlbumImageData(id) {
+            // учитываем фильтр по сайтам
+            var albumModalListInputs = $('#AlbumModalSitesList_'+id).find('input[type=checkbox]:checked'); // отмеченные чекбоксы
+            var albumModalListIds = []; // массив для ID выбранных сайтов
+            $.each(albumModalListInputs, function(key, item){
+                albumModalListIds[key] = $(item).val(); // собираем ID выбранных сайтов
+            });
+
+            $.post(
+                '/Customer_Album/getimageinfo',
+                {
+                    ImageID: id,
+                    CustomerID: <?= $CustomerID;?>,
+                    SiteIDs: ((albumModalListIds.length > 0) ? albumModalListIds.join() : '')
+                },
+                function(data){
+                    if(data !== ''){
+                        $('#AlbumImageSitesMens_'+id).html('');
+                        $('#AlbumImageSitesMens_'+id).html(data);
+                    }
+                    else{
+                        $('#AlbumImageSitesMens_'+id).html('');
+                        $('#AlbumImageSitesMens_'+id).html('<h5 class="text-center">Нет данных для отображения, измените параметры фильтра</h5>');
+                    }
+                },
+                'html'
+            );
+        }
+
+        // разворот выпадающего списка в фильтре наверх - если блок с сайтами пуст или в нём менее 3-х сайтов
+        // (без этого список прячется внутри модального окна – и пунктов не видно)
+        $(document).on('click', '.mac-dd-toggle', function(){
+            var exid = this.id.split('_');
+            var fnd = $('#AlbumImageSitesMens_'+exid[1]).find('.mac-site-row');
+            if(fnd.length > 3){
+                $('#AlbumModalSite_'+exid[1]).removeClass('dropup');
+            }
+            else{
+                $('#AlbumModalSite_'+exid[1]).addClass('dropup');
+            }
+        });
     </script>
 <?php else: ?>
     <h4>Нет данных(</h4>
-<?php endif; // (!empty($AlbumID) && !empty($ImageID) && !empty($images)) ?>
+<?php endif; // (!empty($AlbumID) && !empty($ImageID) && !empty($images) && !empty($CustomerID)) ?>
