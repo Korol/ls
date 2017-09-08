@@ -127,6 +127,17 @@ class Customer_Mens extends MY_Controller {
         $return = '';
         $CustomerID = $this->input->post('CustomerID', true);
         $SiteIDs = $this->input->post('SiteIDs', true);
+        $Filters = $this->input->post('Filters', true);
+        if(!empty($Filters) && is_array($Filters)){
+            foreach ($Filters as $fk => $filter) {
+                if($filter === ''){
+                    unset($Filters[$fk]); // удаляем пустые значения из фильтра (только строки, для Blacklist оставляем 0 - Нет)
+                }
+            }
+        }
+        else{
+            $Filters = array();
+        }
 
         if(!empty($CustomerID)){
 
@@ -154,7 +165,7 @@ class Customer_Mens extends MY_Controller {
                     'customerID' => $CustomerID,
                     'isEditMens' => ($this->isDirector() || $this->isSecretary() || $this->isTranslate()),
                     'isDeleteMens' => ($this->isDirector() || $this->isSecretary()),
-                    'mensList' => $this->getCustomerModel()->getCustomerMensBySites($CustomerID, $sites),
+                    'mensList' => $this->getCustomerModel()->getCustomerMensBySites($CustomerID, $sites, $Filters),
                     'mensSitesList' => $this->getSitesForMens($CustomerID),
                     'sites' => $this->getSiteModel()->getRecords(),
                     'translators' => $this->getCMTranslators($CustomerID),

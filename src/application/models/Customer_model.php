@@ -1785,21 +1785,32 @@ class Customer_model extends MY_Model {
     }
 
     /**
-     * Список мужчин клиентки + фильтр по сайтам
+     * Список мужчин клиентки + фильтр по сайтам + остальные фильтры (имя, возраст, ник, страна/город, blacklist)
      * @param int $CustomerID
      * @param int $SiteIDs
+     * @param int $Filters
      * @param string $order_by
      * @return mixed
      */
-    public function getCustomerMensBySites($CustomerID, $SiteIDs, $order_by = 'ID DESC')
+    public function getCustomerMensBySites($CustomerID, $SiteIDs, $Filters,  $order_by = 'Name ASC')
     {
+        if(!empty($Filters)){
+            $this->db()->group_start();
+            foreach ($Filters as $fk => $filter) {
+                $this->db()->like($fk, $filter);
+            }
+            $this->db()->group_end();
+        }
         if(!empty($SiteIDs)){
             $this->db()->where_in('SiteID', $SiteIDs);
         }
         $this->db()
             ->where(array('CustomerID' => $CustomerID))
             ->order_by($order_by);
-        return $this->db()->get(self::TABLE_CUSTOMER_MENS_NAME)->result_array();
+//        return $this->db()->get(self::TABLE_CUSTOMER_MENS_NAME)->result_array();
+        $res = $this->db()->get(self::TABLE_CUSTOMER_MENS_NAME)->result_array();
+        log_message('error', $this->db()->last_query());
+        return $res;
     }
 
     /**
@@ -1809,7 +1820,12 @@ class Customer_model extends MY_Model {
      */
     public function getCustomerMen($id)
     {
-        return $this->db()->get_where(self::TABLE_CUSTOMER_MENS_NAME, array('ID' => $id))->row_array();
+        return $this->db()
+            ->select("cm.*, s.Name AS 'SiteName'")
+            ->from(self::TABLE_CUSTOMER_MENS_NAME . ' AS cm')
+            ->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = cm.SiteID')
+            ->where(array('cm.ID' => $id))
+            ->get()->row_array();
     }
 
     /**

@@ -31,6 +31,17 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
         color: #1A712C;
         visibility: hidden;
     }
+    .man-view-label{
+        width: 25%;
+        text-align: right;
+        font-weight: bold !important;
+    }
+    .man-view-value{
+        width: 75%;
+    }
+    .man-view-img{
+        margin: 0 auto 15px;
+    }
 </style>
 <?php //if($isEditMens): ?>
 <div class="row">
@@ -51,32 +62,15 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
             <thead>
             <tr>
                 <th>Фото</th>
-                <th class="sortable">Имя</th>
-                <th>ID на сайте</th>
-                <th>Никнейм</th>
-                <th>Возраст</th>
+                <th class="sortable">Имя&nbsp;&nbsp;</th>
+                <th>ID и Никнейм</th>
+                <th class="sortable">Возраст&nbsp;&nbsp;</th>
                 <th>Страна и город</th>
-                <th>Сайт</th>
+                <th class="sortable">Сайт&nbsp;&nbsp;</th>
                 <th>Переводчик</th>
-                <th>Дата добавления</th>
                 <th>Черный список</th>
-                <th>Комментарий</th>
-                <th style="min-width: 70px;"></th>
+                <th style="min-width: 100px;"></th>
             </tr>
-<!--            <tr>-->
-<!--                <td></td>-->
-<!--                <td><input type="text" class="form-control"></td>-->
-<!--                <td></td>-->
-<!--                <td><input type="text" class="form-control"></td>-->
-<!--                <td><input type="text" class="form-control"></td>-->
-<!--                <td><input type="text" class="form-control"></td>-->
-<!--                <td><input type="text" class="form-control"></td>-->
-<!--                <td></td>-->
-<!--                <td></td>-->
-<!--                <td><input type="text" class="form-control"></td>-->
-<!--                <td></td>-->
-<!--                <td></td>-->
-<!--            </tr>-->
             </thead>
             <tbody>
             <?php foreach($mensList as $men): ?>
@@ -89,24 +83,25 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                         </a><br/>
                     <?php endif; // (!empty($men['Photo'])) ?>
                 </td>
-                <td><?= $men['Name']; ?></td>
-                <td><?= $men['IDonSite']; ?></td>
-                <td><?= $men['Nickname']; ?></td>
+<!--                <td>--><?//= $men['Name']; ?><!--</td>-->
+                <td>
+                    <div class="display-popover" data-content="<?= $men['Comment']; ?>" data-original-title="">
+                        <span><?= $men['Name']; ?></span>
+                    </div>
+                </td>
+                <td><?= $men['IDonSite'] . '<br>' . $men['Nickname']; ?></td>
                 <td><?= $men['Age']; ?></td>
                 <td><?= $men['FromWhere']; ?></td>
                 <td><?= (!empty($sites[$men['SiteID']]['Name'])) ? $sites[$men['SiteID']]['Name'] : '&dash;'; ?></td>
                 <td><?= $men['EmployeeName']; ?></td>
-                <td><?= (!empty($men['Added'])) ? date('d.m.Y', strtotime($men['Added'])) : ''; ?></td>
                 <td>
                     <span class="glyphicon glyphicon-ok mens-bl-ok" id="mblok_<?= $men['ID'];?>"></span>
                     <input type="checkbox" id="mbchb_<?= $men['ID'];?>" class="mens-blacklist-chb" onclick="editBlacklist(<?= $men['ID'];?>);" <?= ($men['Blacklist'] > 0) ? 'checked="checked"' : ''; ?>>
                 </td>
                 <td>
-                    <div class="display-popover" data-content="<?= $men['Comment']; ?>" data-original-title="">
-                        <span><?= $men['Comment']; ?></span>
-                    </div>
-                </td>
-                <td>
+                    <button class="btn btn-info btn-xs" title="Просмотр" onclick="viewMen(<?= $men['ID']; ?>);">
+                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    </button>
                     <?php if($isEditMens): ?>
                     <button class="btn btn-primary btn-xs" title="Редактировать мужчину" onclick="editMen(<?= $men['ID']; ?>);">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -162,6 +157,90 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
             'json'
         );
     }
+    // редактируем мужчину в модальном окне
+    function editMen(id) {
+        $.post(
+            '/Customer_Mens/getman',
+            {
+                ManID: id
+            },
+            function(data){
+//                console.log(data);
+                if(data.man){
+                    $('#editH4ID').html(data.man.ID); // заголовок попапа
+                    $('#editID').val(data.man.ID); // ID мужчины
+                    $('#editH4Name').html(data.man.Name); // заголовок попапа
+                    $('#editName').val(data.man.Name); // Имя
+                    if(data.man.Photo){ // Фото
+                        $('#editPhoto').css('display', 'block');
+                        $('#editPhoto').attr('src', '<?= base_url("thumb") ?>/?src=/files/images/'+data.man.Photo+'&w=150');
+                    }
+                    else{
+                        $('#editPhoto').css('display', 'none');
+                    }
+                    $('#editComment').val(data.man.Comment); // Комментарий
+                    $('#editSiteID').val(data.man.SiteID); // Сайт
+                    $('#editBlacklist').val(data.man.Blacklist); // Черный список
+                    $('#editAge').val(data.man.Age); // Возраст
+                    $('#editFromWhere').val(data.man.FromWhere); // Страна и город
+                    $('#editNickname').val(data.man.Nickname); // Никнейм на сайте
+//                    $('#editEmployeeName').val(data.man.EmployeeName); // Создал сотрудник
+//                    $('#editAdded').val(data.man.Added); // Дата добавления
+                    $('#editIDonSite').val(data.man.IDonSite); // ID мужчины на Сайте
+                    $('#myModalMenEdit').modal();
+                }
+            },
+            'json'
+        );
+    }
+    // просматриваем мужчину в модальном окне
+    function viewMen(id) {
+        $.post(
+            '/Customer_Mens/getman',
+            {
+                ManID: id
+            },
+            function(data){
+//                console.log(data);
+                if(data.man){
+                    $('#viewH4ID').html(data.man.ID); // заголовок попапа
+                    $('#viewID').html(data.man.ID); // ID мужчины
+                    $('#viewH4Name').html(data.man.Name); // заголовок попапа
+                    $('#viewName').html(data.man.Name); // Имя
+                    if(data.man.Photo){ // Фото
+                        $('#viewPhoto').css('display', 'block');
+                        $('#viewPhoto').attr('src', '<?= base_url("thumb") ?>/?src=/files/images/'+data.man.Photo+'&w=150');
+                    }
+                    else{
+                        $('#viewPhoto').css('display', 'none');
+                    }
+                    $('#viewComment').html(data.man.Comment); // Комментарий
+                    $('#viewSiteID').html(data.man.SiteName); // Сайт
+                    $('#viewBlacklist').html((data.man.Blacklist*1 > 0) ? '<span class="text-danger">Да</span>' : '<span class="text-success">Нет</span>'); // Черный список
+                    $('#viewAge').html(data.man.Age); // Возраст
+                    $('#viewFromWhere').html(data.man.FromWhere); // Страна и город
+                    $('#viewNickname').html(data.man.Nickname); // Никнейм на сайте
+                    $('#viewEmployeeName').html(data.man.EmployeeName); // Создал сотрудник
+                    $('#viewAdded').html(data.man.Added); // Дата добавления
+                    $('#viewIDonSite').html(data.man.IDonSite); // ID мужчины на Сайте
+                    $('#myModalMenView').modal();
+                }
+            },
+            'json'
+        );
+    }
+
+    jQuery(document).ready(function ($) {
+        $("#tableMens").tablesorter({
+            selectorHeaders: 'thead th.sortable' // <-- здесь указываем класс, который определяет те столбцы, по которым будет работать сортировка
+        });
+
+        // popover комментариев
+        $('.display-popover').popover({
+            placement: 'right',
+            trigger: 'hover'
+        });
+    });
 </script>
 
 <!-- Add Modal -->
@@ -334,6 +413,7 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                             </div>
                         </div>
                     </div>
+                    <?php /* ?>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -350,11 +430,12 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                             </div>
                         </div>
                     </div>
+                    <?php */ ?>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="Blacklist">Мужчина в Черном списке:</label>
-                                <select name="Blacklist" id="editBlacklist" class="form-control">
+                                <select name="Blacklist" id="editBlacklist" class="form-control pm-site-select">
                                     <option value="0">Нет</option>
                                     <option value="1">Да</option>
                                 </select>
@@ -379,54 +460,74 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
     </div>
 </div>
 <!--/Edit Modal-->
-<script type="text/javascript">
-    // редактируем мужчину в модальном окне
-    function editMen(id) {
-        $.post(
-            '/Customer_Mens/getman',
-            {
-                ManID: id
-            },
-            function(data){
-//                console.log(data);
-                if(data.man){
-                    $('#editH4ID').html(data.man.ID); // заголовок попапа
-                    $('#editID').val(data.man.ID); // ID мужчины
-                    $('#editH4Name').html(data.man.Name); // заголовок попапа
-                    $('#editName').val(data.man.Name); // Имя
-                    if(data.man.Photo){ // Фото
-                        $('#editPhoto').css('display', 'block');
-                        $('#editPhoto').attr('src', '<?= base_url("thumb") ?>/?src=/files/images/'+data.man.Photo+'&w=150');
-                    }
-                    else{
-                        $('#editPhoto').css('display', 'none');
-                    }
-                    $('#editComment').val(data.man.Comment); // Комментарий
-                    $('#editSiteID').val(data.man.SiteID); // Сайт
-                    $('#editBlacklist').val(data.man.Blacklist); // Черный список
-                    $('#editAge').val(data.man.Age); // Возраст
-                    $('#editFromWhere').val(data.man.FromWhere); // Страна и город
-                    $('#editNickname').val(data.man.Nickname); // Никнейм на сайте
-                    $('#editEmployeeName').val(data.man.EmployeeName); // Создал сотрудник
-                    $('#editAdded').val(data.man.Added); // Дата добавления
-                    $('#editIDonSite').val(data.man.IDonSite); // ID мужчины на Сайте
-                    $('#myModalMenEdit').modal();
-                }
-            },
-            'json'
-        );
-    }
 
-    jQuery(document).ready(function ($) {
-        $("#tableMens").tablesorter({
-            selectorHeaders: 'thead th.sortable' // <-- здесь указываем класс, который определяет те столбцы, по которым будет работать сортировка
-        });
-
-        // popover комментариев
-        $('.display-popover').popover({
-            placement: 'left',
-            trigger: 'hover'
-        });
-    });
-
-</script>
+<!--View Modal-->
+<div class="modal fade" id="myModalMenView" tabindex="-1" role="dialog" aria-labelledby="myModalMenViewLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalMenViewLabel">Информация о мужчине #<span id="viewH4ID"></span>: <span id="viewH4Name"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="" id="viewPhoto" alt="avatar" class="man-view-img">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped" cellpadding="10" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td class="man-view-label">Имя мужчины:</td>
+                                <td class="man-view-value" id="viewName"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Возраст мужчины:</td>
+                                <td class="man-view-value" id="viewAge"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Страна и город:</td>
+                                <td class="man-view-value" id="viewFromWhere"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Сайт:</td>
+                                <td class="man-view-value" id="viewSiteID"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">ID мужчины на сайте:</td>
+                                <td class="man-view-value" id="viewIDonSite"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Никнейм:</td>
+                                <td class="man-view-value" id="viewNickname"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Переводчик:</td>
+                                <td class="man-view-value" id="viewEmployeeName"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Дата добавления:</td>
+                                <td class="man-view-value" id="viewAdded"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">В Черном списке:</td>
+                                <td class="man-view-value" id="viewBlacklist"></td>
+                            </tr>
+                            <tr>
+                                <td class="man-view-label">Комментарий:</td>
+                                <td class="man-view-value" id="viewComment"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/View Modal-->

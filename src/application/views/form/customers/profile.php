@@ -1233,8 +1233,55 @@
                 <? endif ?>
             </div>
             <div role="tabpanel" class="tab-pane" id="Mens">
-                <div class="row assol-grey-panel" style="padding-top: 10px; margin-bottom: 15px;">
-                    <div class="col-md-4">
+                <style>
+                    .mens-filter-block{
+                        padding-top: 10px; margin-bottom: 15px;
+                    }
+                    .mens-filter-block > .col-md-1,
+                    .mens-filter-block > .col-md-2{
+                        padding-left: 10px;
+                        padding-right: 10px;
+                    }
+                    .mens-filter-block option{
+                        padding: 4px;
+                    }
+                </style>
+                <div class="row assol-grey-panel mens-filter-block">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Имя</label>
+                            <input type="text" id="mfName" class="assol-input-style">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="">Возраст</label>
+                            <input type="text" id="mfAge" class="assol-input-style">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Никнейм</label>
+                            <input type="text" id="mfNickname" class="assol-input-style">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Страна/Город</label>
+                            <input type="text" id="mfFromWhere" class="assol-input-style">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Черный список</label>
+                            <select id="mfBlacklist" class="form-control assol-btn-style">
+                                <option value="0">&nbsp;</option>
+                                <option value="2">Да</option><?php /* значение на 1 больше */ ?>
+                                <option value="1">Нет</option><?php /* значение на 1 больше */ ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="MensSite">Сайт</label>
                             <div class="btn-group assol-select-dropdown" id="MensSite">
@@ -1255,9 +1302,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <button class="btn btn-default" id="MensSearchBtn" style="margin-top: 18px; padding: 9px 12px 8px;">
-                            <span class="glyphicon glyphicon-search"></span> Поиск
+                            <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </div>
                 </div>
@@ -1298,12 +1345,22 @@
                         $.each(mensListInputs, function(key, item){
                             mensListIds[key] = $(item).val(); // собираем ID выбранных сайтов
                         });
+                        // учитываем остальные фильтры
+                        var mensFilters = {};
+                        mensFilters['Name'] = $('#mfName').val();
+                        mensFilters['Age'] = $('#mfAge').val();
+                        mensFilters['Nickname'] = $('#mfNickname').val();
+                        mensFilters['FromWhere'] = $('#mfFromWhere').val();
+                        if(($('#mfBlacklist').val()*1 > 0)){
+                            mensFilters['Blacklist'] = ($('#mfBlacklist').val()*1 - 1);
+                        }
 
                         $.post(
                             '/Customer_Mens/filter',
                             {
                                 CustomerID: <?= $customer['ID']; ?>,
-                                SiteIDs: ((mensListIds.length > 0) ? mensListIds.join() : '')
+                                SiteIDs: ((mensListIds.length > 0) ? mensListIds.join() : ''),
+                                Filters: mensFilters
                             },
                             function(data){
                                 if(data !== ''){
