@@ -30,8 +30,8 @@ class Customer_Mens extends MY_Controller {
                         'FromWhere' => (!empty($post['FromWhere'])) ? $post['FromWhere'] : '',
                         'IDonSite' => (!empty($post['IDonSite'])) ? $post['IDonSite'] : '',
                         'Added' => date('Y-m-d H:i:s'),
-                        'EmployeeID' => $this->getUserID(),
-                        'EmployeeName' => $this->getEmployeeName($this->getUserID()),
+                        'EmployeeID' => $post['EmployeeID'],
+                        'EmployeeName' => $this->getEmployeeName($post['EmployeeID']),
                         'Blacklist' => 0,
                     );
                     // добавляем
@@ -55,8 +55,8 @@ class Customer_Mens extends MY_Controller {
                             'Nickname' => (!empty($post['Nickname'])) ? $post['Nickname'] : '',
                             'FromWhere' => (!empty($post['FromWhere'])) ? $post['FromWhere'] : '',
                             'IDonSite' => (!empty($post['IDonSite'])) ? $post['IDonSite'] : '',
-                            'EmployeeID' => (!empty($men['EmployeeID'])) ? $men['EmployeeID'] : $this->getUserID(),
-                            'EmployeeName' => (!empty($men['EmployeeID'])) ? $this->getEmployeeName($men['EmployeeID']) : $this->getEmployeeName($this->getUserID()),
+                            'EmployeeID' => $post['EmployeeID'],
+                            'EmployeeName' => $this->getEmployeeName($post['EmployeeID']),
                         );
                         // обновляем
                         $this->getCustomerModel()->updateCustomerMen($post['ID'], $update);
@@ -262,10 +262,21 @@ class Customer_Mens extends MY_Controller {
     /**
      * получаем список переводчиков, для Директора и Секретаря, чтоб могли указать, кто добавил мужчину
      * @param $CustomerID
+     * @return array
      */
     public function getCMTranslators($CustomerID)
     {
-        // TODO: пока не делаю – если не потребуют
+        $return = array();
+        $translators = $this->getCustomerModel()->getCustomerTranslatorsList($CustomerID);
+        if(!empty($translators)){
+            foreach ($translators as $translator) {
+                // формируем массив для dropdown list (ID => Employee Name)
+                $return[$translator['ID']] = trim($translator['SName']) . ' '
+                    . mb_substr(trim($translator['FName']), 0, 1) . '.'
+                    . mb_substr(trim($translator['MName']), 0, 1) . '.';
+            }
+        }
+        return $return;
     }
 
 }

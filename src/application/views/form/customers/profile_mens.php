@@ -9,7 +9,6 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
     .display-popover{
         max-width: 90px;
         max-height: 20px;
-        overflow: hidden;
         text-decoration: underline;
     }
     .display-popover:hover{
@@ -86,7 +85,7 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
 <!--                <td>--><?//= $men['Name']; ?><!--</td>-->
                 <td>
                     <div class="display-popover" data-content="<?= $men['Comment']; ?>" data-original-title="">
-                        <span><?= $men['Name']; ?></span>
+                        <?= $men['Name']; ?>
                     </div>
                 </td>
                 <td><?= $men['IDonSite'] . '<br>' . $men['Nickname']; ?></td>
@@ -184,7 +183,7 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                     $('#editAge').val(data.man.Age); // Возраст
                     $('#editFromWhere').val(data.man.FromWhere); // Страна и город
                     $('#editNickname').val(data.man.Nickname); // Никнейм на сайте
-//                    $('#editEmployeeName').val(data.man.EmployeeName); // Создал сотрудник
+                    $('#editEmployeeID').val(data.man.EmployeeID); // Создал сотрудник
 //                    $('#editAdded').val(data.man.Added); // Дата добавления
                     $('#editIDonSite').val(data.man.IDonSite); // ID мужчины на Сайте
                     $('#myModalMenEdit').modal();
@@ -318,6 +317,20 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="EmployeeID">Переводчик:</label>
+                                <select name="EmployeeID" class="form-control pm-site-select">
+                                    <?php
+                                    foreach($translators as $t_key => $trans){
+                                        echo '<option value="' . $t_key . '">' . $trans . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="">Комментарий о мужчине:</label>
@@ -389,7 +402,6 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                                 <select name="SiteID" id="editSiteID" class="form-control pm-site-select">
                                     <?php
                                     foreach($mensSitesList as $msl){
-//                                        $selected = ($msl['ID'] == $men['SiteID']) ? 'selected="selected"' : '';
                                         echo '<option value="' . $msl['ID'] . '">' . $msl['Name'] . '</option>';
                                     }
                                     ?>
@@ -413,24 +425,6 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                             </div>
                         </div>
                     </div>
-                    <?php /* ?>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="EmployeeName">Переводчик:</label>
-                                <input type="text" name="EmployeeName" id="editEmployeeName" class="form-control" placeholder="Создал сотрудник" readonly/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="Added">Дата добавления:</label>
-                                <input type="text" name="Added" id="editAdded" class="form-control" placeholder="Дата добавления" readonly/>
-                            </div>
-                        </div>
-                    </div>
-                    <?php */ ?>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -438,6 +432,20 @@ $sites = (!empty($sites)) ? toolIndexArrayBy($sites, 'ID') : array();
                                 <select name="Blacklist" id="editBlacklist" class="form-control pm-site-select">
                                     <option value="0">Нет</option>
                                     <option value="1">Да</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="EmployeeID">Переводчик:</label>
+                                <select name="EmployeeID" id="editEmployeeID" class="form-control pm-site-select">
+                                    <?php
+                                    foreach($translators as $t_key => $trans){
+                                        echo '<option value="' . $t_key . '">' . $trans . '</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

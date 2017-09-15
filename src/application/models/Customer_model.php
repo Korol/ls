@@ -2029,4 +2029,37 @@ class Customer_model extends MY_Model {
         $this->db()->update(self::TABLE_CUSTOMER_CONTACTS_NAME, $data, array('ID' => $ContactID));
         return $this->db()->affected_rows();
     }
+
+    /**
+     * список переводчиков, с которыми связана клиентка
+     * @param $CustomerID
+     * @return array
+     */
+    public function getCustomerTranslatorsList($CustomerID)
+    {
+        $return = array();
+        // полный список, с повторами сотрудников
+        $fullLList = $this->db()
+            ->select('esc.EmployeeSiteID, es.EmployeeID, e.ID, e.SName, e.FName, e.MName')
+            ->from(self::TABLE_EMPLOYEE_SITE_CUSTOMER_NAME . ' AS esc')
+            ->join(self::TABLE_EMPLOYEE_SITE_NAME . ' AS es', 'es.ID = esc.EmployeeSiteID')
+            ->join(self::TABLE_EMPLOYEE_NAME . ' AS e', 'e.ID = es.EmployeeID')
+            ->where(
+                array(
+                    'esc.CustomerID' => $CustomerID,
+                    'esc.IsDeleted' => 0,
+                    'e.UserRole' => 10003,
+                    'e.IsDeleted' => 0,
+                    'e.IsBlocked' => 0,
+                )
+            )
+            ->get()->result_array();
+        if(!empty($fullLList)){
+            // удаляем повторы
+            foreach ($fullLList as $item) {
+                $return[$item['ID']] = $item;
+            }
+        }
+        return (!empty($return)) ? array_order_by($return, 'SName', SORT_ASC) : array();
+    }
 }
