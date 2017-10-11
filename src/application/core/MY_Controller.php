@@ -349,6 +349,16 @@ class MY_Controller extends CI_Controller {
     }
 
     /**
+     * @return Card_model
+     */
+    protected function getCardModel() {
+        if (!isset($this->card_model))
+            $this->load->model('card_model');
+
+        return $this->card_model;
+    }
+
+    /**
      * Статус блокировки для сайта LoveStory
      *
      *@return true если отчет не заполнялся несколько дней и текущий пользователь переводчик
@@ -414,6 +424,10 @@ class MY_Controller extends CI_Controller {
         // 9. Пункт меню для роли "Директор"
         if ($this->isDirector())
             $menu[] = ['controller'=>'setting', 'description'=>'Настройки'];
+
+        // 10. Пункт меню «Кредитные карты» для роли "Директор"
+        if ($this->isDirector())
+            $menu[] = ['controller'=>'cards', 'description'=>'Кредитные карты'];
 
         return $menu;
     }

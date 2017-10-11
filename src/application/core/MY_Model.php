@@ -87,6 +87,8 @@ class MY_Model extends CI_Model {
     const TABLE_TRAINING_NAME = 'assol_training';
     const TABLE_TRAINING_RIGHTS_NAME = 'assol_training_rights';
 
+    const TABLE_CARD_NAME = 'assol_card';
+
     /**
      * MY_Model constructor.
      */
