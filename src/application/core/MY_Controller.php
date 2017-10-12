@@ -20,6 +20,12 @@ class MY_Controller extends CI_Controller {
     var $user;
     var $role;
 
+    public $currencies = array(
+        'USD' => 'USD',
+        'EUR' => 'EUR',
+        'UAH' => 'UAH',
+    );
+
     function __construct($isInit = true) {
         parent::__construct();
 
@@ -71,8 +77,8 @@ class MY_Controller extends CI_Controller {
         }
     }
 
-    public function viewHeader($data = array()) {
-        $this->load->view('header', array_merge([
+    public function viewHeader($data = array(), $view = 'header') {
+        $this->load->view($view, array_merge([
             'role' => $this->role,
             'user' => $this->user,
             'menu' => $this->getMenu(),
@@ -359,6 +365,16 @@ class MY_Controller extends CI_Controller {
     }
 
     /**
+     * @return Finance_model
+     */
+    protected function getFinanceModel() {
+        if (!isset($this->finance_model))
+            $this->load->model('finance_model');
+
+        return $this->finance_model;
+    }
+
+    /**
      * Статус блокировки для сайта LoveStory
      *
      *@return true если отчет не заполнялся несколько дней и текущий пользователь переводчик
@@ -428,6 +444,10 @@ class MY_Controller extends CI_Controller {
         // 10. Пункт меню «Кредитные карты» для роли "Директор"
         if ($this->isDirector())
             $menu[] = ['controller'=>'cards', 'description'=>'Кредитные карты'];
+
+        // 11. Пункт меню «Финансовый отчет» для роли "Директор"
+        if ($this->isDirector())
+            $menu[] = ['controller'=>'finance', 'description'=>'Финансовый отчет'];
 
         return $menu;
     }

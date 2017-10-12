@@ -6,11 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Cards extends MY_Controller
 {
-    public $currencies = array(
-        'USD' => 'USD',
-        'EUR' => 'EUR',
-        'UAH' => 'UAH',
-    );
 
     public function __construct()
     {
@@ -44,8 +39,8 @@ class Cards extends MY_Controller
 
             if (empty($Name))
                 throw new RuntimeException("Не указано название");
-            if (empty($Number))
-                throw new RuntimeException("Не указан номер");
+//            if (empty($Number))
+//                throw new RuntimeException("Не указан номер"); // не обязательно – потому, что Наличка
             if (empty($Currency))
                 throw new RuntimeException("Не указана валюта");
 
@@ -115,6 +110,17 @@ class Cards extends MY_Controller
         } catch (Exception $e) {
             $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
         }
+    }
+
+    /**
+     * temp
+     */
+    public function finance()
+    {
+        $data['currencies'] = $this->currencies;
+        $this->viewHeader();
+        $this->view('form/finance/index', $data);
+        $this->viewFooter();
     }
 
 }

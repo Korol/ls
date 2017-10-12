@@ -50,8 +50,8 @@ $isEdit = true;
         <form class="form-inline pull-right" id="addCard">
             <input type="hidden" name="isNew" value="1">
             <div class="form-group">
-                <label class="sr-only" for="Name">Нозвание карты</label>
-                <input name="Name" type="text" class="form-control" id="Name" placeholder="Название карты">
+                <label class="sr-only" for="Name">Название карты</label>
+                <input name="Name" type="text" class="form-control" id="Name" placeholder="Название карты *">
             </div>
             <div class="form-group">
                 <label class="sr-only" for="Number">Номер карты</label>
@@ -71,23 +71,10 @@ $isEdit = true;
                 ?>
                 </select>
             </div>
-            <button type="button" id="addNewCard" class="btn btn-success">Добавить карту</button>
+            <button type="button" id="addNewCard" class="btn btn-default">Добавить карту</button>
         </form>
     </div>
 </div>
-<?php /*div class="row">
-    <div class="col-md-6 col-md-offset-6">
-        <div id="formError" class="alert alert-danger alert-dismissible" role="alert">
-            <strong>Внимание!</strong> Вы не указали один из параметров!<br>Карта НЕ добавлена!
-        </div>
-        <div id="formSuccess" class="alert alert-success alert-dismissible" role="alert">
-            Новая карта успешно добавлена!
-        </div>
-        <div id="editSuccess" class="alert alert-success alert-dismissible" role="alert">
-            Карта успешно обновлена!
-        </div>
-    </div>
-</div*/?>
 
 <div class="row card-table-block">
     <div class="col-md-12" id="cardTable"></div>
@@ -230,10 +217,10 @@ $isEdit = true;
         <td>{{if $data.Active > 0}}Да{{else}}Нет{{/if}}</td>
         <?php if(!empty($isEdit)): ?>
         <td>
-            <button class="btn btn-primary btn-xs" onclick="getCardToEdit(${ID});">
+            <button class="btn btn-default btn-xs" onclick="getCardToEdit(${ID});">
                 <span class="glyphicon glyphicon-pencil"></span>
             </button>
-            <button class="btn btn-danger btn-xs" onclick="if(confirm('Вы действительно хотите удалить эту карту?')){ removeCard(${ID}); }">
+            <button class="btn btn-default btn-xs" onclick="if(confirm('Вы действительно хотите удалить эту карту?')){ removeCard(${ID}); }">
                 <span class="glyphicon glyphicon-trash"></span>
             </button>
         </td>
