@@ -11,13 +11,6 @@ $isEdit = true;
     #editActive option {
         padding: 5px;
     }
-    #formError,
-    #formSuccess,
-    #editSuccess {
-        display: none;
-        margin-top: 15px;
-        text-align: center;
-    }
     .card-table-block {
         margin: 20px 0;
     }
@@ -28,6 +21,13 @@ $isEdit = true;
     #editActive{
         width: 150px;
     }
+    .card-messages .alert {
+        padding: 9px;
+        margin-bottom: 0;
+        margin-top: 0;
+        display: none;
+        text-align: center;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -35,7 +35,18 @@ $isEdit = true;
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4 card-messages">
+        <div id="formError" class="alert alert-danger alert-dismissible" role="alert">
+            Карта НЕ добавлена! Заполните все поля!
+        </div>
+        <div id="formSuccess" class="alert alert-success alert-dismissible" role="alert">
+            Новая карта успешно добавлена!
+        </div>
+        <div id="editSuccess" class="alert alert-success alert-dismissible" role="alert">
+            Карта успешно обновлена!
+        </div>
+    </div>
+    <div class="col-md-8">
         <form class="form-inline pull-right" id="addCard">
             <input type="hidden" name="isNew" value="1">
             <div class="form-group">
@@ -64,7 +75,7 @@ $isEdit = true;
         </form>
     </div>
 </div>
-<div class="row">
+<?php /*div class="row">
     <div class="col-md-6 col-md-offset-6">
         <div id="formError" class="alert alert-danger alert-dismissible" role="alert">
             <strong>Внимание!</strong> Вы не указали один из параметров!<br>Карта НЕ добавлена!
@@ -76,7 +87,7 @@ $isEdit = true;
             Карта успешно обновлена!
         </div>
     </div>
-</div>
+</div*/?>
 
 <div class="row card-table-block">
     <div class="col-md-12" id="cardTable"></div>
@@ -94,6 +105,7 @@ $isEdit = true;
                     if(data.status){
                         $('#formSuccess').show().delay(4000).fadeOut();
                         loadCardTable();
+                        $('#addCard')[0].reset();
                     }
                     else{
                         showFormError();

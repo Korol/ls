@@ -53,6 +53,7 @@ class Card_model extends MY_Model
                 )
             );
         return $this->db()
+            ->where('Deleted', 0)
             ->get(self::TABLE_CARD_NAME)->result_array();
     }
 
@@ -74,6 +75,7 @@ class Card_model extends MY_Model
             ->select('c.*, e.SName, e.FName')
             ->from(self::TABLE_CARD_NAME . ' AS c')
             ->join(self::TABLE_EMPLOYEE_NAME . ' AS e', 'e.ID = c.id')
+            ->where('c.Deleted', 0)
             ->get()->result_array();
     }
 
@@ -124,7 +126,29 @@ class Card_model extends MY_Model
             );
         return $this->db()
             ->where('ID', $id)
+            ->where('Deleted', 0)
             ->limit(1)
             ->get(self::TABLE_CARD_NAME)->row_array();
+    }
+
+    /**
+     * удаление карты
+     * физически НЕ удаляем – только ставим отметку Deleted = 1
+     * и снимаем активность (Active = 0)
+     * @param $id
+     * @return mixed
+     */
+    public function deleteCard($id)
+    {
+        $this->db()->update(
+            self::TABLE_CARD_NAME,
+            array(
+                'Active' => 0,
+                'Deleted' => 1
+            ),
+            array('ID' => $id)
+        );
+
+        return $this->db()->affected_rows();
     }
 }

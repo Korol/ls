@@ -102,4 +102,19 @@ class Cards extends MY_Controller
         }
     }
 
+    public function remove()
+    {
+        try {
+            $ID = $this->input->post('ID', true);
+            if (empty($ID))
+                throw new RuntimeException("Не указана карта для удаления");
+
+            $status = $this->getCardModel()->deleteCard($ID);
+
+            $this->json_response(array("status" => $status));
+        } catch (Exception $e) {
+            $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
+        }
+    }
+
 }
