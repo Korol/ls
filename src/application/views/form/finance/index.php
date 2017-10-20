@@ -5,24 +5,10 @@
  * @var $cards
  * @var $employees
  */
-// TODO: сообщения успех|ошибка в шапке страницы
 // TODO: модальное окно для показа деталей по операциям за выбранный период
 // TODO: выяснить вопрос по сортировке: если по клику на заголовок открывается модалка – то какая нах тут сортировка???
+// TODO: tablesorter похоже не работает с .tmpl – попробовать рендерить готовую таблицу с сортировкой (fuck!!!!!!)
 
-$types_in = array(
-    'receipts' => 'Поступление',
-    'meeting' => 'Встреча',
-    'western' => 'Вестерн',
-    'apartment' => 'Квартира',
-    'transfer' => 'Трансфер',
-    'reserve' => 'Резерв',
-);
-$types_out = array(
-    'office' => 'Офис',
-    'charity' => 'Благотворительность',
-    'salary' => 'Зарплата',
-    'exchange' => 'Обмен',
-);
 $sites = (!empty($sites)) ? $sites : array();
 $cards = (!empty($cards)) ? $cards : array();
 $employees = (!empty($employees)) ? $employees : array();
@@ -67,6 +53,10 @@ $employees = (!empty($employees)) ? $employees : array();
     .th-light-grey {
         background-color: #f2f2f2;
     }
+    .th-grey,
+    .th-light-grey {
+        font-weight: bold !important;
+    }
     .fin-table > thead > tr > th {
         text-align: center;
     }
@@ -94,6 +84,36 @@ $employees = (!empty($employees)) ? $employees : array();
         font-weight: normal;
         margin-left: 25px;
     }
+    #operationSuccess,
+    #operationError,
+    #formResponse {
+        display: none;
+        text-align: center;
+    }
+    #operationSuccess,
+    #operationError {
+        margin-top: 30px;
+        padding: 10px 15px;
+        margin-bottom: 0;
+    }
+    .table.fin-table > tbody > tr > td {
+        border: 1px solid #ddd !important;
+    }
+    .hide-zeros {
+        color: #DEDEE6 !important;
+    }
+    /*.fin-table > thead > tr > th > span.glyphicon-sort {*/
+        /*position: relative;*/
+        /*right: 0;*/
+        /*margin-left: 5px;*/
+    /*}*/
+    .fin-table-sort {
+        width: 20px;
+        padding: 15px 10px;
+        position: absolute;
+        cursor: pointer;
+        top: 40px;
+    }
 </style>
 
 <div class="row">
@@ -120,7 +140,10 @@ $employees = (!empty($employees)) ? $employees : array();
             <span class="glyphicon glyphicon-search"></span> Показать
         </button>
     </div>
-    <div class="col-md-4">messages here!</div>
+    <div class="col-md-4">
+        <div class="alert alert-success" role="alert" id="operationSuccess"></div>
+        <div class="alert alert-danger" role="alert" id="operationError"></div>
+    </div>
     <div class="col-md-3 clearfix">
         <button class="btn btn-default pull-right" id="addOperation">Добавить операцию</button>
     </div>
@@ -156,13 +179,40 @@ $employees = (!empty($employees)) ? $employees : array();
             fillFinanceTable();
         });
 
-        // добавить новую операцию
+        // показать модальное окно добавления новой операции
         $('#addOperation').click(function () {
+            $('#formResponse').html('').hide();
             $('#myAddOperation').modal('show');
+        });
+
+        // добавление новой операции
+        $('#addOperationBtn').click(function () {
+            $('#formResponse').html('').hide();
+            $.post(
+                '/finance/add/',
+                {
+                    form: $('#addOperationForm').serialize()
+                },
+                function (data) {
+                    console.log(data);
+                    if(data.status){
+                        $('#myAddOperation').modal('hide');
+                        $('#operationSuccess').html(data.message);
+                        $('#operationSuccess').show().delay(4000).fadeOut();
+                        $('#addOperationForm')[0].reset();
+                        fillFinanceTable();
+                    }
+                    else{
+                        $('#formResponse').html(data.message).show();
+                    }
+                },
+                'json'
+            );
         });
 
     });
 
+    // запрос и отображение данных по операциям этого типа за данный период
     $(document).on('click','th.th-info',function(){
         var dataType = $(this).attr('data-type');
         var dataId = $(this).attr('data-id');
@@ -170,7 +220,7 @@ $employees = (!empty($employees)) ? $employees : array();
             var fromD = $('#dateFrom').val();
             var toD = $('#dateTo').val();
             console.log(dataType, dataId, fromD, toD);
-            // запрос и отображение данных по операциям этого типа за данный период
+
 
         });
     });
@@ -211,14 +261,14 @@ $employees = (!empty($employees)) ? $employees : array();
 
     // загружаем таблицу с данными за выбранный период времени
     fillFinanceTable();
-    
+
 </script>
 
 <?php /* ШАБЛОНЫ */ ?>
 
 <?php /* шаблон таблицы */ ?>
 <script id="finTableTmpl" type="text/x-jquery-tmpl">
-    <table class="table table-bordered table-striped fin-table">
+    <table id="fin_table" class="table table-bordered table-striped fin-table">
         <thead>
             <tr>
                 <th></th>
@@ -235,9 +285,9 @@ $employees = (!empty($employees)) ? $employees : array();
                 <th>Трансфер</th>
                 <th>Обмен</th>
                 <th>Резерв</th>
-                <th class="th-grey">Итого приход</th>
+                <th class="th-grey">Итого приход<span class="fin-table-sort"></span></th>
                 <th>Офис</th>
-                <th>Благотворительность</th>
+                <th>Благо</th>
                 <th>Зарплата</th>
                 <th>Обмен</th>
                 <th class="th-grey">Итого расход</th>
@@ -260,21 +310,21 @@ $employees = (!empty($employees)) ? $employees : array();
 <?php /* шаблон строки в таблице */ ?>
 <script id="finRowTmpl" type="text/x-jquery-tmpl">
     <tr">
-        <td>${CardName}</td>
-        <td>${Receipts}</td>
-        <td>${Meeting}</td>
-        <td>${Western}</td>
-        <td>${Apartment}</td>
-        <td>${Transfer}</td>
-        <td class="th-grey">${ExchangeIn}</td>
-        <td>${Reserve}</td>
-        <td>${TotalIn}</td>
-        <td>${Office}</td>
-        <td>${Charity}</td>
-        <td>${Salary}</td>
-        <td>${ExchangeOut}</td>
-        <td class="th-grey">${TotalOut}</td>
-        <td class="th-dark-grey">${Total}</td>
+        <td>${card_name}</td>
+        <td class="{{if income.receipts === '0.00'}}hide-zeros{{/if}}">${income.receipts}</td>
+        <td class="{{if income.meeting === '0.00'}}hide-zeros{{/if}}">${income.meeting}</td>
+        <td class="{{if income.western === '0.00'}}hide-zeros{{/if}}">${income.western}</td>
+        <td class="{{if income.apartment === '0.00'}}hide-zeros{{/if}}">${income.apartment}</td>
+        <td class="{{if income.transfer === '0.00'}}hide-zeros{{/if}}">${income.transfer}</td>
+        <td class="{{if income.exchange_in === '0.00'}}hide-zeros{{/if}}">${income.exchange_in}</td>
+        <td class="{{if income.reserve === '0.00'}}hide-zeros{{/if}}">${income.reserve}</td>
+        <td class="th-grey">${income.total}</td>
+        <td class="{{if outcome.office === '0.00'}}hide-zeros{{/if}}">${outcome.office}</td>
+        <td class="{{if outcome.charity === '0.00'}}hide-zeros{{/if}}">${outcome.charity}</td>
+        <td class="{{if outcome.salary === '0.00'}}hide-zeros{{/if}}">${outcome.salary}</td>
+        <td class="{{if outcome.exchange_out === '0.00'}}hide-zeros{{/if}}">${outcome.exchange_out}</td>
+        <td class="th-grey">${outcome.total}</td>
+        <td class="th-light-grey">${total}</td>
     </tr>
 </script>
 
@@ -385,8 +435,8 @@ $employees = (!empty($employees)) ? $employees : array();
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="modalOutCustomer">Сотрудник: <span class="grey-help">(это имеет смысл только если Категория расходов = Зарплата)</span></label>
-                                                    <select name="modalOutCustomer" id="modalOutCustomer" class="form-control">
+                                                    <label for="modalOutEmployee">Сотрудник: <span class="grey-help">(это имеет смысл только если Категория расходов = Зарплата)</span></label>
+                                                    <select name="modalOutEmployee" id="modalOutEmployee" class="form-control">
                                                         <option value="0">--- Выберите сотрудника ---</option>
                                                         <?php foreach ($employees as $employee): ?>
                                                             <option value="<?= $employee['ID']; ?>"><?= $employee['SName']; ?> <?= $employee['FName']; ?></option>
@@ -429,6 +479,7 @@ $employees = (!empty($employees)) ? $employees : array();
                                                     <label for="modalExCard">Карта/наличные:</label>
                                                     <select name="modalExCard" id="modalExCard" class="form-control">
                                                         <?php foreach ($cards as $card): ?>
+                                                            <?php if($card['Currency'] == 'UAH') continue; ?>
                                                             <option value="<?= $card['ID']; ?>">
                                                                 <?= $card['Name']; ?>, <?= $card['Currency']; ?>
                                                             </option>
@@ -462,6 +513,7 @@ $employees = (!empty($employees)) ? $employees : array();
                             </div>
                         </div>
                     </form>
+                    <div id="formResponse" class="alert alert-danger" role="alert"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отменить и закрыть</button>

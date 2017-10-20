@@ -8,7 +8,7 @@ class Card_model extends MY_Model
 {
 
     private $table_card = "
-        CREATE TABLE `assol_card` (
+        CREATE TABLE `finance_card` (
           `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
           `Name` varchar(255) DEFAULT NULL,
           `Number` varchar(255) DEFAULT NULL,
@@ -35,7 +35,7 @@ class Card_model extends MY_Model
     {
         $this->load->dbforge();
 
-        $this->dbforge->drop_table(self::TABLE_CARD_NAME, TRUE);
+        $this->dbforge->drop_table(self::TABLE_FINANCE_CARD, TRUE);
     }
 
     /**
@@ -54,7 +54,25 @@ class Card_model extends MY_Model
             );
         return $this->db()
             ->where('Deleted', 0)
-            ->get(self::TABLE_CARD_NAME)->result_array();
+            ->order_by('Nal ASC, Name ASC, Currency ASC')
+            ->get(self::TABLE_FINANCE_CARD)->result_array();
+    }
+
+    /**
+     * Список карт для редактирования в Админке
+     * без карт с флагом Nal=1 (это наличные в трёх валютах)
+     * @return mixed
+     */
+    public function getAdminCardsList()
+    {
+        $this->db()->where(
+            array(
+                'Nal' => 0,
+                'Deleted' => 0
+            )
+        );
+        return $this->db()
+            ->get(self::TABLE_FINANCE_CARD)->result_array();
     }
 
     /**
@@ -73,7 +91,7 @@ class Card_model extends MY_Model
             );
         return $this->db()
             ->select('c.*, e.SName, e.FName')
-            ->from(self::TABLE_CARD_NAME . ' AS c')
+            ->from(self::TABLE_FINANCE_CARD . ' AS c')
             ->join(self::TABLE_EMPLOYEE_NAME . ' AS e', 'e.ID = c.id')
             ->where('c.Deleted', 0)
             ->get()->result_array();
@@ -87,7 +105,7 @@ class Card_model extends MY_Model
     public function insertCard($data)
     {
         $this->db()->insert(
-            self::TABLE_CARD_NAME,
+            self::TABLE_FINANCE_CARD,
             $data
         );
         return $this->db()->affected_rows();
@@ -102,7 +120,7 @@ class Card_model extends MY_Model
     public function updateCard($data, $id)
     {
         $this->db()->update(
-            self::TABLE_CARD_NAME,
+            self::TABLE_FINANCE_CARD,
             $data,
             array('ID' => $id)
         );
@@ -128,7 +146,26 @@ class Card_model extends MY_Model
             ->where('ID', $id)
             ->where('Deleted', 0)
             ->limit(1)
-            ->get(self::TABLE_CARD_NAME)->row_array();
+            ->get(self::TABLE_FINANCE_CARD)->row_array();
+    }
+
+    /**
+     * получаем одну карту для редактирования в Админке
+     * @param $id
+     * @return mixed
+     */
+    public function getAdminCard($id)
+    {
+        $this->db()->where(
+            array(
+                'Nal' => 0,
+                'Deleted' => 0
+            )
+        );
+        return $this->db()
+            ->where('ID', $id)
+            ->limit(1)
+            ->get(self::TABLE_FINANCE_CARD)->row_array();
     }
 
     /**
@@ -141,7 +178,7 @@ class Card_model extends MY_Model
     public function deleteCard($id)
     {
         $this->db()->update(
-            self::TABLE_CARD_NAME,
+            self::TABLE_FINANCE_CARD,
             array(
                 'Active' => 0,
                 'Deleted' => 1

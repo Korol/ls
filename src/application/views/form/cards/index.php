@@ -55,7 +55,7 @@ $isEdit = true;
             </div>
             <div class="form-group">
                 <label class="sr-only" for="Number">Номер карты</label>
-                <input name="Number" type="text" class="form-control" id="Number" placeholder="Номер карты">
+                <input name="Number" type="text" class="form-control" id="Number" placeholder="Номер карты *">
             </div>
             <div class="form-group">
                 <label class="sr-only" for="Currency">Валюта</label>

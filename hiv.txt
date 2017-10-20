@@ -36,6 +36,9 @@ log_message('error', $this->db()->get_compiled_select());
 
 Sortable table:
 0. для таблицы указываем  class="tablesorter"!
+на странице подключить скрипты и стили:
+<script src="/public/tablesorter/jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="/public/tablesorter/blue/style.css">
 1. если таблица формируется при помощи js - то код вызова сортировки нужно прописывать в конец функции, которая заполняет таблицу данными
 2. если таблица формируется при помощи php - то код вызова сортировки нужно прописывать после формирования таблицы
 3. код вызова сортировки:

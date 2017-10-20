@@ -39,8 +39,8 @@ class Cards extends MY_Controller
 
             if (empty($Name))
                 throw new RuntimeException("Не указано название");
-//            if (empty($Number))
-//                throw new RuntimeException("Не указан номер"); // не обязательно – потому, что Наличка
+            if (empty($Number))
+                throw new RuntimeException("Не указан номер");
             if (empty($Currency))
                 throw new RuntimeException("Не указана валюта");
 
@@ -55,6 +55,7 @@ class Cards extends MY_Controller
                 $data['Created'] = date('Y-m-d H:i:s');
                 $data['Active'] = 1;
                 $data['Deleted'] = 0;
+                $data['Nal'] = 0;
                 $result = $this->getCardModel()->insertCard($data);
             }
             else{
@@ -74,7 +75,7 @@ class Cards extends MY_Controller
 
     public function data() {
         try {
-            $records = $this->getCardModel()->getCardsList(false);
+            $records = $this->getCardModel()->getAdminCardsList(false);
 
             $this->json_response(array("status" => 1, 'records' => $records));
         } catch (Exception $e) {
@@ -89,7 +90,7 @@ class Cards extends MY_Controller
             if (empty($ID))
                 throw new RuntimeException("Не указана карта для редактирования");
 
-            $card = $this->getCardModel()->getCard($ID, false);
+            $card = $this->getCardModel()->getAdminCard($ID, false);
 
             $this->json_response(array("status" => 1, 'card' => $card));
         } catch (Exception $e) {
@@ -110,17 +111,6 @@ class Cards extends MY_Controller
         } catch (Exception $e) {
             $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
         }
-    }
-
-    /**
-     * temp
-     */
-    public function finance()
-    {
-        $data['currencies'] = $this->currencies;
-        $this->viewHeader();
-        $this->view('form/finance/index', $data);
-        $this->viewFooter();
     }
 
 }
