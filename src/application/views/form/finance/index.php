@@ -6,13 +6,13 @@
  * @var $employees
  */
 // TODO: модальное окно для показа деталей по операциям за выбранный период
-// TODO: выяснить вопрос по сортировке: если по клику на заголовок открывается модалка – то какая нах тут сортировка???
-// TODO: tablesorter похоже не работает с .tmpl – попробовать рендерить готовую таблицу с сортировкой (fuck!!!!!!)
 
 $sites = (!empty($sites)) ? $sites : array();
 $cards = (!empty($cards)) ? $cards : array();
 $employees = (!empty($employees)) ? $employees : array();
 ?>
+<script src="/public/tablesorter/jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="/public/tablesorter/blue/style.css">
 <style>
     #dateFromBlock,
     #dateToBlock {
@@ -56,9 +56,15 @@ $employees = (!empty($employees)) ? $employees : array();
     .th-grey,
     .th-light-grey {
         font-weight: bold !important;
+        padding-left: 8px !important;
+        padding-right: 15px !important;
     }
     .fin-table > thead > tr > th {
         text-align: center;
+        padding-right: 15px;
+    }
+    .fin-table > tbody > tr > td.fin-td-info {
+        cursor: pointer;
     }
     #myAddOperation .nav-tabs.nav-justified > .active > a,
     .nav-tabs.nav-justified > .active > a:focus,
@@ -101,18 +107,6 @@ $employees = (!empty($employees)) ? $employees : array();
     }
     .hide-zeros {
         color: #DEDEE6 !important;
-    }
-    /*.fin-table > thead > tr > th > span.glyphicon-sort {*/
-        /*position: relative;*/
-        /*right: 0;*/
-        /*margin-left: 5px;*/
-    /*}*/
-    .fin-table-sort {
-        width: 20px;
-        padding: 15px 10px;
-        position: absolute;
-        cursor: pointer;
-        top: 40px;
     }
 </style>
 
@@ -213,14 +207,16 @@ $employees = (!empty($employees)) ? $employees : array();
     });
 
     // запрос и отображение данных по операциям этого типа за данный период
-    $(document).on('click','th.th-info',function(){
+    $(document).on('click','td.fin-td-info',function(){
+        $('#myViewOperation').modal('hide');
         var dataType = $(this).attr('data-type');
         var dataId = $(this).attr('data-id');
         $(function () {
             var fromD = $('#dateFrom').val();
             var toD = $('#dateTo').val();
             console.log(dataType, dataId, fromD, toD);
-
+            // $.post();
+            $('#myViewOperation').modal('show');
 
         });
     });
@@ -237,19 +233,18 @@ $employees = (!empty($employees)) ? $employees : array();
                     to: to
                 },
                 function (data) {
-                    if(data.status){
+//                    if(data.status){
+                    if(data !== ''){
                         $('.fin-loader').css('display', 'none');
                         $('#finTable').html('');
-                        $(function () {
-                            $('#finTableTmpl').tmpl(data).appendTo('#finTable');
-                        });
+                        $('#finTable').html(data);
                     }
                     else{
                         $('.fin-loader').css('display', 'none');
                         $('#finTable').html('<h5 class="text-center">Нет данных для отображения</h5>');
                     }
                 },
-                'json'
+                'html'
             );
         });
     }
@@ -262,70 +257,6 @@ $employees = (!empty($employees)) ? $employees : array();
     // загружаем таблицу с данными за выбранный период времени
     fillFinanceTable();
 
-</script>
-
-<?php /* ШАБЛОНЫ */ ?>
-
-<?php /* шаблон таблицы */ ?>
-<script id="finTableTmpl" type="text/x-jquery-tmpl">
-    <table id="fin_table" class="table table-bordered table-striped fin-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th colspan="8" class="big-th">Приход</th>
-                <th colspan="5" class="big-th">Расход</th>
-                <th></th>
-            </tr>
-            <tr>
-                <th>Карта, валюта</th>
-                <th class="th-info" data-type="income" data-id="receipts">Поступление</th>
-                <th>Встреча</th>
-                <th>Вестерн</th>
-                <th>Квартира</th>
-                <th>Трансфер</th>
-                <th>Обмен</th>
-                <th>Резерв</th>
-                <th class="th-grey">Итого приход<span class="fin-table-sort"></span></th>
-                <th>Офис</th>
-                <th>Благо</th>
-                <th>Зарплата</th>
-                <th>Обмен</th>
-                <th class="th-grey">Итого расход</th>
-                <th class="th-light-grey">Итого</th>
-            </tr>
-        </thead>
-        <tbody>
-        {{if records.length > 0}}
-            {{tmpl(records) '#finRowTmpl'}}
-        {{else}}
-            <tr>
-                <td colspan="15">
-                    <h5 class="text-center">Нет данных для отображения</h5>
-                </td>
-            </tr>
-        {{/if}}
-        </tbody>
-    </table>
-</script>
-<?php /* шаблон строки в таблице */ ?>
-<script id="finRowTmpl" type="text/x-jquery-tmpl">
-    <tr">
-        <td>${card_name}</td>
-        <td class="{{if income.receipts === '0.00'}}hide-zeros{{/if}}">${income.receipts}</td>
-        <td class="{{if income.meeting === '0.00'}}hide-zeros{{/if}}">${income.meeting}</td>
-        <td class="{{if income.western === '0.00'}}hide-zeros{{/if}}">${income.western}</td>
-        <td class="{{if income.apartment === '0.00'}}hide-zeros{{/if}}">${income.apartment}</td>
-        <td class="{{if income.transfer === '0.00'}}hide-zeros{{/if}}">${income.transfer}</td>
-        <td class="{{if income.exchange_in === '0.00'}}hide-zeros{{/if}}">${income.exchange_in}</td>
-        <td class="{{if income.reserve === '0.00'}}hide-zeros{{/if}}">${income.reserve}</td>
-        <td class="th-grey">${income.total}</td>
-        <td class="{{if outcome.office === '0.00'}}hide-zeros{{/if}}">${outcome.office}</td>
-        <td class="{{if outcome.charity === '0.00'}}hide-zeros{{/if}}">${outcome.charity}</td>
-        <td class="{{if outcome.salary === '0.00'}}hide-zeros{{/if}}">${outcome.salary}</td>
-        <td class="{{if outcome.exchange_out === '0.00'}}hide-zeros{{/if}}">${outcome.exchange_out}</td>
-        <td class="th-grey">${outcome.total}</td>
-        <td class="th-light-grey">${total}</td>
-    </tr>
 </script>
 
 <?php /* MODALS */ ?>
@@ -523,3 +454,20 @@ $employees = (!empty($employees)) ? $employees : array();
         </div>
     </div>
 <?php /* /Add modal */ ?>
+
+<?php /* View modal */ ?>
+<div class="modal fade" id="myViewOperation" tabindex="-1" role="dialog" aria-labelledby="myViewOperationLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ViewOperationLabel">Просмотр операции</h4>
+            </div>
+            <div class="modal-body" id="ViewOperationBody">
+                Hello!
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<?php /* /View modal */ ?>

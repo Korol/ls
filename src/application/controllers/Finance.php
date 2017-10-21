@@ -67,10 +67,15 @@ class Finance extends MY_Controller
                 throw new RuntimeException("Не указана дата для запроса");
 
             $records = $this->getData($from, $to);
-
-            $this->json_response(array("status" => 1, 'records' => $records));
+            $html = $this->load->view('form/finance/table',
+                array('records' => $records),
+                true
+            );
+            echo $html;
+//            $this->json_response(array("status" => 1, 'records' => $records));
         } catch (Exception $e) {
-            $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
+//            $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
+            echo '<b>Error!</b>';
         }
     }
 
