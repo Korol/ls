@@ -313,6 +313,7 @@ $employees = (!empty($employees)) ? $employees : array();
                                                     <label for="modalInType">Категория поступления:</label>
                                                     <select name="modalInType" id="modalInType" class="form-control">
                                                     <?php foreach($types_in as $ti_k => $ti_v): ?>
+                                                        <?php if($ti_k == 'exchange_in') continue; ?>
                                                         <option value="<?= $ti_k; ?>"><?= $ti_v; ?></option>
                                                     <?php endforeach; ?>
                                                     </select>
@@ -357,6 +358,7 @@ $employees = (!empty($employees)) ? $employees : array();
                                                     <label for="modalOutType">Категория расходов:</label>
                                                     <select name="modalOutType" id="modalOutType" class="form-control">
                                                         <?php foreach($types_out as $to_k => $to_v): ?>
+                                                            <?php if($to_k == 'exchange_out') continue; ?>
                                                             <option value="<?= $to_k; ?>"><?= $to_v; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
