@@ -91,6 +91,7 @@ class Finance_model extends MY_Model
     {
         $this->db()->query($this->table_in);
         $this->db()->query($this->table_out);
+        $this->db()->query($this->table_ex);
     }
 
     public function dropTables()
@@ -99,6 +100,7 @@ class Finance_model extends MY_Model
 
         $this->dbforge->drop_table(self::TABLE_FINANCE_IN, TRUE);
         $this->dbforge->drop_table(self::TABLE_FINANCE_OUT, TRUE);
+        $this->dbforge->drop_table(self::TABLE_FINANCE_EX, TRUE);
     }
 
     /**
