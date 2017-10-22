@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * работа с Финансовой таблицей
  */
-// TODO: сбор и передача суммарной статистики по одному типу операций за период (в модальное окно)
 
 class Finance extends MY_Controller
 {
@@ -66,7 +65,7 @@ class Finance extends MY_Controller
             if (empty($from) || empty($to))
                 throw new RuntimeException("Не указана дата для запроса");
 
-            $records = $this->getData($from, $to);
+            $records = $this->getData($this->convertDate($from), $this->convertDate($to));
             $html = $this->load->view('form/finance/table',
                 array('records' => $records),
                 true
@@ -279,20 +278,20 @@ class Finance extends MY_Controller
             $i = 0;
             foreach ($cards as $card) {
                 $result[$i]['card_name'] = $card['Name'] . ', ' . $card['Currency'];
-                // обработка обмена
+                // результат по карте
+                $result[$i]['income'] = $income[$card['ID']];
                 // добавляем сумму гривен по обмену к карте «Наличные UAH»
                 if(!empty($card['Nal']) && ($card['Currency'] == 'UAH')){
                     $result[$i]['income']['exchange_in'] = $exchange_uah_sum;
+                    $income[$card['ID']]['exchange_in'] = $exchange_uah_sum;
                 }
                 // добавляем сумму, которую обменяли – к расходам карты
-                if($exchange[$i]['summ_out'] !== '0.00'){
+                if($exchange[$card['ID']]['summ_out'] != '0.00'){
                     $outcome[$card['ID']]['exchange_out'] = $exchange[$card['ID']]['summ_out'];
                 }
                 // считаем суммы по масивам Приход и Расход
                 $income_sum = $this->convertSum(array_sum($income[$card['ID']]));
                 $outcome_sum = $this->convertSum(array_sum($outcome[$card['ID']]));
-                // результат по карте
-                $result[$i]['income'] = $income[$card['ID']];
                 $result[$i]['income']['total'] = $income_sum;
                 $result[$i]['outcome'] = $outcome[$card['ID']];
                 $result[$i]['outcome']['total'] = $outcome_sum;
@@ -436,5 +435,51 @@ class Finance extends MY_Controller
             }
         }
         return $this->convertSum($return);
+    }
+
+    public function operation()
+    {
+        $html = '';
+        $type = $this->input->post('type', true);
+        $id = $this->input->post('id', true);
+        $from = $this->input->post('from', true);
+        $to = $this->input->post('to', true);
+        $headers = array(
+            'income' => 'Приход',
+            'outcome' => 'Расход',
+            'exchange' => 'Обмен',
+        );
+
+        if(!empty($type) && !empty($id)
+            && !empty($from) && !empty($to)
+            && in_array($type, array('income', 'outcome', 'exchange'))
+        ){
+            $id = (in_array($id, array('exchange_in', 'exchange_out'))) ? '' : $id; // обмен
+            $data['header'] = $headers[$type];
+            if($type != 'exchange'){
+                $data['header'] .= ' / ' . (($type == 'income') ? $this->types_in[$id] : $this->types_out[$id]);
+            }
+            $data['header'] .= ($from == $to)
+                ? ' за ' . date('d-m-Y', strtotime($from))
+                : ' за период с ' . date('d-m-Y', strtotime($from)) . ' до ' . date('d-m-Y', strtotime($to));
+            $data['records'] = $this->getFinanceModel()->getOperation($type, $id, $this->convertDate($from), $this->convertDate($to));
+            $html = $this->load->view('form/finance/' . $type, $data, true);
+        }
+        echo $html;
+    }
+
+    /**
+     * удаление операции
+     * @return int
+     */
+    public function remove()
+    {
+        $type = $this->input->post('type', true);
+        $id = $this->input->post('id', true);
+        if(!in_array($type, array('income', 'outcome', 'exchange')))
+            echo 0;
+
+        $res = $this->getFinanceModel()->removeOperation($id, $type);
+        echo (!empty($res)) ? $id : 0;
     }
 }

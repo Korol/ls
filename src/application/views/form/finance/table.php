@@ -50,7 +50,7 @@
             <td class="fin-td-info <?= ($record['income']['transfer'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="income" data-id="transfer">
                 <?= $record['income']['transfer']; ?>
             </td>
-            <td class="fin-td-info <?= ($record['income']['exchange_in'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="income" data-id="exchange_in">
+            <td class="fin-td-info <?= ($record['income']['exchange_in'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="exchange" data-id="exchange_in">
                 <?= $record['income']['exchange_in']; ?>
             </td>
             <td class="fin-td-info <?= ($record['income']['reserve'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="income" data-id="reserve">
@@ -66,7 +66,7 @@
             <td class="fin-td-info <?= ($record['outcome']['salary'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="salary">
                 <?= $record['outcome']['salary']; ?>
             </td>
-            <td class="fin-td-info <?= ($record['outcome']['exchange_out'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="exchange_out">
+            <td class="fin-td-info <?= ($record['outcome']['exchange_out'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="exchange" data-id="exchange_out">
                 <?= $record['outcome']['exchange_out']; ?>
             </td>
             <td class="th-grey"><?= $record['outcome']['total']; ?></td>

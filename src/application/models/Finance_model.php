@@ -71,6 +71,11 @@ class Finance_model extends MY_Model
         'exchange' => self::TABLE_FINANCE_EX,
     );
 
+    /**
+     * проверка типа операции: Приход, Расход, Обмен
+     * @param $type
+     * @return bool
+     */
     public function checkType($type)
     {
         if(!in_array($type, array_keys($this->types)))
@@ -115,6 +120,7 @@ class Finance_model extends MY_Model
     }
 
     /**
+     * операции Приход или Расход за период
      * @param $from
      * @param $to
      * @param $type
@@ -140,6 +146,7 @@ class Finance_model extends MY_Model
     }
 
     /**
+     * операции Обмен за период
      * @param $from
      * @param $to
      * @return mixed
@@ -158,5 +165,59 @@ class Finance_model extends MY_Model
             ->group_by('`card_id`')
             ->get(self::TABLE_FINANCE_EX)->result_array();
         return $res;
+    }
+
+    /**
+     * операции Приход или Расход определенного типа (`type`) за период
+     * @param $type
+     * @param $operation_type
+     * @param $from
+     * @param $to
+     * @return bool|array
+     */
+    public function getOperation($type, $operation_type, $from, $to)
+    {
+        if(!$this->checkType($type))
+            return false;
+
+        $where = ($from == $to)
+            ? array('created_date' => $from)
+            : array(
+                'created_date >=' => $from,
+                'created_date <=' => $to,
+            );
+        $select = "f.*, CONCAT(c.Name, ', ', c.Currency) AS 'card_name'";
+        if(in_array($type, array('income', 'outcome'))){
+            $select .= ", s.Name AS 'site_name'";
+            $this->db()->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = f.site_id');
+            $this->db()->where('type', $operation_type);
+        }
+        if($type == 'outcome'){
+            $select .= ", IF(f.employee_id>0, CONCAT(e.SName, ' ', LEFT(e.FName, 1), '. ', LEFT(e.MName, 1), '.'), '') AS 'employee_name'";
+            $this->db()->join(self::TABLE_EMPLOYEE_NAME . ' AS e', 'e.ID = f.employee_id', 'left');
+        }
+        $res = $this->db()
+            ->select($select, null)
+            ->from($this->types[$type] . ' AS f')
+            ->join(self::TABLE_FINANCE_CARD . ' AS c', 'c.ID = f.card_id')
+            ->where($where)
+            ->order_by('f.created_ts ASC')
+            ->get()->result_array(); log_message('error', $this->db()->last_query());
+        return $res;
+    }
+
+    /**
+     * удаление операции
+     * @param $id
+     * @param $type
+     * @return bool
+     */
+    public function removeOperation($id, $type)
+    {
+        if(!$this->checkType($type))
+            return false;
+
+        $this->db()->delete($this->types[$type], array('id' => $id));
+        return true;
     }
 }

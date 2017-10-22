@@ -442,8 +442,8 @@ class MY_Controller extends CI_Controller {
             $menu[] = ['controller'=>'setting', 'description'=>'Настройки'];
 
         // 10. Пункт меню «Кредитные карты» для роли "Директор"
-        if ($this->isDirector())
-            $menu[] = ['controller'=>'cards', 'description'=>'Кредитные карты'];
+//        if ($this->isDirector())
+//            $menu[] = ['controller'=>'cards', 'description'=>'Кредитные карты'];
 
         // 11. Пункт меню «Финансовый отчет» для роли "Директор"
         if ($this->isDirector())

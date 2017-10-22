@@ -5,7 +5,6 @@
  * @var $cards
  * @var $employees
  */
-// TODO: модальное окно для показа деталей по операциям за выбранный период
 
 $sites = (!empty($sites)) ? $sites : array();
 $cards = (!empty($cards)) ? $cards : array();
@@ -22,9 +21,13 @@ $employees = (!empty($employees)) ? $employees : array();
         width: 200px;
     }
     #addOperation,
-    #getData {
+    #getData,
+    #goToCards {
         position: relative;
         top: 30px;
+    }
+    #goToCards {
+        margin-left: 15px;
     }
     .fin-table-block {
         margin: 25px 0 40px;
@@ -102,11 +105,15 @@ $employees = (!empty($employees)) ? $employees : array();
         padding: 10px 15px;
         margin-bottom: 0;
     }
-    .table.fin-table > tbody > tr > td {
+    .table.fin-table > tbody > tr > td,
+    .table.operation-table > tbody > tr > td {
         border: 1px solid #ddd !important;
     }
     .hide-zeros {
         color: #DEDEE6 !important;
+    }
+    .rm-operation {
+        text-align: center;
     }
 </style>
 
@@ -139,6 +146,7 @@ $employees = (!empty($employees)) ? $employees : array();
         <div class="alert alert-danger" role="alert" id="operationError"></div>
     </div>
     <div class="col-md-3 clearfix">
+        <a href="/cards" class="btn btn-default pull-right" id="goToCards">Карты</a>
         <button class="btn btn-default pull-right" id="addOperation">Добавить операцию</button>
     </div>
 </div>
@@ -215,9 +223,25 @@ $employees = (!empty($employees)) ? $employees : array();
             var fromD = $('#dateFrom').val();
             var toD = $('#dateTo').val();
             console.log(dataType, dataId, fromD, toD);
-            // $.post();
-            $('#myViewOperation').modal('show');
-
+            $.post(
+                '/finance/operation/',
+                {
+                    type: dataType,
+                    id: dataId,
+                    from: fromD,
+                    to: toD
+                },
+                function(data){
+                    if(data !== ''){
+                        $('#ViewOperationBody').html(data);
+                    }
+                    else{
+                        $('#ViewOperationBody').html('Нет данных для отображения');
+                    }
+                    $('#myViewOperation').modal('show');
+                },
+                'html'
+            );
         });
     });
 
@@ -252,6 +276,26 @@ $employees = (!empty($employees)) ? $employees : array();
     // фиксация изменений типа операции через клики по табам
     function setOperationType(type) {
         $('#modalOperationType').val(type);
+    }
+    
+    // удаление операции
+    function removeOperation(id, type) {
+        if(confirm("Вы уверены, что хотите удалить эту операцию?\nЭто действие необратимо!")) {
+            $.post(
+                '/finance/remove/',
+                {
+                    id: id,
+                    type: type
+                },
+                function (data) {
+                    if (data * 1 > 0) {
+                        $('#operation_' + data).remove();
+                        fillFinanceTable();
+                    }
+                },
+                'text'
+            );
+        }
     }
 
     // загружаем таблицу с данными за выбранный период времени
@@ -459,17 +503,8 @@ $employees = (!empty($employees)) ? $employees : array();
 
 <?php /* View modal */ ?>
 <div class="modal fade" id="myViewOperation" tabindex="-1" role="dialog" aria-labelledby="myViewOperationLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="ViewOperationLabel">Просмотр операции</h4>
-            </div>
-            <div class="modal-body" id="ViewOperationBody">
-                Hello!
-            </div>
-            <div class="modal-footer"></div>
-        </div>
+    <div class="modal-dialog" role="document" style="width: 900px;">
+        <div class="modal-content" id="ViewOperationBody"></div>
     </div>
 </div>
 <?php /* /View modal */ ?>

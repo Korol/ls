@@ -189,7 +189,6 @@ $isEdit = true;
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Название карты</th>
                 <th>Номер карты</th>
                 <th>Валюта карты</th>
@@ -210,7 +209,6 @@ $isEdit = true;
 <?php /* шаблон строки в таблице */ ?>
 <script id="cardRowTmpl" type="text/x-jquery-tmpl">
     <tr id="cardTableRow_${ID}">
-        <td>${ID}</td>
         <td>${Name}</td>
         <td>${Number}</td>
         <td>${Currency}</td>
