@@ -28,7 +28,7 @@ class Finance_model extends MY_Model
     private $table_out = "
         CREATE TABLE `finance_out` (
           `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-          `type` enum('office','charity','salary','exchange') DEFAULT NULL,
+          `type` enum('office','charity','salary','exchange','photo') DEFAULT NULL,
           `sum` decimal(10,2) NOT NULL DEFAULT '0.00',
           `currency` enum('USD','EUR','UAH') DEFAULT NULL,
           `card_id` int(11) DEFAULT NULL,
@@ -191,7 +191,7 @@ class Finance_model extends MY_Model
         $select = "f.*, CONCAT(c.Name, ', ', c.Currency) AS 'card_name'";
         if(in_array($type, array('income', 'outcome'))){
             $select .= ", s.Name AS 'site_name'";
-            $this->db()->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = f.site_id');
+            $this->db()->join(self::TABLE_SITE_NAME . ' AS s', 's.ID = f.site_id', 'left');
             $this->db()->where('type', $operation_type);
         }
         if($type == 'outcome'){

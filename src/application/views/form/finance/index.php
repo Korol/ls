@@ -344,8 +344,9 @@ $employees = (!empty($employees)) ? $employees : array();
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="modalInSite">Сайт:</label>
+                                                    <label for="modalInSite">Сайт: <span class="grey-help">(не обязательно)</span></label>
                                                     <select name="modalInSite" id="modalInSite" class="form-control">
+                                                        <option value="0">--- Выберите сайт ---</option>
                                                     <?php foreach ($sites as $site): ?>
                                                         <option value="<?= $site['ID']; ?>"><?= $site['Name']; ?></option>
                                                     <?php endforeach; ?>
@@ -389,11 +390,12 @@ $employees = (!empty($employees)) ? $employees : array();
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="modalOutSite">Сайт:</label>
+                                                    <label for="modalOutSite">Сайт: <span class="grey-help">(не обязательно)</span></label>
                                                     <select name="modalOutSite" id="modalOutSite" class="form-control">
-                                                        <?php foreach ($sites as $site): ?>
-                                                            <option value="<?= $site['ID']; ?>"><?= $site['Name']; ?></option>
-                                                        <?php endforeach; ?>
+                                                        <option value="0">--- Выберите сайт ---</option>
+                                                    <?php foreach ($sites as $site): ?>
+                                                        <option value="<?= $site['ID']; ?>"><?= $site['Name']; ?></option>
+                                                    <?php endforeach; ?>
                                                     </select>
                                                 </div>
                                             </div>

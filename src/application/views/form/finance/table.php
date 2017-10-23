@@ -25,6 +25,7 @@
         <th class="sortable">Офис</th>
         <th class="sortable">Благо</th>
         <th class="sortable">Зарплата</th>
+        <th class="sortable">Фото</th>
         <th class="sortable">Обмен</th>
         <th class="th-grey sortable">Итого расход</th>
         <th class="th-light-grey sortable">Итого</th>
@@ -65,6 +66,9 @@
             </td>
             <td class="fin-td-info <?= ($record['outcome']['salary'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="salary">
                 <?= $record['outcome']['salary']; ?>
+            </td>
+            <td class="fin-td-info <?= ($record['outcome']['photo'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="photo">
+                <?= $record['outcome']['photo']; ?>
             </td>
             <td class="fin-td-info <?= ($record['outcome']['exchange_out'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="exchange" data-id="exchange_out">
                 <?= $record['outcome']['exchange_out']; ?>

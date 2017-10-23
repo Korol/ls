@@ -20,6 +20,7 @@ class Finance extends MY_Controller
         'office' => 'Офис',
         'charity' => 'Благотворительность',
         'salary' => 'Зарплата',
+        'photo' => 'Фото',
         'exchange_out' => 'Обмен',
     );
 

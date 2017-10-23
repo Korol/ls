@@ -26,7 +26,7 @@ $header = (!empty($header)) ? $header : '';
             <tr id="operation_<?= $record['id']; ?>">
                 <td><?= date('d-m-Y', strtotime($record['created_date'])); ?></td>
                 <td><?= (!empty($record['employee_name'])) ? $record['employee_name'] : ''; ?></td>
-                <td><?= $record['site_name']; ?></td>
+                <td><?= (!empty($record['site_name'])) ? $record['site_name'] : ''; ?></td>
                 <td><?= $record['sum']; ?></td>
                 <td><?= $record['currency']; ?></td>
                 <td><?= $record['card_name']; ?></td>
