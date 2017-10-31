@@ -261,7 +261,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="Country">Страна</label>
                             <input type="text" class="assol-input-style" id="Country" placeholder="Страна" value="<?=$customer['Country']?>">
@@ -273,18 +273,18 @@
                             <input type="text" class="assol-input-style" id="Address" placeholder="Адрес проживания" value="<?=$customer['Address']?>">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="row sub-row">
-                            <div class="col-md-6 sub-col">
+                            <div class="col-md-6 sub-col" style="width: 130px;">
                                 <div class="form-group">
-                                    <label for="Phone_1">Телефон 1</label>
-                                    <input type="text" class="assol-input-style" id="Phone_1" placeholder="Телефон 1" value="<?=$customer['Phone_1']?>">
+                                    <label for="Phone_1">Телефон девушки</label>
+                                    <input type="text" class="assol-input-style" id="Phone_1" placeholder="Тел. девушки" value="<?=$customer['Phone_1']?>">
                                 </div>
                             </div>
-                            <div class="col-md-6 sub-col">
+                            <div class="col-md-6 sub-col" style="width: 150px;">
                                 <div class="form-group">
-                                    <label for="Phone_2">Телефон 2</label>
-                                    <input type="text" class="assol-input-style" id="Phone_2" placeholder="Телефон 2" value="<?=$customer['Phone_2']?>">
+                                    <label for="Phone_2">Телефон для мужчин</label>
+                                    <input type="text" class="assol-input-style" id="Phone_2" placeholder="Тел. для мужчин" value="<?=$customer['Phone_2']?>">
                                 </div>
                             </div>
                         </div>
