@@ -281,7 +281,7 @@
                                     <input type="text" class="assol-input-style" id="Phone_1" placeholder="Тел. девушки" value="<?=$customer['Phone_1']?>">
                                 </div>
                             </div>
-                            <div class="col-md-6 sub-col" style="width: 150px;">
+                            <div class="col-md-6 sub-col" style="width: 153px;">
                                 <div class="form-group">
                                     <label for="Phone_2">Телефон для мужчин</label>
                                     <input type="text" class="assol-input-style" id="Phone_2" placeholder="Тел. для мужчин" value="<?=$customer['Phone_2']?>">
