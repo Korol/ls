@@ -921,6 +921,7 @@ class Employee_model extends MY_Model {
                 'es2c.CustomerID = c.ID AND es2c.IsDeleted=0', 'inner')
             ->join(self::TABLE_EMPLOYEE_SITE_NAME.' AS es',
                 'es.EmployeeID = '.$idEmployee.' AND es.IsDeleted = 0 AND es2c.EmployeeSiteID = es.ID', 'inner')
+            ->where('c.IsDeleted', 0)
             ->order_by('c.SName, c.FName', 'ASC')
             ->group_by('c.ID')
             ->get()->result_array();
@@ -937,6 +938,7 @@ class Employee_model extends MY_Model {
                 'es2c.CustomerID = c.ID AND es2c.IsDeleted=0', 'inner')
             ->join(self::TABLE_EMPLOYEE_SITE_NAME.' AS es',
                 'es2c.EmployeeSiteID = es.ID AND es.IsDeleted = 0', 'inner')
+            ->where('c.IsDeleted', 0)
             ->order_by('c.SName, c.FName', 'ASC')
             ->group_by('c.ID')
             ->get()->result_array();
