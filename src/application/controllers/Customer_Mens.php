@@ -143,19 +143,19 @@ class Customer_Mens extends MY_Controller {
 
             // для первичного вывода и неактивного фильтра по сайтам
             // выводим для всех, кроме Директора и Секретаря, только по тем сайтам, с которыми они связаны
-            if(empty($SiteIDs) && empty(($this->isDirector() || $this->isSecretary()))){
-                $employee_sites = $this->getEmployeeModel()->siteGetList($this->getUserID()); // сайты, с которыми связан сотрудник
-                if(!empty($employee_sites)){
-                    $st = array();
-                    foreach ($employee_sites as $employee_site) {
-                        $st[] = $employee_site['SiteID'];
-                    }
-                    $SiteIDs = implode(',', $st); // строка с ID сайтов, с которыми связан сотрудник, like: 1,2,3,4,5
-                }
-                else{
-                    $SiteIDs = '654321'; // рыба, чтоб не срабатывала empty()
-                }
-            }
+            $st = array();
+//            if(empty($SiteIDs) && empty(($this->isDirector() || $this->isSecretary()))){
+//                $employee_sites = $this->getEmployeeModel()->siteGetList($this->getUserID()); // сайты, с которыми связан сотрудник
+//                if(!empty($employee_sites)){
+//                    foreach ($employee_sites as $employee_site) {
+//                        $st[] = $employee_site['SiteID'];
+//                    }
+//                    $SiteIDs = implode(',', $st); // строка с ID сайтов, с которыми связан сотрудник, like: 1,2,3,4,5
+//                }
+//                else{
+//                    $SiteIDs = '654321'; // рыба, чтоб не срабатывала empty()
+//                }
+//            }
 
             // учитываем фильтрацию по сайтам
             $sites = (!empty($SiteIDs)) ? explode(',', $SiteIDs) : '';
@@ -169,6 +169,7 @@ class Customer_Mens extends MY_Controller {
                     'mensSitesList' => $this->getSitesForMens($CustomerID),
                     'sites' => $this->getSiteModel()->getRecords(),
                     'translators' => $this->getCMTranslators($CustomerID),
+                    'st' => $st,
                 ),
                 true
             );
@@ -197,17 +198,17 @@ class Customer_Mens extends MY_Controller {
             }
         }
         // для Переводчиков
-        if($this->role['isTranslate']){
-            // фильтруем сайты Клиентки, оставляя только те, с которыми связан и Переводчик, и Клиентка
-            $cs_ids = get_keys_array($customer_sites, 'SiteID'); // ID сайтов Клиентки
-            $us_ids = get_keys_array($this->getEmployeeModel()->siteGetList($this->getUserID()), 'SiteID'); // ID сайтов Переводчика
-            $intersect_ids = array_intersect($cs_ids, $us_ids);
-            foreach($sites as $i_key => $i_site){
-                if(!in_array($i_key, $intersect_ids)){
-                    unset($sites[$i_key]); // удаляем сайт, не связанный с Переводчиком
-                }
-            }
-        }
+//        if($this->role['isTranslate']){
+//            // фильтруем сайты Клиентки, оставляя только те, с которыми связан и Переводчик, и Клиентка
+//            $cs_ids = get_keys_array($customer_sites, 'SiteID'); // ID сайтов Клиентки
+//            $us_ids = get_keys_array($this->getEmployeeModel()->siteGetList($this->getUserID()), 'SiteID'); // ID сайтов Переводчика
+//            $intersect_ids = array_intersect($cs_ids, $us_ids);
+//            foreach($sites as $i_key => $i_site){
+//                if(!in_array($i_key, $intersect_ids)){
+//                    unset($sites[$i_key]); // удаляем сайт, не связанный с Переводчиком
+//                }
+//            }
+//        }
         return $sites;
     }
 
