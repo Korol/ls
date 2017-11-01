@@ -222,4 +222,72 @@ class Finance_model extends MY_Model
         $this->db()->delete($this->types[$type], array('id' => $id));
         return true;
     }
+
+    /**
+     * остаток за прошлый день по наличным картам
+     * @param $date дата
+     * @param $nal_ids ID наличных карт
+     * @return array
+     */
+    public function getLeft($date, $nal_ids)
+    {
+        if(empty($nal_ids)){
+            return array();
+        }
+        // income
+        $income = $this->db()
+            ->select("`card_id`, SUM(`sum`) AS `summ`", null)
+            ->where(
+                array(
+                    'created_date' => $date,
+                )
+            )
+            ->where_in('card_id', $nal_ids)
+            ->group_by('`card_id`')
+            ->get(self::TABLE_FINANCE_IN)->result_array();
+        $data['income'] = (!empty($income))
+            ? toolIndexArrayBy($income, 'card_id')
+            : array();
+        // outcome
+        $outcome = $this->db()
+            ->select("`card_id`, SUM(`sum`) AS `summ`", null)
+            ->where(
+                array(
+                    'created_date' => $date,
+                )
+            )
+            ->where_in('card_id', $nal_ids)
+            ->group_by('`card_id`')
+            ->get(self::TABLE_FINANCE_OUT)->result_array();
+        $data['outcome'] = (!empty($outcome))
+            ? toolIndexArrayBy($outcome, 'card_id')
+            : array();
+        // exchange UAH
+        $exchange = $this->db()
+            ->select("SUM(`sum_uah`) AS `summ`", null)
+            ->where(
+                array(
+                    'created_date' => $date,
+                )
+            )
+            ->get(self::TABLE_FINANCE_EX)->row_array();
+        $data['exchange'] = (!empty($exchange['summ']))
+            ? $exchange['summ']
+            : '0.00';
+        // exchange out
+        $exchange_out = $this->db()
+            ->select("`card_id`, SUM(`sum_out`) AS `summ`", null)
+            ->where(
+                array(
+                    'created_date' => $date,
+                )
+            )
+            ->where_in('card_id', $nal_ids)
+            ->group_by('`card_id`')
+            ->get(self::TABLE_FINANCE_EX)->result_array();
+        $data['exchange_out'] = (!empty($exchange_out))
+            ? toolIndexArrayBy($exchange_out, 'card_id')
+            : array();
+        return $data;
+    }
 }

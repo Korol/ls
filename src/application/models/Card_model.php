@@ -188,4 +188,23 @@ class Card_model extends MY_Model
 
         return $this->db()->affected_rows();
     }
+
+    /**
+     * список наличных карт
+     * @param bool $active
+     * @return array
+     */
+    public function getNalCards($active = true)
+    {
+        $result = $this->db()
+            ->where(
+                array(
+                    'Active' => 1,
+                    'Deleted' => 0,
+                    'Nal' => 1
+                )
+            )
+            ->get(self::TABLE_FINANCE_CARD)->result_array();
+        return (!empty($result)) ? toolIndexArrayBy($result, 'ID') : array();
+    }
 }

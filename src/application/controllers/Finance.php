@@ -270,6 +270,7 @@ class Finance extends MY_Controller
     public function getData($from, $to)
     {
         $cards = $this->getCards();
+        $left = $this->getLeft($from);
         $income = $this->getInOutData($from, $to, 'income');
         $outcome = $this->getInOutData($from, $to, 'outcome');
         $exchange = $this->getExData($from, $to);
@@ -279,6 +280,13 @@ class Finance extends MY_Controller
             $i = 0;
             foreach ($cards as $card) {
                 $result[$i]['card_name'] = $card['Name'] . ', ' . $card['Currency'];
+                // остаток с прошлого дня по наличным картам
+                if(($card['Nal'] == 1) && !empty($left[$card['ID']])){
+                    $result[$i]['left'] = $this->convertSum($left[$card['ID']]);
+                }
+                else{
+                    $result[$i]['left'] = '0.00';
+                }
                 // результат по карте
                 $result[$i]['income'] = $income[$card['ID']];
                 // добавляем сумму гривен по обмену к карте «Наличные UAH»
@@ -482,5 +490,34 @@ class Finance extends MY_Controller
 
         $res = $this->getFinanceModel()->removeOperation($id, $type);
         echo (!empty($res)) ? $id : 0;
+    }
+
+    public function getLeft($from)
+    {
+//        $from = '2017-10-21'; // test
+        $result = array();
+        // наличные карты
+        $nals_cards = $this->getCardModel()->getNalCards();
+        $nals_cards_ids = (!empty($nals_cards)) ? array_keys($nals_cards) : array();
+        // суммы прихода, расхода и обмена по ним за день
+        $left = $this->getFinanceModel()->getLeft(date('Y-m-d', strtotime('-1 day', strtotime($from))), $nals_cards_ids);
+        if(!empty($nals_cards) && !empty($left)){
+            foreach ($nals_cards as $nk => $nals_card) {
+                $in = (!empty($left['income'][$nk]['summ'])) ? $left['income'][$nk]['summ'] : '0.00';
+                $out = (!empty($left['outcome'][$nk]['summ'])) ? $left['outcome'][$nk]['summ'] : '0.00';
+                // добавляем к расходам по карте обмен наличных с карты
+                if(!empty($left['exchange_out'][$nk]['summ'])){
+                    $out += $left['exchange_out'][$nk]['summ'];
+                }
+                $total = $in - $out;
+                // к UAH наличной карте добавляем весь обмен, в грн
+                if(($nals_card['Currency'] == 'UAH') && !empty($left['exchange'])){
+                    $total += $left['exchange'];
+                }
+                $result[$nk] = $total;
+            }
+        }
+//        var_dump(date('Y-m-d', strtotime('-1 day', strtotime($from))), $left, $result); // test
+        return $result;
     }
 }

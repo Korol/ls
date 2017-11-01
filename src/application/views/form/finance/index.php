@@ -115,6 +115,9 @@ $employees = (!empty($employees)) ? $employees : array();
     .rm-operation {
         text-align: center;
     }
+    .big-th span.glyphicon {
+        margin-left: 5px;
+    }
 </style>
 
 <div class="row">

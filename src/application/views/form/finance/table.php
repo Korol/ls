@@ -8,12 +8,14 @@
     <thead>
     <tr>
         <th></th>
-        <th colspan="8" class="big-th">Приход</th>
-        <th colspan="5" class="big-th">Расход</th>
+        <th></th>
+        <th colspan="8" class="big-th">Приход <span class="glyphicon glyphicon-save"></span></th>
+        <th colspan="6" class="big-th">Расход <span class="glyphicon glyphicon-open"></span></th>
         <th></th>
     </tr>
     <tr>
         <th>Карта, валюта</th>
+        <th>Остаток</th>
         <th class="th-info sortable">Поступление</th>
         <th class="sortable">Встреча</th>
         <th class="sortable">Вестерн</th>
@@ -21,13 +23,13 @@
         <th class="sortable">Трансфер</th>
         <th class="sortable">Обмен</th>
         <th class="sortable">Резерв</th>
-        <th class="th-grey sortable">Итого приход</th>
+        <th class="th-grey sortable">Итого <span class="glyphicon glyphicon-save"></span></th>
         <th class="sortable">Офис</th>
         <th class="sortable">Благо</th>
         <th class="sortable">Зарплата</th>
         <th class="sortable">Фото</th>
         <th class="sortable">Обмен</th>
-        <th class="th-grey sortable">Итого расход</th>
+        <th class="th-grey sortable">Итого <span class="glyphicon glyphicon-open"></span></th>
         <th class="th-light-grey sortable">Итого</th>
     </tr>
     </thead>
@@ -36,6 +38,7 @@
         <?php foreach ($records as $record): ?>
         <tr>
             <td><?= $record['card_name']; ?></td>
+            <td class="<?= ($record['left'] == '0.00') ? 'hide-zeros' : ''; ?>"><?= $record['left']; ?></td>
             <td class="fin-td-info <?= ($record['income']['receipts'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="income" data-id="receipts">
                 <?= $record['income']['receipts']; ?>
             </td>
