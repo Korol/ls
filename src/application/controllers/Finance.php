@@ -281,7 +281,9 @@ class Finance extends MY_Controller
             foreach ($cards as $card) {
                 $result[$i]['card_name'] = $card['Name'] . ', ' . $card['Currency'];
                 // остаток с прошлого дня по наличным картам
-                if(($card['Nal'] == 1) && !empty($left[$card['ID']])){
+//                if(($card['Nal'] == 1) && !empty($left[$card['ID']])){
+                // остаток с прошлого дня по всем картам
+                if(!empty($left[$card['ID']])){
                     $result[$i]['left'] = $this->convertSum($left[$card['ID']]);
                 }
                 else{
@@ -498,6 +500,9 @@ class Finance extends MY_Controller
         $result = array();
         // наличные карты
         $nals_cards = $this->getCardModel()->getNalCards();
+        // все карты
+        $nals_cards = $this->getCards();
+        $nals_cards = toolIndexArrayBy($nals_cards, 'ID');
         $nals_cards_ids = (!empty($nals_cards)) ? array_keys($nals_cards) : array();
         // суммы прихода, расхода и обмена по ним за день
         $left = $this->getFinanceModel()->getLeft(date('Y-m-d', strtotime('-1 day', strtotime($from))), $nals_cards_ids);
@@ -511,7 +516,7 @@ class Finance extends MY_Controller
                 }
                 $total = $in - $out;
                 // к UAH наличной карте добавляем весь обмен, в грн
-                if(($nals_card['Currency'] == 'UAH') && !empty($left['exchange'])){
+                if((($nals_card['Currency'] == 'UAH') && ($nals_card['Nal'] == 1)) && !empty($left['exchange'])){
                     $total += $left['exchange'];
                 }
                 $result[$nk] = $total;

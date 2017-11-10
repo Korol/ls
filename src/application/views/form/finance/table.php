@@ -25,7 +25,7 @@
         <th class="sortable">Резерв</th>
         <th class="th-grey sortable">Итого <span class="glyphicon glyphicon-save"></span></th>
         <th class="sortable">Офис</th>
-        <th class="sortable">Благо</th>
+        <th class="sortable">Доставки</th>
         <th class="sortable">Зарплата</th>
         <th class="sortable">Фото</th>
         <th class="sortable">Обмен</th>
