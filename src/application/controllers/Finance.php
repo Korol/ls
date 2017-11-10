@@ -19,6 +19,7 @@ class Finance extends MY_Controller
     public $types_out = array(
         'office' => 'Офис',
         'charity' => 'Благотворительность',
+        'delivery' => 'Доставки',
         'salary' => 'Зарплата',
         'photo' => 'Фото',
         'exchange_out' => 'Обмен',
@@ -226,7 +227,12 @@ class Finance extends MY_Controller
      */
     public function convertDate($date)
     {
-        $date_ex = explode('-', $date);
+        if(!empty($date)){
+            $date_ex = explode('-', $date);
+        }
+        else {
+            $date_ex = array();
+        }
         return (count($date_ex) == 3)
             ? $date_ex[2] . '-' . $date_ex[1] . '-' . $date_ex[0]
             : date('Y-m-d');

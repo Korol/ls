@@ -10,7 +10,7 @@
         <th></th>
         <th></th>
         <th colspan="8" class="big-th">Приход <span class="glyphicon glyphicon-save"></span></th>
-        <th colspan="6" class="big-th">Расход <span class="glyphicon glyphicon-open"></span></th>
+        <th colspan="7" class="big-th">Расход <span class="glyphicon glyphicon-open"></span></th>
         <th></th>
     </tr>
     <tr>
@@ -25,6 +25,7 @@
         <th class="sortable">Резерв</th>
         <th class="th-grey sortable">Итого <span class="glyphicon glyphicon-save"></span></th>
         <th class="sortable">Офис</th>
+        <th class="sortable">Благо</th>
         <th class="sortable">Доставки</th>
         <th class="sortable">Зарплата</th>
         <th class="sortable">Фото</th>
@@ -66,6 +67,9 @@
             </td>
             <td class="fin-td-info <?= ($record['outcome']['charity'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="charity">
                 <?= $record['outcome']['charity']; ?>
+            </td>
+            <td class="fin-td-info <?= ($record['outcome']['delivery'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="delivery">
+                <?= $record['outcome']['delivery']; ?>
             </td>
             <td class="fin-td-info <?= ($record['outcome']['salary'] == '0.00') ? 'hide-zeros' : ''; ?>" data-type="outcome" data-id="salary">
                 <?= $record['outcome']['salary']; ?>

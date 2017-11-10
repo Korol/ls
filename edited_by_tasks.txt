@@ -1,4 +1,6 @@
-Stage 3:
+Finance (добавляем тип расходной операции Доставки):
+ALTER TABLE `finance_out` CHANGE `type` `type` ENUM('office','charity','salary','exchange','photo','delivery')  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT NULL;
+=====
 
 Task 6 (Сотрудникам добавить вкладка Комментарии):
 SQL:
