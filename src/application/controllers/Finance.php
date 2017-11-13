@@ -307,7 +307,7 @@ class Finance extends MY_Controller
                     $outcome[$card['ID']]['exchange_out'] = $exchange[$card['ID']]['summ_out'];
                 }
                 // считаем суммы по масивам Приход и Расход
-                $income_sum = $this->convertSum(array_sum($income[$card['ID']]));
+                $income_sum = $this->convertSum(array_sum($income[$card['ID']]) + ($result[$i]['left']));
                 $outcome_sum = $this->convertSum(array_sum($outcome[$card['ID']]));
                 $result[$i]['income']['total'] = $income_sum;
                 $result[$i]['outcome'] = $outcome[$card['ID']];
