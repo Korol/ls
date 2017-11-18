@@ -65,6 +65,18 @@ class Finance_model extends MY_Model
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     ";
 
+    private $table_left = "
+        CREATE TABLE `finance_left` (
+          `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+          `card_id` int(11) DEFAULT NULL,
+          `left_date` date DEFAULT NULL,
+          `left_sum` decimal(10,2) DEFAULT NULL,
+          PRIMARY KEY (`id`),
+          KEY `card_id` (`card_id`),
+          KEY `left_date` (`left_date`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ";
+
     public $types = array(
         'income' => self::TABLE_FINANCE_IN,
         'outcome' => self::TABLE_FINANCE_OUT,
@@ -92,6 +104,7 @@ class Finance_model extends MY_Model
         $this->db()->query($this->table_in);
         $this->db()->query($this->table_out);
         $this->db()->query($this->table_ex);
+        $this->db()->query($this->table_left);
     }
 
     public function dropTables()
@@ -101,6 +114,7 @@ class Finance_model extends MY_Model
         $this->dbforge->drop_table(self::TABLE_FINANCE_IN, TRUE);
         $this->dbforge->drop_table(self::TABLE_FINANCE_OUT, TRUE);
         $this->dbforge->drop_table(self::TABLE_FINANCE_EX, TRUE);
+        $this->dbforge->drop_table(self::TABLE_FINANCE_LEFT, TRUE);
     }
 
     /**
@@ -289,5 +303,194 @@ class Finance_model extends MY_Model
             ? toolIndexArrayBy($exchange_out, 'card_id')
             : array();
         return $data;
+    }
+
+    /**
+     * получаем остатки по картам за указанный день
+     * @param $date
+     * @param $card_ids
+     * @return array
+     */
+    public function getLefts($date, $card_ids)
+    {
+        $return = array();
+        if(empty($card_ids)){
+            return $return;
+        }
+
+        $res = $this->db()
+            ->select('card_id, left_sum')
+            ->where('left_date', $date)
+            ->where_in('card_id', $card_ids)
+            ->get(self::TABLE_FINANCE_LEFT)->result_array();
+
+        if(!empty($res)){
+            $return = for_select($res, 'card_id', 'left_sum');
+        }
+        return $return;
+    }
+
+    /**
+     * сохраняем остатки по картам за указанный день
+     * @param $lefts - остатки
+     * @param $date - текущий день в формате date('Y-m-d')
+     * @return mixed
+     */
+    public function saveLefts($lefts, $date)
+    {
+        if(empty($lefts)) return 0;
+
+        $affected = 0;
+        $yesterday = date('Y-m-d', strtotime('-1 day', strtotime($date)));
+        // получаем записи за предыдущий день
+        $check_yesterday = $this->db()
+            ->where('left_date', $yesterday)
+            ->get(self::TABLE_FINANCE_LEFT)->result_array();
+        // получаем записи за текущий день
+        $check_today = $this->db()
+            ->where('left_date', $date)
+            ->get(self::TABLE_FINANCE_LEFT)->result_array();
+//            ->count_all_results(self::TABLE_FINANCE_LEFT);
+        // сохраняем остатки
+        if(!empty($check_yesterday) && empty($check_today)){
+            // есть записи за предыдущий – но нет записей за текущий день
+            foreach ($check_yesterday as $ch){
+                if(isset($lefts[$ch['card_id']])){
+                    // суммируем вчерашнюю сумму по карте с текущей
+                    $sum = $ch['left_sum'] + $lefts[$ch['card_id']];
+                    // добавляем записи за сегодня
+                    $this->db()->insert(
+                        self::TABLE_FINANCE_LEFT,
+                        array(
+                            'card_id' => $ch['card_id'],
+                            'left_date' => $date,
+                            'left_sum' => $sum,
+                        )
+                    );
+                    $affected++;
+                }
+            }
+        }
+        elseif (!empty($check_yesterday) && !empty($check_today)) {
+            // есть записи и за предыдущий и за текущий день (обновление записей за этот день)
+            foreach ($check_yesterday as $ct){
+                if(isset($lefts[$ct['card_id']])) {
+                    // суммируем вчерашнюю сумму по карте с текущей
+                    $sum = $ct['left_sum'] + $lefts[$ct['card_id']];
+                    // апдейтим суммы за текущий день
+                    $this->db()->update(
+                        self::TABLE_FINANCE_LEFT,
+                        array('left_sum' => $sum),
+                        array(
+                            'card_id' => $ct['card_id'],
+                            'left_date' => $date,
+                        )
+                    );
+                    $affected++;
+                }
+            }
+        }
+        elseif (empty($check_yesterday) && !empty($check_today)){
+            // записей за предыдущий день нет – а за текущий есть
+            // (обновление первого дня учета остатков)
+            foreach ($check_today as $cht){
+                if(isset($lefts[$cht['card_id']])){
+                    // апдейтим суммы за текущий день
+                    $this->db()->update(
+                        self::TABLE_FINANCE_LEFT,
+                        array('left_sum' => $lefts[$cht['card_id']]),
+                        array(
+                            'card_id' => $cht['card_id'],
+                            'left_date' => $date,
+                        )
+                    );
+                    $affected++;
+                }
+            }
+        }
+        else{
+            // нет записей ни за предыдущий день, ни за текущий день
+            foreach ($lefts as $tk => $tv){
+                // добавляем записи за текущий день
+                $this->db()->insert(
+                    self::TABLE_FINANCE_LEFT,
+                    array(
+                        'card_id' => $tk,
+                        'left_date' => $date,
+                        'left_sum' => $tv,
+                    )
+                );
+                $affected++;
+            }
+        }
+        return $affected;
+    }
+
+    public function truncateTotals()
+    {
+        $this->db()->truncate(self::TABLE_FINANCE_LEFT);
+    }
+
+    /**
+     * баланс по всем картам (приход, расход, расход обмен, приход обмен, баланс)
+     * @param $card_id
+     * @param bool $nal_uah
+     * @return mixed
+     */
+    public function getBalance($card_id, $nal_uah = false)
+    {
+        $return['in_ex']['total'] = 0;
+        $return['in'] = $this->db()
+            ->select('SUM(`sum`) AS `total`', false)
+            ->where('card_id', $card_id)
+            ->get(self::TABLE_FINANCE_IN)->row_array();
+        $return['out'] = $this->db()
+            ->select('SUM(`sum`) AS `total`', false)
+            ->where('card_id', $card_id)
+            ->get(self::TABLE_FINANCE_OUT)->row_array();
+        $return['out_ex'] = $this->db()
+            ->select('SUM(`sum_out`) AS `total`', false)
+            ->where('card_id', $card_id)
+            ->get(self::TABLE_FINANCE_EX)->row_array();
+        if(!empty($nal_uah)){
+            $return['in_ex'] = $this->db()
+                ->select('SUM(`sum_uah`) AS `total`', false)
+                ->get(self::TABLE_FINANCE_EX)->row_array();
+        }
+        // баланс = ((приход - (расход + расход по обмену)) + приход по обмену)
+        $return['total'] = (
+            ($return['in']['total'] - ($return['out']['total'] + $return['out_ex']['total']))
+            + $return['in_ex']['total']
+        );
+        return $return;
+    }
+
+    /**
+     * удаление остатков, начиная с даты $from
+     * @param $from
+     * @return mixed
+     */
+    public function removeLefts($from)
+    {
+        return $this->db()->delete(
+            self::TABLE_FINANCE_LEFT,
+            array('left_date >=' => $from)
+        );
+    }
+
+    /**
+     * информация об операции по ID и типу
+     * @param $id
+     * @param $type
+     * @return array
+     */
+    public function getOperationInfo($id, $type)
+    {
+        if(!$this->checkType($type))
+            return false;
+
+        return $this->db()
+            ->where('id', $id)
+            ->get($this->types[$type])->row_array();
     }
 }

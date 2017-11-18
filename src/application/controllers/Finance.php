@@ -132,6 +132,9 @@ class Finance extends MY_Controller
                     throw new RuntimeException("Нет обработчика для данного типа операций!" . $error_tail);
             }
 
+            // сохраняем/обновляем остатки за указанную дату
+            $this->setLefts($this->convertDate($data['modalDate']));
+
             $this->json_response(array("status" => 1, 'message' => 'Операция успешно добавлена!'));
         } catch (Exception $e) {
             $this->json_response(array('status' => 0, 'message' => $e->getMessage()));
@@ -276,7 +279,7 @@ class Finance extends MY_Controller
     public function getData($from, $to)
     {
         $cards = $this->getCards();
-        $left = $this->getLeft($from);
+        $left = $this->getLefts($from);
         $income = $this->getInOutData($from, $to, 'income');
         $outcome = $this->getInOutData($from, $to, 'outcome');
         $exchange = $this->getExData($from, $to);
@@ -496,22 +499,32 @@ class Finance extends MY_Controller
         if(!in_array($type, array('income', 'outcome', 'exchange')))
             echo 0;
 
+        // информация об операции
+        $info = $this->getFinanceModel()->getOperationInfo($id, $type);
+        // удаление операции
         $res = $this->getFinanceModel()->removeOperation($id, $type);
+        // пересчет остатков
+        if(!empty($info['created_date'])){
+            $this->setLefts($info['created_date']);
+        }
         echo (!empty($res)) ? $id : 0;
     }
 
+    /**
+     * остатки по операциям за указанный день
+     * @param $from - дата в формате date('Y-m-d');
+     * @return array
+     */
     public function getLeft($from)
     {
-//        $from = '2017-10-21'; // test
+//        $from = '2017-10-23'; // test
         $result = array();
-        // наличные карты
-        $nals_cards = $this->getCardModel()->getNalCards();
         // все карты
         $nals_cards = $this->getCards();
         $nals_cards = toolIndexArrayBy($nals_cards, 'ID');
         $nals_cards_ids = (!empty($nals_cards)) ? array_keys($nals_cards) : array();
         // суммы прихода, расхода и обмена по ним за день
-        $left = $this->getFinanceModel()->getLeft(date('Y-m-d', strtotime('-1 day', strtotime($from))), $nals_cards_ids);
+        $left = $this->getFinanceModel()->getLeft($from, $nals_cards_ids);
         if(!empty($nals_cards) && !empty($left)){
             foreach ($nals_cards as $nk => $nals_card) {
                 $in = (!empty($left['income'][$nk]['summ'])) ? $left['income'][$nk]['summ'] : '0.00';
@@ -525,10 +538,80 @@ class Finance extends MY_Controller
                 if((($nals_card['Currency'] == 'UAH') && ($nals_card['Nal'] == 1)) && !empty($left['exchange'])){
                     $total += $left['exchange'];
                 }
-                $result[$nk] = $total;
+                $result[$nk] = $this->convertSum($total);
             }
         }
-//        var_dump(date('Y-m-d', strtotime('-1 day', strtotime($from))), $left, $result); // test
+//        var_dump($left, $result); // test
         return $result;
+    }
+
+    /**
+     * остатки по всем картам за предыдущий день
+     * @param $from
+     * @return array
+     */
+    public function getLefts($from)
+    {
+        $return = array();
+        // все карты
+        $cards = $this->getCards();
+        if(empty($cards)) return $return;
+        $cards = toolIndexArrayBy($cards, 'ID');
+        $cards_ids = array_keys($cards);
+        $date = date('Y-m-d', strtotime('-1 day', strtotime($from)));
+        $return = $this->getFinanceModel()->getLefts($date, $cards_ids);
+        return $return;
+    }
+
+    /**
+     * проставляем остатки по дням, начиная с $from
+     * вызов без аргумента полностью очищает и перезаписывает таблицу остатков
+     * @param $from - дата в формате date('Y-m-d');
+     * @return bool
+     */
+    public function setLefts($from = '2017-10-20')
+    {
+        $today = date('Y-m-d');
+        if($from == '2017-10-20'){
+            // очищаем таблицу finance_left
+            $this->getFinanceModel()->truncateTotals();
+        }
+        else{
+            // удаляем записи из таблицы finance_left, начиная с $from
+            $this->getFinanceModel()->removeLefts($from);
+        }
+
+        // заполняем новыми значениями по сегодняшний день
+        while($from != $today){
+            // получаем остатки за день
+            $lefts = $this->getLeft($from);
+            // сохраняем их
+            $res = $this->getFinanceModel()->saveLefts($lefts, $from);
+            if($from == '2017-10-20') {
+                // отображаем прогресс
+                 var_dump($from . ': ' . $res);
+            }
+            // увеличиваем дату на 1 день
+            $from = date('Y-m-d', strtotime('+1 day', strtotime($from)));
+        }
+        return true;
+    }
+
+    /**
+     * баланс по всем картам на сегодняшний день (приход - расход) + обмен(если это карта «Наличные, UAH»)
+     */
+    public function getBalance()
+    {
+        $cards = $this->getCards();
+        foreach ($cards as $card) {
+            $nal_uah = (($card['Nal'] == 1) && ($card['Currency'] == 'UAH')) ? true : false;
+            $balance = $this->getFinanceModel()->getBalance($card['ID'], $nal_uah);
+            echo '<b>' . $card['Name'] . '</b>, ' . $card['Currency'] . ':<br>';
+            echo 'Приход: ' . $this->convertSum($balance['in']['total']) . '<br>';
+            echo (($nal_uah) ? 'Приход с обмена: ' . $this->convertSum($balance['in_ex']['total']) . '<br>' : '');
+            echo 'Расход: ' . $this->convertSum($balance['out']['total']) . '<br>';
+            echo ((!$nal_uah) ? 'Расход на обмен: ' . $this->convertSum($balance['out_ex']['total']) . '<br>' : '');
+            echo 'Баланс: ' . $this->convertSum($balance['total']) . '<br><br>';
+        }
     }
 }

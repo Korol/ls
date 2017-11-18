@@ -91,6 +91,7 @@ class MY_Model extends CI_Model {
     const TABLE_FINANCE_IN  = 'finance_in';
     const TABLE_FINANCE_OUT = 'finance_out';
     const TABLE_FINANCE_EX = 'finance_ex';
+    const TABLE_FINANCE_LEFT = 'finance_left';
 
     /**
      * MY_Model constructor.
