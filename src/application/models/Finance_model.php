@@ -493,4 +493,18 @@ class Finance_model extends MY_Model
             ->where('id', $id)
             ->get($this->types[$type])->row_array();
     }
+
+    /**
+     * дата последнего остатка – чтоб не допускать разрывов
+     * @return string
+     */
+    public function getLastLeftDate()
+    {
+        $res = $this->db()
+            ->select('left_date')
+            ->order_by('left_date DESC')
+            ->limit(1)
+            ->get(self::TABLE_FINANCE_LEFT)->row_array();
+        return (!empty($res['left_date'])) ? $res['left_date'] : '2017-10-20';
+    }
 }

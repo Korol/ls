@@ -52,6 +52,13 @@ class Finance extends MY_Controller
         $data['employees'] = $this->getEmployeeModel()->employeeGetActiveList($this->getUserID(), $this->getUserRole());
         $data['types_in'] = $this->types_in;
         $data['types_out'] = $this->types_out;
+        
+        // обновляем остатки, начиная с даты фиксации
+        // последнего остатка в finance_left
+        // запрос последнего остатка
+        $last_date = $this->getFinanceModel()->getLastLeftDate();
+        $this->setLefts($last_date);
+        
         $this->viewHeader(array(), 'header_wide');
         $this->view('form/finance/index', $data);
         $this->viewFooter();
