@@ -507,4 +507,19 @@ class Finance_model extends MY_Model
             ->get(self::TABLE_FINANCE_LEFT)->row_array();
         return (!empty($res['left_date'])) ? $res['left_date'] : '2017-10-20';
     }
+
+    /**
+     * максимальная дата последнего остатка по карте – чтоб не допускать разрывов
+     * @return string
+     */
+    public function getMaxLastLeftDate()
+    {
+        $res = $this->db()
+            ->select_max('left_date')
+            ->select('card_id')
+            ->group_by('card_id')
+            ->order_by('left_date ASC')
+            ->get(self::TABLE_FINANCE_LEFT)->row_array();
+        return (!empty($res['left_date'])) ? $res['left_date'] : '2017-10-20';
+    }
 }

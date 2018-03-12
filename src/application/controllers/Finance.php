@@ -52,12 +52,18 @@ class Finance extends MY_Controller
         $data['employees'] = $this->getEmployeeModel()->employeeGetActiveList($this->getUserID(), $this->getUserRole());
         $data['types_in'] = $this->types_in;
         $data['types_out'] = $this->types_out;
-        
+
         // обновляем остатки, начиная с даты фиксации
         // последнего остатка в finance_left
         // запрос последнего остатка
-        $last_date = $this->getFinanceModel()->getLastLeftDate();
-        $this->setLefts($last_date);
+//        $last_date = $this->getFinanceModel()->getLastLeftDate();
+        // NEW
+        // получаем самую раннюю дату последнего зафиксированного остатка по карте
+        // и обноляем остатки начиная с этой даты
+        if(!empty($data['cards'])){
+            $last_date = $this->getFinanceModel()->getMaxLastLeftDate();
+            $this->setLefts($last_date);
+        }
         
         $this->viewHeader(array(), 'header_wide');
         $this->view('form/finance/index', $data);
@@ -596,7 +602,7 @@ class Finance extends MY_Controller
             $res = $this->getFinanceModel()->saveLefts($lefts, $from);
             if($from == '2017-10-20') {
                 // отображаем прогресс
-                 var_dump($from . ': ' . $res);
+                // var_dump($from . ': ' . $res);
             }
             // увеличиваем дату на 1 день
             $from = date('Y-m-d', strtotime('+1 day', strtotime($from)));
@@ -620,5 +626,10 @@ class Finance extends MY_Controller
             echo ((!$nal_uah) ? 'Расход на обмен: ' . $this->convertSum($balance['out_ex']['total']) . '<br>' : '');
             echo 'Баланс: ' . $this->convertSum($balance['total']) . '<br><br>';
         }
+    }
+
+    public function test()
+    {
+        var_dump($this->getFinanceModel()->getMaxLastLeftDate());
     }
 }
